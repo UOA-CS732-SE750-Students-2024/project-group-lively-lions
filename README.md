@@ -11,14 +11,16 @@ Your team members are:
 - Peter Strobel
 - Matthew Stevens
 
-![](./group-image/Lively%20Lions.webp)
+![](./readme-images/Lively%20Lions.webp)
 
 ## Getting Started
 
 1. Make sure you have the latest version of pnpm (8.15.1) and node (20.11.0) installed.
-2. Install the Prettier and EsLint plugins on VSCode.
-3. Clone the repository, then run `pnpm install` to install the dependencies.
-4. Run `pnpm run dev` to start a local development server on your machine.
+2. Install the Prettier and ESLint plugins on VSCode.
+3. (Optional) Change the corresponding VSCode settings:
+   ![](./readme-images/formatter.png)
+4. Clone the repository, then run `pnpm install` to install the dependencies.
+5. Run `pnpm run dev` to start a local development server on your machine.
 
 ### Other commands
 
