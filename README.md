@@ -15,10 +15,11 @@ Your team members are:
 
 ## Getting Started
 
-1. Make sure you have the latest version of pnpm (8.15.1) and node (20.11.0) installed.
-2. Install the Prettier and ESLint plugins on VSCode.
+1. Make sure you have the latest version of pnpm (>8.15.1) and node (20.11.0) installed.
+2. Install the Prettier, ESLint, Tailwind CSS IntelliSense plugins on VSCode.
 3. (Optional) Change the corresponding VSCode settings:
    ![](./readme-images/formatter.png)
+   ![](./readme-images/association.png)
 4. Clone the repository, then run `pnpm install` to install the dependencies.
 5. Run `pnpm run dev` to start a local development server on your machine.
 
