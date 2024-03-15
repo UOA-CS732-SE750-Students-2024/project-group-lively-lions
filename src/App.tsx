@@ -8,7 +8,7 @@ function App() {
           Purrlock Holmes' Crypurrtography Agency
         </h1>
         <img
-          className="block w-[30rem] h-[30rem] m-auto"
+          className="block w-[30rem] h-[30rem] m-auto rounded-3xl"
           src={capyboros}
           alt="purrlocklock"
         />
