@@ -1,34 +1,22 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import capyboros from './assets/capybara.jpg';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="bg-[#242424] min-w-screen min-h-screen p-3">
+      <div className="flex flex-col justify-center w-full">
+        <h1 className="text-white font-[BJG] text-4xl tracking-wide text-center py-20">
+          Purrlock Holmes' Crypurrtography Agency
+        </h1>
+        <img
+          className="block w-[30rem] h-[30rem] m-auto"
+          src={capyboros}
+          alt="purrlocklock"
+        />
+        <h4 className="text-[#777777] font-[BJG] text-1 tracking-wide text-center py-20">
+          [Placeholder for logo]
+        </h4>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }
 

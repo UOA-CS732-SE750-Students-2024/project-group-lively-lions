@@ -15,7 +15,7 @@ Your team members are:
 
 ## Getting Started
 
-1. Make sure you have the latest version of pnpm (>8.15.1) and node (20.11.0) installed.
+1. Make sure you have the latest version of pnpm (>=8.15.1) and node (>=20.11.0) installed.
 2. Install the Prettier, ESLint, Tailwind CSS IntelliSense plugins on VSCode.
 3. (Optional) Change the corresponding VSCode settings:
    ![](./readme-images/formatter.png)

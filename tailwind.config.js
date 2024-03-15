@@ -17,6 +17,9 @@ module.exports = {
         '2xl': '1400px'
       }
     },
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'] // Default font for the entire app
+    },
     extend: {
       colors: {
         border: 'hsl(var(--border))',
