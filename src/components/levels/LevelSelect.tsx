@@ -9,7 +9,7 @@ interface LevelSelectProps {
 export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps){
 
     return(
-        <div className="text-center">
+        <div className="text-center flex flex-col items-center">
             <HoverFolder overlap='0px' zIndex={0}/>
             <HoverFolder overlap='-640px' zIndex={1}/>
             <HoverFolder overlap='-640px'zIndex={2}/>
@@ -21,7 +21,5 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps){
             Back
             </Button>
         </div>
-        
     )
-
 }
