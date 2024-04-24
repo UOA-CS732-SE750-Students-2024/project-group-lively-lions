@@ -1,5 +1,7 @@
 import { HoverFolder } from '../ui/HoverFolder';
 import { Button } from '../ui/button';
+import { useState } from 'react';
+
 
 interface LevelSelectProps {
   handleLevelButtonClick: (
@@ -9,11 +11,21 @@ interface LevelSelectProps {
 }
 
 export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
+  const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
+  const [clickedIndex, setClickedIndex] = useState<number>(-1);
+
   return (
     <div className="text-center flex flex-col items-center">
-      <HoverFolder overlap="0px" zIndex={0} />
-      <HoverFolder overlap="-640px" zIndex={1} />
-      <HoverFolder overlap="-640px" zIndex={2} />
+      {['0px', '-650px', '-650px'].map((marginTop, index) => (
+        <HoverFolder
+          marginTop={marginTop}
+          index={index}
+          isHoveredIndex={hoveredIndex}
+          isClickedIndex={clickedIndex}
+          setHoveredIndex={setHoveredIndex}
+          setClickedIndex={setClickedIndex}
+        />
+      ))}
       <Button
         className="w-[20rem] h-[4rem] font-[BJG] mt-10 mb-10"
         onClick={(e) => handleLevelButtonClick(0, e)}
