@@ -13,7 +13,7 @@ interface LevelSelectProps {
 export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
-
+  
   return (
     <div className="text-center flex flex-col items-center">
       {['0px', '-650px', '-650px'].map((marginTop, index) => (
@@ -24,6 +24,8 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
           isClickedIndex={clickedIndex}
           setHoveredIndex={setHoveredIndex}
           setClickedIndex={setClickedIndex}
+          levelIndex={0}
+          handleLevelButtonClick={handleLevelButtonClick}
         />
       ))}
       <Button
