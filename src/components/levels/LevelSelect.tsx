@@ -2,6 +2,7 @@ import { HoverFolder } from '../ui/HoverFolder';
 import { Button } from '../ui/button';
 import { useState } from 'react';
 
+
 interface LevelSelectProps {
   handleLevelButtonClick: (
     level: number,
@@ -29,7 +30,6 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
       ))}
       <Button
         className="w-[20rem] h-[4rem] font-[BJG] mt-10 mb-10"
-        variant="outline"
         onClick={(e) => handleLevelButtonClick(0, e)}
       >
         Back
