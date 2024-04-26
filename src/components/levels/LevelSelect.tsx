@@ -14,9 +14,11 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
   
+  const menuItemOffsets = ['0px', '-650px', '-650px'];
+
   return (
     <div className="text-center flex flex-col items-center">
-      {['0px', '-650px', '-650px'].map((marginTop, index) => (
+      {menuItemOffsets.map((marginTop, index) => (
         <HoverFolder
           marginTop={marginTop}
           index={index}

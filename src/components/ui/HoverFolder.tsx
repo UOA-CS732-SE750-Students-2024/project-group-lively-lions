@@ -35,11 +35,12 @@ export function HoverFolder({
   const clickedOffset = -300; // Distance moved by folder when clicked (selected)
 
   return (
-    <motion.div
+    <div>
+      <motion.div
       className="relative inline-block"
       style={{ marginTop: marginTop }} // Adjust this value to control the initial vertical overlap
       onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(-1)} // Remove hover status
+      onMouseLeave={() => setHoveredIndex(-1)} // Clear hover status
       onClick={() =>
         isClickedIndex === index ? setClickedIndex(-1) : setClickedIndex(index)
       }
@@ -49,51 +50,58 @@ export function HoverFolder({
           (isAboveHovered ? hoverOffset : 0)
       }}
       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-    >
-      <p
-      className= "absolute opacity-[70%] top-[2%] left-[8%] font-[BJG]"
-      style={{pointerEvents: 'none'}}
       >
-      Puzzle {index}
-      </p>
-      <img src={folder_sprite} />
-      <AnimatePresence>
-        {isClickedIndex === index ? (
-          <motion.div
-            key={index}
-            initial={{ y: '100vh', x: 20 }}
-            exit={{ y: '100vh' }}
-            animate={{ y: index === isClickedIndex ? 50 : 1000 }}
-            transition={{ type: 'spring', duration: 0.8, damping: 16 }}
-            className="absolute inset-0 flex items-start justify-start text-2xl"
-          >
-            <div>
-              <Button
-              className="absolute top-[28%] right-[14%] font-[BJG] w-[15rem] h-[4rem]"
-              onClick={(e) => handleLevelButtonClick(levelIndex, e)}
+        <p
+        className= "absolute opacity-[70%] top-[2%] left-[8%] font-[BJG]"
+        style={{pointerEvents: 'none'}}
+        >
+        Puzzle {index}
+        </p>
+        <img src={folder_sprite} />
+        <div
+        className="absolute inset-0 w-[100%] h-[100%]"
+        style={{ overflow: 'hidden' }}>
+          <AnimatePresence>
+          {isClickedIndex === index ? (
+              // Container for puzzle information
+              <motion.div
+              key={index}
+              initial={{ y: '100vh', x: '2.5%' }}
+              exit={{ y: '100vh' }}
+              animate={{ y: index === isClickedIndex ? 50 : 1000 }}
+              transition={{ type: 'spring', duration: 0.8, damping: 16 }}
+              className="absolute inset-0 flex items-start justify-start text-2xl"
               >
-                Open
-              </Button>
-            </div>
-            <div
-            className="absolute top-[8%] right-[14%] w-[15rem] h-[8rem]"
-            >
-              <p
-              className="absolute opacity-[50%] text-sm font-[BJG] wrap w-[100%] top-[30%]">
-                0/5 Deciphered
-              </p>
-              <img 
-              style={{imageRendering: 'pixelated'}}
-              className="opacity-[50%] w-[100%] h-[100%]"
-              src={stamp_area} 
-              />
-            </div>
-            <img src={case_paper_sprite} />
-          </motion.div>
-        ) : (
-          <></>
-        )}
-      </AnimatePresence>
-    </motion.div>
+                <div>
+                  <Button
+                  className="absolute top-[28%] right-[14%] font-[BJG] w-[15rem] h-[4rem]"
+                  onClick={(e) => handleLevelButtonClick(levelIndex, e)}
+                  >
+                    Open
+                  </Button>
+                </div>
+                <div
+                className="absolute top-[8%] right-[14%] w-[15rem] h-[8rem]"
+                >
+                  <p
+                  className="absolute opacity-[25%] text-sm font-[BJG] wrap w-[100%] top-[30%]">
+                    0/5 Deciphered
+                  </p>
+                  <img 
+                  style={{imageRendering: 'pixelated'}}
+                  className="opacity-[50%] w-[100%] h-[100%]"
+                  src={stamp_area} 
+                  />
+                </div>
+              <img src={case_paper_sprite} />
+            </motion.div>
+          ) : (
+            // Empty when this folder is not selected
+            <></>
+          )}
+          </AnimatePresence>
+        </div>
+      </motion.div>
+    </div>
   );
 }
