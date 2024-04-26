@@ -1,6 +1,7 @@
-import folder_sprite from '../../assets/folder_sprite.png';
-import case_paper_sprite from '../../assets/case_paper_sprite.png';
+import folder_sprite from '../../assets/level-select/folder_sprite.png';
+import case_paper_sprite from '../../assets/level-select/case_paper_sprite.png';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from './button';
 
 interface HoverFolderProps {
   marginTop: string;
@@ -8,7 +9,12 @@ interface HoverFolderProps {
   isHoveredIndex: number;
   setHoveredIndex: (index: number) => void;
   isClickedIndex: number;
+  levelIndex: number;
   setClickedIndex: (index: number) => void;
+  handleLevelButtonClick: (
+    level: number,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => void;
 }
 
 export function HoverFolder({
@@ -17,13 +23,15 @@ export function HoverFolder({
   isHoveredIndex,
   setHoveredIndex,
   isClickedIndex,
-  setClickedIndex
+  setClickedIndex,
+  levelIndex,
+  handleLevelButtonClick
 }: HoverFolderProps) {
   const isAboveHovered = index <= isHoveredIndex;
   const isAboveClicked = index <= isClickedIndex;
 
   const hoverOffset = -10; // Distance moved by folder when hovered over
-  const clickedOffset = -200; // Distance moved by folder when clicked (selected)
+  const clickedOffset = -300; // Distance moved by folder when clicked (selected)
 
   return (
     <motion.div
@@ -39,8 +47,14 @@ export function HoverFolder({
           (isAboveClicked ? clickedOffset : 0) +
           (isAboveHovered ? hoverOffset : 0)
       }}
-      transition={{ type: 'spring', stiffness: 1000, damping: 30 }}
+      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
     >
+      <p
+      className= "absolute top-[2%] left-[8%] font-[BJG]"
+      style={{pointerEvents: 'none'}}
+      >
+      Puzzle {index}
+      </p>
       <img src={folder_sprite} />
       <AnimatePresence>
         {isClickedIndex === index ? (
@@ -49,9 +63,15 @@ export function HoverFolder({
             initial={{ y: '100vh', x: 20 }}
             exit={{ y: '100vh' }}
             animate={{ y: index === isClickedIndex ? 50 : 1000 }}
-            transition={{ type: 'spring', duration: 0.8 }}
+            transition={{ type: 'spring', duration: 0.8, damping: 16 }}
             className="absolute inset-0 flex items-start justify-start text-2xl"
           >
+            <Button
+            className="absolute top-[15%] right-[14%] font-[BJG] w-[15rem] h-[4rem]"
+            onClick={(e) => handleLevelButtonClick(levelIndex, e)}
+            >
+              Solve
+            </Button>
             <img src={case_paper_sprite} />
           </motion.div>
         ) : (
