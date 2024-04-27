@@ -31,8 +31,8 @@ export function HoverFolder({
   const isAboveHovered = index <= isHoveredIndex;
   const isAboveClicked = index <= isClickedIndex;
 
-  const hoverOffset = -10; // Distance moved by folder when hovered over
-  const clickedOffset = -300; // Distance moved by folder when clicked (selected)
+  const hoverOffset = -3; // Distance moved by folder when hovered over
+  const clickedOffset = -40; // Distance moved by folder when clicked (selected)
 
   return (
     <div>
@@ -46,10 +46,13 @@ export function HoverFolder({
       }
       animate={{
         y:
-          (isAboveClicked ? clickedOffset : 0) +
-          (isAboveHovered ? hoverOffset : 0)
+          `${(isAboveClicked ? clickedOffset : 0) +
+          (isAboveHovered ? hoverOffset : 0)}%`
       }}
-      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+      transition={{ 
+        type: 'spring', 
+        stiffness: 500, 
+        damping: 30 }}
       >
         <p
         className= "absolute opacity-[70%] top-[2%] left-[8%] font-[BJG]"
@@ -66,25 +69,25 @@ export function HoverFolder({
               // Container for puzzle information
               <motion.div
               key={index}
-              initial={{ y: '100vh', x: '2.5%' }}
+              initial={{ y: '100vh' }}
               exit={{ y: '100vh' }}
               animate={{ y: index === isClickedIndex ? 50 : 1000 }}
               transition={{ type: 'spring', duration: 0.8, damping: 16 }}
-              className="absolute inset-0 flex items-start justify-start text-2xl"
+              className="absolute inset-x-[3%] inset-y-[1%] flex items-start justify-start text-2xl"
               >
                 <div>
                   <Button
-                  className="absolute top-[28%] right-[14%] font-[BJG] w-[15rem] h-[4rem]"
+                  className="absolute top-[28%] right-[14%] font-[BJG] top-[29%] right-[8%] w-[35%] h-[10%]"
                   onClick={(e) => handleLevelButtonClick(levelIndex, e)}
                   >
                     Open
                   </Button>
                 </div>
                 <div
-                className="absolute top-[8%] right-[14%] w-[15rem] h-[8rem]"
+                className="absolute top-[8%] right-[8%] w-[35%] h-[18%]"
                 >
                   <p
-                  className="absolute opacity-[25%] text-sm font-[BJG] wrap w-[100%] top-[30%]">
+                  className="absolute opacity-[25%] text-sm font-[BJG] wrap w-[80%] top-[30%] left-[10%]">
                     0/5 Deciphered
                   </p>
                   <img 

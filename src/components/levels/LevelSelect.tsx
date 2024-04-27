@@ -14,7 +14,7 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
   
-  const menuItemOffsets = ['0px', '-650px', '-650px'];
+  const menuItemOffsets = ['0%', '-85%', '-85%'];
 
   return (
     <div className="text-center flex flex-col items-center">
