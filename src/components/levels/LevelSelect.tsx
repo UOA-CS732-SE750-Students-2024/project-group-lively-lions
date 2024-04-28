@@ -17,25 +17,33 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
   const menuItemOffsets = ['0%', '-85%', '-85%'];
 
   return (
-    <div className="text-center flex flex-col items-center">
-      {menuItemOffsets.map((marginTop, index) => (
-        <HoverFolder
-          marginTop={marginTop}
-          index={index}
-          isHoveredIndex={hoveredIndex}
-          isClickedIndex={clickedIndex}
-          setHoveredIndex={setHoveredIndex}
-          setClickedIndex={setClickedIndex}
-          levelIndex={0}
-          handleLevelButtonClick={handleLevelButtonClick}
-        />
-      ))}
-      <Button
-        className="w-[20rem] h-[4rem] font-[BJG] mt-10 mb-10"
-        onClick={(e) => handleLevelButtonClick(0, e)}
+    <div
+    className='flex flex-col items-center h-[100%]'>
+      <div
+      className='inset-0 pt-[25%] overflow-hidden h-[80%] w-[50%]'
       >
-        Back
+        <div className="text-center flex flex-col items-center">
+          {menuItemOffsets.map((marginTop, index) => (
+            <HoverFolder
+              marginTop={marginTop}
+              index={index}
+              isHoveredIndex={hoveredIndex}
+              isClickedIndex={clickedIndex}
+              setHoveredIndex={setHoveredIndex}
+              setClickedIndex={setClickedIndex}
+              levelIndex={0}
+              handleLevelButtonClick={handleLevelButtonClick}
+            />
+          ))}
+        </div>
+      </div>
+      <Button
+        className="font-[alagard] text-[1rem] mt-5 mb-5 bottom-0"
+        onClick={(e) => handleLevelButtonClick(0, e)}
+        >
+          Back
       </Button>
     </div>
+    
   );
 }

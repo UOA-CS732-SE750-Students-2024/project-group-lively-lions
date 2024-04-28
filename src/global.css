@@ -7,6 +7,11 @@
   src: url('./fonts/bjg-pixel-brandon-james-greer.otf');
 }
 
+@font-face {
+  font-family: 'alagard';
+  src: url('./fonts/alagard.ttf');
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
