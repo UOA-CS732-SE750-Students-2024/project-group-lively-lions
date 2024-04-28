@@ -19,13 +19,27 @@ function App() {
   }
 
   return (
-    <div className="bg-[#242424] min-w-screen min-h-screen p-3">
-      <h1 className="text-white font-[BJG] text-4xl leading-loose tracking-wide text-center py-20">
-        Purrlock Holmes' <br />
-        Crypurrtography Agency
+    /* Fills viewport and centers game bounds */
+    <div
+    className='bg-[#101819] flex flex-col items-center justify-center h-screen w-screen'
+    >
+      <h1 
+      className="text-[#d9b26f] font-[alagard] text-[3rem] leading-loose text-center text-pretty w-[100%]"
+      >
+        Purrlock Holmes' Crypawtography Agency
       </h1>
-      {levels[currentLevel]}
+      {/* Constrains game contents maximum and minimum dimensions */}
+      <div 
+      className="
+      relative bg-[#1e2d2f] rounded-md
+      w-[calc(60vw)] h-[calc(60vw*9/16)]
+      overflow-scroll"
+      >
+        {/* Game contents */}
+        {levels[currentLevel]}
+      </div>
     </div>
+    
   );
 }
 

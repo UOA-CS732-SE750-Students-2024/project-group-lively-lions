@@ -1,4 +1,4 @@
-import capyboros from '../../assets/capybara.jpg';
+import purrlock from '../../assets/PurrlockHolmesNobkgd.png';
 import { Button } from '../ui/button';
 import { WoodenCard } from '../ui/wooden_card';
 
@@ -13,23 +13,19 @@ export default function LandingScreen({
   handleLevelButtonClick
 }: LandingScreenProps) {
   return (
-    <div className="text-center">
-      <WoodenCard className="w-[600px] p-10 m-auto">
-        <img
-          className="block w-[30rem] h-[30rem] m-auto rounded-3xl"
-          src={capyboros}
-          alt="purrlocklock"
-        />
-        <h4 className="text-[#777777] font-[BJG] text-1 tracking-wide pt-5 pb-20">
-          [Placeholder for logo]
-        </h4>
-        <Button
-          className="w-[20rem] h-[4rem] font-[BJG] m-auto"
-          onClick={(e) => handleLevelButtonClick(1, e)}
-        >
-          Play
-        </Button>
-      </WoodenCard>
-    </div>
+    <WoodenCard className="absolute w-[37%] p-10 text-center left-[31.5%] top-[5%]">
+      <img
+        className="rounded-3xl"
+        src={purrlock}
+        alt="purrlocklock"
+      />
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleLevelButtonClick(1, e)}
+        size={'sm'}
+      >
+        PLAY
+      </Button>
+    </WoodenCard>
   );
 }

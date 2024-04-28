@@ -55,14 +55,14 @@ export function HoverFolder({
         damping: 30 }}
       >
         <p
-        className= "absolute opacity-[70%] top-[2%] left-[8%] font-[BJG]"
+        className= "absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
         style={{pointerEvents: 'none'}}
         >
-        Puzzle {index}
+        Puzzle {index + 1}
         </p>
         <img src={folder_sprite} />
         <div
-        className="absolute inset-0 w-[100%] h-[100%]"
+        className="absolute inset-0"
         style={{ overflow: 'hidden' }}>
           <AnimatePresence>
           {isClickedIndex === index ? (
@@ -71,13 +71,13 @@ export function HoverFolder({
               key={index}
               initial={{ y: '100vh' }}
               exit={{ y: '100vh' }}
-              animate={{ y: index === isClickedIndex ? 50 : 1000 }}
-              transition={{ type: 'spring', duration: 0.8, damping: 16 }}
+              animate={{ y: index === isClickedIndex ? '7%' : '100%' }}
+              transition={{ type: 'spring', damping: 16.5 }}
               className="absolute inset-x-[3%] inset-y-[1%] flex items-start justify-start text-2xl"
               >
                 <div>
                   <Button
-                  className="absolute top-[28%] right-[14%] font-[BJG] top-[29%] right-[8%] w-[35%] h-[10%]"
+                  className="absolute font-[alagard] text-[1.5rem] top-[29%] right-[8%] w-[35%] h-[10%]"
                   onClick={(e) => handleLevelButtonClick(levelIndex, e)}
                   >
                     Open
@@ -87,7 +87,7 @@ export function HoverFolder({
                 className="absolute top-[8%] right-[8%] w-[35%] h-[18%]"
                 >
                   <p
-                  className="absolute opacity-[25%] text-sm font-[BJG] wrap w-[80%] top-[30%] left-[10%]">
+                  className="absolute opacity-[25%] text-md font-[alagard] wrap w-[80%] top-[20%] left-[10%]">
                     0/5 Deciphered
                   </p>
                   <img 

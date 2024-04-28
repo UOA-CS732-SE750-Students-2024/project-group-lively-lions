@@ -7,6 +7,11 @@
   src: url('./fonts/bjg-pixel-brandon-james-greer.otf');
 }
 
+@font-face {
+  font-family: 'alagard';
+  src: url('./fonts/alagard.ttf');
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -141,5 +146,14 @@ button.animated-btn:active::before {
   image-rendering: pixelated; /* Chrome and Edge */
   -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
   border: 15px outset #716151;
+}
+
+.unselectable {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
