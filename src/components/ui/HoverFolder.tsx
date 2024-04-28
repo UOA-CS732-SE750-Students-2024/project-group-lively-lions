@@ -69,15 +69,15 @@ export function HoverFolder({
               // Container for puzzle information
               <motion.div
               key={index}
-              initial={{ y: '100vh' }}
-              exit={{ y: '100vh' }}
+              initial={{ y: '100%' }}
+              exit={{ y: '100%' }}
               animate={{ y: index === isClickedIndex ? '7%' : '100%' }}
-              transition={{ type: 'spring', damping: 16.5 }}
-              className="absolute inset-x-[3%] inset-y-[1%] flex items-start justify-start text-2xl"
+              transition={{ type: 'spring', damping: 16 }}
+              className="absolute inset-x-[3%] inset-y-[3%] flex"
               >
                 <div>
                   <Button
-                  className="absolute font-[alagard] text-[1.5rem] top-[29%] right-[8%] w-[35%] h-[10%]"
+                  className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
                   onClick={(e) => handleLevelButtonClick(levelIndex, e)}
                   >
                     Open
@@ -87,7 +87,7 @@ export function HoverFolder({
                 className="absolute top-[8%] right-[8%] w-[35%] h-[18%]"
                 >
                   <p
-                  className="absolute opacity-[25%] text-md font-[alagard] wrap w-[80%] top-[20%] left-[10%]">
+                  className="absolute opacity-[25%] text-[1rem] font-[alagard] wrap w-[80%] top-[16%] left-[10%]">
                     0/5 Deciphered
                   </p>
                   <img 

@@ -20,7 +20,7 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
     <div
     className='flex flex-col items-center h-[100%]'>
       <div
-      className='inset-0 pt-[25%] overflow-hidden h-[80%] w-[55%]'
+      className='inset-0 pt-[25%] overflow-hidden h-[80%] w-[50%]'
       >
         <div className="text-center flex flex-col items-center">
           {menuItemOffsets.map((marginTop, index) => (
@@ -37,12 +37,12 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
           ))}
         </div>
       </div>
-    <Button
-          className="absolute font-[alagard] text-[1.5rem] mt-10 mb-10 bottom-0"
-          onClick={(e) => handleLevelButtonClick(0, e)}
+      <Button
+        className="font-[alagard] text-[1rem] mt-5 mb-5 bottom-0"
+        onClick={(e) => handleLevelButtonClick(0, e)}
         >
           Back
-        </Button>
+      </Button>
     </div>
     
   );
