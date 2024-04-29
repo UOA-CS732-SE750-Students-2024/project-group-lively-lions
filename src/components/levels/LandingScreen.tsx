@@ -14,17 +14,20 @@ export default function LandingScreen({
 }: LandingScreenProps) {
   return (
     <WoodenCard className="absolute w-[37%] p-10 text-center left-[31.5%] top-[5%]">
-      <img
-        className="rounded-3xl"
-        src={purrlock}
-        alt="purrlocklock"
-      />
+      <img className="rounded-3xl" src={purrlock} alt="purrlocklock" />
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleLevelButtonClick(2, e)}
+        size={'sm'}
+      >
+        PLAY
+      </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
         onClick={(e) => handleLevelButtonClick(1, e)}
         size={'sm'}
       >
-        PLAY
+        New Player
       </Button>
     </WoodenCard>
   );
