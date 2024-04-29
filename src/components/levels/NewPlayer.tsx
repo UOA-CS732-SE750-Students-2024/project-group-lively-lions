@@ -9,7 +9,7 @@ It also has a confirm button, which does nothing yet, and a back button to the l
 */
 
 interface NewPlayerProps {
-  handleBackButtonClick: (
+  handleLevelButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
@@ -21,7 +21,7 @@ interface NewPlayerProps {
 }
 
 export function NewPlayer({
-  handleBackButtonClick,
+  handleLevelButtonClick,
   handleConfirm
 }: NewPlayerProps) {
   const [username, setUsername] = useState('');
@@ -56,7 +56,7 @@ export function NewPlayer({
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleBackButtonClick(0, e)}
+        onClick={(e) => handleLevelButtonClick(0, e)}
         size={'sm'}
       >
         BACK
