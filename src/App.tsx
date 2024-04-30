@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import MainMenuScreen from './components/levels/MainMenuScreen';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/levels/LevelSelect';
 import { NewPlayer } from './components/levels/NewPlayer';
@@ -6,9 +7,10 @@ import { SignIn } from './components/levels/SignIn';
 import { PlayerInfo } from './components/levels/PlayerInfo';
 
 function App() {
-  const [currentLevel, setCurrentLevel] = useState(0);
+  const [currentLevel, setCurrentLevel] = useState(1);
 
   const levels = [
+    <MainMenuScreen handleLevelButtonClick={handleLevelButtonClick} />,
     <LandingScreen handleLevelButtonClick={handleLevelButtonClick} />,
     <NewPlayer
       handleLevelButtonClick={handleLevelButtonClick}
@@ -52,6 +54,7 @@ function App() {
         className="
       relative bg-[#1e2d2f] rounded-md
       w-[calc(60vw)] h-[calc(60vw*9/16)]
+      min-w-[640px] min-h-[360px]
       overflow-scroll"
       >
         {/* Game contents */}
