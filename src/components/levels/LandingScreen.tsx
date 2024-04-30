@@ -1,4 +1,4 @@
-import purrlock from '../../assets/PurrlockHolmesNobkgd.png';
+import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import { Button } from '../ui/button';
 import { WoodenCard } from '../ui/wooden_card';
 
