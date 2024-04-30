@@ -3,6 +3,7 @@ import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/levels/LevelSelect';
 import { NewPlayer } from './components/levels/NewPlayer';
 import { SignIn } from './components/levels/SignIn';
+import { PlayerInfo } from './components/levels/PlayerInfo';
 
 function App() {
   const [currentLevel, setCurrentLevel] = useState(0);
@@ -14,6 +15,10 @@ function App() {
       handleConfirm={handleConfirm}
     />,
     <SignIn
+      handleLevelButtonClick={handleLevelButtonClick}
+      handleConfirm={handleConfirm}
+    />,
+    <PlayerInfo
       handleLevelButtonClick={handleLevelButtonClick}
       handleConfirm={handleConfirm}
     />,

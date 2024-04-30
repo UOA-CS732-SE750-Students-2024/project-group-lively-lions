@@ -17,10 +17,17 @@ export default function LandingScreen({
       <img className="rounded-3xl" src={purrlock} alt="purrlocklock" />
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(3, e)}
+        onClick={(e) => handleLevelButtonClick(4, e)}
         size={'sm'}
       >
         PLAY
+      </Button>
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleLevelButtonClick(3, e)}
+        size={'sm'}
+      >
+        PLAYER INFO
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
