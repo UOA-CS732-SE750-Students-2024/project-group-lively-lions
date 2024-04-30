@@ -3,12 +3,16 @@ import { useState } from 'react';
 import { TextField } from '../ui/text_field';
 
 /* 
-This is the component for the new player menu. It allows the creation of a new player profile.
-So far it has input fields for a new profile name and password. These are not yet connected to a database.
-It also has a confirm button, which does nothing yet, and a back button to the landing page.
+This is the component for the player info menu. It allows the user to view profile details.
+So far it has input fields for changing profile name and password. These are not yet connected to a database. It also shows the current profile data, including:
+- Username
+- Password
+- Game completion %
+- Count of hints used
+It also has a change info button, which does nothing yet, and a back button to the landing page.
 */
 
-interface NewPlayerProps {
+interface ProfileProps {
   handleLevelButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
@@ -20,17 +24,17 @@ interface NewPlayerProps {
   ) => void;
 }
 
-export function NewPlayer({
+export function PlayerInfo({
   handleLevelButtonClick,
   handleConfirm
-}: NewPlayerProps) {
+}: ProfileProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   return (
     <div>
       <form>
-        <p>New Identity Name:</p>
+        <p>Identity:</p>
         <TextField
           value={username}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -38,7 +42,7 @@ export function NewPlayer({
           }
           placeholder={'Username'}
         />
-        <p>New Identity Password:</p>
+        <p>Password:</p>
         <TextField
           value={password}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -47,12 +51,14 @@ export function NewPlayer({
           placeholder={'Password'}
         />
       </form>
+      <p>Game Completion Percentage: </p>
+      <p>Hints Used: </p>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
         onClick={(e) => handleConfirm(username, password, e)}
         size={'sm'}
       >
-        CONFIRM
+        CONFIRM CHANGES
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"

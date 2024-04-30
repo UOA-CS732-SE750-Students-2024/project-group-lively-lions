@@ -2,13 +2,26 @@ import { useState } from 'react';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/levels/LevelSelect';
 import { NewPlayer } from './components/levels/NewPlayer';
+import { SignIn } from './components/levels/SignIn';
+import { PlayerInfo } from './components/levels/PlayerInfo';
 
 function App() {
   const [currentLevel, setCurrentLevel] = useState(0);
 
   const levels = [
     <LandingScreen handleLevelButtonClick={handleLevelButtonClick} />,
-    <NewPlayer handleLevelButtonClick={handleLevelButtonClick} />,
+    <NewPlayer
+      handleLevelButtonClick={handleLevelButtonClick}
+      handleConfirm={handleConfirm}
+    />,
+    <SignIn
+      handleLevelButtonClick={handleLevelButtonClick}
+      handleConfirm={handleConfirm}
+    />,
+    <PlayerInfo
+      handleLevelButtonClick={handleLevelButtonClick}
+      handleConfirm={handleConfirm}
+    />,
     <LevelSelect handleLevelButtonClick={handleLevelButtonClick} />
   ];
 
@@ -18,6 +31,14 @@ function App() {
   ) {
     e.preventDefault();
     setCurrentLevel(level);
+  }
+
+  function handleConfirm(
+    username: string,
+    password: string,
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    e.preventDefault();
   }
 
   return (
