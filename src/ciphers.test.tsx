@@ -1,4 +1,4 @@
-import { SimpleCaesarCipher } from './ciphers';
+import { simpleCaesarCipher } from './ciphers';
 
 /*
  Testing Simple Caesar Cipher
@@ -6,14 +6,14 @@ import { SimpleCaesarCipher } from './ciphers';
 test('Decoding with opposite negative value', () => {
   const phrase = 'hello world';
 
-  const encodedPhrase = SimpleCaesarCipher({
+  const encodedPhrase = simpleCaesarCipher({
     caesarkey: 3,
     phrase: phrase
   });
 
-  const decodedPhrase = SimpleCaesarCipher({
+  const decodedPhrase = simpleCaesarCipher({
     caesarkey: -3,
-    phrase: encodedPhrase?.toString() ?? ''
+    phrase: encodedPhrase
   });
 
   expect(decodedPhrase).toBe('hello world');

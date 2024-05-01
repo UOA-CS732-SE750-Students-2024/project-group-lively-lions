@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface CaesarCipherProps {
   caesarkey: number;
   phrase: string;
@@ -19,10 +17,10 @@ interface MorseCipherProps {
  * @param caesarkey - The key for the Caesar cipher.
  * @param phrase - The phrase to be encoded using the Caesar cipher.
  */
-export const SimpleCaesarCipher: React.FC<CaesarCipherProps> = ({
+export const simpleCaesarCipher = ({
   caesarkey,
   phrase
-}) => {
+}: CaesarCipherProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
   return phrase
@@ -51,10 +49,7 @@ export const SimpleCaesarCipher: React.FC<CaesarCipherProps> = ({
  * @param phrase - The phrase to be encoded.
  * @returns The encoded phrase as a string.
  */
-export const VigenereCipher: React.FC<VigenereCipherProps> = ({
-  keyword,
-  phrase
-}) => {
+export const vigenereCipher = ({ keyword, phrase }: VigenereCipherProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const keyLength = keyword.length;
   let keyIndex = 0;
@@ -86,7 +81,7 @@ export const VigenereCipher: React.FC<VigenereCipherProps> = ({
  * @param phrase - The phrase to be encoded.
  * @returns The encoded phrase wrapped in a paragraph element with the "text-white" class.
  */
-export const PolybiusCipher: React.FC<CaesarCipherProps> = ({ phrase }) => {
+export const encodePolybius = ({ phrase }: MorseCipherProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const polybiusSquare = [
     ['A', 'B', 'C', 'D', 'E'],
@@ -160,7 +155,7 @@ export const decodePolybius = (str: string) => {
  * @param phrase - The phrase to be encoded into Morse code.
  * @returns The encoded phrase in Morse code.
  */
-export const MorseCodeCipher: React.FC<MorseCipherProps> = ({ phrase }) => {
+export const encodeToMorse = ({ phrase }: MorseCipherProps) => {
   const morseCodeMap: { [key: string]: string } = {
     a: '.-',
     b: '-...',
@@ -205,7 +200,7 @@ export const MorseCodeCipher: React.FC<MorseCipherProps> = ({ phrase }) => {
  * @param morse - The Morse code string to convert.
  * @returns The ASCII representation of the Morse code string.
  */
-export const MorseToAscii: React.FC<MorseCipherProps> = ({ phrase }) => {
+export const decodeMorseToAscii = ({ phrase }: MorseCipherProps) => {
   const morseToAsciiMap: { [key: string]: string } = {
     '.-': 'a',
     '-...': 'b',
@@ -235,17 +230,12 @@ export const MorseToAscii: React.FC<MorseCipherProps> = ({ phrase }) => {
     '--..': 'z',
     '/': ' '
   };
-
-  const morseToAscii = (morse: string) => {
-    return morse
-      .split(' ')
-      .map((morseCode) => {
-        return morseToAsciiMap[morseCode] || '';
-      })
-      .join('');
-  };
-
-  return morseToAscii(phrase);
+  return phrase
+    .split(' ')
+    .map((morseCode) => {
+      return morseToAsciiMap[morseCode] || '';
+    })
+    .join('');
 };
 
 /**
@@ -254,7 +244,7 @@ export const MorseToAscii: React.FC<MorseCipherProps> = ({ phrase }) => {
  * @param str - The input string to convert.
  * @returns The binary representation of the input string.
  */
-export const AsciiToBinary: React.FC<MorseCipherProps> = ({ phrase }) => {
+export const asciiToBinary = ({ phrase }: MorseCipherProps) => {
   const asciiToBinary = (str: string) => {
     return str
       .split('')
@@ -275,7 +265,7 @@ export const AsciiToBinary: React.FC<MorseCipherProps> = ({ phrase }) => {
  * @param binary - The binary string to convert.
  * @returns The ASCII representation of the binary string.
  */
-export const BinaryToAscii: React.FC<MorseCipherProps> = ({ phrase }) => {
+export const binaryToAscii = ({ phrase }: MorseCipherProps) => {
   const binaryToAscii = (binary: string) => {
     return binary
       .split(' ')
@@ -297,9 +287,7 @@ export const BinaryToAscii: React.FC<MorseCipherProps> = ({ phrase }) => {
  * @param {string} props.phrase - The phrase to be encoded.
  * @returns {JSX.Element} The encoded phrase wrapped in a paragraph element.
  */
-export const EmojiSubstitutionCipher: React.FC<MorseCipherProps> = ({
-  phrase
-}) => {
+export const encodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
   const emojiMap: { [key: string]: string } = {
     a: '😀',
     b: '😃',
@@ -336,38 +324,11 @@ export const EmojiSubstitutionCipher: React.FC<MorseCipherProps> = ({
    * @param {string} str - The string to be encoded.
    * @returns {string} The encoded string.
    */
-  const emojiSubstitution = (str: string) => {
-    return str
-      .toLowerCase()
-      .split('')
-      .map((char) => {
-        return emojiMap[char] || char;
-      })
-      .join('');
-  };
-
-  return emojiSubstitution(phrase);
+  return phrase
+    .toLowerCase()
+    .split('')
+    .map((char) => {
+      return emojiMap[char] || char;
+    })
+    .join('');
 };
-
-/**
- * Renders a component that tests various cipher encoding methods.
- */
-const CipherTestComponent: React.FC = () => {
-  return (
-    <div>
-      <p className="text-white">Simple Caesar</p>
-      <SimpleCaesarCipher caesarkey={1} phrase="hello" />
-
-      <p className="text-white">Vigenere</p>
-      <VigenereCipher keyword="hello" phrase="hello" />
-      <p className="text-white">Morse Code</p>
-      <MorseCodeCipher phrase="hello" />
-      <p className="text-white">Emoji Substitution</p>
-      <EmojiSubstitutionCipher phrase="hello" />
-      <p className="text-white">Binary Converter</p>
-      <AsciiToBinary phrase="hello" />
-    </div>
-  );
-};
-
-export default CipherTestComponent;
