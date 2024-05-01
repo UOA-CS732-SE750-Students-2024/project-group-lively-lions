@@ -12,6 +12,11 @@
   src: url('./fonts/alagard.ttf');
 }
 
+@font-face {
+  font-family: 'PS2';
+  src: url('./fonts/PressStart2P-Regular.ttf');
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -147,4 +152,3 @@ button.animated-btn:active::before {
   -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
   border: 15px outset #716151;
 }
-
