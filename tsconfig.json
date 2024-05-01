@@ -23,7 +23,8 @@
     /* shadcn configs */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./components/*"]
     }
   },
   "include": ["src"],
