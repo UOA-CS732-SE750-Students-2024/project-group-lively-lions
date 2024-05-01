@@ -138,7 +138,7 @@ button.animated-btn:active::before {
 
 /* Pixelated card */
 .card.pixelated {
-  background: url('./assets/card_texture.png');
+  background: url('./assets/common/card_texture.png');
   background-size: contain;
   image-rendering: -moz-crisp-edges; /* Firefox */
   image-rendering: -webkit-optimize-contrast; /* Safari */

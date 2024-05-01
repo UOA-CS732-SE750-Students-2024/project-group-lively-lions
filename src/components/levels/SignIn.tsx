@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { TextField } from '../ui/text_field';
 
 /* 
-This is the component for the new player menu. It allows the creation of a new player profile.
-So far it has input fields for a new profile name and password. These are not yet connected to a database.
+This is the component for the sign in menu. It allows the user to sign into their profile.
+So far it has input fields for a profile name and password. These are not yet connected to a database.
 It also has a confirm button, which does nothing yet, and a back button to the landing page.
 */
 
-interface NewPlayerProps {
+interface SignInProps {
   handleLevelButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
@@ -20,17 +20,14 @@ interface NewPlayerProps {
   ) => void;
 }
 
-export function NewPlayer({
-  handleLevelButtonClick,
-  handleConfirm
-}: NewPlayerProps) {
+export function SignIn({ handleLevelButtonClick, handleConfirm }: SignInProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   return (
     <div>
       <form>
-        <p>New Identity Name:</p>
+        <p>Identity:</p>
         <TextField
           value={username}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -38,7 +35,7 @@ export function NewPlayer({
           }
           placeholder={'Username'}
         />
-        <p>New Identity Password:</p>
+        <p>Password:</p>
         <TextField
           value={password}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -52,7 +49,7 @@ export function NewPlayer({
         onClick={(e) => handleConfirm(username, password, e)}
         size={'sm'}
       >
-        CONFIRM
+        SIGN IN
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
