@@ -38,7 +38,10 @@ export function Tutorial({
         milk thief.
       </p>
       <SimpleCaesarCipher caesarkey={3} phrase={phrase} />
-
+      <SimpleCaesarCipher
+        caesarkey={-3}
+        phrase="Vxusulvh! Kdssb Eluwkgdb Ghwhfwlyh Sxuuorfn Krophv!"
+      />
       <form>
         <TextField
           value={userPhrase}
