@@ -22,7 +22,7 @@ export default function LandingScreen({
       >
         "{randomTagline()}"
       </h2>
-      <WoodenCard className="absolute w-[28%] p-10 text-center left-[37%] top-[20%]">
+      <WoodenCard className="absolute w-[30%] p-10 text-center left-[37%] top-[20%]">
         <img className="rounded-3xl w-[100%]" src={purrlock} alt="purrlocklock" />
         <Button
           className="font-[alagard] text-[1.2rem] tracking-wide mt-2 w-[100%]"

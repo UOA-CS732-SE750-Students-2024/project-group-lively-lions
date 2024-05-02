@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface CaesarCipherProps {
   caesarkey: number;
   phrase: string;
@@ -13,83 +11,106 @@ interface MorseCipherProps {
   phrase: string;
 }
 
-interface KeywordShiftCipherProps {
-  caesarkey: number;
-  keyword: string;
-  phrase: string;
-}
-
 /**
  * A simple Caesar cipher component.
  *
  * @param caesarkey - The key for the Caesar cipher.
  * @param phrase - The phrase to be encoded using the Caesar cipher.
  */
-export const SimpleCaesarCipher: React.FC<CaesarCipherProps> = ({
+export const simpleCaesarCipher = ({
   caesarkey,
   phrase
-}) => {
+}: CaesarCipherProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
-  const caesar = (str: string, caesarkey: number) => {
-    return str
-      .split('')
-      .map((char) => {
-        if (!alphabet.includes(char.toLowerCase())) {
-          return char;
-        }
+  return phrase
+    .split('')
+    .map((char) => {
+      if (!alphabet.includes(char.toLowerCase())) {
+        return char;
+      }
 
-        const currIndex = alphabet.indexOf(char.toLowerCase());
-        const newIndex = (currIndex + caesarkey) % 26;
+      const currIndex = alphabet.indexOf(char.toLowerCase());
+      if (caesarkey < 0) {
+        caesarkey = 26 + caesarkey;
+      }
+      const newIndex = (currIndex + caesarkey) % 26;
 
-        return char === char.toUpperCase()
-          ? alphabet[newIndex].toUpperCase()
-          : alphabet[newIndex];
-      })
-      .join('');
-  };
-
-  return <p className="text-white">{caesar(phrase, caesarkey)}</p>;
+      return char === char.toUpperCase()
+        ? alphabet[newIndex].toUpperCase()
+        : alphabet[newIndex];
+    })
+    .join('');
 };
 
 /**
  * VigenereCipher component for encoding a phrase using the Vigenere cipher.
  * @param keyword - The keyword used for encoding.
  * @param phrase - The phrase to be encoded.
- * @returns The encoded phrase as a React element.
+ * @returns The encoded phrase as a string.
  */
-export const VigenereCipher: React.FC<VigenereCipherProps> = ({
-  keyword,
-  phrase
-}) => {
+export const vigenereCipher = ({ keyword, phrase }: VigenereCipherProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  const keyLength = keyword.length;
+  let keyIndex = 0;
+  if (keyLength === 0) {
+    return phrase;
+  }
+  return phrase
+    .split('')
+    .map((char) => {
+      if (!alphabet.includes(char.toLowerCase())) {
+        return char;
+      }
 
-  const vigenere = (str: string, keyword: string) => {
-    const keyLength = keyword.length;
-    let keyIndex = 0;
+      const currIndex = alphabet.indexOf(char.toLowerCase());
+      const keyChar = keyword[keyIndex % keyLength];
+      const keyIndexInAlphabet = alphabet.indexOf(keyChar.toLowerCase());
+      const newIndex = (currIndex + keyIndexInAlphabet) % 26;
 
-    return str
-      .split('')
-      .map((char) => {
-        if (!alphabet.includes(char.toLowerCase())) {
-          return char;
-        }
+      keyIndex++;
 
-        const currIndex = alphabet.indexOf(char.toLowerCase());
-        const keyChar = keyword[keyIndex % keyLength];
-        const keyIndexInAlphabet = alphabet.indexOf(keyChar.toLowerCase());
-        const newIndex = (currIndex + keyIndexInAlphabet) % 26;
+      return char === char.toUpperCase()
+        ? alphabet[newIndex].toUpperCase()
+        : alphabet[newIndex];
+    })
+    .join('');
+};
 
-        keyIndex++;
+/**
+ * Decodes a given phrase encoded using the Vigenere cipher.
+ *
+ * @param keyword - The keyword used for encoding.
+ * @param phrase - The phrase to be decoded.
+ * @returns The decoded phrase as a string.
+ */
+export const vigenereDecipher = ({ keyword, phrase }: VigenereCipherProps) => {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  const keyLength = keyword.length;
+  let keyIndex = 0;
 
-        return char === char.toUpperCase()
-          ? alphabet[newIndex].toUpperCase()
-          : alphabet[newIndex];
-      })
-      .join('');
-  };
+  return phrase
+    .split('')
+    .map((char) => {
+      if (!alphabet.includes(char.toLowerCase())) {
+        return char;
+      }
 
-  return <p className="text-white">{vigenere(phrase, keyword)}</p>;
+      const currIndex = alphabet.indexOf(char.toLowerCase());
+      const keyChar = keyword[keyIndex % keyLength];
+      const keyIndexInAlphabet = alphabet.indexOf(keyChar.toLowerCase());
+      let newIndex = currIndex - keyIndexInAlphabet;
+      if (newIndex < 0) {
+        newIndex = 26 + newIndex;
+      }
+
+      keyIndex++;
+
+      return char === char.toUpperCase()
+        ? alphabet[newIndex].toUpperCase()
+        : alphabet[newIndex];
+    })
+    .join('');
 };
 
 /**
@@ -98,7 +119,7 @@ export const VigenereCipher: React.FC<VigenereCipherProps> = ({
  * @param phrase - The phrase to be encoded.
  * @returns The encoded phrase wrapped in a paragraph element with the "text-white" class.
  */
-export const PolybiusCipher: React.FC<CaesarCipherProps> = ({ phrase }) => {
+export const encodePolybius = ({ phrase }: MorseCipherProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const polybiusSquare = [
     ['A', 'B', 'C', 'D', 'E'],
@@ -115,24 +136,47 @@ export const PolybiusCipher: React.FC<CaesarCipherProps> = ({ phrase }) => {
    * @param str - The string to be encoded.
    * @returns The encoded string.
    */
-  const polybius = (str: string) => {
-    return str
-      .split('')
-      .map((char) => {
-        if (!alphabet.includes(char.toLowerCase())) {
-          return char;
-        }
 
-        const charIndex = alphabet.indexOf(char.toLowerCase());
-        const row = Math.floor(charIndex / 5);
-        const col = charIndex % 5;
+  return phrase
+    .split('')
+    .map((char) => {
+      if (!alphabet.includes(char.toLowerCase())) {
+        return char;
+      }
 
-        return polybiusSquare[row][col];
-      })
-      .join('');
-  };
+      const charIndex = alphabet.indexOf(char.toLowerCase());
+      const row = Math.floor(charIndex / 5);
+      const col = charIndex % 5;
 
-  return <p className="text-white">{polybius(phrase)}</p>;
+      return polybiusSquare[row][col];
+    })
+    .join('');
+};
+
+/**
+ * Decodes a given string encoded using the Polybius cipher.
+ *
+ * @param str - The string to be decoded.
+ * @returns The decoded string.
+ */
+export const decodePolybius = (phrase: string, polybiusSquare: string[][]) => {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+  return phrase
+    .split('')
+    .map((char) => {
+      if (!alphabet.includes(char.toLowerCase())) {
+        return char;
+      }
+
+      const rowIndex = polybiusSquare.findIndex((row) =>
+        row.includes(char.toUpperCase())
+      );
+      const colIndex = polybiusSquare[rowIndex].indexOf(char.toUpperCase());
+
+      return alphabet[rowIndex * 5 + colIndex];
+    })
+    .join('');
 };
 
 /**
@@ -141,7 +185,7 @@ export const PolybiusCipher: React.FC<CaesarCipherProps> = ({ phrase }) => {
  * @param phrase - The phrase to be encoded into Morse code.
  * @returns The encoded phrase in Morse code.
  */
-export const MorseCodeCipher: React.FC<MorseCipherProps> = ({ phrase }) => {
+export const encodeToMorse = ({ phrase }: MorseCipherProps) => {
   const morseCodeMap: { [key: string]: string } = {
     a: '.-',
     b: '-...',
@@ -171,64 +215,57 @@ export const MorseCodeCipher: React.FC<MorseCipherProps> = ({ phrase }) => {
     z: '--..',
     ' ': '/'
   };
-
-  const morseCode = (str: string) => {
-    return str
-      .toLowerCase()
-      .split('')
-      .map((char) => {
-        return morseCodeMap[char] || char;
-      })
-      .join(' ');
-  };
-
-  return <p className="text-white">{morseCode(phrase)}</p>;
+  return phrase
+    .toLowerCase()
+    .split('')
+    .map((char) => {
+      return morseCodeMap[char] || char;
+    })
+    .join(' ');
 };
 
 /**
- * KeywordShiftCipher component represents a React functional component that applies a keyword shift cipher to a given phrase.
+ * Converts a Morse code string to ASCII characters.
  *
- * @param {KeywordShiftCipherProps} props - The component props.
- * @param {number} props.caesarkey - The caesar key used for the cipher.
- * @param {string} props.keyword - The keyword used for the cipher.
- * @param {string} props.phrase - The phrase to be encoded using the cipher.
- * @returns {JSX.Element} The rendered component.
+ * @param morse - The Morse code string to convert.
+ * @returns The ASCII representation of the Morse code string.
  */
-export const KeywordShiftCipher: React.FC<KeywordShiftCipherProps> = ({
-  caesarkey,
-  keyword,
-  phrase
-}) => {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
-
-  const keywordShift = (str: string, keyword: string, caesarkey: number) => {
-    const keywordLength = keyword.length;
-    let keywordIndex = 0;
-
-    return str
-      .split('')
-      .map((char) => {
-        if (!alphabet.includes(char.toLowerCase())) {
-          return char;
-        }
-
-        const currIndex = alphabet.indexOf(char.toLowerCase());
-        const keywordChar = keyword[keywordIndex % keywordLength];
-        const keywordShift = alphabet.indexOf(keywordChar.toLowerCase());
-        const newIndex = (currIndex + keywordShift + caesarkey) % 26;
-
-        keywordIndex++;
-
-        return char === char.toUpperCase()
-          ? alphabet[newIndex].toUpperCase()
-          : alphabet[newIndex];
-      })
-      .join('');
+export const decodeMorseToAscii = ({ phrase }: MorseCipherProps) => {
+  const morseToAsciiMap: { [key: string]: string } = {
+    '.-': 'a',
+    '-...': 'b',
+    '-.-.': 'c',
+    '-..': 'd',
+    '.': 'e',
+    '..-.': 'f',
+    '--.': 'g',
+    '....': 'h',
+    '..': 'i',
+    '.---': 'j',
+    '-.-': 'k',
+    '.-..': 'l',
+    '--': 'm',
+    '-.': 'n',
+    '---': 'o',
+    '.--.': 'p',
+    '--.-': 'q',
+    '.-.': 'r',
+    '...': 's',
+    '-': 't',
+    '..-': 'u',
+    '...-': 'v',
+    '.--': 'w',
+    '-..-': 'x',
+    '-.--': 'y',
+    '--..': 'z',
+    '/': ' '
   };
-
-  return (
-    <p className="text-white">{keywordShift(phrase, keyword, caesarkey)}</p>
-  );
+  return phrase
+    .split(' ')
+    .map((morseCode) => {
+      return morseToAsciiMap[morseCode] || '';
+    })
+    .join('');
 };
 
 /**
@@ -237,7 +274,7 @@ export const KeywordShiftCipher: React.FC<KeywordShiftCipherProps> = ({
  * @param str - The input string to convert.
  * @returns The binary representation of the input string.
  */
-export const AsciiToBinary: React.FC<MorseCipherProps> = ({ phrase }) => {
+export const asciiToBinary = ({ phrase }: MorseCipherProps) => {
   const asciiToBinary = (str: string) => {
     return str
       .split('')
@@ -249,7 +286,28 @@ export const AsciiToBinary: React.FC<MorseCipherProps> = ({ phrase }) => {
       .join(' ');
   };
 
-  return <p className="text-white">{asciiToBinary(phrase)}</p>;
+  return asciiToBinary(phrase);
+};
+
+/**
+ * Converts a binary string to ASCII characters.
+ *
+ * @param binary - The binary string to convert.
+ * @returns The ASCII representation of the binary string.
+ */
+export const binaryToAscii = ({ phrase }: MorseCipherProps) => {
+  const binaryToAscii = (binary: string) => {
+    return binary
+      .split(' ')
+      .map((binaryCode) => {
+        const asciiCode = parseInt(binaryCode, 2);
+        const char = String.fromCharCode(asciiCode);
+        return char;
+      })
+      .join('');
+  };
+
+  return binaryToAscii(phrase);
 };
 
 /**
@@ -259,9 +317,7 @@ export const AsciiToBinary: React.FC<MorseCipherProps> = ({ phrase }) => {
  * @param {string} props.phrase - The phrase to be encoded.
  * @returns {JSX.Element} The encoded phrase wrapped in a paragraph element.
  */
-export const EmojiSubstitutionCipher: React.FC<MorseCipherProps> = ({
-  phrase
-}) => {
+export const encodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
   const emojiMap: { [key: string]: string } = {
     a: '😀',
     b: '😃',
@@ -298,39 +354,11 @@ export const EmojiSubstitutionCipher: React.FC<MorseCipherProps> = ({
    * @param {string} str - The string to be encoded.
    * @returns {string} The encoded string.
    */
-  const emojiSubstitution = (str: string) => {
-    return str
-      .toLowerCase()
-      .split('')
-      .map((char) => {
-        return emojiMap[char] || char;
-      })
-      .join('');
-  };
-
-  return <p className="text-white">{emojiSubstitution(phrase)}</p>;
+  return phrase
+    .toLowerCase()
+    .split('')
+    .map((char) => {
+      return emojiMap[char] || char;
+    })
+    .join('');
 };
-
-/**
- * Renders a component that tests various cipher encoding methods.
- */
-const CipherTestComponent: React.FC = () => {
-  return (
-    <div>
-      <p className="text-white">Simple Caesar</p>
-      <SimpleCaesarCipher caesarkey={1} phrase="hello" />
-      <p className="text-white">Vigenere</p>
-      <VigenereCipher keyword="hello" phrase="hello" />
-      <p className="text-white">Morse Code</p>
-      <MorseCodeCipher phrase="hello" />
-      <p className="text-white">Keyword Shift</p>
-      <KeywordShiftCipher caesarkey={1} keyword="hello" phrase="hello" />
-      <p className="text-white">Emoji Substitution</p>
-      <EmojiSubstitutionCipher phrase="hello" />
-      <p className="text-white">Binary Converter</p>
-      <AsciiToBinary phrase="hello" />
-    </div>
-  );
-};
-
-export default CipherTestComponent;
