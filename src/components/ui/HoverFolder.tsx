@@ -1,6 +1,6 @@
 import folder_sprite from '../../assets/level-select/folder_sprite.png';
 import case_paper_sprite from '../../assets/level-select/case_paper_sprite.png';
-import stamp_area from '../../assets/level-select/stamp_area.png'
+import stamp_area from '../../assets/level-select/stamp_area.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
 
@@ -37,71 +37,70 @@ export function HoverFolder({
   return (
     <div>
       <motion.div
-      className="relative inline-block"
-      style={{ marginTop: marginTop }} // Adjust this value to control the initial vertical overlap
-      onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(-1)} // Clear hover status
-      onClick={() =>
-        isClickedIndex === index ? setClickedIndex(-1) : setClickedIndex(index)
-      }
-      animate={{
-        y:
-          `${(isAboveClicked ? clickedOffset : 0) +
-          (isAboveHovered ? hoverOffset : 0)}%`
-      }}
-      transition={{ 
-        type: 'spring', 
-        stiffness: 500, 
-        damping: 30 }}
+        className="relative inline-block"
+        style={{ marginTop: marginTop }} // Adjust this value to control the initial vertical overlap
+        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseLeave={() => setHoveredIndex(-1)} // Clear hover status
+        onClick={() =>
+          isClickedIndex === index
+            ? setClickedIndex(-1)
+            : setClickedIndex(index)
+        }
+        animate={{
+          y: `${
+            (isAboveClicked ? clickedOffset : 0) +
+            (isAboveHovered ? hoverOffset : 0)
+          }%`
+        }}
+        transition={{
+          type: 'spring',
+          stiffness: 500,
+          damping: 30
+        }}
       >
         <p
-        className= "absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
-        style={{pointerEvents: 'none'}}
+          className="absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
+          style={{ pointerEvents: 'none' }}
         >
-        Puzzle {index + 1}
+          Puzzle {index + 1}
         </p>
         <img src={folder_sprite} />
-        <div
-        className="absolute inset-0"
-        style={{ overflow: 'hidden' }}>
+        <div className="absolute inset-0" style={{ overflow: 'hidden' }}>
           <AnimatePresence>
-          {isClickedIndex === index ? (
+            {isClickedIndex === index ? (
               // Container for puzzle information
               <motion.div
-              key={index}
-              initial={{ y: '100%' }}
-              exit={{ y: '100%' }}
-              animate={{ y: index === isClickedIndex ? '7%' : '100%' }}
-              transition={{ type: 'spring', damping: 16 }}
-              className="absolute inset-x-[3%] inset-y-[3%] flex"
+                key={index}
+                initial={{ y: '100%' }}
+                exit={{ y: '100%' }}
+                animate={{ y: index === isClickedIndex ? '7%' : '100%' }}
+                transition={{ type: 'spring', damping: 16 }}
+                className="absolute inset-x-[3%] inset-y-[3%] flex"
               >
                 <div>
                   <Button
-                  className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
-                  onClick={(e) => handleLevelButtonClick(levelIndex, e)}
+                    className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
+                    onClick={(e) => handleLevelButtonClick(levelIndex, e)}
                   >
                     Open
                   </Button>
                 </div>
-                <div
-                className="absolute top-[8%] right-[8%] w-[35%] h-[18%]"
-                >
-                  <p
-                  className="absolute opacity-[25%] text-[1rem] font-[alagard] wrap w-[80%] top-[16%] left-[10%]">
+                <div className="absolute top-[8%] right-[8%] w-[35%] h-[18%]">
+                  <p className="absolute opacity-[25%] text-[1rem] font-[alagard] wrap w-[80%] top-[16%] left-[10%]">
                     0/5 Deciphered
                   </p>
-                  <img 
-                  style={{imageRendering: 'pixelated'}}
-                  className="opacity-[50%] w-[100%] h-[100%]"
-                  src={stamp_area} 
+                  <img
+                    style={{ imageRendering: 'pixelated' }}
+                    className="opacity-[50%] w-[100%] h-[100%]"
+                    src={stamp_area}
                   />
                 </div>
-              <img src={case_paper_sprite} />
-            </motion.div>
-          ) : (
-            // Empty when this folder is not selected
-            <></>
-          )}
+                <img src={case_paper_sprite} />
+              </motion.div>
+            ) : (
+              // Empty when this folder is not selected
+              <></>
+            )}
           </AnimatePresence>
         </div>
       </motion.div>

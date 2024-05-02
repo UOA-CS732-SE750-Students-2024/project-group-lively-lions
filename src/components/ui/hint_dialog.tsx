@@ -1,12 +1,6 @@
 import FadeIn from 'react-fade-in';
 import SpeechBubble from './speech_bubble';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogTrigger
-} from './dialog';
+import { Dialog, DialogContent, DialogFooter, DialogTrigger } from './dialog';
 import { Button } from './button';
 import { motion } from 'framer-motion';
 import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
@@ -26,6 +20,7 @@ interface HintDialogProps {
   transcript: Transcript;
 }
 
+// This component takes a transcript
 const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
   return (
     <Dialog>
@@ -71,13 +66,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
           </motion.div>
         </WoodenCard>
       </DialogContent>
-      <DialogFooter className="sm:justify-start">
-        <DialogClose asChild>
-          <Button type="button" variant="secondary">
-            Close
-          </Button>
-        </DialogClose>
-      </DialogFooter>
+      <DialogFooter className="sm:justify-start"></DialogFooter>
     </Dialog>
   );
 };
