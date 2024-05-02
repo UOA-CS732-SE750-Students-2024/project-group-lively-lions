@@ -3,7 +3,9 @@ import {
   vigenereCipher,
   vigenereDecipher,
   encodePolybius,
-  decodePolybius
+  decodePolybius,
+  encodeToMorse,
+  decodeMorseToAscii
 } from './ciphers';
 
 /*
@@ -74,5 +76,23 @@ test('Encoding with Polybius Cipher', () => {
 
   const decodedPhrase = decodePolybius(encodedPhrase, polybiusSquare);
   expect(decodedPhrase).toBe('hello world');
-  // expect(encodedPhrase).toBe('HGEEI LLOEO');
+});
+
+/*
+ Testing Morse Cipher
+*/
+test('Encoding with Morse Cipher', () => {
+  const phrase = 'hello world';
+  const encodedPhrase = encodeToMorse({
+    phrase: phrase
+  });
+  expect(encodedPhrase).toBe('.... . .-.. .-.. --- / .-- --- .-. .-.. -..');
+});
+
+test('Decoding with Morse Cipher', () => {
+  const phrase = '.... . .-.. .-.. --- / .-- --- .-. .-.. -..';
+  const decodedPhrase = decodeMorseToAscii({
+    phrase: phrase
+  });
+  expect(decodedPhrase).toBe('hello world');
 });
