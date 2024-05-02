@@ -2,6 +2,7 @@ import { HoverFolder } from '../ui/HoverFolder';
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import drawer_face_sprite from '../../assets/level-select/drawer_face_sprite.png';
+import { motion } from 'framer-motion';
 
 interface LevelSelectProps {
   handleLevelButtonClick: (
@@ -17,7 +18,7 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
   const menuItemOffsets = ['0%', '-85%', '-85%'];
 
   return (
-    <div className="flex flex-col items-center h-[100%] w-[100%] pb-[1%]">
+    <motion.div className="flex flex-col items-center h-[100%] w-[100%] pb-[1%]">
       <div className="flex flex-col items-center overflow-hidden h-[80%] w-[100%]">
         <div 
         style={{imageRendering:'pixelated'}}
@@ -50,6 +51,6 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
           Back
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }
