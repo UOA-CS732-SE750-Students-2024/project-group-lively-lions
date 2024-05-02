@@ -5,6 +5,7 @@ import { LevelSelect } from './components/levels/LevelSelect';
 import { NewPlayer } from './components/levels/NewPlayer';
 import { SignIn } from './components/levels/SignIn';
 import { PlayerInfo } from './components/levels/PlayerInfo';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const [currentLevel, setCurrentLevel] = useState(1);
@@ -58,7 +59,9 @@ function App() {
       overflow-scroll"
       >
         {/* Game contents */}
-        {levels[currentLevel]}
+        <AnimatePresence mode='wait'>
+          {levels[currentLevel]}
+        </AnimatePresence>
       </div>
     </div>
   );
