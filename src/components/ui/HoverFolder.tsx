@@ -1,6 +1,7 @@
 import folder_sprite from '../../assets/level-select/folder_sprite.png';
 import case_paper_sprite from '../../assets/level-select/case_paper_sprite.png';
-import stamp_area from '../../assets/level-select/stamp_area.png'
+import stamp_area_sprite from '../../assets/level-select/stamp_area_sprite.png';
+import solved_stamp_sprite from '../../assets/level-select/solved_stamp_sprite.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
 
@@ -87,15 +88,31 @@ export function HoverFolder({
                   </Button>
                 </div>
                 <div
-                className="absolute top-[8%] right-[8%] w-[35%] h-[18%]"
+                className='absolute left-[10%] top-[10%] w-[36%]'
+                >
+                  <p
+                  className="opacity-[70%] text-[1.3rem] font-[alagard]">
+                    Puzzle File Description: 
+                  </p>
+                  <p
+                  className="opacity-[70%] text-[1rem] font-[alagard]">
+                    This is where we describe the puzzle!
+                  </p>
+                </div>
+                <div
+                className="absolute top-[6%] right-[6%] w-[40%] h-[20%]"
                 >
                   <p
                   className="absolute opacity-[25%] text-[1.3rem] text-center leading-tight font-[alagard] wrap w-[80%] top-[18%] left-[10%]">
                     0/5 Deciphered
                   </p>
                   <img 
-                  className="opacity-[50%] w-[100%] h-[100%]"
-                  src={stamp_area} 
+                  className="opacity-[50%] w-[100%] h-[100%] p-[4%]"
+                  src={stamp_area_sprite} 
+                  />
+                  <img 
+                  className="absolute inset-0 opacity-[75%] w-[100%] h-[100%]"
+                  src={solved_stamp_sprite}
                   />
                 </div>
               <img src={case_paper_sprite} />
