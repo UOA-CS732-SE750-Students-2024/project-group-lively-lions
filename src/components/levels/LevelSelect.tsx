@@ -27,7 +27,7 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
               isClickedIndex={clickedIndex}
               setHoveredIndex={setHoveredIndex}
               setClickedIndex={setClickedIndex}
-              levelIndex={0}
+              levelIndex={6}
               handleLevelButtonClick={handleLevelButtonClick}
             />
           ))}
