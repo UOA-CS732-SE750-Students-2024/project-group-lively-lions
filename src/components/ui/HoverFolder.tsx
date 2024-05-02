@@ -35,10 +35,11 @@ export function HoverFolder({
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
 
   return (
-    <div>
+    <div
+    className='w-[94%]'>
       <motion.div
-      className="relative inline-block"
-      style={{ marginTop: marginTop }} // Adjust this value to control the initial vertical overlap
+      className="relative inline-block w-[100%]"
+      style={{ marginTop: marginTop, imageRendering: 'pixelated' }} // marginTop controls the initial vertical overlap
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(-1)} // Clear hover status
       onClick={() =>
@@ -60,7 +61,9 @@ export function HoverFolder({
         >
         Puzzle {index + 1}
         </p>
-        <img src={folder_sprite} />
+        <img 
+        className='w-[100%]'
+        src={folder_sprite} />
         <div
         className="absolute inset-0"
         style={{ overflow: 'hidden' }}>
@@ -87,11 +90,10 @@ export function HoverFolder({
                 className="absolute top-[8%] right-[8%] w-[35%] h-[18%]"
                 >
                   <p
-                  className="absolute opacity-[25%] text-[1rem] font-[alagard] wrap w-[80%] top-[16%] left-[10%]">
+                  className="absolute opacity-[25%] text-[1.3rem] text-center leading-tight font-[alagard] wrap w-[80%] top-[18%] left-[10%]">
                     0/5 Deciphered
                   </p>
                   <img 
-                  style={{imageRendering: 'pixelated'}}
                   className="opacity-[50%] w-[100%] h-[100%]"
                   src={stamp_area} 
                   />

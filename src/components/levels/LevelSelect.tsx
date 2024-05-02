@@ -1,6 +1,7 @@
 import { HoverFolder } from '../ui/HoverFolder';
 import { Button } from '../ui/button';
 import { useState } from 'react';
+import drawer_face_sprite from '../../assets/level-select/drawer_face_sprite.png';
 
 interface LevelSelectProps {
   handleLevelButtonClick: (
@@ -16,9 +17,11 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
   const menuItemOffsets = ['0%', '-85%', '-85%'];
 
   return (
-    <div className="flex flex-col items-center h-[100%]">
-      <div className="inset-0 pt-[25%] overflow-hidden h-[80%] w-[50%]">
-        <div className="text-center flex flex-col items-center">
+    <div className="flex flex-col items-center h-[100%] w-[100%] pb-[1%]">
+      <div className="flex flex-col items-center overflow-hidden h-[80%] w-[100%]">
+        <div 
+        style={{imageRendering:'pixelated'}}
+        className="flex flex-col items-center w-[50%] h-[100%] pt-[22%] bg-drawer-bottom bg-[cover]">
           {menuItemOffsets.map((marginTop, index) => (
             <HoverFolder
               marginTop={marginTop}
@@ -33,12 +36,20 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
           ))}
         </div>
       </div>
-      <Button
-        className="font-[alagard] text-[1rem] mt-5 mb-5 bottom-0"
-        onClick={(e) => handleLevelButtonClick(0, e)}
+      <div
+      style={{imageRendering:'pixelated'}}
+      className='flex flex-col w-[52%] align-bottom'
       >
-        Back
-      </Button>
+        <img 
+        className='w-[100%] bottom-0'
+        src={drawer_face_sprite} />
+        <Button
+          className="absolute font-[alagard] text-[1.1rem] mt-5 mb-5 bottom-[9%] w-[20%] left-[40%]"
+          onClick={(e) => handleLevelButtonClick(0, e)}
+        >
+          Back
+        </Button>
+      </div>
     </div>
   );
 }
