@@ -1,12 +1,10 @@
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { TextField } from '../ui/text_field';
-import { SimpleCaesarCipher } from '@/ciphers';
+import { simpleCaesarCipher } from '@/ciphers';
 
 /* 
-This is the component for the sign in menu. It allows the user to sign into their profile.
-So far it has input fields for a profile name and password. These are not yet connected to a database.
-It also has a confirm button, which does nothing yet, and a back button to the landing page.
+This is the component for the Tutorial Page. It allows the user to play the tutorial.
 */
 
 interface TutorialProps {
@@ -27,6 +25,7 @@ export function Tutorial({
   handleLevelButtonClick
 }: TutorialProps) {
   const phrase = 'Surprise! Happy Birthday Detective Purrlock Holmes!';
+  const caesarkey = 3;
   const [userPhrase, setUserPhrase] = useState('');
   return (
     <div>
@@ -36,12 +35,13 @@ export function Tutorial({
         is a strange note left behind with scrambled letters. Purrlock must use
         his knowledge of the Caesar Cipher to decipher the note and identify the
         milk thief.
+        {simpleCaesarCipher({ caesarkey, phrase })}
+        {simpleCaesarCipher({
+          caesarkey: -caesarkey,
+          phrase: 'Vxusulvh! Kdssb Eluwkgdb Ghwhfwlyh Sxuuorfn Krophv!'
+        })}
       </p>
-      <SimpleCaesarCipher caesarkey={3} phrase={phrase} />
-      <SimpleCaesarCipher
-        caesarkey={-3}
-        phrase="Vxusulvh! Kdssb Eluwkgdb Ghwhfwlyh Sxuuorfn Krophv!"
-      />
+
       <form>
         <TextField
           value={userPhrase}
