@@ -5,11 +5,8 @@ import { LevelSelect } from './components/levels/LevelSelect';
 import { NewPlayer } from './components/levels/NewPlayer';
 import { SignIn } from './components/levels/SignIn';
 import { PlayerInfo } from './components/levels/PlayerInfo';
-<<<<<<< HEAD
 import { AnimatePresence } from 'framer-motion';
-=======
 import { Tutorial } from './components/levels/Tutorial';
->>>>>>> main
 
 function App() {
   const [currentLevel, setCurrentLevel] = useState(1);
