@@ -53,7 +53,9 @@ export const vigenereCipher = ({ keyword, phrase }: VigenereCipherProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const keyLength = keyword.length;
   let keyIndex = 0;
-
+  if (keyLength === 0) {
+    return phrase;
+  }
   return phrase
     .split('')
     .map((char) => {
@@ -65,6 +67,42 @@ export const vigenereCipher = ({ keyword, phrase }: VigenereCipherProps) => {
       const keyChar = keyword[keyIndex % keyLength];
       const keyIndexInAlphabet = alphabet.indexOf(keyChar.toLowerCase());
       const newIndex = (currIndex + keyIndexInAlphabet) % 26;
+
+      keyIndex++;
+
+      return char === char.toUpperCase()
+        ? alphabet[newIndex].toUpperCase()
+        : alphabet[newIndex];
+    })
+    .join('');
+};
+
+/**
+ * Decodes a given phrase encoded using the Vigenere cipher.
+ *
+ * @param keyword - The keyword used for encoding.
+ * @param phrase - The phrase to be decoded.
+ * @returns The decoded phrase as a string.
+ */
+export const vigenereDecipher = ({ keyword, phrase }: VigenereCipherProps) => {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  const keyLength = keyword.length;
+  let keyIndex = 0;
+
+  return phrase
+    .split('')
+    .map((char) => {
+      if (!alphabet.includes(char.toLowerCase())) {
+        return char;
+      }
+
+      const currIndex = alphabet.indexOf(char.toLowerCase());
+      const keyChar = keyword[keyIndex % keyLength];
+      const keyIndexInAlphabet = alphabet.indexOf(keyChar.toLowerCase());
+      let newIndex = currIndex - keyIndexInAlphabet;
+      if (newIndex < 0) {
+        newIndex = 26 + newIndex;
+      }
 
       keyIndex++;
 
@@ -121,18 +159,10 @@ export const encodePolybius = ({ phrase }: MorseCipherProps) => {
  * @param str - The string to be decoded.
  * @returns The decoded string.
  */
-export const decodePolybius = (str: string) => {
+export const decodePolybius = (phrase: string, polybiusSquare: string[][]) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
-  const polybiusSquare = [
-    ['A', 'B', 'C', 'D', 'E'],
-    ['F', 'G', 'H', 'I', 'J'],
-    ['K', 'L', 'M', 'N', 'O'],
-    ['P', 'Q', 'R', 'S', 'T'],
-    ['U', 'V', 'W', 'X', 'Y'],
-    ['Z']
-  ];
 
-  return str
+  return phrase
     .split('')
     .map((char) => {
       if (!alphabet.includes(char.toLowerCase())) {
