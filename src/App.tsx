@@ -5,6 +5,7 @@ import { LevelSelect } from './components/levels/LevelSelect';
 import { NewPlayer } from './components/levels/NewPlayer';
 import { SignIn } from './components/levels/SignIn';
 import { PlayerInfo } from './components/levels/PlayerInfo';
+import { AnimatePresence } from 'framer-motion';
 import { Tutorial } from './components/levels/Tutorial';
 
 function App() {
@@ -72,11 +73,13 @@ function App() {
         className="
       relative bg-[#1e2d2f] rounded-md
       w-[calc(60vw)] h-[calc(60vw*9/16)]
-      min-w-[640px] min-h-[360px]
+      min-w-[960px] min-h-[540px]
       overflow-scroll"
       >
         {/* Game contents */}
-        {levels[currentLevel]}
+        <AnimatePresence mode='wait'>
+          {levels[currentLevel]}
+        </AnimatePresence>
       </div>
     </div>
   );
