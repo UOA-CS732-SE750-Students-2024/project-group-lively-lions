@@ -5,7 +5,11 @@ import {
   encodePolybius,
   decodePolybius,
   encodeToMorse,
-  decodeMorseToAscii
+  decodeMorseToAscii,
+  binaryToAscii,
+  asciiToBinary,
+  encodeEmojiSubstitutionCipher,
+  decodeEmojiSubstitutionCipher
 } from './ciphers';
 
 /*
@@ -94,5 +98,45 @@ test('Decoding with Morse Cipher', () => {
   const decodedPhrase = decodeMorseToAscii({
     phrase: phrase
   });
+  expect(decodedPhrase).toBe('hello world');
+});
+
+/*
+ Testing Binary to ASCII
+*/
+test('Converting ASCII to binary', () => {
+  const phrase = 'hello world';
+  const binary = asciiToBinary({ phrase });
+  expect(binary).toBe(
+    '01101000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100'
+  );
+});
+
+test('Converting binary to ASCII', () => {
+  const binary =
+    '01101000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100';
+  const ascii = binaryToAscii({
+    phrase: binary
+  });
+  expect(ascii).toBe('hello world');
+});
+
+/*
+ Testing Emoji Substitution Cipher
+*/
+test('Encoding with Emoji Substitution Cipher', () => {
+  const phrase = 'hello world';
+  const encodedPhrase = encodeEmojiSubstitutionCipher({
+    phrase: phrase
+  });
+  expect(encodedPhrase).toBe('🤣😆🙃🙃😍🔒😜😍😙🙃😁');
+});
+
+test('Decoding with Emoji Substitution Cipher', () => {
+  const phrase = '🤣😆🙃🙃😍🔒😜😍😙🙃😁';
+  const decodedPhrase = decodeEmojiSubstitutionCipher({
+    phrase: phrase
+  });
+
   expect(decodedPhrase).toBe('hello world');
 });

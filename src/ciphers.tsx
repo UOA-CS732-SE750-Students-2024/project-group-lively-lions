@@ -275,18 +275,17 @@ export const decodeMorseToAscii = ({ phrase }: MorseCipherProps) => {
  * @returns The binary representation of the input string.
  */
 export const asciiToBinary = ({ phrase }: MorseCipherProps) => {
-  const asciiToBinary = (str: string) => {
-    return str
-      .split('')
-      .map((char) => {
-        const asciiCode = char.charCodeAt(0);
-        const binaryCode = asciiCode.toString(2);
-        return binaryCode;
-      })
-      .join(' ');
-  };
-
-  return asciiToBinary(phrase);
+  return phrase
+    .split('')
+    .map((char) => {
+      const asciiCode = char.charCodeAt(0);
+      let binaryCode = asciiCode.toString(2);
+      if (binaryCode.length < 8) {
+        binaryCode = '0'.repeat(8 - binaryCode.length) + binaryCode;
+      }
+      return binaryCode;
+    })
+    .join(' ');
 };
 
 /**
@@ -361,4 +360,46 @@ export const encodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
       return emojiMap[char] || char;
     })
     .join('');
+};
+
+//decode emoji cipher
+
+export const decodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
+  console.log(phrase);
+  const emojiMap: { [key: string]: string } = {
+    '😀': 'a',
+    '😃': 'b',
+    '😄': 'c',
+    '😁': 'd',
+    '😆': 'e',
+    '😅': 'f',
+    '😂': 'g',
+    '🤣': 'h',
+    '😊': 'i',
+    '😇': 'j',
+    '🙂': 'k',
+    '🙃': 'l',
+    '😉': 'm',
+    '😌': 'n',
+    '😍': 'o',
+    '😘': 'p',
+    '😗': 'q',
+    '😙': 'r',
+    '😚': 's',
+    '😋': 't',
+    '😛': 'u',
+    '😝': 'v',
+    '😜': 'w',
+    '🤪': 'x',
+    '🤨': 'y',
+    '😎': 'z',
+    '🔒': ' '
+  };
+
+  let decodedPhrase = '';
+  for (const emoji of phrase) {
+    decodedPhrase += emojiMap[emoji];
+  }
+
+  return decodedPhrase;
 };
