@@ -12,7 +12,13 @@ const transcript: Transcript = {
       sender: 'Purrlock',
       text: 'Do you have any additional leads on the investigation?'
     },
-    { sender: 'Capo', text: 'Yes, I have a few leads, here...' }
+    { sender: 'Capo', text: 'Blah labhalabbala...' },
+    { sender: 'Purrlock', text: 'Heehe ooohooo...' },
+    { sender: 'Capo', text: 'yipeeyipee...' },
+    { sender: 'Capo', text: 'yipeeyipee...' },
+    { sender: 'Capo', text: 'yipeeyipee...' },
+    { sender: 'Capo', text: 'yipeeyipee...' },
+    { sender: 'Capo', text: 'yipeeyipee...' }
   ]
 };
 

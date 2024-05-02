@@ -55,7 +55,7 @@ function App() {
       relative bg-[#1e2d2f] rounded-md
       w-[calc(60vw)] h-[calc(60vw*9/16)]
       min-w-[640px] min-h-[360px]
-      overflow-scroll"
+      overflow-scroll no-scrollbar"
       >
         {/* Game contents */}
         {levels[currentLevel]}
