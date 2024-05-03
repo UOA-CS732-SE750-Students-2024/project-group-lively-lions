@@ -1,26 +1,7 @@
 import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import { Button } from '../ui/button';
-import HintDialog, { Transcript } from '../ui/hint_dialog';
 import { WoodenCard } from '../ui/wooden_card';
 import { randomTagline } from '@/lib/taglines';
-
-const exampleTranscript: Transcript = {
-  messages: [
-    { sender: 'Purrlock', text: 'Hello, Capo!' },
-    { sender: 'Capo', text: 'Hi, Purrlock! What can I do for you?' },
-    {
-      sender: 'Purrlock',
-      text: 'Do you have any additional leads on the investigation?'
-    },
-    { sender: 'Capo', text: 'Blah labhalabbala...' },
-    { sender: 'Purrlock', text: 'Heehe ooohooo...' },
-    { sender: 'Capo', text: 'yipeeyipee...' },
-    { sender: 'Capo', text: 'yipeeyipee...' },
-    { sender: 'Capo', text: 'yipeeyipee...' },
-    { sender: 'Capo', text: 'yipeeyipee...' },
-    { sender: 'Capo', text: 'yipeeyipee...' }
-  ]
-};
 
 interface LandingScreenProps {
   handleLevelButtonClick: (
@@ -43,10 +24,13 @@ export default function LandingScreen({
           src={purrlock}
           alt="purrlocklock"
         />
-        <Button onClick={(e) => handleLevelButtonClick(0, e)} size={'sm'}>
+        <Button
+          className="font-[alagard] text-[1.2rem] tracking-wide mt-2 w-[100%]"
+          onClick={(e) => handleLevelButtonClick(0, e)}
+          size={'sm'}
+        >
           MEOW
         </Button>
-        <HintDialog transcript={exampleTranscript} />
       </WoodenCard>
     </div>
   );
