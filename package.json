@@ -29,7 +29,6 @@
     "mongosh": "^2.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-fade-in": "^2.0.1",
     "react-router-dom": "^6.23.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
