@@ -1,31 +1,38 @@
-import {
-  simpleCaesarCipher,
-  vigenereCipher,
-  encodeToMorse,
-  encodeEmojiSubstitutionCipher,
-  binaryToAscii
-} from './ciphers';
+import { caesar, vigenere, polybius, morse, binary, emoji } from './ciphers';
 /**
  * Renders a component that tests various cipher encoding methods.
  */
 const CipherTestComponent: React.FC = () => {
   const caesarkey = 3;
-  const phrase = 'hello';
+  const phrase = 'hello world';
   const keyword = 'hello';
+
+  const encodedPolybius = polybius.encode({ phrase });
   return (
     <div className="text-white">
+      <p>Simple Caesar</p>
+      {caesar.encode({ caesarkey, phrase })}
+      {/* <SimpleCaesarCipher caesarkey={1} phrase="hello" /> */}
       <p>
-        Simple Caesar
-        {simpleCaesarCipher({ caesarkey, phrase })}
-        {/* <SimpleCaesarCipher caesarkey={1} phrase="hello" /> */}
         Vigenere
-        {vigenereCipher({ keyword, phrase })}
+        {vigenere.encode({ keyword, phrase })}
+      </p>
+      <p>
+        Polybius Square
+        {polybius.encode({ phrase })}
+        {polybius.decode(encodedPolybius)}
+      </p>
+      <p>
         Morse Code
-        {encodeToMorse({ phrase })}
+        {morse.encode({ phrase })}
+      </p>
+      <p>
         Emoji Substitution
-        {encodeEmojiSubstitutionCipher({ phrase })}
+        {emoji.encode({ phrase })}
+      </p>
+      <p>
         Binary Converter
-        {binaryToAscii({ phrase })}
+        {binary.encode({ phrase })}
       </p>
     </div>
   );
