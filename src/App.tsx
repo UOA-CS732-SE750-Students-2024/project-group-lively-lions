@@ -74,7 +74,7 @@ function App() {
       relative bg-[#1e2d2f] rounded-md
       w-[calc(60vw)] h-[calc(60vw*9/16)]
       min-w-[960px] min-h-[540px]
-      overflow-scroll"
+      overflow-scroll no-scrollbar"
       >
         {/* Game contents */}
         <AnimatePresence mode='wait'>
