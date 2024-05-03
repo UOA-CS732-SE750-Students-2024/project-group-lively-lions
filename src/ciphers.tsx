@@ -17,10 +17,7 @@ interface MorseCipherProps {
  * @param caesarkey - The key for the Caesar cipher.
  * @param phrase - The phrase to be encoded using the Caesar cipher.
  */
-export const simpleCaesarCipher = ({
-  caesarkey,
-  phrase
-}: CaesarCipherProps) => {
+const simpleCaesarCipher = ({ caesarkey, phrase }: CaesarCipherProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
   return phrase
@@ -43,13 +40,18 @@ export const simpleCaesarCipher = ({
     .join('');
 };
 
+export const caesar = {
+  encode: simpleCaesarCipher,
+  decode: simpleCaesarCipher
+};
+
 /**
  * VigenereCipher component for encoding a phrase using the Vigenere cipher.
  * @param keyword - The keyword used for encoding.
  * @param phrase - The phrase to be encoded.
  * @returns The encoded phrase as a string.
  */
-export const vigenereCipher = ({ keyword, phrase }: VigenereCipherProps) => {
+const vigenereCipher = ({ keyword, phrase }: VigenereCipherProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const keyLength = keyword.length;
   let keyIndex = 0;
@@ -84,7 +86,7 @@ export const vigenereCipher = ({ keyword, phrase }: VigenereCipherProps) => {
  * @param phrase - The phrase to be decoded.
  * @returns The decoded phrase as a string.
  */
-export const vigenereDecipher = ({ keyword, phrase }: VigenereCipherProps) => {
+const vigenereDecipher = ({ keyword, phrase }: VigenereCipherProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const keyLength = keyword.length;
   let keyIndex = 0;
@@ -113,44 +115,43 @@ export const vigenereDecipher = ({ keyword, phrase }: VigenereCipherProps) => {
     .join('');
 };
 
+export const vigenere = {
+  encode: vigenereCipher,
+  decode: vigenereDecipher
+};
+
 /**
- * PolybiusCipher component represents a React functional component that encodes a given phrase using the Polybius cipher.
+ * Encodes a given string using the Polybius cipher.
  *
- * @param phrase - The phrase to be encoded.
- * @returns The encoded phrase wrapped in a paragraph element with the "text-white" class.
+ * @param str - The string to be encoded.
+ * @returns The encoded string.
  */
-export const encodePolybius = ({ phrase }: MorseCipherProps) => {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
-  const polybiusSquare = [
-    ['A', 'B', 'C', 'D', 'E'],
-    ['F', 'G', 'H', 'I', 'J'],
-    ['K', 'L', 'M', 'N', 'O'],
-    ['P', 'Q', 'R', 'S', 'T'],
-    ['U', 'V', 'W', 'X', 'Y'],
-    ['Z']
-  ];
+const encodePolybius = ({ phrase }: MorseCipherProps) => {
+  let row, col;
+  let result = '';
 
-  /**
-   * Encodes a given string using the Polybius cipher.
-   *
-   * @param str - The string to be encoded.
-   * @returns The encoded string.
-   */
+  // convert each character
+  // to its encrypted code
+  for (let i = 0; i < phrase.length; i++) {
+    // finding row of the table
+    if (phrase.charAt(i).toLowerCase() === 'j') {
+      row = 2;
+      col = 4;
+    } else if (phrase.charAt(i) === ' ') {
+      row = 0;
+      row = 0;
+    } else {
+      let code =
+        phrase.charAt(i).toLowerCase().charCodeAt(0) - 'a'.charCodeAt(0);
+      if (code >= 9) code--; // excluding j, shift remaining codes by 1
+      row = Math.floor(code / 5) + 1;
+      col = (code % 5) + 1;
+    }
 
-  return phrase
-    .split('')
-    .map((char) => {
-      if (!alphabet.includes(char.toLowerCase())) {
-        return char;
-      }
+    result += row + '' + col;
+  }
 
-      const charIndex = alphabet.indexOf(char.toLowerCase());
-      const row = Math.floor(charIndex / 5);
-      const col = charIndex % 5;
-
-      return polybiusSquare[row][col];
-    })
-    .join('');
+  return result;
 };
 
 /**
@@ -159,28 +160,35 @@ export const encodePolybius = ({ phrase }: MorseCipherProps) => {
  * @param str - The string to be decoded.
  * @returns The decoded string.
  */
-export const decodePolybius = (phrase: string, polybiusSquare: string[][]) => {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+const decodePolybius = (phrase: string) => {
+  const polybiusSquare = [
+    ['a', 'b', 'c', 'd', 'e'],
+    ['f', 'g', 'h', 'i/j', 'k'],
+    ['l', 'm', 'n', 'o', 'p'],
+    ['q', 'r', 's', 't', 'u'],
+    ['v', 'w', 'x', 'y', 'z']
+  ];
 
-  return phrase
-    .split('')
-    .map((char) => {
-      if (!alphabet.includes(char.toLowerCase())) {
-        return char;
-      }
+  let encoded = '';
+  for (let i = 0; i < phrase.length; i++) {
+    const row = parseInt(phrase[i]);
+    const col = parseInt(phrase[++i]);
+    if (row > 0 && col > 0) {
+      encoded += polybiusSquare[row - 1][col - 1];
+    } else {
+      encoded += ' ';
+    }
+  }
+  return encoded;
+};
 
-      const rowIndex = polybiusSquare.findIndex((row) =>
-        row.includes(char.toUpperCase())
-      );
-      const colIndex = polybiusSquare[rowIndex].indexOf(char.toUpperCase());
-
-      return alphabet[rowIndex * 5 + colIndex];
-    })
-    .join('');
+export const polybius = {
+  encode: encodePolybius,
+  decode: decodePolybius
 };
 
 /**
- * MorseCodeCipher component encodes a given phrase into Morse code.
+ * MorseCodeCipher encodes a given phrase into Morse code.
  *
  * @param phrase - The phrase to be encoded into Morse code.
  * @returns The encoded phrase in Morse code.
@@ -268,13 +276,17 @@ export const decodeMorseToAscii = ({ phrase }: MorseCipherProps) => {
     .join('');
 };
 
+export const morse = {
+  encode: encodeToMorse,
+  decode: decodeMorseToAscii
+};
 /**
  * Converts a string of ASCII characters to binary representation.
  *
- * @param str - The input string to convert.
+ * @param phrase - The input string to convert.
  * @returns The binary representation of the input string.
  */
-export const asciiToBinary = ({ phrase }: MorseCipherProps) => {
+const asciiToBinary = ({ phrase }: MorseCipherProps) => {
   return phrase
     .split('')
     .map((char) => {
@@ -294,21 +306,21 @@ export const asciiToBinary = ({ phrase }: MorseCipherProps) => {
  * @param binary - The binary string to convert.
  * @returns The ASCII representation of the binary string.
  */
-export const binaryToAscii = ({ phrase }: MorseCipherProps) => {
-  const binaryToAscii = (binary: string) => {
-    return binary
-      .split(' ')
-      .map((binaryCode) => {
-        const asciiCode = parseInt(binaryCode, 2);
-        const char = String.fromCharCode(asciiCode);
-        return char;
-      })
-      .join('');
-  };
-
-  return binaryToAscii(phrase);
+const binaryToAscii = ({ phrase }: MorseCipherProps) => {
+  return phrase
+    .split(' ')
+    .map((binaryCode) => {
+      const asciiCode = parseInt(binaryCode, 2);
+      const char = String.fromCharCode(asciiCode);
+      return char;
+    })
+    .join('');
 };
 
+export const binary = {
+  encode: asciiToBinary,
+  decode: binaryToAscii
+};
 /**
  * Component that performs emoji substitution cipher encoding on a given phrase.
  *
@@ -316,7 +328,7 @@ export const binaryToAscii = ({ phrase }: MorseCipherProps) => {
  * @param {string} props.phrase - The phrase to be encoded.
  * @returns {JSX.Element} The encoded phrase wrapped in a paragraph element.
  */
-export const encodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
+const encodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
   const emojiMap: { [key: string]: string } = {
     a: '😀',
     b: '😃',
@@ -362,10 +374,13 @@ export const encodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
     .join('');
 };
 
-//decode emoji cipher
+/**
+ * Decodes a given string encoded using the emoji substitution cipher.
+ * @param {string} phrase - The phrase to be decoded.
+ * @returns {string} The decoded phrase.
+ */
 
-export const decodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
-  console.log(phrase);
+const decodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
   const emojiMap: { [key: string]: string } = {
     '😀': 'a',
     '😃': 'b',
@@ -402,4 +417,9 @@ export const decodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
   }
 
   return decodedPhrase;
+};
+
+export const emoji = {
+  encode: encodeEmojiSubstitutionCipher,
+  decode: decodeEmojiSubstitutionCipher
 };
