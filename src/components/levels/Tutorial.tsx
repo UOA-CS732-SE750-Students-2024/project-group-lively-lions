@@ -1,7 +1,7 @@
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { TextField } from '../ui/text_field';
-import { simpleCaesarCipher } from '@/ciphers';
+import { caesar } from '@/ciphers';
 
 /* 
 This is the component for the Tutorial Page. It allows the user to play the tutorial.
@@ -35,8 +35,8 @@ export function Tutorial({
         is a strange note left behind with scrambled letters. Purrlock must use
         his knowledge of the Caesar Cipher to decipher the note and identify the
         milk thief.
-        {simpleCaesarCipher({ caesarkey, phrase })}
-        {simpleCaesarCipher({
+        {caesar.encode({ caesarkey, phrase })}
+        {caesar.decode({
           caesarkey: -caesarkey,
           phrase: 'Vxusulvh! Kdssb Eluwkgdb Ghwhfwlyh Sxuuorfn Krophv!'
         })}
