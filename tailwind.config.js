@@ -21,6 +21,9 @@ module.exports = {
       sans: ['Inter', 'sans-serif'] // Default font for the entire app
     },
     extend: {
+      backgroundImage: {
+        'drawer-bottom': "url('/src/assets/level-select/drawer_bottom_sprite.png')",
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -79,4 +82,3 @@ module.exports = {
   },
   plugins: [require('tailwindcss-animate')]
 };
-

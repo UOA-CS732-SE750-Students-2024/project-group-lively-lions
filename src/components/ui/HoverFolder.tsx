@@ -1,6 +1,7 @@
 import folder_sprite from '../../assets/level-select/folder_sprite.png';
 import case_paper_sprite from '../../assets/level-select/case_paper_sprite.png';
-import stamp_area from '../../assets/level-select/stamp_area.png'
+import stamp_area_sprite from '../../assets/level-select/stamp_area_sprite.png';
+import solved_stamp_sprite from '../../assets/level-select/solved_stamp_sprite.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
 
@@ -35,10 +36,11 @@ export function HoverFolder({
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
 
   return (
-    <div>
+    <div
+    className='w-[94%]'>
       <motion.div
-      className="relative inline-block"
-      style={{ marginTop: marginTop }} // Adjust this value to control the initial vertical overlap
+      className="relative inline-block w-[100%]"
+      style={{ marginTop: marginTop, imageRendering: 'pixelated' }} // marginTop controls the initial vertical overlap
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(-1)} // Clear hover status
       onClick={() =>
@@ -55,53 +57,70 @@ export function HoverFolder({
         damping: 30 }}
       >
         <p
-        className= "absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
-        style={{pointerEvents: 'none'}}
+          className="absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
+          style={{ pointerEvents: 'none' }}
         >
-        Puzzle {index + 1}
+          Puzzle {index + 1}
         </p>
-        <img src={folder_sprite} />
+        <img 
+        className='w-[100%]'
+        src={folder_sprite} />
         <div
         className="absolute inset-0"
         style={{ overflow: 'hidden' }}>
           <AnimatePresence>
-          {isClickedIndex === index ? (
+            {isClickedIndex === index ? (
               // Container for puzzle information
               <motion.div
-              key={index}
-              initial={{ y: '100%' }}
-              exit={{ y: '100%' }}
-              animate={{ y: index === isClickedIndex ? '7%' : '100%' }}
-              transition={{ type: 'spring', damping: 16 }}
-              className="absolute inset-x-[3%] inset-y-[3%] flex"
+                key={index}
+                initial={{ y: '100%' }}
+                exit={{ y: '100%' }}
+                animate={{ y: index === isClickedIndex ? '7%' : '100%' }}
+                transition={{ type: 'spring', damping: 16 }}
+                className="absolute inset-x-[3%] inset-y-[3%] flex"
               >
                 <div>
                   <Button
-                  className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
-                  onClick={(e) => handleLevelButtonClick(levelIndex, e)}
+                    className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
+                    onClick={(e) => handleLevelButtonClick(levelIndex, e)}
                   >
                     Open
                   </Button>
                 </div>
                 <div
-                className="absolute top-[8%] right-[8%] w-[35%] h-[18%]"
+                className='absolute left-[10%] top-[10%] w-[36%]'
                 >
                   <p
-                  className="absolute opacity-[25%] text-[1rem] font-[alagard] wrap w-[80%] top-[16%] left-[10%]">
+                  className="opacity-[70%] text-[1.3rem] font-[alagard]">
+                    Puzzle File Description: 
+                  </p>
+                  <p
+                  className="opacity-[70%] text-[1rem] font-[alagard]">
+                    This is where we describe the puzzle!
+                  </p>
+                </div>
+                <div
+                className="absolute top-[6%] right-[6%] w-[40%] h-[20%]"
+                >
+                  <p
+                  className="absolute opacity-[25%] text-[1.3rem] text-center leading-tight font-[alagard] wrap w-[80%] top-[18%] left-[10%]">
                     0/5 Deciphered
                   </p>
                   <img 
-                  style={{imageRendering: 'pixelated'}}
-                  className="opacity-[50%] w-[100%] h-[100%]"
-                  src={stamp_area} 
+                  className="opacity-[50%] w-[100%] h-[100%] p-[4%]"
+                  src={stamp_area_sprite} 
+                  />
+                  <img 
+                  className="absolute inset-0 opacity-[75%] w-[100%] h-[100%]"
+                  src={solved_stamp_sprite}
                   />
                 </div>
-              <img src={case_paper_sprite} />
-            </motion.div>
-          ) : (
-            // Empty when this folder is not selected
-            <></>
-          )}
+                <img src={case_paper_sprite} />
+              </motion.div>
+            ) : (
+              // Empty when this folder is not selected
+              <></>
+            )}
           </AnimatePresence>
         </div>
       </motion.div>
