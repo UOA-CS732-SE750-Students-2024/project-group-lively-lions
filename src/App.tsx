@@ -5,6 +5,8 @@ import { LevelSelect } from './components/levels/LevelSelect';
 import { NewPlayer } from './components/levels/NewPlayer';
 import { SignIn } from './components/levels/SignIn';
 import { PlayerInfo } from './components/levels/PlayerInfo';
+import { AnimatePresence } from 'framer-motion';
+import { Tutorial } from './components/levels/Tutorial';
 
 function App() {
   const [currentLevel, setCurrentLevel] = useState(1);
@@ -24,7 +26,11 @@ function App() {
       handleLevelButtonClick={handleLevelButtonClick}
       handleConfirm={handleConfirm}
     />,
-    <LevelSelect handleLevelButtonClick={handleLevelButtonClick} />
+    <LevelSelect handleLevelButtonClick={handleLevelButtonClick} />,
+    <Tutorial
+      handleCheckAnswer={handleCheckAnswer}
+      handleLevelButtonClick={handleLevelButtonClick}
+    />
   ];
 
   function handleLevelButtonClick(
@@ -33,6 +39,19 @@ function App() {
   ) {
     e.preventDefault();
     setCurrentLevel(level);
+  }
+
+  function handleCheckAnswer(
+    userPhrase: string,
+    phrase: string,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) {
+    e.preventDefault();
+    if (userPhrase == phrase) {
+      alert('Correct!');
+    } else {
+      alert('Incorrect, try again!');
+    }
   }
 
   function handleConfirm(
@@ -54,11 +73,13 @@ function App() {
         className="
       relative bg-[#1e2d2f] rounded-md
       w-[calc(60vw)] h-[calc(60vw*9/16)]
-      min-w-[640px] min-h-[360px]
+      min-w-[960px] min-h-[540px]
       overflow-scroll"
       >
         {/* Game contents */}
-        {levels[currentLevel]}
+        <AnimatePresence mode='wait'>
+          {levels[currentLevel]}
+        </AnimatePresence>
       </div>
     </div>
   );
