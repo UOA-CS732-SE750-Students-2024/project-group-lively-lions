@@ -28,18 +28,36 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = (props) => {
               stiffness: 120
             }}
           >
+            {/* The board */}
             <img
               className="min-h-[540px] h-[calc(60vw*9/16)]"
               src={boardBackground}
             />
-            {/* The notes */}
-            <div className="absolute top-[10%] left-[10%]">
-              <ConspiracyNote />
+            {/* Note 1 */}
+            <div className="absolute top-[14%] left-[10%] hover:rotate-12 hover:scale-110 duration-50">
+              <ConspiracyNote type="A" />
             </div>
-
-            <div className="absolute top-[45%] left-[20%]">
-              <ConspiracyNote />
+            {/* Note 2 */}
+            <div className="absolute top-[52%] left-[15%] hover:rotate-12 hover:scale-110 duration-50">
+              <ConspiracyNote type="B" />
             </div>
+            {/* Note 3 */}
+            <div className="absolute top-[73%] left-[28%] rotate-45 hover:rotate-0 hover:scale-110 duration-50">
+              <ConspiracyNote type="A" />
+            </div>
+            {/* Note 4 */}
+            <div className="absolute top-[54%] left-[47%] rotate-12 hover:rotate-45 hover:scale-110 duration-50">
+              <ConspiracyNote type="A" />
+            </div>
+            {/* Note 5 */}
+            <div className="absolute top-[27%] left-[43%] rotate-12 hover:rotate-0 hover:scale-110 duration-50">
+              <ConspiracyNote type="B" />
+            </div>
+            {/* Note 6 */}
+            <div className="absolute top-[55%] left-[80%] hover:rotate-12 hover:scale-110 duration-50">
+              <ConspiracyNote type="A" />
+            </div>
+            {/* Red strings */}
             <img
               className="absolute top-0 left-0 min-h-[540px] h-[calc(60vw*9/16)] pointer-events-none"
               src={strings}

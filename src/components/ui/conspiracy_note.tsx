@@ -1,25 +1,35 @@
 import { Dialog, DialogContent, DialogFooter, DialogTrigger } from './dialog';
 import noteA from '../../assets/room/main_menu/conspiracy_board/noteA.png';
 import noteAHighlighted from '../../assets/room/main_menu/conspiracy_board/noteA-highlighted.png';
+import noteB from '../../assets/room/main_menu/conspiracy_board/noteB.png';
+import noteBHighlighted from '../../assets/room/main_menu/conspiracy_board/noteB-highlighted.png';
 import paper from '../../assets/level-select/case_paper_sprite.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-interface ConspiracyNoteProps {}
+interface ConspiracyNoteProps {
+  type: 'A' | 'B';
+}
 
 // This component takes a transcript
-const ConspiracyNote: React.FC<ConspiracyNoteProps> = (props) => {
+const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({ type }) => {
   const [src, setSrc] = useState(noteA);
+  const noteImage = type === 'A' ? noteA : noteB;
+  const noteHighlighted = type === 'A' ? noteAHighlighted : noteBHighlighted;
+
+  useEffect(() => {
+    setSrc(noteImage);
+  }, [type]);
 
   return (
     <Dialog>
       <DialogTrigger
         asChild
         onMouseOver={() => {
-          setSrc(noteAHighlighted);
+          setSrc(noteHighlighted);
         }}
         onMouseOut={() => {
-          setSrc(noteA);
+          setSrc(noteImage);
         }}
       >
         <img
