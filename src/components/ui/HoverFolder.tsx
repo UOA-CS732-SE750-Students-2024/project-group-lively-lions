@@ -36,25 +36,28 @@ export function HoverFolder({
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
 
   return (
-    <div
-    className='w-[94%]'>
+    <div className="w-[94%]">
       <motion.div
-      className="relative inline-block w-[100%]"
-      style={{ marginTop: marginTop, imageRendering: 'pixelated' }} // marginTop controls the initial vertical overlap
-      onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(-1)} // Clear hover status
-      onClick={() =>
-        isClickedIndex === index ? setClickedIndex(-1) : setClickedIndex(index)
-      }
-      animate={{
-        y:
-          `${(isAboveClicked ? clickedOffset : 0) +
-          (isAboveHovered ? hoverOffset : 0)}%`
-      }}
-      transition={{ 
-        type: 'spring', 
-        stiffness: 500, 
-        damping: 30 }}
+        className="relative inline-block w-[100%]"
+        style={{ marginTop: marginTop, imageRendering: 'pixelated' }} // marginTop controls the initial vertical overlap
+        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseLeave={() => setHoveredIndex(-1)} // Clear hover status
+        onClick={() =>
+          isClickedIndex === index
+            ? setClickedIndex(-1)
+            : setClickedIndex(index)
+        }
+        animate={{
+          y: `${
+            (isAboveClicked ? clickedOffset : 0) +
+            (isAboveHovered ? hoverOffset : 0)
+          }%`
+        }}
+        transition={{
+          type: 'spring',
+          stiffness: 500,
+          damping: 30
+        }}
       >
         <p
           className="absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
@@ -62,12 +65,8 @@ export function HoverFolder({
         >
           Puzzle {index + 1}
         </p>
-        <img 
-        className='w-[100%]'
-        src={folder_sprite} />
-        <div
-        className="absolute inset-0"
-        style={{ overflow: 'hidden' }}>
+        <img className="w-[100%]" src={folder_sprite} />
+        <div className="absolute inset-0" style={{ overflow: 'hidden' }}>
           <AnimatePresence>
             {isClickedIndex === index ? (
               // Container for puzzle information
@@ -87,32 +86,25 @@ export function HoverFolder({
                     Open
                   </Button>
                 </div>
-                <div
-                className='absolute left-[10%] top-[10%] w-[36%]'
-                >
-                  <p
-                  className="opacity-[70%] text-[1.3rem] font-[alagard]">
-                    Puzzle File Description: 
+                <div className="absolute left-[10%] top-[10%] w-[36%]">
+                  <p className="opacity-[70%] text-[1.3rem] font-[alagard]">
+                    Puzzle File Description:
                   </p>
-                  <p
-                  className="opacity-[70%] text-[1rem] font-[alagard]">
+                  <p className="opacity-[70%] text-[1rem] font-[alagard]">
                     This is where we describe the puzzle!
                   </p>
                 </div>
-                <div
-                className="absolute top-[6%] right-[6%] w-[40%] h-[20%]"
-                >
-                  <p
-                  className="absolute opacity-[25%] text-[1.3rem] text-center leading-tight font-[alagard] wrap w-[80%] top-[18%] left-[10%]">
+                <div className="absolute top-[6%] right-[6%] w-[40%] h-[20%]">
+                  <p className="absolute opacity-[25%] text-[1.3rem] text-center leading-tight font-[alagard] wrap w-[80%] top-[18%] left-[10%]">
                     0/5 Deciphered
                   </p>
-                  <img 
-                  className="opacity-[50%] w-[100%] h-[100%] p-[4%]"
-                  src={stamp_area_sprite} 
+                  <img
+                    className="opacity-[50%] w-[100%] h-[100%] p-[4%]"
+                    src={stamp_area_sprite}
                   />
-                  <img 
-                  className="absolute inset-0 opacity-[75%] w-[100%] h-[100%]"
-                  src={solved_stamp_sprite}
+                  <img
+                    className="absolute inset-0 opacity-[75%] w-[100%] h-[100%]"
+                    src={solved_stamp_sprite}
                   />
                 </div>
                 <img src={case_paper_sprite} />
