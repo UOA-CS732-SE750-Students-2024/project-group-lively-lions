@@ -19,18 +19,19 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
 
   return (
     <motion.div
-    className='absolute w-[100%] h-[100%]'
-    key='modal'
-    initial={{ y: '-100%' }}
-    animate={{y: '0%' }}
-    exit={{ y: '-100%' }}
-    transition={{ type: 'spring', damping: 18 }}
+      className="absolute w-[100%] h-[100%]"
+      key="modal"
+      initial={{ y: '-100%' }}
+      animate={{ y: '0%' }}
+      exit={{ y: '-100%' }}
+      transition={{ type: 'spring', damping: 18 }}
     >
       <div className="flex flex-col items-center h-[100%] w-[100%] pb-[1%]">
         <div className="flex flex-col items-center overflow-hidden h-[80%] w-[100%]">
-          <div 
-          style={{imageRendering:'pixelated'}}
-          className="flex flex-col items-center w-[50%] h-[100%] pt-[22%] bg-drawer-bottom bg-[cover]">
+          <div
+            style={{ imageRendering: 'pixelated' }}
+            className="flex flex-col items-center w-[50%] h-[100%] pt-[22%] bg-drawer-bottom bg-[cover]"
+          >
             {menuItemOffsets.map((marginTop, index) => (
               <HoverFolder
                 marginTop={marginTop}
@@ -39,19 +40,17 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
                 isClickedIndex={clickedIndex}
                 setHoveredIndex={setHoveredIndex}
                 setClickedIndex={setClickedIndex}
-                levelIndex={0}
+                levelIndex={6 + index}
                 handleLevelButtonClick={handleLevelButtonClick}
               />
             ))}
           </div>
         </div>
         <div
-        style={{imageRendering:'pixelated'}}
-        className='flex flex-col w-[52%] align-bottom'
+          style={{ imageRendering: 'pixelated' }}
+          className="flex flex-col w-[52%] align-bottom"
         >
-          <img 
-          className='w-[100%] bottom-0'
-          src={drawer_face_sprite} />
+          <img className="w-[100%] bottom-0" src={drawer_face_sprite} />
           <Button
             className="absolute font-[alagard] text-[1.1rem] mt-5 mb-5 bottom-[9%] w-[20%] left-[40%]"
             onClick={(e) => handleLevelButtonClick(0, e)}
@@ -61,6 +60,5 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
         </div>
       </div>
     </motion.div>
-
   );
 }

@@ -4,14 +4,14 @@ import { useState } from 'react';
 
 interface EchidnaMachineProps {
   phrase: string;
-  shift?: number;
-  keyword?: string;
 }
 
-const EchidnaMachine = ({ phrase, shift, keyword }: EchidnaMachineProps) => {
+const EchidnaMachine = ({ phrase }: EchidnaMachineProps) => {
   const [selectedCipher, setSelectedCipher] = useState(
     Object.values(ciphersExports)[0].name.toString()
   );
+  const [shift, setShift] = useState<number>(0);
+  const [keyword, setKeyword] = useState('');
   const [workingPhrase, setWorkingPhrase] = useState(phrase);
 
   const handleDecipher = () => {
@@ -22,19 +22,12 @@ const EchidnaMachine = ({ phrase, shift, keyword }: EchidnaMachineProps) => {
     const cipher = cipherValues[index];
     const newCipher = new cipher();
     if (newCipher.type === CipherType.Caesar) {
-      if (shift === undefined) {
-        shift = 0;
-        console.log('no shift');
-      }
       const decodedPhrase = newCipher.decode({
         caesarkey: shift,
         phrase: phrase
       });
       setWorkingPhrase(decodedPhrase);
     } else if (newCipher.type === CipherType.Keyword) {
-      if (keyword === undefined) {
-        keyword = '';
-      }
       const decodedPhrase = newCipher.decode({
         keyword: keyword,
         phrase: phrase
@@ -71,6 +64,21 @@ const EchidnaMachine = ({ phrase, shift, keyword }: EchidnaMachineProps) => {
 
       <div className="text-white">
         <p>{}</p>
+        <label>Shift</label>
+        <input
+          className="bg-white text-black"
+          type="number"
+          onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setShift(e.target.valueAsNumber)
+          }
+        ></input>
+        <input
+          className="bg-white text-black"
+          type="text"
+          onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setKeyword(e.target.value)
+          }
+        ></input>
         <button onClick={() => handleCycleOptions(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

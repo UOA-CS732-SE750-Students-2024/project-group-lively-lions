@@ -1,16 +1,20 @@
 import EchidnaMachine from './EchidnaMachine';
+import { Button } from '../ui/button';
 
 const GamePageTemplate = () => {
-  const phrase = '11011000';
-
+  const phrase = 'Hello world';
+  const handleEchidna = () => {
+    // open echidna view
+  };
   return (
     <div>
-      <button>Level Select Cabinet</button>
-      <button> Conspiracy Board</button>
+      <Button>Level Select Cabinet</Button>
+      <Button> Conspiracy Board</Button>
       <div id="desk">
-        <button>phone hints</button>
-        <button>computer</button>
-        <button> reference book</button>
+        <Button>phone hints</Button>
+        <Button>computer</Button>
+        <Button> reference book</Button>
+        <Button onClick={handleEchidna}> Echidna Machine</Button>
         <EchidnaMachine phrase={phrase} />
       </div>
     </div>
