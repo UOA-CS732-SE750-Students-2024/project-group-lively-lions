@@ -1,20 +1,16 @@
-//const dotenv = require("dotenv");
 import dotenv from "dotenv"
 dotenv.config();
+
 import router from "./routes/routes.mjs"
-// const { routes } = require("./routes/routes.mjs").router;
-//const express = require('express');
 import express from "express"
 import mongoose from "mongoose"
-//const mongoose = require('mongoose');
 import bodyParser from "body-parser"
-//const bodyParser = require('body-parser');
 import cors from "cors"
-//const cors = require('cors');
 
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT ?? 3001;
+const BACKUP_PORT = 3000
 
 // Middleware
 app.use(bodyParser.json());
@@ -24,7 +20,7 @@ app.use(express.static("public"));
 
 app.use("/", router)
 
-const SERVER_URI = 'mongodb+srv://pstr243:33gYXK372cjMbf4m@purrlockholmes.jawkn3g.mongodb.net/'
+const SERVER_URI = 'mongodb+srv://game-user:general-access-password@purrlockholmes.jawkn3g.mongodb.net/'
 
 // MongoDB connection
 mongoose.connect(SERVER_URI, {
@@ -36,8 +32,8 @@ mongoose.connect(SERVER_URI, {
     console.log(`App server listening on port ${PORT}`);
   }).on('error', (err) => {
     if (err.code === 'EADDRINUSE') {
-      console.log(`Port ${PORT} is already in use. Trying another port...`);;
-      app.listen(3000);
+      console.log(`Port ${PORT} is already in use. Listening on ${BACKUP_PORT}`);;
+      app.listen(BACKUP_PORT);
     } else {
       console.error(err);
     }
@@ -58,7 +54,7 @@ import Player from "./playerSchema.js"
 app.post('/player', async (req, res) => {
   try {
     const { username, password } = req.body;
-    const newPlayer = new Player(username, password);
+    const newPlayer = new Player({username, password});
     await newPlayer.save();
     res.status(201).json(newPlayer);
   } catch (error) {

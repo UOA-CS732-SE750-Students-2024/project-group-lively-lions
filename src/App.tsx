@@ -16,7 +16,6 @@ function App() {
     <LandingScreen handleLevelButtonClick={handleLevelButtonClick} />,
     <NewPlayer
       handleLevelButtonClick={handleLevelButtonClick}
-      handleConfirm={handleConfirm}
     />,
     <SignIn
       handleLevelButtonClick={handleLevelButtonClick}
