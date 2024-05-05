@@ -57,10 +57,10 @@ export function HoverFolder({
         damping: 30 }}
       >
         <p
-        className= "absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
-        style={{pointerEvents: 'none'}}
+          className="absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
+          style={{ pointerEvents: 'none' }}
         >
-        Puzzle {index + 1}
+          Puzzle {index + 1}
         </p>
         <img 
         className='w-[100%]'
@@ -69,20 +69,20 @@ export function HoverFolder({
         className="absolute inset-0"
         style={{ overflow: 'hidden' }}>
           <AnimatePresence>
-          {isClickedIndex === index ? (
+            {isClickedIndex === index ? (
               // Container for puzzle information
               <motion.div
-              key={index}
-              initial={{ y: '100%' }}
-              exit={{ y: '100%' }}
-              animate={{ y: index === isClickedIndex ? '7%' : '100%' }}
-              transition={{ type: 'spring', damping: 16 }}
-              className="absolute inset-x-[3%] inset-y-[3%] flex"
+                key={index}
+                initial={{ y: '100%' }}
+                exit={{ y: '100%' }}
+                animate={{ y: index === isClickedIndex ? '7%' : '100%' }}
+                transition={{ type: 'spring', damping: 16 }}
+                className="absolute inset-x-[3%] inset-y-[3%] flex"
               >
                 <div>
                   <Button
-                  className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
-                  onClick={(e) => handleLevelButtonClick(levelIndex, e)}
+                    className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
+                    onClick={(e) => handleLevelButtonClick(levelIndex, e)}
                   >
                     Open
                   </Button>
@@ -115,12 +115,12 @@ export function HoverFolder({
                   src={solved_stamp_sprite}
                   />
                 </div>
-              <img src={case_paper_sprite} />
-            </motion.div>
-          ) : (
-            // Empty when this folder is not selected
-            <></>
-          )}
+                <img src={case_paper_sprite} />
+              </motion.div>
+            ) : (
+              // Empty when this folder is not selected
+              <></>
+            )}
           </AnimatePresence>
         </div>
       </motion.div>
