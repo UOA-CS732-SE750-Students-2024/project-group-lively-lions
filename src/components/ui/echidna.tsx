@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import {
     EchidnaBase,
-    EchidnaCipherButtonBaseDown,
-    EchidnaCipherButtonBaseUp,
+    EchidnaCipherButtonBase,
     EchidnaCipherButtonCapDown,
     EchidnaCipherButtonCapUp,
     EchidnaGreenLampOff,
@@ -15,71 +15,67 @@ import {
     EchidnaSolveLeverHandle,
     EchidnaSolveLeverStem
   } from '../../assets/echidna-2';
-  import { motion } from 'framer-motion';
+  import { AnimatePresence, motion } from 'framer-motion';
+  import EchidnaButton from './echidna_button';
 
 interface EchidnaProps {
-  marginTop: string;
-  index: number;
-  isHoveredIndex: number;
-  setHoveredIndex: (index: number) => void;
-  isClickedIndex: number;
-  levelIndex: number;
-  setClickedIndex: (index: number) => void;
-  handleLevelButtonClick: (
-    level: number,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  base_width_percent: number;
+  available_ciphers: string[];
 }
 
-  const width = '40%'
-  
 export function Echidna({
+  base_width_percent,
+  available_ciphers
+}: EchidnaProps){
 
-}){
-    return (
-      <div className='flex flex-col items-center w[100%] pt-[5%]'>
-        <img src={EchidnaBase} alt="Echidna Base" className={`absolute w-${width}`}/>
-        <img src={EchidnaCipherButtonBaseDown} alt="Echidna Cipher Button Base Down" className={`absolute w-${width}`} />
-        <img src={EchidnaCipherButtonBaseUp} alt="Echidna Cipher Button Base Up" className={`absolute w-${width}`} />
-        <motion.img src={EchidnaCipherButtonCapDown} alt="Echidna Cipher Button Cap Down" className={`absolute w-${width}`}
-        initial={{y: '0%'}}
-        animate={{y: ['0%', '0.85%', '0%']}}
-        transition={{ ease: "easeInOut", duration: 0.5 }}
-        />
-        <motion.img src={EchidnaCipherButtonCapUp} alt="Echidna Cipher Button Cap Up" className={`absolute w-${width}`}
-        initial={{y: '0%'}}
-        animate={{y: ['0%', '0.85%', '0%']}}
-        transition={{ ease: "easeInOut", duration: 0.5 }}
-        />
-        <motion.div className='absolute w-[100%] h-[20.3%] overflow-hidden'>
-          <motion.img src={EchidnaPaper} alt="Echidna Paper" className="absolute w-[40%] left-[30%]"
-          initial={{y: '0%'}}
-          animate={{y: ['0%', '18%', '0%']}}
-          transition={{ ease: "easeInOut", duration: 1 }}
-          />
-        </motion.div>
-        <motion.img src={EchidnaPaperShadow} alt="Echidna Green Lamp Off" className={`absolute w-${width}`} />
-        <motion.img src={EchidnaGreenLampOff} alt="Echidna Green Lamp Off" className={`absolute w-${width}`} />
-        <motion.img src={EchidnaGreenLampOn} alt="Echidna Green Lamp On" className="absolute w-[40%] hidden" />
-        <motion.img src={EchidnaHelpTab} alt="Echidna Help Tab" className={`absolute w-${width}`} />
-        <motion.img src={EchidnaPaperFeedArms} alt="Echidna Paper Feed Arms" className={`absolute w-${width}`} />
-        <motion.img src={EchidnaRedLampOff} alt="Echidna Red Lamp Off" className={`absolute w-${width}`} />
-        <motion.img src={EchidnaRedLampOn} alt="Echidna Red Lamp On" className={`absolute w-${width}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 1, 1, 0] }}
-        transition={{ duration: 1, times: [0, 0.2, 0.8, 1] }} />
-        <motion.img src={EchidnaSolveLeverHandle} alt="Echidna Solve Lever" className={`absolute w-${width}`}
-        initial={{y: '0%'}}
-        animate={{y: ['0%', '7%', '0%']}}
-        transition={{ ease: "easeInOut", duration: 1 }}
-        />
-        <motion.img src={EchidnaSolveLeverStem} alt="Echidna Solve Lever" className={`absolute w-${width}`}
-        initial={{y: '0%'}}
-        animate={{y: ['0%', '7%', '0%']}}
-        transition={{ ease: "easeInOut", duration: 1 }}
-        />
-      </div>  
-    );
+  const [selectedCipher, setSelectedCipher] = useState<number>(0);
+  const [cipherSelectUp, setCipherSelectUp] = useState<boolean>(true);
+  const [animatingOut, setAnimatingOut] = useState<boolean>(false);
+
+  const handleCipherChange = (up: boolean) => {
+    setAnimatingOut(true);
+    setCipherSelectUp(up);
+    setTimeout(() => {
+    setSelectedCipher(up ? 
+      (selectedCipher + 1) % available_ciphers.length : 
+      ((selectedCipher - 1) + available_ciphers.length) % available_ciphers.length);
+      setAnimatingOut(false);
+    }, 250);
+  };
+
+  return (
+    /* Centers component with some top padding */
+    <div className='flex flex-col items-center w[100%] pt-[5%]'>
+      {/* The wood, bakelite and aluminum base of the mighty "Echidna I" cipher machine */}
+      <img src={EchidnaBase} alt="Echidna Base" className={`absolute w-[${base_width_percent}%]`}/>
+      {/* Masks the text outside the bounds of the cipher-select rotor display */}
+      <div className='absolute top-[49%] left-[37%] h-[5%] w-[14%] pl-[1%] pt-[0.5%] overflow-hidden'>
+        {/* Cipher-select display, populated with available cipher options for current puzzle */}
+        <AnimatePresence initial={false} mode='wait'>
+          <motion.p
+          key={available_ciphers[selectedCipher]}
+          className={"font-[alagard] text-[1.2rem] leading-[1.2rem]"}
+          initial={{ y: cipherSelectUp ? '-1.4rem' : '1.4rem' }}
+          animate={{ y: animatingOut ? cipherSelectUp ? '1.4rem' : '-1.5rem' : 0 }}
+          transition={{ type: 'spring', duration: 0.15 }}
+          >
+          {available_ciphers[selectedCipher]}
+          </motion.p>
+        </AnimatePresence>
+      </div>
+      {/* Cipher-select buttons */}
+      {/* UP */}
+      <div className='absolute w-[4%] top-[46.5%] left-[52.5%] '>
+        <EchidnaButton capImage={EchidnaCipherButtonCapUp} 
+        onClick={() => {handleCipherChange(true)}} />
+      </div>
+      {/* DOWN */}
+      <div className='absolute w-[4%] top-[51.5%] left-[52.5%] '>
+        <EchidnaButton capImage={EchidnaCipherButtonCapDown} 
+        onClick={() => {handleCipherChange(false)}} />
+      </div>
+    </div>  
+  );
 }
   
-  export default Echidna;
+export default Echidna;

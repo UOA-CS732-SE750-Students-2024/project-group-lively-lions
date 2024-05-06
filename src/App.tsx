@@ -8,6 +8,7 @@ import { PlayerInfo } from './components/levels/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Tutorial } from './components/levels/Tutorial';
 import GamePageTemplate from './components/levels/GamePageTemplate';
+import Echidna from './components/ui/echidna';
 
 function App() {
   const [currentLevel, setCurrentLevel] = useState(1);
@@ -74,7 +75,9 @@ function App() {
       overflow-scroll no-scrollbar"
       >
         {/* Game contents */}
-        <AnimatePresence mode="wait">{levels[currentLevel]}</AnimatePresence>
+        <AnimatePresence mode="wait">
+          {levels[currentLevel]} 
+        </AnimatePresence>
       </div>
     </div>
   );

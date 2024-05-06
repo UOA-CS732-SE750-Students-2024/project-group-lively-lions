@@ -1,6 +1,5 @@
 export { default as EchidnaBase } from './echidna_base.png';
-export { default as EchidnaCipherButtonBaseDown } from './echidna_cipher_button_base_down.png';
-export { default as EchidnaCipherButtonBaseUp } from './echidna_cipher_button_base_up.png';
+export { default as EchidnaCipherButtonBase } from './echidna_cipher_button_base.png';
 export { default as EchidnaCipherButtonCapDown } from './echidna_cipher_button_cap_down.png';
 export { default as EchidnaCipherButtonCapUp } from './echidna_cipher_button_cap_up.png';
 export { default as EchidnaGreenLampOff } from './echidna_green_lamp_off.png';
