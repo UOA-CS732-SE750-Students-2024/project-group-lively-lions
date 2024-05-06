@@ -10,9 +10,6 @@ import string6 from '../../assets/room/main_menu/conspiracy_board/strings/string
 import string7 from '../../assets/room/main_menu/conspiracy_board/strings/string7.png';
 import { Dialog, DialogContent, DialogTrigger } from './dialog';
 import ConspiracyNote from './conspiracy_note';
-import Keith from '../../assets/common/Keiththerat.png';
-import Purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
-import Caperton from '../../assets/common/CapybaraFella.png';
 
 export interface ConspiracyNoteData {
   story: string;
@@ -24,13 +21,17 @@ export interface ConspiracyBoardData {
 }
 
 interface ConspiracyBoardProps {
+  boardData: ConspiracyBoardData;
   maxNotes: 1 | 3 | 5 | 7;
 }
 
 // This component represents the conspiracy board, notes and strings on the board are rendered
 // based on the provided props
-const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({ maxNotes }) => {
-  const progress = 7;
+const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
+  boardData,
+  maxNotes
+}) => {
+  const progress = boardData.notes.length;
   const strings = [
     string1,
     string2,
@@ -156,12 +157,7 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({ maxNotes }) => {
                 <ConspiracyNote
                   index={i}
                   type={note.type as 'A' | 'B' | 'D' | 'C'}
-                  noteData={
-                    {
-                      story:
-                        'Purrlock now had the location of the master’s lair. With the location clocked into his GPS, Purrlock headed off right away. The route took him right into the heart of the city, to the mysterious, haunted, abandoned mansion. While the public always wanted the house to get hauled away to make space for something better for the community, the council always seemed to ignore these requests, never making a comment on the building, completely avoiding all mention of it. Clouds closed in, blanketing the sky in grey fluff. Purrlock’s fur prickled; a mighty storm was approaching. As he stepped out of his car, Purrlock drew his flashlight. He jumped over the crumbling brick outer walls and into the front yard. Weeds ran wild, almost completely obscuring the footpath. He looked up. The door was slightly ajar, as if taunting him to enter. Purrlock found his curious feet walk up the stairs, across the porch, and finally enter the building. The interior, still proud despite its wear, was surprisingly well kept. Something, or someone, had been preventing ramsackers from ruining this place. The mysterious master, no doubt. As he explored each room, Purrlock found that the rest of the house was also tidy, with the exception of crazed symbols decorating the walls. Each room seemed to have a different cipher. After checking the ground floor and upstairs, Purrlock approached the basement. Purrlock, an avid reader and puzzle solver, was well aware that the basement would be where the climax of this case would occur. Surely the master could not resist a good clique, after all. Walking down the stairs, he came to a large set of locked doors, with a final hint on how to combine the ciphers from around the house.'
-                    } as ConspiracyNoteData
-                  }
+                  noteData={boardData.notes[i]}
                 />
               </div>
             ))}
