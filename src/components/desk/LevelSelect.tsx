@@ -23,7 +23,7 @@ export function LevelSelect({
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
 
-  const menuItemOffsets = ['0%', '-85%', '-85%'];
+  const menuItemOffsets = ['-5%', '-87%', '-87%', '-87%'];
 
   return (
     <motion.div

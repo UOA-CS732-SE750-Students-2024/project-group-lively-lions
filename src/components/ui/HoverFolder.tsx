@@ -35,7 +35,7 @@ export function HoverFolder({
 
   const hoverOffset = -3; // Distance moved by folder when hovered over
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
-
+  const puzzles = ['Tutorial', 'Easy', 'Medium', 'Hard'];
   return (
     <div className="w-[94%]">
       <motion.div
@@ -64,7 +64,7 @@ export function HoverFolder({
           className="absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
           style={{ pointerEvents: 'none' }}
         >
-          Puzzle {index + 1}
+          {puzzles[index]}
         </p>
         <img className="w-[100%]" src={folder_sprite} />
         <div className="absolute inset-0" style={{ overflow: 'hidden' }}>
