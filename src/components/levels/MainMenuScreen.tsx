@@ -44,10 +44,10 @@ export default function MainMenuScreen({
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(8, e)}
+        onClick={(e) => handleLevelButtonClick(0, e)}
         size={'sm'}
       >
-        CONSPIRICY BOARD
+        CONSPIRACY BOARD needs link to working board
       </Button>
 
       <Button
@@ -60,7 +60,7 @@ export default function MainMenuScreen({
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(9, e)}
+        onClick={(e) => handleLevelButtonClick(8, e)}
         size={'sm'}
       >
         PHONE
@@ -68,7 +68,7 @@ export default function MainMenuScreen({
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(11, e)}
+        onClick={(e) => handleLevelButtonClick(10, e)}
         size={'sm'}
       >
         REFERENCE BOOK
@@ -76,7 +76,7 @@ export default function MainMenuScreen({
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(10, e)}
+        onClick={(e) => handleLevelButtonClick(9, e)}
         size={'sm'}
       >
         PUZZLE PAGE

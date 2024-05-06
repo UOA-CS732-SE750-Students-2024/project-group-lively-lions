@@ -2,7 +2,7 @@ import { useState } from 'react';
 import MainMenuScreen from './components/levels/MainMenuScreen';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/desk/LevelSelect';
-import { ConspiricyBoard } from './components/desk/ConspiricyBoard';
+import ConspiracyBoard from './components/desk/conspiracy_board';
 import { Phone } from './components/desk/Phone';
 import { PuzzlePage } from './components/desk/PuzzlePage';
 import { ReferenceBook } from './components/desk/ReferenceBook';
@@ -33,7 +33,6 @@ function App() {
 
     <GamePageTemplate />,
     <ComputerProfile handleLevelButtonClick={handleLevelButtonClick} />,
-    <ConspiricyBoard handleLevelButtonClick={handleLevelButtonClick} />,
     <Phone handleLevelButtonClick={handleLevelButtonClick} />,
     <PuzzlePage handleLevelButtonClick={handleLevelButtonClick} />,
 
