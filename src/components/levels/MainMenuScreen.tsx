@@ -1,43 +1,82 @@
 import { Button } from '../ui/button';
-import { Screen } from '@/util';
 
 interface MainMenuScreenProps {
-  handleScreenButtonClick: (
+  handleLevelButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
 
 export default function MainMenuScreen({
-  handleScreenButtonClick
+  handleLevelButtonClick
 }: MainMenuScreenProps) {
   return (
     <div>
       {/*Cabinet Difficulty Selection*/}
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.LevelSelect, e)}
+        onClick={(e) => handleScreenButtonClick(5, e)}
         size={'sm'}
       >
         TUTORIAL
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.PlayerInfo, e)}
+        onClick={(e) => handleScreenButtonClick(5, e)}
         size={'sm'}
       >
         EASY
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.SignIn, e)}
+        onClick={(e) => handleScreeenButtonClick(5, e)}
         size={'sm'}
       >
         MEDIUM
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.NewPlayer, e)}
+        onClick={(e) => handleScreenButtonClick(5, e)}
+        size={'sm'}
+      >
+        HARD
+      </Button>
+
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleScreenButtonClick(0, e)}
+        size={'sm'}
+      >
+        CONSPIRACY BOARD needs link to working board
+      </Button>
+
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleScreenButtonClick(7, e)}
+        size={'sm'}
+      >
+        COMPUTER/PROFILE
+      </Button>
+
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleScreenButtonClick(8, e)}
+        size={'sm'}
+      >
+        PHONE
+      </Button>
+
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleScreenButtonClick(10, e)}
+        size={'sm'}
+      >
+        REFERENCE BOOK
+      </Button>
+
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleScreenButtonClick(9, e)}
         size={'sm'}
       >
         PUZZLE PAGE
