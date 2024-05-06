@@ -83,9 +83,18 @@ export function Echidna({
       <div className='absolute w-[8.8%] top-[34%] left-[58%]'>
         <EchidnaSolveLever delay={500} onClick={handleSolve}/>
       </div>
-
+      {/* Display */}
       
       {/* Paper feed */}
+      <div className='absolute w-[19.7%] h-[20.4%] top-[8.6%] left-[36.35%] overflow-hidden'>
+        <motion.div
+        >
+          <img
+          className='absolute w-[100%] top-[9%]' 
+          src={EchidnaPaper} />
+          <p className='absolute top-[50%] left-[10%]'>I am a cipher.</p>
+        </motion.div>
+      </div>
     </div>  
   );
 }
