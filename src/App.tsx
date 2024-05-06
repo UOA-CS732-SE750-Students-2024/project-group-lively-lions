@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import MainMenuScreen from './components/levels/MainMenuScreen';
 import LandingScreen from './components/levels/LandingScreen';
-import { LevelSelect } from './components/levels/LevelSelect';
-import { NewPlayer } from './components/levels/NewPlayer';
-import { SignIn } from './components/levels/SignIn';
-import { PlayerInfo } from './components/levels/PlayerInfo';
+import { LevelSelect } from './components/desk/LevelSelect';
+import ConspiracyBoard from './components/desk/conspiracy_board';
+import { Phone } from './components/desk/Phone';
+import { PuzzlePage } from './components/desk/PuzzlePage';
+import { ReferenceBook } from './components/desk/ReferenceBook';
+import { ComputerProfile } from './components/desk/ComputerProfile';
+import { NewPlayer } from './components/desk/computer_profile/NewPlayer';
+import { SignIn } from './components/desk/computer_profile/SignIn';
+import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Tutorial } from './components/levels/Tutorial';
 import GamePageTemplate from './components/levels/GamePageTemplate';
@@ -15,9 +20,7 @@ function App() {
   const levels = [
     <MainMenuScreen handleLevelButtonClick={handleLevelButtonClick} />,
     <LandingScreen handleLevelButtonClick={handleLevelButtonClick} />,
-    <NewPlayer
-      handleLevelButtonClick={handleLevelButtonClick}
-    />,
+    <NewPlayer handleLevelButtonClick={handleLevelButtonClick} />,
     <SignIn
       handleLevelButtonClick={handleLevelButtonClick}
       handleConfirm={handleConfirm}
@@ -27,7 +30,13 @@ function App() {
       handleConfirm={handleConfirm}
     />,
     <LevelSelect handleLevelButtonClick={handleLevelButtonClick} />,
-    <GamePageTemplate />
+
+    <GamePageTemplate />,
+    <ComputerProfile handleLevelButtonClick={handleLevelButtonClick} />,
+    <Phone handleLevelButtonClick={handleLevelButtonClick} />,
+    <PuzzlePage handleLevelButtonClick={handleLevelButtonClick} />,
+
+    <ReferenceBook handleLevelButtonClick={handleLevelButtonClick} />
   ];
 
   function handleLevelButtonClick(

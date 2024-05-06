@@ -1,4 +1,9 @@
-import { Dialog, DialogContent, DialogFooter, DialogTrigger } from './dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger
+} from '../ui/dialog';
 import noteA from '../../assets/room/main_menu/conspiracy_board/noteA.png';
 import noteAHighlighted from '../../assets/room/main_menu/conspiracy_board/noteA-highlighted.png';
 import noteB from '../../assets/room/main_menu/conspiracy_board/noteB.png';
@@ -11,7 +16,7 @@ import paper from '../../assets/level-select/case_paper_sprite.png';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ConspiracyNoteData } from './conspiracy_board';
-import { WoodenCard } from './wooden_card';
+import { WoodenCard } from '../ui/wooden_card';
 
 interface ConspiracyNoteProps {
   index: number;
