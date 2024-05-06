@@ -42,7 +42,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
           </motion.div>
         </WoodenCard>
         {/* The dialog */}
-        <div className="max-h-full p-2 overflow-auto scroll-smooth no-scrollbar">
+        <div className="max-h-full p-2 overflow-auto scroll-smooth scrollbar">
           <AnimatePresence>
             {transcript.messages.map((message, index) => (
               <motion.div
