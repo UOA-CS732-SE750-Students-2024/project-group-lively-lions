@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import cabinetFrame from '../../assets/room/main_menu/small_cabinet/small_cabinet.png';
 import drawer from '../../assets/room/main_menu/small_cabinet/small_cabinet_drawer.png';
 import { motion } from 'framer-motion';

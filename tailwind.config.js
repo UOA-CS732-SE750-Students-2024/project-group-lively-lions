@@ -1,4 +1,7 @@
 /*eslint-env node*/ //telling ESLint that this file is running in Node environment
+
+const { transform } = require('typescript');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ['class'],
@@ -72,11 +75,17 @@ module.exports = {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' }
+        },
+        'phone-ring' : {
+          '0%, 33%, 66%, 100%': { transform: 'rotate(0deg)' },
+          '11%, 44%, 77%': { transform: 'rotate(8deg)' },
+          '22%, 55%, 88%': { transform: 'rotate(-8deg)'}
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'phone-ring': 'phone-ring 0.7s ease-out'
       }
     }
   },
