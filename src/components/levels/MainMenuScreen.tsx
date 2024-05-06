@@ -1,14 +1,15 @@
+import { Screen } from '@/util';
 import { Button } from '../ui/button';
 
 interface MainMenuScreenProps {
-  handleLevelButtonClick: (
-    level: number,
+  handleScreenButtonClick: (
+    screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
 
 export default function MainMenuScreen({
-  handleLevelButtonClick
+  handleScreenButtonClick
 }: MainMenuScreenProps) {
   return (
     <div>
@@ -29,7 +30,7 @@ export default function MainMenuScreen({
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreeenButtonClick(5, e)}
+        onClick={(e) => handleScreenButtonClick(5, e)}
         size={'sm'}
       >
         MEDIUM
