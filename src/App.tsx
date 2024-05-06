@@ -16,10 +16,8 @@ function App() {
   const screens = [
     <MainMenuScreen handleScreenButtonClick={handleScreenButtonClick} />,
     <LandingScreen handleScreenButtonClick={handleScreenButtonClick} />,
-    <NewPlayer
-      handleScreenButtonClick={handleScreenButtonClick}
-      handleConfirm={handleConfirm}
-    />,
+
+    <NewPlayer handleScreenButtonClick={handleScreenButtonClick} />,
     <SignIn
       handleScreenButtonClick={handleScreenButtonClick}
       handleConfirm={handleConfirm}

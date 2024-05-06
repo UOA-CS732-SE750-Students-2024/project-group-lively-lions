@@ -12,9 +12,10 @@ async function create_new_player(username, password) {
   
     const db = client.db(databaseName);
   
-    db.collection(collectionName).insertOne( //adds player instance to database
+    await db.collection(collectionName).insertOne( //adds player instance to database
         new_player
     );
+    return new_player;
 };
   
 async function delete_player(client, databaseName, collectionName, player_id){
@@ -28,11 +29,12 @@ async function delete_player(client, databaseName, collectionName, player_id){
 async function update_player(player_id, puzzles_unlocked, puzzles_completed, notes_unlocked) {
     try {
         const player = await Player.findByIdAndUpdate(
-        { _id: player_id },
-        {$addToSet: { puzzles_unlocked: { $each: puzzles_unlocked } },
+        player_id, {
+        $addToSet: { puzzles_unlocked: { $each: puzzles_unlocked } },
         $addToSet: { puzzles_completed: { $each: puzzles_completed } },
         $addToSet: { notes_unlocked: { $each: notes_unlocked } }},
         { new: true });
+        return updatedPlayer;
     } catch (error) {
         console.error('Error updating player:', error);
         throw error; // Rethrow the error to handle it in the calling function
@@ -41,15 +43,21 @@ async function update_player(player_id, puzzles_unlocked, puzzles_completed, not
 
 // Create new player
 router.post("/", async (req, res) => {
-    const newPlayer = await create_new_player(req.body); 
+    const {username, password} = req.body;
 
-    if (newPlayer) 
-        return res 
-            .status(201)
-            .header("Location:", `api/notes/${newPlayer._id}`)
-            .json(newPlayer);
+    try {
+        const newPlayer = await create_new_player(req.body); 
 
-    return res.sendStatus(422);
+        if (newPlayer) 
+            return res 
+                .status(201)
+                .header("Location:", `api/notes/${newPlayer._id}`)
+                .json(newPlayer);
+        return res.sendStatus(422);
+    } catch (error) {
+        console.error('Error creating player:', error);
+        return res.status(500).json({ error: 'An error occurred while creating the player' });
+    }
 });
 
 // Retrieve player data
