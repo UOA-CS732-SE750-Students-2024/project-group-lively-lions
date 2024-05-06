@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import crypto from "crypto";
 
 const playerSchema = new mongoose.Schema({
   username: { type: String, required: true },
@@ -8,29 +9,23 @@ const playerSchema = new mongoose.Schema({
   notes_unlocked: {}
 });
 
-// Custom setter function to encode the username to hexadecimal
-function encodeToHex(username) {
-  // Convert the username to hexadecimal
-  return Buffer.from(username, 'utf8').toString('hex');
-}
-
-// Pre-save hook to generate and set the _id based on the username
+// Custom function to generate a 24-character hash of the username
+function generateHash(username) {
+    // Create a hash using SHA-256 algorithm
+    const hash = crypto.createHash('sha256').update(username).digest('hex');
+    // Take the first 24 characters of the hash
+    return hash.slice(0, 24);
+};
+  
+// Pre-save hook to generate and set the _id based on the hashed username
 playerSchema.pre("save", function(next) {
-  // First, encode username to hex 
-  const username_enc = encodeToHex(this.username);
-
-  // Pad the username with zeros to make it 24 characters long
-  user_id = username_enc.padEnd(24, '0');
-
-  // Ensure user_id is not longer than 24 characters
-  if (user_id.length > 24) {
-    user_id = user_id.slice(0, 24);
-  }
-  // Set player ID equal to encoded username for avoiding duplicate usernames
-  this._id = new mongoose.Types.ObjectId(user_id);
-  next();
+    // Generate a hash of the username
+    const hashedUsername = generateHash(this.username);
+    // Set the _id field to the hashed username
+    this._id = new mongoose.Types.ObjectId(hashedUsername);
+    next();
 });
 
 const Player = mongoose.model("Player", playerSchema);
 
-module.exports = { Player };
+export default Player;

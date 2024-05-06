@@ -195,3 +195,31 @@ button.animated-btn:active::before {
   animation: pulse 0.5s infinite;
   transition: 0.5s;
 }
+
+/* Scrollbar css */
+:root {
+  scrollbar-color: #888 #f1f1f1 !important;
+  scrollbar-width: thin !important;
+}
+
+.scrollbar {
+  scrollbar-color: #b5b5b5 #ffffff !important;
+  scrollbar-width: thin !important;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

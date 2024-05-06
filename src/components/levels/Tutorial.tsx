@@ -1,7 +1,7 @@
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { TextField } from '../ui/text_field';
-import { caesar } from '@/ciphers';
+import { Caesar } from '@/ciphers';
 
 /* 
 This is the component for the Tutorial Page. It allows the user to play the tutorial.
@@ -19,6 +19,8 @@ interface TutorialProps {
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
+
+const caesar = new Caesar();
 
 export function Tutorial({
   handleCheckAnswer,

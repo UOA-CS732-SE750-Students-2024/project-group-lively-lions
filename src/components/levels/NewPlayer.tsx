@@ -13,19 +13,40 @@ interface NewPlayerProps {
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  handleConfirm: (
-    username: string,
-    password: string,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
 }
 
+const SERVER_MONGODB_URI = 'http://localhost:3000'
+
 export function NewPlayer({
-  handleLevelButtonClick,
-  handleConfirm
+  handleLevelButtonClick
 }: NewPlayerProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleConfirm = async () => {
+    try {
+      const response = await fetch(SERVER_MONGODB_URI + '/player', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        // Handle success
+        console.log('Player profile created successfully');
+        // Add more code so 1) the player knows the account
+        // was made, and 2) that account gets loaded in locally
+        // as the account currently logged in (maybe)
+      } else {
+        // Handle error
+        console.error('Failed to create player profile');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
 
   return (
     <div>
@@ -49,7 +70,7 @@ export function NewPlayer({
       </form>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleConfirm(username, password, e)}
+        onClick={handleConfirm}
         size={'sm'}
       >
         CONFIRM

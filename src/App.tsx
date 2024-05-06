@@ -7,6 +7,7 @@ import { SignIn } from './components/levels/SignIn';
 import { PlayerInfo } from './components/levels/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Tutorial } from './components/levels/Tutorial';
+import GamePageTemplate from './components/levels/GamePageTemplate';
 
 function App() {
   const [currentLevel, setCurrentLevel] = useState(1);
@@ -16,7 +17,6 @@ function App() {
     <LandingScreen handleLevelButtonClick={handleLevelButtonClick} />,
     <NewPlayer
       handleLevelButtonClick={handleLevelButtonClick}
-      handleConfirm={handleConfirm}
     />,
     <SignIn
       handleLevelButtonClick={handleLevelButtonClick}
@@ -27,10 +27,7 @@ function App() {
       handleConfirm={handleConfirm}
     />,
     <LevelSelect handleLevelButtonClick={handleLevelButtonClick} />,
-    <Tutorial
-      handleCheckAnswer={handleCheckAnswer}
-      handleLevelButtonClick={handleLevelButtonClick}
-    />
+    <GamePageTemplate />
   ];
 
   function handleLevelButtonClick(
@@ -77,9 +74,7 @@ function App() {
       overflow-scroll no-scrollbar"
       >
         {/* Game contents */}
-        <AnimatePresence mode='wait'>
-          {levels[currentLevel]}
-        </AnimatePresence>
+        <AnimatePresence mode="wait">{levels[currentLevel]}</AnimatePresence>
       </div>
     </div>
   );

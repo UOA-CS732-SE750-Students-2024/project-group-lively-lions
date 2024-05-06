@@ -1,18 +1,19 @@
-import { caesar, vigenere, polybius, morse, binary, emoji } from './ciphers';
+import { c } from 'vite/dist/node/types.d-aGj9QkWt';
+import { Caesar, Vigenere, Polybius, Morse, Binary, Emoji } from './ciphers';
 
 /*
  Testing Simple Caesar Cipher
 */
 test('Decoding with opposite negative value', () => {
   const phrase = 'hello world';
-
+  const caesar = new Caesar();
   const encodedPhrase = caesar.encode({
     caesarkey: 3,
     phrase: phrase
   });
 
   const decodedPhrase = caesar.decode({
-    caesarkey: -3,
+    caesarkey: 3,
     phrase: encodedPhrase
   });
 
@@ -25,7 +26,7 @@ test('Decoding with opposite negative value', () => {
 test('Encoding and decoding with Vigenere Cipher', () => {
   const keyword = 'key';
   const phrase = 'hello world';
-
+  const vigenere = new Vigenere();
   const encodedPhrase = vigenere.encode({
     keyword: keyword,
     phrase: phrase
@@ -42,6 +43,7 @@ test('Encoding and decoding with Vigenere Cipher', () => {
 test('Vigenere: Expect no change if keyword is empty', () => {
   const keyword = '';
   const phrase = 'hello world';
+  const vigenere = new Vigenere();
   const encodedPhrase = vigenere.encode({
     keyword: keyword,
     phrase: phrase
@@ -54,12 +56,12 @@ test('Vigenere: Expect no change if keyword is empty', () => {
 */
 test('Encoding with Polybius Cipher', () => {
   const phrase = 'hello world';
-
+  const polybius = new Polybius();
   const encodedPhrase = polybius.encode({
     phrase: phrase
   });
 
-  const decodedPhrase = polybius.decode(encodedPhrase);
+  const decodedPhrase = polybius.decode({ phrase: encodedPhrase });
   expect(decodedPhrase).toBe('hello world');
 });
 
@@ -68,6 +70,7 @@ test('Encoding with Polybius Cipher', () => {
 */
 test('Encoding with Morse Cipher', () => {
   const phrase = 'hello world';
+  const morse = new Morse();
   const encodedPhrase = morse.encode({
     phrase: phrase
   });
@@ -76,6 +79,7 @@ test('Encoding with Morse Cipher', () => {
 
 test('Decoding with Morse Cipher', () => {
   const phrase = '.... . .-.. .-.. --- / .-- --- .-. .-.. -..';
+  const morse = new Morse();
   const decodedPhrase = morse.decode({
     phrase: phrase
   });
@@ -87,6 +91,7 @@ test('Decoding with Morse Cipher', () => {
 */
 test('Converting ASCII to binary', () => {
   const phrase = 'hello world';
+  const binary = new Binary();
   const bin = binary.encode({ phrase });
   expect(bin).toBe(
     '01101000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100'
@@ -94,6 +99,7 @@ test('Converting ASCII to binary', () => {
 });
 
 test('Converting binary to ASCII', () => {
+  const binary = new Binary();
   const bin =
     '01101000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100';
   const ascii = binary.decode({
@@ -107,6 +113,7 @@ test('Converting binary to ASCII', () => {
 */
 test('Encoding with Emoji Substitution Cipher', () => {
   const phrase = 'hello world';
+  const emoji = new Emoji();
   const encodedPhrase = emoji.encode({
     phrase: phrase
   });
@@ -115,6 +122,7 @@ test('Encoding with Emoji Substitution Cipher', () => {
 
 test('Decoding with Emoji Substitution Cipher', () => {
   const phrase = '🤣😆🙃🙃😍🔒😜😍😙🙃😁';
+  const emoji = new Emoji();
   const decodedPhrase = emoji.decode({
     phrase: phrase
   });

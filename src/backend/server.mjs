@@ -1,38 +1,52 @@
-import dotenv from "dotenv";
+import dotenv from "dotenv"
 dotenv.config();
 
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import router from "./routes/routes.mjs"
+import express from "express"
+import mongoose from "mongoose"
+import bodyParser from "body-parser"
+import cors from "cors"
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT ?? 3000;
+const PORT = process.env.PORT ?? 3001;
+const BACKUP_PORT = 3000
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
-app.use(morgan("combined"));
 app.use(express.json());
 app.use(express.static("public"));
 
-import routes from "./routes/routes.js"
-app.use("/", routes)
+app.use("/", router)
+
+const SERVER_URI = 'mongodb+srv://game-user:general-access-password@purrlockholmes.jawkn3g.mongodb.net/'
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/purrlockholmes', {
+mongoose.connect(SERVER_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true}
-  .then(() =>
-  app.listen(PORT, () => console.log(`App server listening on port ${PORT}!`))
-));
+  useUnifiedTopology: true
+}).then(() => {
+  console.log("Connected to MongoDB");
+  app.listen(PORT, () => {
+    console.log(`App server listening on port ${PORT}`);
+  }).on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${PORT} is already in use. Listening on ${BACKUP_PORT}`);;
+      app.listen(BACKUP_PORT);
+    } else {
+      console.error(err);
+    }
+  });
+}).catch(err => {
+  console.error("MongoDB connection error:", err);
+});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Define schema and model
-const { Player } = require("./playerSchema.js")
+import Player from "./playerSchema.js"
 
 // CRUD endpoints
 
@@ -40,7 +54,7 @@ const { Player } = require("./playerSchema.js")
 app.post('/player', async (req, res) => {
   try {
     const { username, password } = req.body;
-    const newPlayer = new Player(username, password);
+    const newPlayer = new Player({username, password});
     await newPlayer.save();
     res.status(201).json(newPlayer);
   } catch (error) {
@@ -51,13 +65,19 @@ app.post('/player', async (req, res) => {
 
 // This endpoint retrieves a player's data from the database
 app.get('/player', async (req, res) => {
-  try {
-    const players = await Player.find();
-    res.json(players);
-  } catch (error) {
-    console.error('Error fetching players:', error);
-    res.status(500).json({ error: 'An error occurred while fetching players' });
-  }
+  const { username, password } = req.query;
+
+    try {
+        const player = await Player.findOne({ username, password }, { _id: 1 });
+        if (player) {
+            return res.json(player);
+        } else {
+            return res.sendStatus(404); // Player not found
+        }
+    } catch (error) {
+        console.error("Error retrieving player data:", error);
+        return res.status(500).json({ error: "An error occurred while retrieving the player data" });
+    }
 });
 
 // This endpoint updates out database player info with our local info (our save function)
