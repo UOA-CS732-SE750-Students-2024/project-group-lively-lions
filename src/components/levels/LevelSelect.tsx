@@ -54,7 +54,7 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
           src={drawer_face_sprite} />
           <Button
             className="absolute font-[alagard] text-[1.1rem] mt-5 mb-5 bottom-[9%] w-[20%] left-[40%]"
-            onClick={(e) => handleLevelButtonClick(0, e)}
+            onClick={(e) => handleLevelButtonClick(5, e)}
           >
             Back
           </Button>

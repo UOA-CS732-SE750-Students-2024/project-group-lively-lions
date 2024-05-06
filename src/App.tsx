@@ -7,6 +7,7 @@ import { SignIn } from './components/levels/SignIn';
 import { PlayerInfo } from './components/levels/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Tutorial } from './components/levels/Tutorial';
+import MainGamePage from './components/main_game_page/MainGamePage';
 
 function App() {
   const [currentLevel, setCurrentLevel] = useState(1);
@@ -25,6 +26,8 @@ function App() {
       handleLevelButtonClick={handleLevelButtonClick}
       handleConfirm={handleConfirm}
     />,
+    <MainGamePage
+      handleLevelButtonClick={handleLevelButtonClick}/>,
     <LevelSelect handleLevelButtonClick={handleLevelButtonClick} />,
     <Tutorial
       handleCheckAnswer={handleCheckAnswer}
