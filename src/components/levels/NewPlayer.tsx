@@ -1,6 +1,7 @@
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { TextField } from '../ui/text_field';
+import { Screen } from '@/util';
 
 /* 
 This is the component for the new player menu. It allows the creation of a new player profile.
@@ -9,7 +10,7 @@ It also has a confirm button, which does nothing yet, and a back button to the l
 */
 
 interface NewPlayerProps {
-  handleLevelButtonClick: (
+  handleScreenButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
@@ -21,7 +22,7 @@ interface NewPlayerProps {
 }
 
 export function NewPlayer({
-  handleLevelButtonClick,
+  handleScreenButtonClick,
   handleConfirm
 }: NewPlayerProps) {
   const [username, setUsername] = useState('');
@@ -56,7 +57,7 @@ export function NewPlayer({
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(0, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
         size={'sm'}
       >
         BACK

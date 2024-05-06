@@ -1,6 +1,7 @@
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { TextField } from '../ui/text_field';
+import { Screen } from '@/util';
 
 /* 
 This is the component for the player info menu. It allows the user to view profile details.
@@ -13,7 +14,7 @@ It also has a change info button, which does nothing yet, and a back button to t
 */
 
 interface ProfileProps {
-  handleLevelButtonClick: (
+  handleScreenButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
@@ -25,7 +26,7 @@ interface ProfileProps {
 }
 
 export function PlayerInfo({
-  handleLevelButtonClick,
+  handleScreenButtonClick,
   handleConfirm
 }: ProfileProps) {
   const [username, setUsername] = useState('');
@@ -62,7 +63,7 @@ export function PlayerInfo({
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(0, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
         size={'sm'}
       >
         BACK

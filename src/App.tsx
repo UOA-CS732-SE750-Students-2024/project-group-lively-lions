@@ -6,37 +6,46 @@ import { NewPlayer } from './components/levels/NewPlayer';
 import { SignIn } from './components/levels/SignIn';
 import { PlayerInfo } from './components/levels/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
-import { Tutorial } from './components/levels/Tutorial';
+import { Screen, Levels } from './util';
 import GamePageTemplate from './components/levels/GamePageTemplate';
 
 function App() {
-  const [currentLevel, setCurrentLevel] = useState(1);
+  const [currentScreen, setCurrentScreen] = useState(Screen.MainMenuScreen);
+  const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
 
-  const levels = [
-    <MainMenuScreen handleLevelButtonClick={handleLevelButtonClick} />,
-    <LandingScreen handleLevelButtonClick={handleLevelButtonClick} />,
+  const screens = [
+    <MainMenuScreen handleScreenButtonClick={handleScreenButtonClick} />,
+    <LandingScreen handleScreenButtonClick={handleScreenButtonClick} />,
     <NewPlayer
-      handleLevelButtonClick={handleLevelButtonClick}
+      handleScreenButtonClick={handleScreenButtonClick}
       handleConfirm={handleConfirm}
     />,
     <SignIn
-      handleLevelButtonClick={handleLevelButtonClick}
+      handleScreenButtonClick={handleScreenButtonClick}
       handleConfirm={handleConfirm}
     />,
     <PlayerInfo
-      handleLevelButtonClick={handleLevelButtonClick}
+      handleScreenButtonClick={handleScreenButtonClick}
       handleConfirm={handleConfirm}
     />,
-    <LevelSelect handleLevelButtonClick={handleLevelButtonClick} />,
-    <GamePageTemplate />
+    <LevelSelect
+      handleScreenButtonClick={handleScreenButtonClick}
+      handleLevel={handleLevel}
+    />,
+    <GamePageTemplate level={currentLevel} />
   ];
 
-  function handleLevelButtonClick(
-    level: number,
+  function handleLevel(level: number, e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setCurrentLevel(level);
+    setCurrentScreen(Screen.GamePageTemplate);
+  }
+  function handleScreenButtonClick(
+    screen: Screen,
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
-    setCurrentLevel(level);
+    setCurrentScreen(screen);
   }
 
   function handleCheckAnswer(
@@ -75,7 +84,7 @@ function App() {
       overflow-scroll no-scrollbar"
       >
         {/* Game contents */}
-        <AnimatePresence mode="wait">{levels[currentLevel]}</AnimatePresence>
+        <AnimatePresence mode="wait">{screens[currentScreen]}</AnimatePresence>
       </div>
     </div>
   );

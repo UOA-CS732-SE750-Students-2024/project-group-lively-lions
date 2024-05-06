@@ -3,15 +3,23 @@ import { Button } from '../ui/button';
 import { useState } from 'react';
 import drawer_face_sprite from '../../assets/level-select/drawer_face_sprite.png';
 import { motion } from 'framer-motion';
+import { Screen } from '@/util';
 
 interface LevelSelectProps {
-  handleLevelButtonClick: (
+  handleScreenButtonClick: (
+    screen: Screen,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => void;
+  handleLevel: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
 
-export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
+export function LevelSelect({
+  handleScreenButtonClick,
+  handleLevel
+}: LevelSelectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
 
@@ -40,8 +48,8 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
                 isClickedIndex={clickedIndex}
                 setHoveredIndex={setHoveredIndex}
                 setClickedIndex={setClickedIndex}
-                levelIndex={6 + index}
-                handleLevelButtonClick={handleLevelButtonClick}
+                levelIndex={index}
+                handleLevel={handleLevel}
               />
             ))}
           </div>
@@ -53,7 +61,7 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
           <img className="w-[100%] bottom-0" src={drawer_face_sprite} />
           <Button
             className="absolute font-[alagard] text-[1.1rem] mt-5 mb-5 bottom-[9%] w-[20%] left-[40%]"
-            onClick={(e) => handleLevelButtonClick(0, e)}
+            onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
           >
             Back
           </Button>

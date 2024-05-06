@@ -1,9 +1,15 @@
 import EchidnaMachine from './EchidnaMachine';
 import { Button } from '../ui/button';
+import { Levels } from '@/util';
 
-const GamePageTemplate = () => {
+interface GamePageTemplateProps {
+  level: Levels;
+}
+
+const GamePageTemplate = ({ level }: GamePageTemplateProps) => {
   const phrase = 'Hello world';
   const handleEchidna = () => {
+    console.log('level', level);
     // open echidna view
   };
   return (
