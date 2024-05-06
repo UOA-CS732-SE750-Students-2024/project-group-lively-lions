@@ -70,16 +70,17 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
               stiffness: 200
             }}
           >
+            {/* Note background */}
             <img className=" min-h-[540px] h-[calc(60vw*9/16)]" src={paper} />
+            {/* Note title */}
             <p className="absolute opacity-[70%] text-[2rem] font-[alagard] left-[42%] top-[5%]">
               {`Note ${index + 1}`}
             </p>
-            {noteData.image ? (
-              <>
-                <p className="absolute opacity-[70%] text-[1rem] font-[alagard] h-[calc(45vw*9/16)] w-[80%] left-[10%] top-[20%]">
-                  {noteData.story}
-                </p>
-                <WoodenCard className="absolute top-[50%] right-[10%]">
+            {/* Note content */}
+            <div className="flex flex-col place-items-center absolute h-[calc(45vw*9/16)] w-[80%] left-[10%] top-[20%] text-[1rem] font-[alagard] overflow-y-auto max-h-full scrollbar">
+              <p className="opacity-[70%] antialiased">{noteData.story}</p>
+              {noteData.image ? (
+                <WoodenCard className="p-2 m-2 w-fit">
                   <motion.div
                     className="items-center justify-center"
                     initial={{ opacity: 0 }}
@@ -92,12 +93,10 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
                     />
                   </motion.div>
                 </WoodenCard>
-              </>
-            ) : (
-              <p className="absolute opacity-[70%] text-[1rem] font-[alagard] h-[calc(45vw*9/16)] w-[80%] left-[10%] top-[20%]">
-                {noteData.story}
-              </p>
-            )}
+              ) : (
+                <></>
+              )}
+            </div>
           </motion.div>
         </AnimatePresence>
       </DialogContent>
