@@ -33,7 +33,7 @@ export default function LandingScreen({
           MEOW
         </Button>
       </WoodenCard>
-      <ConspiracyBoard />
+      <ConspiracyBoard maxNotes={3} />
     </div>
   );
 }

@@ -11,6 +11,7 @@ import paper from '../../assets/level-select/case_paper_sprite.png';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ConspiracyNoteData } from './conspiracy_board';
+import { WoodenCard } from './wooden_card';
 
 interface ConspiracyNoteProps {
   index: number;
@@ -50,6 +51,9 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
         onMouseOut={() => {
           setSrc(noteImage);
         }}
+        onClick={() => {
+          setSrc(noteHighlighted);
+        }}
       >
         <img
           src={src}
@@ -70,9 +74,30 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
             <p className="absolute opacity-[70%] text-[2rem] font-[alagard] left-[42%] top-[5%]">
               {`Note ${index + 1}`}
             </p>
-            <p className="absolute opacity-[70%] text-[1rem] font-[alagard] h-[calc(45vw*9/16)] w-[80%] left-[10%] top-[20%]">
-              {noteData.story}
-            </p>
+            {noteData.image ? (
+              <>
+                <p className="absolute opacity-[70%] text-[1rem] font-[alagard] h-[calc(45vw*9/16)] w-[80%] left-[10%] top-[20%]">
+                  {noteData.story}
+                </p>
+                <WoodenCard className="absolute top-[50%] right-[10%]">
+                  <motion.div
+                    className="items-center justify-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ type: 'linear', duration: 1 }}
+                  >
+                    <img
+                      src={noteData.image}
+                      className="w-[15rem] pulse-slow mb-[-5%] pt-[5%]"
+                    />
+                  </motion.div>
+                </WoodenCard>
+              </>
+            ) : (
+              <p className="absolute opacity-[70%] text-[1rem] font-[alagard] h-[calc(45vw*9/16)] w-[80%] left-[10%] top-[20%]">
+                {noteData.story}
+              </p>
+            )}
           </motion.div>
         </AnimatePresence>
       </DialogContent>
