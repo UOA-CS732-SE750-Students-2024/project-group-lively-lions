@@ -30,7 +30,7 @@ interface ConspiracyBoardProps {
 // This component represents the conspiracy board, notes and strings on the board are rendered
 // based on the provided props
 const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({ maxNotes }) => {
-  const progress = 2;
+  const progress = 7;
   const strings = [
     string1,
     string2,
@@ -155,7 +155,7 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({ maxNotes }) => {
               </div>
             ))}
             {/* Red strings */}
-            {[...Array(progress)].map((_, i) => (
+            {[...Array(Math.ceil((progress * 7) / maxNotes))].map((_, i) => (
               <img
                 key={i}
                 className="absolute top-0 left-0 min-h-[540px] h-[calc(60vw*9/16)] pointer-events-none"
