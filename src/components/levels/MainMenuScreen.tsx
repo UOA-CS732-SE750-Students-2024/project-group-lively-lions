@@ -13,33 +13,34 @@ export default function MainMenuScreen({
 }: MainMenuScreenProps) {
   return (
     <div>
+      {/*Cabinet Difficulty Selection*/}
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
         onClick={(e) => handleScreenButtonClick(Screen.LevelSelect, e)}
         size={'sm'}
       >
-        PLAY
+        TUTORIAL
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
         onClick={(e) => handleScreenButtonClick(Screen.PlayerInfo, e)}
         size={'sm'}
       >
-        PLAYER INFO
+        EASY
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
         onClick={(e) => handleScreenButtonClick(Screen.SignIn, e)}
         size={'sm'}
       >
-        Sign In
+        MEDIUM
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
         onClick={(e) => handleScreenButtonClick(Screen.NewPlayer, e)}
         size={'sm'}
       >
-        New Player
+        PUZZLE PAGE
       </Button>
     </div>
   );

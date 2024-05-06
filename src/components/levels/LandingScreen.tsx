@@ -30,7 +30,7 @@ export default function LandingScreen({
           onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
           size={'sm'}
         >
-          MEOW
+          START
         </Button>
       </WoodenCard>
     </div>

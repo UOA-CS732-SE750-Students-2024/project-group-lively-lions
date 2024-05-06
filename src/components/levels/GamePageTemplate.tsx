@@ -1,4 +1,4 @@
-import EchidnaMachine from './EchidnaMachine';
+import EchidnaMachine from '../desk/EchidnaMachine';
 import { Button } from '../ui/button';
 import { Levels } from '@/util';
 

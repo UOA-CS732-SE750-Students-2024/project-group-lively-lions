@@ -5,7 +5,11 @@ export enum Screen {
   SignIn,
   PlayerInfo,
   LevelSelect,
-  GamePageTemplate
+  GamePageTemplate,
+  ComputerProfile,
+  Phone,
+  PuzzlePage,
+  ReferenceBook
 }
 
 export enum Levels {

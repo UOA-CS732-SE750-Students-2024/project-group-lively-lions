@@ -1,7 +1,6 @@
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { useState } from 'react';
-import { TextField } from '../ui/text_field';
-import { Screen } from '@/util';
+import { TextField } from '../../ui/text_field';
 
 /* 
 This is the component for the sign in menu. It allows the user to sign into their profile.
@@ -57,7 +56,7 @@ export function SignIn({
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
+        onClick={(e) => handleScreenButtonClick(7, e)}
         size={'sm'}
       >
         BACK

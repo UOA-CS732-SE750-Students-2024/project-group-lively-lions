@@ -1,6 +1,6 @@
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { useState } from 'react';
-import { TextField } from '../ui/text_field';
+import { TextField } from '../../ui/text_field';
 import { Screen } from '@/util';
 
 /* 
@@ -15,7 +15,7 @@ It also has a change info button, which does nothing yet, and a back button to t
 
 interface ProfileProps {
   handleScreenButtonClick: (
-    level: number,
+    screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
   handleConfirm: (
@@ -63,7 +63,7 @@ export function PlayerInfo({
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
         size={'sm'}
       >
         BACK

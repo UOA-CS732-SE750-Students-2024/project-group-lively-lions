@@ -1,6 +1,6 @@
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { useState } from 'react';
-import { TextField } from '../ui/text_field';
+import { TextField } from '../../ui/text_field';
 import { Screen } from '@/util';
 
 /* 
@@ -76,7 +76,7 @@ export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
         size={'sm'}
       >
         BACK
