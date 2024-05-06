@@ -1,5 +1,6 @@
 import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import { Button } from '../ui/button';
+import ConspiracyBoard from '../ui/conspiracy_board';
 import { WoodenCard } from '../ui/wooden_card';
 import { randomTagline } from '@/lib/taglines';
 
@@ -32,6 +33,7 @@ export default function LandingScreen({
           MEOW
         </Button>
       </WoodenCard>
+      <ConspiracyBoard />
     </div>
   );
 }

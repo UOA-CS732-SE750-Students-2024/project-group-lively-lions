@@ -1,19 +1,76 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import boardBackground from '../../assets/room/main_menu/conspiracy_board/conspiracy_board.png';
 import board from '../../assets/room/main_menu/conspiracy_board/conspiracy_board_notes_and_text.png';
-import strings from '../../assets/room/main_menu/conspiracy_board/conspiracy-strings.png';
+import string1 from '../../assets/room/main_menu/conspiracy_board/strings/string1.png';
+import string2 from '../../assets/room/main_menu/conspiracy_board/strings/string2.png';
+import string3 from '../../assets/room/main_menu/conspiracy_board/strings/string3.png';
+import string4 from '../../assets/room/main_menu/conspiracy_board/strings/string4.png';
+import string5 from '../../assets/room/main_menu/conspiracy_board/strings/string5.png';
+import string6 from '../../assets/room/main_menu/conspiracy_board/strings/string6.png';
+import string7 from '../../assets/room/main_menu/conspiracy_board/strings/string7.png';
 import { Dialog, DialogContent, DialogTrigger } from './dialog';
 import ConspiracyNote from './conspiracy_note';
 
+export interface ConspiracyNoteData {
+  story: string;
+  image?: string;
+}
+
+export interface ConspiracyBoardData {
+  notes: ConspiracyNoteData[];
+}
+
 interface ConspiracyBoardProps {}
 
-// This component takes a transcript
+// This component represents the conspiracy board, notes and strings on the board are rendered
+// based on the provided props
 const ConspiracyBoard: React.FC<ConspiracyBoardProps> = (props) => {
+  const progress = 7;
+  const strings = [
+    string1,
+    string2,
+    string3,
+    string4,
+    string5,
+    string6,
+    string7
+  ];
+  const notes = [
+    {
+      type: 'A',
+      css: 'absolute top-[14%] left-[10%] hover:rotate-12 hover:scale-110 duration-100'
+    },
+    {
+      type: 'B',
+      css: 'absolute top-[52%] left-[15%] hover:rotate-12 hover:scale-110 duration-100'
+    },
+    {
+      type: 'A',
+      css: 'absolute top-[70%] left-[28%] rotate-12 hover:rotate-0 hover:scale-110 duration-100'
+    },
+    {
+      type: 'D',
+      css: 'absolute top-[54%] left-[47%] rotate-0 hover:rotate-12 hover:scale-110 duration-100'
+    },
+    {
+      type: 'C',
+      css: 'absolute top-[10%] left-[65%] hover:rotate-12 hover:scale-110 duration-100'
+    },
+    {
+      type: 'B',
+      css: 'absolute top-[27%] left-[43%] rotate-12 hover:rotate-0 hover:scale-110 duration-100'
+    },
+    {
+      type: 'A',
+      css: 'absolute top-[55%] left-[80%] hover:rotate-12 hover:scale-110 duration-100'
+    }
+  ];
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <img
-          className="min-h-[540px] h-[calc(60vw*9/16)] cursor-pointer"
+          className="min-h-[540px] h-[calc(60vw*9/16)] hover:outline outline-white outline-7 cursor-pointer"
           src={board}
         />
       </DialogTrigger>
@@ -33,35 +90,25 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = (props) => {
               className="min-h-[540px] h-[calc(60vw*9/16)]"
               src={boardBackground}
             />
-            {/* Note 1 */}
-            <div className="absolute top-[14%] left-[10%] hover:rotate-12 hover:scale-110 duration-50">
-              <ConspiracyNote type="A" />
-            </div>
-            {/* Note 2 */}
-            <div className="absolute top-[52%] left-[15%] hover:rotate-12 hover:scale-110 duration-50">
-              <ConspiracyNote type="B" />
-            </div>
-            {/* Note 3 */}
-            <div className="absolute top-[73%] left-[28%] rotate-45 hover:rotate-0 hover:scale-110 duration-50">
-              <ConspiracyNote type="A" />
-            </div>
-            {/* Note 4 */}
-            <div className="absolute top-[54%] left-[47%] rotate-12 hover:rotate-45 hover:scale-110 duration-50">
-              <ConspiracyNote type="A" />
-            </div>
-            {/* Note 5 */}
-            <div className="absolute top-[27%] left-[43%] rotate-12 hover:rotate-0 hover:scale-110 duration-50">
-              <ConspiracyNote type="B" />
-            </div>
-            {/* Note 6 */}
-            <div className="absolute top-[55%] left-[80%] hover:rotate-12 hover:scale-110 duration-50">
-              <ConspiracyNote type="A" />
-            </div>
+            {/* Notes */}
+            {notes.slice(0, progress).map((note, i) => (
+              <div key={i} className={note.css}>
+                <ConspiracyNote
+                  index={i}
+                  type={note.type as 'A' | 'B' | 'D' | 'C'}
+                  noteData={{ story: 'story' } as ConspiracyNoteData}
+                />
+              </div>
+            ))}
+
             {/* Red strings */}
-            <img
-              className="absolute top-0 left-0 min-h-[540px] h-[calc(60vw*9/16)] pointer-events-none"
-              src={strings}
-            />
+            {[...Array(progress)].map((_, i) => (
+              <img
+                key={i}
+                className="absolute top-0 left-0 min-h-[540px] h-[calc(60vw*9/16)] pointer-events-none"
+                src={strings[i]}
+              />
+            ))}
           </motion.div>
         </AnimatePresence>
       </DialogContent>
