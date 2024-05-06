@@ -11,40 +11,70 @@ import { NewPlayer } from './components/desk/computer_profile/NewPlayer';
 import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
-import { Tutorial } from './components/levels/Tutorial';
-import GamePageTemplate from './components/levels/GamePageTemplate';
+import { Screen, Levels } from './util';
 
 function App() {
-  const [currentLevel, setCurrentLevel] = useState(1);
+  const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
+  const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
 
-  const levels = [
-    <MainMenuScreen handleLevelButtonClick={handleLevelButtonClick} />,
-    <LandingScreen handleLevelButtonClick={handleLevelButtonClick} />,
-    <NewPlayer handleLevelButtonClick={handleLevelButtonClick} />,
+  const screens = [
+    <MainMenuScreen
+      key="mainMenu"
+      handleScreenButtonClick={handleScreenButtonClick}
+      handleLevel={handleLevel}
+      level={currentLevel}
+    />,
+    <LandingScreen
+      key="landing"
+      handleScreenButtonClick={handleScreenButtonClick}
+    />,
+
+    <NewPlayer
+      key="newPlayer"
+      handleScreenButtonClick={handleScreenButtonClick}
+    />,
     <SignIn
-      handleLevelButtonClick={handleLevelButtonClick}
+      key="signIn"
+      handleScreenButtonClick={handleScreenButtonClick}
       handleConfirm={handleConfirm}
     />,
     <PlayerInfo
-      handleLevelButtonClick={handleLevelButtonClick}
+      key="playerInfo"
+      handleScreenButtonClick={handleScreenButtonClick}
       handleConfirm={handleConfirm}
     />,
-    <LevelSelect handleLevelButtonClick={handleLevelButtonClick} />,
-
-    <GamePageTemplate />,
-    <ComputerProfile handleLevelButtonClick={handleLevelButtonClick} />,
-    <Phone handleLevelButtonClick={handleLevelButtonClick} />,
-    <PuzzlePage handleLevelButtonClick={handleLevelButtonClick} />,
-
-    <ReferenceBook handleLevelButtonClick={handleLevelButtonClick} />
+    <LevelSelect
+      key="levelSelect"
+      handleScreenButtonClick={handleScreenButtonClick}
+      handleLevel={handleLevel}
+    />,
+    <ComputerProfile
+      key="computerProfile"
+      handleScreenButtonClick={handleScreenButtonClick}
+    />,
+    <Phone key="phone" handleScreenButtonClick={handleScreenButtonClick} />,
+    <PuzzlePage
+      key="puzzlePage"
+      handleScreenButtonClick={handleScreenButtonClick}
+    />,
+    <ReferenceBook
+      key="referenceBook"
+      handleScreenButtonClick={handleScreenButtonClick}
+    />
   ];
 
-  function handleLevelButtonClick(
-    level: number,
+  function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setCurrentLevel(level);
+    setCurrentScreen(Screen.MainMenuScreen);
+  }
+
+  function handleScreenButtonClick(
+    screen: Screen,
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
-    setCurrentLevel(level);
+    setCurrentScreen(screen);
   }
 
   function handleCheckAnswer(
@@ -83,7 +113,7 @@ function App() {
       overflow-scroll no-scrollbar"
       >
         {/* Game contents */}
-        <AnimatePresence mode="wait">{levels[currentLevel]}</AnimatePresence>
+        <AnimatePresence mode="wait">{screens[currentScreen]}</AnimatePresence>
       </div>
     </div>
   );

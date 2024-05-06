@@ -4,6 +4,7 @@ import stamp_area_sprite from '../../assets/level-select/stamp_area_sprite.png';
 import solved_stamp_sprite from '../../assets/level-select/solved_stamp_sprite.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
+import { Levels } from '@/util';
 
 interface HoverFolderProps {
   marginTop: string;
@@ -13,8 +14,8 @@ interface HoverFolderProps {
   isClickedIndex: number;
   levelIndex: number;
   setClickedIndex: (index: number) => void;
-  handleLevelButtonClick: (
-    level: number,
+  handleLevel: (
+    level: Levels,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
@@ -27,14 +28,14 @@ export function HoverFolder({
   isClickedIndex,
   setClickedIndex,
   levelIndex,
-  handleLevelButtonClick
+  handleLevel
 }: HoverFolderProps) {
   const isAboveHovered = index <= isHoveredIndex;
   const isAboveClicked = index <= isClickedIndex;
 
   const hoverOffset = -3; // Distance moved by folder when hovered over
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
-
+  const puzzles = ['Tutorial', 'Easy', 'Medium', 'Hard'];
   return (
     <div className="w-[94%]">
       <motion.div
@@ -63,7 +64,7 @@ export function HoverFolder({
           className="absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
           style={{ pointerEvents: 'none' }}
         >
-          Puzzle {index + 1}
+          {puzzles[index]}
         </p>
         <img className="w-[100%]" src={folder_sprite} />
         <div className="absolute inset-0" style={{ overflow: 'hidden' }}>
@@ -81,7 +82,7 @@ export function HoverFolder({
                 <div>
                   <Button
                     className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
-                    onClick={(e) => handleLevelButtonClick(levelIndex, e)}
+                    onClick={(e) => handleLevel(levelIndex, e)}
                   >
                     Open
                   </Button>

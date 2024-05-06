@@ -1,6 +1,7 @@
 import { Button } from '../../ui/button';
 import { useState } from 'react';
 import { TextField } from '../../ui/text_field';
+import { Screen } from '@/util';
 
 /* 
 This is the component for the sign in menu. It allows the user to sign into their profile.
@@ -9,7 +10,7 @@ It also has a confirm button, which does nothing yet, and a back button to the l
 */
 
 interface SignInProps {
-  handleLevelButtonClick: (
+  handleScreenButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
@@ -20,7 +21,10 @@ interface SignInProps {
   ) => void;
 }
 
-export function SignIn({ handleLevelButtonClick, handleConfirm }: SignInProps) {
+export function SignIn({
+  handleScreenButtonClick,
+  handleConfirm
+}: SignInProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -53,7 +57,7 @@ export function SignIn({ handleLevelButtonClick, handleConfirm }: SignInProps) {
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(7, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
         size={'sm'}
       >
         BACK

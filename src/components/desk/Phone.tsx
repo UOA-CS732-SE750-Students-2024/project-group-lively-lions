@@ -1,3 +1,4 @@
+import { Screen } from '@/util';
 import { Button } from '../ui/button';
 
 /* 
@@ -6,19 +7,19 @@ to their current puzzle. They can talk with Caperton the Capybara, who will try 
 */
 
 interface PhoneProps {
-  handleLevelButtonClick: (
-    level: number,
+  handleScreenButtonClick: (
+    screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
 
-export function Phone({ handleLevelButtonClick }: PhoneProps) {
+export function Phone({ handleScreenButtonClick }: PhoneProps) {
   return (
     <div>
       <p>PHONE</p>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(0, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
         size={'sm'}
       >
         BACK

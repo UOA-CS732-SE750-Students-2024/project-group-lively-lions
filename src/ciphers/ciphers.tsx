@@ -6,9 +6,9 @@ import {
   SubstitutionProps
 } from './Cipher';
 
-const checkType = (
-  props: CaesarCipherProps | KeywordProps | SubstitutionProps
-): CipherType => {
+type CipherProps = CaesarCipherProps | KeywordProps | SubstitutionProps;
+
+const checkType = (props: CipherProps): CipherType => {
   if ('caesarkey' in props) {
     return CipherType.Caesar;
   } else if ('keyword' in props) {
@@ -51,14 +51,14 @@ const simpleCaesarCipher = ({ caesarkey, phrase }: CaesarCipherProps) => {
 
 export class Caesar implements Cipher {
   name = 'Caesar Cipher';
-  encode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Caesar) {
       return simpleCaesarCipher(props as CaesarCipherProps);
     }
     throw new Error('Invalid props');
   };
 
-  decode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  decode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Caesar) {
       return simpleCaesarCipher({
         caesarkey: -1 * (props as CaesarCipherProps).caesarkey,
@@ -142,14 +142,14 @@ const vigenereDecipher = ({ keyword, phrase }: KeywordProps) => {
 
 export class Vigenere implements Cipher {
   name = 'Vigenere Cipher';
-  encode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Keyword) {
       return vigenereCipher(props as KeywordProps);
     }
     throw new Error('Invalid props');
   };
 
-  decode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  decode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Keyword) {
       return vigenereDecipher(props as KeywordProps);
     }
@@ -222,13 +222,13 @@ const decodePolybius = ({ phrase }: SubstitutionProps) => {
 
 export class Polybius implements Cipher {
   name = 'Polybius Cipher';
-  encode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return encodePolybius(props as SubstitutionProps);
     }
     throw new Error('Invalid props');
   };
-  decode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  decode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return decodePolybius(props as SubstitutionProps); // Fix: Pass the 'phrase' property of 'props' to 'decodePolybius'
     }
@@ -328,13 +328,13 @@ const decodeMorseToAscii = ({ phrase }: SubstitutionProps) => {
 };
 export class Morse implements Cipher {
   name = 'Morse Code';
-  encode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return encodeToMorse(props as SubstitutionProps);
     }
     throw new Error('Invalid props');
   };
-  decode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  decode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return decodeMorseToAscii(props as SubstitutionProps); // Fix: Pass the 'phrase' property of 'props' to 'decodePolybius'
     }
@@ -381,13 +381,13 @@ const binaryToAscii = ({ phrase }: SubstitutionProps) => {
 
 export class Binary implements Cipher {
   name = 'Binary Converter';
-  encode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return asciiToBinary(props as SubstitutionProps);
     }
     throw new Error('Invalid props');
   };
-  decode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  decode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return binaryToAscii(props as SubstitutionProps); // Fix: Pass the 'phrase' property of 'props' to 'decodePolybius'
     }
@@ -496,13 +496,13 @@ const decodeEmojiSubstitutionCipher = ({ phrase }: SubstitutionProps) => {
 
 export class Emoji implements Cipher {
   name = 'Emoji Substitution Cipher';
-  encode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return encodeEmojiSubstitutionCipher(props as SubstitutionProps);
     }
     throw new Error('Invalid props');
   };
-  decode = (props: CaesarCipherProps | KeywordProps | SubstitutionProps) => {
+  decode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return decodeEmojiSubstitutionCipher(props as SubstitutionProps);
     }

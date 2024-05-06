@@ -1,6 +1,7 @@
 import { Button } from '../../ui/button';
 import { useState } from 'react';
 import { TextField } from '../../ui/text_field';
+import { Screen } from '@/util';
 
 /* 
 This is the component for the new player menu. It allows the creation of a new player profile.
@@ -9,7 +10,7 @@ It also has a confirm button, which does nothing yet, and a back button to the l
 */
 
 interface NewPlayerProps {
-  handleLevelButtonClick: (
+  handleScreenButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
@@ -17,7 +18,7 @@ interface NewPlayerProps {
 
 const SERVER_MONGODB_URI = 'http://localhost:3000';
 
-export function NewPlayer({ handleLevelButtonClick }: NewPlayerProps) {
+export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -75,7 +76,7 @@ export function NewPlayer({ handleLevelButtonClick }: NewPlayerProps) {
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(7, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
         size={'sm'}
       >
         BACK

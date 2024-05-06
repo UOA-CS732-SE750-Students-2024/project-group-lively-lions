@@ -1,3 +1,4 @@
+import { Screen } from '@/util';
 import { Button } from '../ui/button';
 
 /* 
@@ -7,32 +8,32 @@ The user can also press the back button to go back to the main menu.
 */
 
 interface ComputerProps {
-  handleLevelButtonClick: (
-    level: number,
+  handleScreenButtonClick: (
+    screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
 
-export function ComputerProfile({ handleLevelButtonClick }: ComputerProps) {
+export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
   return (
     <div>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(4, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.PlayerInfo, e)}
         size={'sm'}
       >
         PLAYER INFO
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(3, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.SignIn, e)}
         size={'sm'}
       >
         SIGN IN
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(2, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.NewPlayer, e)}
         size={'sm'}
       >
         NEW PLAYER
@@ -40,7 +41,7 @@ export function ComputerProfile({ handleLevelButtonClick }: ComputerProps) {
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(0, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
         size={'sm'}
       >
         BACK
