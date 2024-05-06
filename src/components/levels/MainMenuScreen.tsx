@@ -1,46 +1,62 @@
-import { Screen } from '@/util';
+import { Levels, Screen } from '@/util';
 import { Button } from '../ui/button';
+import { LevelSelect } from '../desk/LevelSelect';
 
 interface MainMenuScreenProps {
   handleScreenButtonClick: (
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  handleLevel: (
+    level: Levels,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => void; // Added handleLevel property
+  level: Levels; // Added level property
 }
 
 export default function MainMenuScreen({
-  handleScreenButtonClick
+  handleScreenButtonClick,
+  handleLevel,
+  level
 }: MainMenuScreenProps) {
+  console.log(level);
   return (
     <div>
       {/*Cabinet Difficulty Selection*/}
-      <Button
+      {/* <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(5, e)}
+        onClick={(e) => handleLevel(Levels.Tutorial, e)}
         size={'sm'}
       >
         TUTORIAL
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(5, e)}
+        onClick={(e) => handleLevel(Levels.Easy, e)}
         size={'sm'}
       >
         EASY
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(5, e)}
+        onClick={(e) => handleLevel(Levels.Medium, e)}
         size={'sm'}
       >
         MEDIUM
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(5, e)}
+        onClick={(e) => handleLevel(Levels.Hard, e)}
         size={'sm'}
       >
         HARD
+      </Button> */}
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleScreenButtonClick(Screen.LevelSelect, e)}
+        size={'sm'}
+      >
+        Level Select
       </Button>
 
       <Button
@@ -53,7 +69,7 @@ export default function MainMenuScreen({
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(7, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
         size={'sm'}
       >
         COMPUTER/PROFILE
@@ -61,7 +77,7 @@ export default function MainMenuScreen({
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(8, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.Phone, e)}
         size={'sm'}
       >
         PHONE
@@ -69,7 +85,7 @@ export default function MainMenuScreen({
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(10, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.ReferenceBook, e)}
         size={'sm'}
       >
         REFERENCE BOOK
@@ -77,7 +93,7 @@ export default function MainMenuScreen({
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(9, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.PuzzlePage, e)}
         size={'sm'}
       >
         PUZZLE PAGE

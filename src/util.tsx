@@ -5,7 +5,6 @@ export enum Screen {
   SignIn,
   PlayerInfo,
   LevelSelect,
-  GamePageTemplate,
   ComputerProfile,
   Phone,
   PuzzlePage,

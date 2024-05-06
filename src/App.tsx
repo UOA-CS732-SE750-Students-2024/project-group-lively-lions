@@ -12,16 +12,17 @@ import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels } from './util';
-import GamePageTemplate from './components/levels/GamePageTemplate';
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState(Screen.MainMenuScreen);
+  const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
 
   const screens = [
     <MainMenuScreen
       key="mainMenu"
       handleScreenButtonClick={handleScreenButtonClick}
+      handleLevel={handleLevel}
+      level={currentLevel}
     />,
     <LandingScreen
       key="landing"
@@ -47,7 +48,6 @@ function App() {
       handleScreenButtonClick={handleScreenButtonClick}
       handleLevel={handleLevel}
     />,
-    <GamePageTemplate key="gamePage" level={currentLevel} />,
     <ComputerProfile
       key="computerProfile"
       handleScreenButtonClick={handleScreenButtonClick}
@@ -57,18 +57,18 @@ function App() {
       key="puzzlePage"
       handleScreenButtonClick={handleScreenButtonClick}
     />,
-
     <ReferenceBook
       key="referenceBook"
       handleScreenButtonClick={handleScreenButtonClick}
     />
   ];
 
-  function handleLevel(level: number, e: React.MouseEvent<HTMLButtonElement>) {
+  function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     setCurrentLevel(level);
-    setCurrentScreen(Screen.GamePageTemplate);
+    setCurrentScreen(Screen.MainMenuScreen);
   }
+
   function handleScreenButtonClick(
     screen: Screen,
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
