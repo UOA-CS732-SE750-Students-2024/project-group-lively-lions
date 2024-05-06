@@ -17,6 +17,7 @@ import {
   } from '../../assets/echidna-2';
   import { AnimatePresence, motion } from 'framer-motion';
   import EchidnaButton from './echidna_button';
+  import EchidnaSolveLever from './echidna_solve_lever';
 
 interface EchidnaProps {
   base_width_percent: number;
@@ -42,6 +43,10 @@ export function Echidna({
       setAnimatingOut(false);
     }, 250);
   };
+
+  function handleSolve(){
+
+  }
 
   return (
     /* Centers component with some top padding */
@@ -74,6 +79,13 @@ export function Echidna({
         <EchidnaButton capImage={EchidnaCipherButtonCapDown} 
         onClick={() => {handleCipherChange(false)}} />
       </div>
+      {/* Solve lever */}
+      <div className='absolute w-[8.8%] top-[34%] left-[58%]'>
+        <EchidnaSolveLever delay={500} onClick={handleSolve}/>
+      </div>
+
+      
+      {/* Paper feed */}
     </div>  
   );
 }
