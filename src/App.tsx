@@ -151,7 +151,6 @@ function App() {
     setCurrentLevel(level);
     setCurrentStory(handleLoadStory() ?? story.tutorial);
     setCurrentPhrase(encodePhrase());
-    setCurrentScreen(Screen.MainMenuScreen);
   }
 
   function handleReturnScreen(screen: Screen) {

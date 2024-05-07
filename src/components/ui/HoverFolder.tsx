@@ -4,7 +4,7 @@ import stamp_area_sprite from '../../assets/level-select/stamp_area_sprite.png';
 import solved_stamp_sprite from '../../assets/level-select/solved_stamp_sprite.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
-import { Levels, Story } from '@/util';
+import { Screen, Levels, Story } from '@/util';
 
 interface HoverFolderProps {
   marginTop: string;
@@ -19,6 +19,10 @@ interface HoverFolderProps {
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
   story: Story;
+  handleScreenButtonClick: (
+    screen: Screen,
+    event: React.MouseEvent<HTMLElement>
+  ) => void;
 }
 
 export function HoverFolder({
@@ -29,7 +33,8 @@ export function HoverFolder({
   isClickedIndex,
   setClickedIndex,
   levelIndex,
-  handleLevel
+  handleLevel,
+  handleScreenButtonClick
 }: HoverFolderProps) {
   const isAboveHovered = index <= isHoveredIndex;
   const isAboveClicked = index <= isClickedIndex;
@@ -50,10 +55,9 @@ export function HoverFolder({
             : setClickedIndex(index)
         }
         animate={{
-          y: `${
-            (isAboveClicked ? clickedOffset : 0) +
+          y: `${(isAboveClicked ? clickedOffset : 0) +
             (isAboveHovered ? hoverOffset : 0)
-          }%`
+            }%`
         }}
         transition={{
           type: 'spring',
@@ -83,7 +87,7 @@ export function HoverFolder({
                 <div>
                   <Button
                     className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
-                    onClick={(e) => handleLevel(levelIndex, e)}
+                    onClick={(e) => { handleLevel(levelIndex, e); handleScreenButtonClick(Screen.GameScreen, e) }}
                   >
                     Open
                   </Button>

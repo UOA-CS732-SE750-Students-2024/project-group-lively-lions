@@ -13,6 +13,7 @@ import coffee from '../../assets/room/shared/coffee.png';
 import blueYarn from '../../assets/room/shared/blue_yarn.png';
 import purpleYarn from '../../assets/room/shared/purple_yarn.png';
 import conspiracyBoard from '../../assets/room/active_game/conspiracy_board.png';
+import exitSign from '../../assets/room/active_game/exit.png';
 
 interface GameScreenProps {
     handleScreenButtonClick: (
@@ -69,7 +70,7 @@ export default function GameScreen({
             {/* Interactive Components */}
             {/* To do: Link conspiracy board */}
             {/* Conspiracy board asset linked to conspiracy board system */}
-            <div className='absolute left-[15%] scale-[120%]'>
+            <div className='absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer'>
                 <img src={conspiracyBoard} alt="conspiracy board" />
             </div>
             {/* Phone asset linked to hint system */}
@@ -79,6 +80,11 @@ export default function GameScreen({
             {/* Reference book asset */}
             <div className='absolute scale-[250%] top-[71%] left-[7%] rotate-12'>
                 <ReferenceBookEntryPoint handleScreenButtonClick={handleScreenButtonClick} />
+            </div>
+            {/* Exit sign to go back to main game page */}
+            <div className='absolute left-[87%] scale-[200%]'
+                onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}>
+                <img src={exitSign} alt='Exit' />
             </div>
             {/* To do: add ECHIDNA */}
 

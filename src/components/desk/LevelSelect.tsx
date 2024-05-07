@@ -59,6 +59,7 @@ export function LevelSelect({
                 levelIndex={index}
                 handleLevel={handleLevel}
                 story={story}
+                handleScreenButtonClick={handleScreenButtonClick}
               />
             ))}
           </div>
