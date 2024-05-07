@@ -19,3 +19,4 @@ export { default as EchidnaAuxDisplayInput } from './echidna_aux_display_input.p
 export { default as EchidnaAuxDisplay } from './echidna_aux_display.png';
 export { default as EchidnaResetButtonBase } from './echidna_reset_button_base.png';
 export { default as EchidnaResetButtonCap } from './echidna_reset_button_cap.png';
+export { default as EchidnaAuxPanel } from './echidna_aux_panel.png';

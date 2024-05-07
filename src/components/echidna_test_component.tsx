@@ -1,5 +1,5 @@
 import Echidna from "./ui/echidna"
-import * as ciphers from '@/ciphers'
+import * as ciphers from '../ciphers/ciphers'
 
 function EchidnaTestComponent(){
     return (

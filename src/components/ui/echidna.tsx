@@ -6,27 +6,25 @@ import {
     EchidnaCipherButtonCapUp,
     EchidnaGreenLampOff,
     EchidnaGreenLampOn,
-    EchidnaHelpTab,
     EchidnaPaperFeedArms,
     EchidnaPaper,
     EchidnaPaperShadow,
     EchidnaRedLampOff,
     EchidnaRedLampOn,
-    EchidnaSolveLeverHandle,
-    EchidnaSolveLeverStem,
     EchidnaAuxButtonBase,
     EchidnaAuxButtonCapDown,
     EchidnaAuxButtonCapUp,
     EchidnaAuxDisplay,
     EchidnaAuxDisplayInput,
     EchidnaResetButtonBase,
-    EchidnaResetButtonCap
+    EchidnaResetButtonCap,
+    EchidnaAuxPanel
   } from '../../assets/echidna-2';
   import { AnimatePresence, motion } from 'framer-motion';
   import EchidnaButton from './echidna_button';
   import EchidnaSolveLever from './echidna_solve_lever';
-  import * as ciphersExports from '@/ciphers';
-  import { CipherType } from '@/Cipher';
+  import * as ciphersExports from '../../ciphers/ciphers';
+  import { CipherType } from '../../ciphers/Cipher';
 
 interface EchidnaProps {
   solve_delay_ms: number;
@@ -149,6 +147,10 @@ export function Echidna({
     setShift(shift + shiftBy)
   }
 
+  const handleKeywordChange = ((e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value)
+  })
+
   // Anything that needs to happen on first load goes here
   useEffect(() => {
     initialDisplayDelay();
@@ -235,7 +237,8 @@ export function Echidna({
           />
         </div>
         {/* Auxilliary controls panel */}
-        <div className='absolute w-[55%] h-[16%] top-[62%] left-[13%] overflow-hidden'>
+        <div className='absolute w-[55%] h-[21.2%] top-[60.9%] left-[13%] overflow-hidden'>
+          <img src={EchidnaAuxPanel} className='absolute w-[100%] h-[100%]' />
           <AnimatePresence mode='wait'>
             <motion.div
             className='absolute w-[100%] h-[100%]'
@@ -244,28 +247,38 @@ export function Echidna({
             animate={{ y: 0 }}
             transition={{ type: 'spring', stiffness: 1000, damping: 80 }}
             >
-              <img src={EchidnaAuxDisplayInput} className='absolute opacity-[10%] w-[100%] h-[100%]' />
-              {/* Keyword setting controls */}
+              {/* Keyword setting block */}
+              <p className='absolute font-[alagard] opacity-[40%] text-[1.2rem] top-[5%] left-[13%]'>
+                Keyword
+              </p>
               <img src={EchidnaAuxDisplayInput} className='absolute w-[55%] h-[38%] top-[40%] left-[3%]' />
-              <input className='absolute w-[55%] h-[38%] top-[40%] left-[3%] bg-transparent font-[alagard] text-[0.9rem] text-[#C1E7EB] p-[5%] outline-none' />
-              {/* Shift setting controls */}
-              <div className='absolute w-[15%] left-[82%] top-[23%]'>
+              <input 
+              className='absolute w-[55%] h-[38%] top-[40%] left-[3%] bg-transparent font-[alagard] text-[0.9rem] text-[#C1E7EB] p-[5%] outline-none'
+              onChange={handleKeywordChange}
+              />
+              {/* Shift setting block */}
+              <p className='absolute font-[alagard] opacity-[40%] text-[1.2rem] top-[5%] right-[11%]'>
+                Shift
+              </p>
+              {/* Shift setting block */}
+              <div className='absolute w-[15%] left-[82%] top-[35%]'>
                 <EchidnaButton 
                   capImage={EchidnaAuxButtonCapUp}
                   baseImage={EchidnaAuxButtonBase}
                   onClick={() => {handleShift(1)}}
                 />
               </div>
-              <div className='absolute w-[15%] left-[82%] top-[51%]'>
+              <div className='absolute w-[15%] left-[82%] top-[58%]'>
                 <EchidnaButton 
                   capImage={EchidnaAuxButtonCapDown}
                   baseImage={EchidnaAuxButtonBase}
                   onClick={() => {handleShift(-1)}}
                 />
               </div>
-              <div className='absolute w-[20%] h-[76%] top-[15%] left-[60%]'>
+              {/* Shift setting display */}
+              <div className='absolute w-[20%] h-[50%] top-[34%] left-[60%]'>
                 <img src={EchidnaAuxDisplay} className='absolute w-[100%] h-[100%]'/>
-                <motion.p className='absolute w-[100%] h-[100%] font-[alagard] text-[1.3rem] text-center text-[#C1E7EB] pt-[35%]'
+                <motion.p className='absolute w-[100%] h-[100%] font-[alagard] text-[1.3rem] text-center text-[#C1E7EB] pt-[25%]'
                 key={shift + 'shift'}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
@@ -309,5 +322,5 @@ export function Echidna({
       </div>
   );
 }
-  
+
 export default Echidna;
