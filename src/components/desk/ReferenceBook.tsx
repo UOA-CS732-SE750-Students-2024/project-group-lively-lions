@@ -53,6 +53,7 @@ export function ReferenceBook({ handleScreenButtonClick }: ReferenceBookProps) {
     }
   };
 
+  // Please note that if the description of the cipher is too long, then it will come off the paper as the paper image may not be long enough.
   return (
     <div>
       <div className="flow-root">
