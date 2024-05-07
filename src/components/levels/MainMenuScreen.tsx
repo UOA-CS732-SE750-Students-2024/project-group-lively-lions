@@ -100,6 +100,14 @@ export default function MainMenuScreen({
       >
         MAIN GAME PAGE
       </Button>
+
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleScreenButtonClick(Screen.GameScreen, e)}
+        size={'sm'}
+      >
+        GAME SCREEN
+      </Button>
     </div>
   );
 }

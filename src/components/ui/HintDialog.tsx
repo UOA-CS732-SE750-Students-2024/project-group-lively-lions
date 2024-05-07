@@ -45,7 +45,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
           </motion.div>
         </WoodenCard>
         {/* The dialog */}
-        <div className="max-h-full p-2 overflow-auto scroll-smooth scrollbar">
+        <div className="max-h-full p-2 overflow-auto scroll-smooth no-scrollbar">
           <AnimatePresence>
             {transcript.messages.map((message, index) => (
               <motion.div
@@ -60,7 +60,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
               >
                 <SpeechBubble
                   text={message.text}
-                  arrow={index % 2 === 0 ? 'left' : 'right'}
+                  arrow={message.sender === 'Purrlock' ? 'left' : 'right'}
                 />
               </motion.div>
             ))}

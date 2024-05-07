@@ -11,6 +11,7 @@ import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels } from './util';
+import GameScreen from './components/levels/GameScreen';
 import * as story from './lib/story.json';
 import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
@@ -18,6 +19,7 @@ import * as ciphersExports from './ciphers/ciphers';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
+  const [returnScreen, setReturnScreen] = useState(Screen.MainGamePage);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
   const [currentStory, setCurrentStory] = useState(story.tutorial);
   const [currentPhrase, setCurrentPhrase] = useState('');
@@ -79,6 +81,7 @@ function App() {
     <ReferenceBook
       key="referenceBook"
       handleScreenButtonClick={handleScreenButtonClick}
+      returnToScreen={returnScreen}
     />,
     <EchidnaMachine
       key="echidnaMachine"
@@ -89,6 +92,13 @@ function App() {
     <MainGamePage
       key="mainGamePage"
       handleScreenButtonClick={handleScreenButtonClick}
+      handleReturnScreen={handleReturnScreen}
+    />,
+    <GameScreen
+      key="gameScreen"
+      handleScreenButtonClick={handleScreenButtonClick}
+      level={currentLevel}
+      handleReturnScreen={handleReturnScreen}
     />
   ];
   function encodePhrase() {
@@ -141,7 +151,10 @@ function App() {
     setCurrentLevel(level);
     setCurrentStory(handleLoadStory() ?? story.tutorial);
     setCurrentPhrase(encodePhrase());
-    setCurrentScreen(Screen.MainMenuScreen);
+  }
+
+  function handleReturnScreen(screen: Screen) {
+    setReturnScreen(screen);
   }
 
   function handleScreenButtonClick(

@@ -16,9 +16,13 @@ interface ReferenceBookProps {
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  returnToScreen: Screen;
 }
 
-export function ReferenceBook({ handleScreenButtonClick }: ReferenceBookProps) {
+export function ReferenceBook({
+  handleScreenButtonClick,
+  returnToScreen
+}: ReferenceBookProps) {
   const [currentPage, setCurrentPage] = useState(0);
 
   // The following constants make sure to not attempt to access additional ciphers that do not exist.
