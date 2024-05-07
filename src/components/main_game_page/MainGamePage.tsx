@@ -12,9 +12,15 @@ import lamp from '../../assets/room/main_menu/lamp.png';
 import lighting from '../../assets/room/main_menu/lighting.png';
 import paper from '../../assets/room/shared/crumpled_paper.png';
 import pencilHolder from '../../assets/room/shared/pencil_holder.png';
-import eraser from '../../assets/room/shared/eraser.png';
 import milk from '../../assets/room/shared/milk.png';
 import coffee from '../../assets/room/shared/coffee.png';
+import blueYarn from '../../assets/room/shared/blue_yarn.png';
+import greenYarn from '../../assets/room/shared/green_yarn.png';
+import purpleYarn from '../../assets/room/shared/purple_yarn.png';
+import redYarn from '../../assets/room/shared/red_yarn.png';
+import pinkYarn from '../../assets/room/shared/pink_yarn.png';
+import { motion } from 'framer-motion';
+import conspiracyBoard from '../../assets/room/main_menu/conspiracy_board/conspiracy_board_notes_and_text.png';
 
 interface MainGamePageProps {
   handleScreenButtonClick: (
@@ -36,11 +42,26 @@ export default function MainGamePage({
   }
 
   return (
-    <div className='w-[100%] h-[100%]' style={{ backgroundImage: `url(${background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', imageRendering: 'pixelated' }}>
+    <motion.div className='w-[100%] h-[100%]'
+      style={{ backgroundImage: `url(${background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', imageRendering: 'pixelated' }}
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: [0, 0.5, 0.7, 1]
+      }}
+      exit={{ opacity: 0 }}>
+
       {/* Non interactive visual items lower in scene order*/}
       <img className='absolute right-0' src={lamp} alt='lamp' />
       <img className='absolute bottom-0 w-screen' src={table} alt="table" />
 
+      {/* Main interactive elements */}
+      {/* Conspiracy board shows thought about usage in game */}
+      <div>
+        <img className='absolute scale-[300%] top-[17%] left-[44%] transition ease-in-out hover:translate-y-1 cursor-pointer'
+          onClick={() => configureThought("This conspiracy board lets me keep track of information during cases!")}
+          src={conspiracyBoard}
+          alt="conspiracy board" />
+      </div>
       {/* Cabinet leads to level select screen */}
       <div className='absolute top-[25%] left-[0.5%]' >
         <Cabinet handleScreenButtonClick={handleScreenButtonClick} />
@@ -59,39 +80,58 @@ export default function MainGamePage({
       </div>
 
       {/* Reference book entry point leads to reference book screen */}
-      <div className='absolute scale-[150%] top-[70%] left-[21%] rotate-12'>
+      <div className='absolute scale-[150%] top-[71%] left-[20%] rotate-12'>
         <ReferenceBookEntryPoint handleScreenButtonClick={handleScreenButtonClick} />
       </div>
 
       {/* Non interactive visual items higher in scene order*/}
       <img className='absolute top-[74%] left-[3%]' src={paper} />
       <img className='absolute top-[77%] scale-[110%]' src={paper} />
-      <img className='absolute top-[80%] left-[8%]' src={paper} />
       <img className='absolute top-[68%] left-[9%] scale-[95%]' src={paper} />
       <img className='absolute top-[69%] left-[12%] scale-[80%]' src={paper} />
       <img className='absolute scale-[210%] top-[46%] left-[19%]' src={pencilHolder} />
       <img className='absolute top-[56%] left-[18%] scale-[85%]' src={paper} />
       <img className='absolute top-[59%] left-[21%]' src={paper} />
-      <img className='absolute scale-[230%] top-[46%] left-[67%]' src={pencilHolder} />
-      <img className='absolute top-[64%] left-[73%]' src={eraser} />
+      <img className='absolute scale-[230%] top-[49%] left-[68%]' src={pencilHolder} />
+      <img className='absolute top-[79%] left-[93%] scale-[125%]' src={paper} />
 
       {/* Interactive visual filler items high in scene order*/}
-      <img className='absolute top-[47%] left-[40%] scale-[250%]'
+      <img className='absolute top-[47%] left-[40%] scale-[250%] cursor-pointer'
         onClick={() => configureThought('Mmmmmmmmmmmilkk, I simply must buy some more.')}
         src={milk} />
+      <img className='absolute top-[50%] left-[61%] scale-[160%] cursor-pointer'
+        onClick={() => configureThought("Coffee has gotten me through many rough nights of casework.")}
+        src={coffee} />
+      {/* Cat Heaven */}
+      <img className='absolute top-[65%] left-[90%] scale-[160%] cursor-pointer'
+        onClick={() => configureThought("Now wait just a meowment…")}
+        src={greenYarn} />
+      <img className='absolute top-[72%] left-[87%] scale-[160%] cursor-pointer'
+        onClick={() => configureThought("That case was a total cat-astrophe!!!")}
+        src={redYarn} />
+      <img className='absolute top-[51%] left-[47%] scale-[160%] cursor-pointer'
+        onClick={() => configureThought("Meow you're talking!")}
+        src={blueYarn} />
+      <img className='absolute top-[53%] left-[53%] scale-[160%] cursor-pointer'
+        onClick={() => configureThought("I need a meowtini. Shaken, not purred, of course.")}
+        src={purpleYarn} />
+      <img className='absolute top-[78%] left-[9%] scale-[150%] cursor-pointer'
+        onClick={() => configureThought('This case will go down in hiss-tory!')}
+        src={pinkYarn} />
+
 
       {/* Lighting layer */}
       <div className='absolute w-[100%] h-[100%] top-0 pointer-events-none' style={{ backgroundImage: `url(${lighting})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', imageRendering: 'auto' }} />
 
       {/* Pop Up Shown when clicking items that are not entry points */}
       {/* Pop Up is a thought bubble that darkens the rest of the screen */}
-      <div className={thoughtShowing ? 'absolute top-0 w-[100%] h-[100%]' : 'invisible'} style={{ backgroundImage: `url(${shadow})` }} onClick={() => setThoughtShowing(false)}>
+      <div className={thoughtShowing ? 'absolute top-0 w-[100%] h-[100%] cursor-pointer' : 'invisible'} style={{ backgroundImage: `url(${shadow})` }} onClick={() => setThoughtShowing(false)}>
         <div
-          className={thoughtShowing ? 'fixed visible top-[40%] left-[35.5%]' : 'invisible'}
+          className={thoughtShowing ? 'fixed visible top-[40%] left-[35.5%] cursor-pointer' : 'invisible'}
           onClick={() => setThoughtShowing(false)}>
           <SpeechBubble text={thought} arrow='none' />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
