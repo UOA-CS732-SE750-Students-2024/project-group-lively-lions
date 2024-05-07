@@ -5,7 +5,6 @@ import Phone from './Phone';
 import { Screen } from '@/util';
 import Computer from './Computer';
 import ReferenceBookEntryPoint from './ReferenceBookEntryPoint';
-import SpeechBubble from '../ui/speech_bubble';
 import { useState } from 'react';
 import shadow from '../../assets/room/shared/pop_up_shadow.png';
 import lamp from '../../assets/room/main_menu/lamp.png';
@@ -21,6 +20,7 @@ import redYarn from '../../assets/room/shared/red_yarn.png';
 import pinkYarn from '../../assets/room/shared/pink_yarn.png';
 import { motion } from 'framer-motion';
 import conspiracyBoard from '../../assets/room/main_menu/conspiracy_board/conspiracy_board_notes_and_text.png';
+import SpeechBubble from '../ui/SpeechBubble';
 
 interface MainGamePageProps {
   handleScreenButtonClick: (

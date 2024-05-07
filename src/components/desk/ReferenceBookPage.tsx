@@ -15,10 +15,12 @@ export function ReferenceBookPage({
   decoding
 }: ReferencePageProps) {
   return (
-    <div>
-      <img className="w-[100%] bottom-0" src={case_paper_sprite} />
-      <div className="absolute inset-0" style={{ overflow: 'hidden' }}></div>
-      <div className="absolute left-[10%] top-[10%] w-[80%]">
+    <div className="flex justify-center relative min-w-[400px] w-[calc(24vw)]">
+      <img
+        className="min-w-[400px] w-[calc(24vw)] bottom-0"
+        src={case_paper_sprite}
+      />
+      <div className="absolute left-[10%] top-[20%] w-[80%] h-[70%] overflow-y-scroll scrollbar">
         <p className="opacity-[70%] text-[1.3rem] font-[alagard]">
           {cipherName}
         </p>

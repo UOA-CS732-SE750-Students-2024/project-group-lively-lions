@@ -1,10 +1,9 @@
-import SpeechBubble from './speech_bubble';
+import SpeechBubble from './SpeechBubble';
 import { Dialog, DialogContent, DialogFooter, DialogTrigger } from './dialog';
-import { Button } from './button';
 import { AnimatePresence, motion } from 'framer-motion';
 import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import caperton from '../../assets/common/CapybaraFella.png';
-import { WoodenCard } from './wooden_card';
+import { WoodenCard } from './WoodenCard';
 import Phone from '../mainpage/Phone';
 
 export interface Message {
