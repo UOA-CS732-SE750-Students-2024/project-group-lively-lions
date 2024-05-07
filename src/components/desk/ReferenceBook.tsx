@@ -5,7 +5,8 @@ import cipherInfo from '../../lib/cipherInfo.json';
 import { useState } from 'react';
 
 /* 
-This is the component for the reference book. This will need to be updated.
+This is the component for the reference book. It displays the information about two ciphers side by side It passes into these pages the needed information from cipherInfo.json.
+If there is an odd number of ciphers, the last page on the right is left blank at the end of the list.
 */
 
 interface ReferenceBookProps {
@@ -18,6 +19,7 @@ interface ReferenceBookProps {
 export function ReferenceBook({ handleScreenButtonClick }: ReferenceBookProps) {
   const [currentPage, setCurrentPage] = useState(0);
 
+  // The following constants make sure to not attempt to access additional ciphers that do not exist.
   const handlePageChange = (increment: number): void => {
     if (
       currentPage + increment < cipherInfo.cipherList.length &&
@@ -56,7 +58,7 @@ export function ReferenceBook({ handleScreenButtonClick }: ReferenceBookProps) {
       <div className="flow-root">
         <p
           className="
-      relative bg-[#dde7e9] rounded-md
+      relative
       w-[calc(30vw)] h-[calc(45vw*9/16)]
       min-w-[425px] min-h-[337.5px]
       overflow-scroll no-scrollbar float-left"
@@ -69,7 +71,7 @@ export function ReferenceBook({ handleScreenButtonClick }: ReferenceBookProps) {
         </p>
         <p
           className="
-      relative bg-[#dde7e9] rounded-md
+      relative
       w-[calc(30vw)] h-[calc(45vw*9/16)]
       min-w-[425px] min-h-[337.5px]
       overflow-scroll no-scrollbar float-right"
