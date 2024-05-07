@@ -1,3 +1,5 @@
+import * as story from 'src/lib/story.json';
+
 export enum Screen {
   MainMenuScreen,
   LandingScreen,
@@ -9,7 +11,8 @@ export enum Screen {
   Phone,
   PuzzlePage,
   ReferenceBook,
-  MainGamePage,
+  EchidnaMachine,
+  MainGamePage
 }
 
 export enum Levels {
@@ -18,3 +21,7 @@ export enum Levels {
   Medium,
   Hard
 }
+
+export type Story = (typeof story)['tutorial'];
+
+export type Puzzle = Story['puzzles'][0];

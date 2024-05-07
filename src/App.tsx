@@ -5,24 +5,32 @@ import { LevelSelect } from './components/desk/LevelSelect';
 import { Phone } from './components/desk/Phone';
 import { PuzzlePage } from './components/desk/PuzzlePage';
 import { ReferenceBook } from './components/desk/ReferenceBook';
-import { ComputerProfile } from './components/desk/ComputerProfile';
+import { ComputerProfile } from './components/desk/computer_profile/ComputerProfile';
 import { NewPlayer } from './components/desk/computer_profile/NewPlayer';
 import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels } from './util';
-import MainGamePage from './components/main_game_page/MainGamePage';
+import * as story from './lib/story.json';
+import EchidnaMachine from './components/desk/EchidnaMachine';
+import MainGamePage from './components/mainpage/MainGamePage';
+import * as ciphersExports from './ciphers/ciphers';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
-
+  const [currentStory, setCurrentStory] = useState(story.tutorial);
+  const [currentPhrase, setCurrentPhrase] = useState('');
+  const [currentPuzzle, setCurrentPuzzle] = useState(story.tutorial.puzzles[0]);
   const screens = [
     <MainMenuScreen
       key="mainMenu"
       handleScreenButtonClick={handleScreenButtonClick}
       handleLevel={handleLevel}
       level={currentLevel}
+      story={currentStory}
+      puzzle={currentPuzzle}
+      phrase={currentPhrase}
     />,
     <LandingScreen
       key="landing"
@@ -45,30 +53,94 @@ function App() {
     />,
     <LevelSelect
       key="levelSelect"
-      handleScreenButtonClick={handleScreenButtonClick}
+      handleScreenButtonClick={(screen, e) =>
+        handleScreenButtonClick(
+          screen,
+          e as React.MouseEvent<HTMLButtonElement, MouseEvent>
+        )
+      }
       handleLevel={handleLevel}
+      story={currentStory}
     />,
     <ComputerProfile
       key="computerProfile"
       handleScreenButtonClick={handleScreenButtonClick}
     />,
-    <Phone key="phone" handleScreenButtonClick={handleScreenButtonClick} />,
+    <Phone
+      key="phone"
+      story={currentStory}
+      handleScreenButtonClick={handleScreenButtonClick}
+    />,
     <PuzzlePage
       key="puzzlePage"
+      story={currentStory}
       handleScreenButtonClick={handleScreenButtonClick}
     />,
     <ReferenceBook
       key="referenceBook"
       handleScreenButtonClick={handleScreenButtonClick}
     />,
+    <EchidnaMachine
+      key="echidnaMachine"
+      phrase={currentPhrase}
+      handleScreenButtonClick={handleScreenButtonClick}
+      puzzle={currentPuzzle}
+    />,
     <MainGamePage
       key="mainGamePage"
-      handleScreenButtonClick={handleScreenButtonClick} />
+      handleScreenButtonClick={handleScreenButtonClick}
+    />
   ];
+  function encodePhrase() {
+    const puzzleCipher = currentPuzzle.cipher;
+    const puzzleSolution = currentPuzzle.solution;
+
+    switch (puzzleCipher[0]) {
+      case 'caesar': {
+        const keyshift = Math.floor(Math.random() * 26);
+        return new ciphersExports.Caesar().encode({
+          phrase: puzzleSolution,
+          caesarkey: keyshift
+        });
+      }
+      case 'vigenere': {
+        const keyword = 'KEYWORD'; //tbd
+        return new ciphersExports.Vigenere().encode({
+          phrase: puzzleSolution,
+          keyword: keyword
+        });
+      }
+      case 'morse': {
+        return new ciphersExports.Morse().encode({
+          phrase: puzzleSolution
+        });
+      }
+      case 'binary': {
+        return new ciphersExports.Binary().encode({
+          phrase: puzzleSolution
+        });
+      }
+      case 'emoji': {
+        return new ciphersExports.Emoji().encode({
+          phrase: puzzleSolution
+        });
+      }
+      case 'polybius': {
+        return new ciphersExports.Polybius().encode({
+          phrase: puzzleSolution
+        });
+      }
+
+      default:
+        return '';
+    }
+  }
 
   function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     setCurrentLevel(level);
+    setCurrentStory(handleLoadStory() ?? story.tutorial);
+    setCurrentPhrase(encodePhrase());
     setCurrentScreen(Screen.MainMenuScreen);
   }
 
@@ -88,6 +160,9 @@ function App() {
     e.preventDefault();
     if (userPhrase == phrase) {
       alert('Correct!');
+      // Go to next puzzle
+      // Generate next scramble
+      setCurrentPhrase(encodePhrase());
     } else {
       alert('Incorrect, try again!');
     }
@@ -99,6 +174,22 @@ function App() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
+  }
+
+  function handleLoadStory() {
+    switch (currentLevel) {
+      case Levels.Tutorial:
+        return story.tutorial;
+      case Levels.Easy:
+        return story.easy;
+      case Levels.Medium:
+        return story.medium;
+        break;
+      case Levels.Hard:
+        return story.hard;
+      default:
+        break;
+    }
   }
 
   return (

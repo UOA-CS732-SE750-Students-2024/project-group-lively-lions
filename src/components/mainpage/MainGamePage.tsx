@@ -5,7 +5,7 @@ import Phone from './Phone';
 import { Screen } from '@/util';
 import Computer from './Computer';
 import ReferenceBookEntryPoint from './ReferenceBookEntryPoint';
-import SpeechBubble from '../ui/SpeechBubble';
+import SpeechBubble from '../ui/speech_bubble';
 import { useState } from 'react';
 import shadow from '../../assets/room/shared/pop_up_shadow.png';
 import lamp from '../../assets/room/main_menu/lamp.png';
