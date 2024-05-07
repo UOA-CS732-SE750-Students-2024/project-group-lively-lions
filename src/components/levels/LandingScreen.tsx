@@ -1,6 +1,6 @@
 import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import { Button } from '../ui/button';
-import { WoodenCard } from '../ui/wooden_card';
+import { WoodenCard } from '../ui/WoodenCard';
 import { randomTagline } from '@/lib/taglines';
 import { Screen } from '@/util';
 

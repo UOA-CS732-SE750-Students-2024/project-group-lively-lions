@@ -15,8 +15,8 @@ import noteDHighlighted from '../../assets/room/main_menu/conspiracy_board/notes
 import paper from '../../assets/level-select/case_paper_sprite.png';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ConspiracyNoteData } from './conspiracy_board';
-import { WoodenCard } from '../ui/wooden_card';
+import { ConspiracyNoteData } from './ConspiracyBoard';
+import { WoodenCard } from '../ui/WoodenCard';
 
 interface ConspiracyNoteProps {
   index: number;

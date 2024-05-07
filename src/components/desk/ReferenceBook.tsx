@@ -3,6 +3,7 @@ import { Button } from '../ui/button';
 import { ReferenceBookPage } from './ReferenceBookPage';
 import cipherInfo from '../../lib/cipherInfo.json';
 import { useState } from 'react';
+import arrow from '../../assets/room/main_menu/reference_book/arrow.png';
 
 /* 
 This is the component for the reference book. It displays the information about two ciphers side by side It passes into these pages the needed information from cipherInfo.json.
@@ -84,13 +85,7 @@ export function ReferenceBook({ handleScreenButtonClick }: ReferenceBookProps) {
           />
         </p>
       </div>
-      <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={() => handlePageChange(2)}
-        size={'sm'}
-      >
-        NEXT
-      </Button>
+      <img className="h-3" onClick={() => handlePageChange(2)} src={arrow} />
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
         onClick={() => handlePageChange(-2)}

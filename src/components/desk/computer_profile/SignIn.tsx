@@ -1,6 +1,6 @@
 import { Button } from '../../ui/button';
 import { useState } from 'react';
-import { TextField } from '../../ui/text_field';
+import { TextField } from '../../ui/TextField';
 import { Screen } from '@/util';
 
 /* 
