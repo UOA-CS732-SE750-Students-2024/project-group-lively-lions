@@ -103,6 +103,14 @@ export default function MainMenuScreen({
       >
         PUZZLE PAGE
       </Button>
+
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
+        size={'sm'}
+      >
+        MAIN GAME PAGE
+      </Button>
     </div>
   );
 }

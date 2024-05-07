@@ -66,7 +66,7 @@ export function LevelSelect({
           <img className="w-[100%] bottom-0" src={drawer_face_sprite} />
           <Button
             className="absolute font-[alagard] text-[1.1rem] mt-5 mb-5 bottom-[9%] w-[20%] left-[40%]"
-            onClick={(e) => {handleScreenButtonClick(Screen.MainMenuScreen, e); play_sound()}}
+            onClick={(e) => {handleScreenButtonClick(Screen.MainGamePage, e); play_sound()}}
           >
             Back
           </Button>

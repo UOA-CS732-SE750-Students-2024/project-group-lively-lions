@@ -12,6 +12,7 @@ import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels } from './util';
+import MainGamePage from './components/main_game_page/MainGamePage';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
@@ -60,7 +61,10 @@ function App() {
     <ReferenceBook
       key="referenceBook"
       handleScreenButtonClick={handleScreenButtonClick}
-    />
+    />,
+    <MainGamePage
+      key="mainGamePage"
+      handleScreenButtonClick={handleScreenButtonClick}/>
   ];
 
   function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
