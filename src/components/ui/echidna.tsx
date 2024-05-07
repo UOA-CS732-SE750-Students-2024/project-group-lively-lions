@@ -38,6 +38,7 @@ interface EchidnaProps {
     | typeof ciphersExports.Binary
     | typeof ciphersExports.Emoji
   )[];
+  showAuxControls: boolean;
 }
 
 export function Echidna({
@@ -45,7 +46,8 @@ export function Echidna({
   phrase,
   solution,
   onSolved,
-  availableCiphers
+  availableCiphers,
+  showAuxControls
 }: EchidnaProps) {
   const [selectedCipher, setSelectedCipher] = useState<string>(
     availableCiphers[0].name.toString()
@@ -59,6 +61,8 @@ export function Echidna({
   const [greenLampOn, setGreenLampOn] = useState<boolean>(false);
   const [redLampOn, setRedLampOn] = useState<boolean>(false);
   const [displayOn, setDisplayOn] = useState<boolean>(false);
+  const [isAuxControls, setShowAuxControls] =
+    useState<boolean>(showAuxControls);
 
   /** Cipher-select button function
    * @param {boolean} up Used for animating the cipher-select rotor "spin" direction.
@@ -251,7 +255,7 @@ export function Echidna({
           {displayOn ? (
             <motion.p
               key={workingPhrase}
-              className="absolute text-[1.5rem] text-[#C1E7EB] font-[alagard] leading-tight"
+              className="absolute text-[1.1rem] text-[#C1E7EB] font-[alagard] leading-tight"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
               exit={{ opacity: [1, 0, 1, 0, 1, 0] }}
@@ -276,66 +280,70 @@ export function Echidna({
       <div className="absolute w-[55%] h-[21.2%] top-[60.9%] left-[13%] overflow-hidden">
         <img src={echidnaAuxPanel} className="absolute w-[100%] h-[100%]" />
         <AnimatePresence mode="wait">
-          <motion.div
-            className="absolute w-[100%] h-[100%]"
-            initial={{ y: 1000 }}
-            key="aux_control_panel"
-            animate={{ y: 0 }}
-            transition={{ type: 'spring', stiffness: 1000, damping: 80 }}
-          >
-            {/* Keyword setting block */}
-            <p className="absolute font-[alagard] opacity-[40%] text-[1.2rem] top-[5%] left-[13%]">
-              Keyword
-            </p>
-            <img
-              src={echidnaAuxDisplayInput}
-              className="absolute w-[55%] h-[38%] top-[40%] left-[3%]"
-            />
-            <input
-              className="absolute w-[55%] h-[38%] top-[40%] left-[3%] bg-transparent font-[alagard] text-[0.9rem] text-[#C1E7EB] p-[5%] outline-none"
-              onChange={handleKeywordChange}
-            />
-            {/* Shift setting block */}
-            <p className="absolute font-[alagard] opacity-[40%] text-[1.2rem] top-[5%] right-[11%]">
-              Shift
-            </p>
-            {/* Shift setting block */}
-            <div className="absolute w-[15%] left-[82%] top-[35%]">
-              <EchidnaButton
-                capImage={echidnaAuxButtonCapUp}
-                baseImage={echidnaAuxButtonBase}
-                onClick={() => {
-                  handleShift(1);
-                }}
-              />
-            </div>
-            <div className="absolute w-[15%] left-[82%] top-[58%]">
-              <EchidnaButton
-                capImage={echidnaAuxButtonCapDown}
-                baseImage={echidnaAuxButtonBase}
-                onClick={() => {
-                  handleShift(-1);
-                }}
-              />
-            </div>
-            {/* Shift setting display */}
-            <div className="absolute w-[20%] h-[50%] top-[34%] left-[60%]">
+          {isAuxControls ? (
+            <motion.div
+              className="absolute w-[100%] h-[100%]"
+              initial={{ y: 1000 }}
+              key="aux_control_panel"
+              animate={{ y: 0 }}
+              transition={{ type: 'spring', stiffness: 1000, damping: 80 }}
+            >
+              {/* Keyword setting block */}
+              <p className="absolute font-[alagard] opacity-[40%] text-[1.2rem] top-[5%] left-[13%]">
+                Keyword
+              </p>
               <img
-                src={echidnaAuxDisplay}
-                className="absolute w-[100%] h-[100%]"
+                src={echidnaAuxDisplayInput}
+                className="absolute w-[55%] h-[38%] top-[40%] left-[3%]"
               />
-              <motion.p
-                className="absolute w-[100%] h-[100%] font-[alagard] text-[1.3rem] text-center text-[#C1E7EB] pt-[25%]"
-                key={shift + 'shift'}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
-                exit={{ opacity: [1, 0, 1, 0, 1, 0] }}
-                transition={{ duration: 0.1 }}
-              >
-                {shift}
-              </motion.p>
-            </div>
-          </motion.div>
+              <input
+                className="absolute w-[55%] h-[38%] top-[40%] left-[3%] bg-transparent font-[alagard] text-[0.9rem] text-[#C1E7EB] p-[5%] outline-none"
+                onChange={handleKeywordChange}
+              />
+              {/* Shift setting block */}
+              <p className="absolute font-[alagard] opacity-[40%] text-[1.2rem] top-[5%] right-[11%]">
+                Shift
+              </p>
+              {/* Shift setting block */}
+              <div className="absolute w-[15%] left-[82%] top-[35%]">
+                <EchidnaButton
+                  capImage={echidnaAuxButtonCapUp}
+                  baseImage={echidnaAuxButtonBase}
+                  onClick={() => {
+                    handleShift(1);
+                  }}
+                />
+              </div>
+              <div className="absolute w-[15%] left-[82%] top-[58%]">
+                <EchidnaButton
+                  capImage={echidnaAuxButtonCapDown}
+                  baseImage={echidnaAuxButtonBase}
+                  onClick={() => {
+                    handleShift(-1);
+                  }}
+                />
+              </div>
+              {/* Shift setting display */}
+              <div className="absolute w-[20%] h-[50%] top-[34%] left-[60%]">
+                <img
+                  src={echidnaAuxDisplay}
+                  className="absolute w-[100%] h-[100%]"
+                />
+                <motion.p
+                  className="absolute w-[100%] h-[100%] font-[alagard] text-[1.3rem] text-center text-[#C1E7EB] pt-[25%]"
+                  key={shift + 'shift'}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
+                  exit={{ opacity: [1, 0, 1, 0, 1, 0] }}
+                  transition={{ duration: 0.1 }}
+                >
+                  {shift}
+                </motion.p>
+              </div>
+            </motion.div>
+          ) : (
+            <></>
+          )}
         </AnimatePresence>
       </div>
       {/* Solution lamps */}

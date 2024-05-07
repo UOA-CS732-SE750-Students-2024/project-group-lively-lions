@@ -30,6 +30,7 @@ const EchidnaMachine = ({
             phrase={phrase}
             solution={puzzle.solution}
             solve_delay_ms={500}
+            showAuxControls={true}
           />
         </div>
       </div>

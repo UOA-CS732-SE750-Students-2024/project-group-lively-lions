@@ -1,7 +1,7 @@
 require('text-encoding').TextEncoder;
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
-const { Player } = require("../schema")
+const { Player } = require("../schema");
 
 let mongod;
 
