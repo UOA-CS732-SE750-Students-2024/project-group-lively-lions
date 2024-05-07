@@ -8,8 +8,9 @@ import string4 from '../../assets/room/main_menu/conspiracy_board/strings/string
 import string5 from '../../assets/room/main_menu/conspiracy_board/strings/string5.png';
 import string6 from '../../assets/room/main_menu/conspiracy_board/strings/string6.png';
 import string7 from '../../assets/room/main_menu/conspiracy_board/strings/string7.png';
-import { Dialog, DialogContent, DialogTrigger } from './dialog';
+import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
 import ConspiracyNote from './conspiracy_note';
+import { Button } from '../ui/button';
 
 export interface ConspiracyNoteData {
   story: string;
@@ -23,13 +24,18 @@ export interface ConspiracyBoardData {
 interface ConspiracyBoardProps {
   boardData: ConspiracyBoardData;
   maxNotes: 1 | 3 | 5 | 7;
+  handleLevelButtonClick: (
+    level: number,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => void;
 }
 
 // This component represents the conspiracy board, notes and strings on the board are rendered
 // based on the provided props
 const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
   boardData,
-  maxNotes
+  maxNotes,
+  handleLevelButtonClick
 }) => {
   const progress = boardData.notes.length;
   const strings = [
@@ -134,6 +140,7 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
         <img
           className="min-h-[540px] h-[calc(60vw*9/16)] hover:outline outline-white outline-7 cursor-pointer"
           src={board}
+          draggable={false}
         />
       </DialogTrigger>
       <DialogContent className="pt-[14rem] flex place-items-center justify-center min-w-[960px] min-h-[540px] w-[calc(60vw)] h-[calc(60vw*9/16)] bg-transparent border-none">
@@ -150,6 +157,7 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
             <img
               className="min-h-[540px] h-[calc(60vw*9/16)]"
               src={boardBackground}
+              draggable={false}
             />
             {/* Notes */}
             {notes.slice(0, progress).map((note, i) => (
@@ -167,11 +175,20 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
                 key={i}
                 className="absolute top-0 left-0 min-h-[540px] h-[calc(60vw*9/16)] pointer-events-none"
                 src={strings[i]}
+                draggable={false}
               />
             ))}
           </motion.div>
         </AnimatePresence>
       </DialogContent>
+      <p>PHONE</p>
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleLevelButtonClick(0, e)}
+        size={'sm'}
+      >
+        BACK
+      </Button>
     </Dialog>
   );
 };

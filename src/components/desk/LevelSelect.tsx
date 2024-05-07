@@ -3,23 +3,33 @@ import { Button } from '../ui/button';
 import { useState } from 'react';
 import drawer_face_sprite from '../../assets/level-select/drawer_face_sprite.png';
 import { motion } from 'framer-motion';
+import { Screen } from '@/util';
+import filing_cabinet_close from '../../assets/sounds/filing_cabinet_close.mp3';
 
 interface LevelSelectProps {
-  handleLevelButtonClick: (
+  handleScreenButtonClick: (screen: Screen, event: React.MouseEvent) => void;
+  handleLevel: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
 
-export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
+export function LevelSelect({
+  handleScreenButtonClick,
+  handleLevel
+}: LevelSelectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
 
-  const menuItemOffsets = ['0%', '-85%', '-85%'];
+  const menuItemOffsets = ['-5%', '-87%', '-87%', '-87%'];
+
+  function play_sound() {
+    new Audio(filing_cabinet_close).play();
+  }
 
   return (
     <motion.div
-      className="absolute w-[100%] h-[100%]"
+      className="absolute w-[100%] h-[100%] select-none"
       key="modal"
       initial={{ y: '-100%' }}
       animate={{ y: '0%' }}
@@ -40,8 +50,8 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
                 isClickedIndex={clickedIndex}
                 setHoveredIndex={setHoveredIndex}
                 setClickedIndex={setClickedIndex}
-                levelIndex={6 + index}
-                handleLevelButtonClick={handleLevelButtonClick}
+                levelIndex={index}
+                handleLevel={handleLevel}
               />
             ))}
           </div>
@@ -50,13 +60,18 @@ export function LevelSelect({ handleLevelButtonClick }: LevelSelectProps) {
           style={{ imageRendering: 'pixelated' }}
           className="flex flex-col w-[52%] align-bottom"
         >
-          <img className="w-[100%] bottom-0" src={drawer_face_sprite} />
-          <Button
-            className="absolute font-[alagard] text-[1.1rem] mt-5 mb-5 bottom-[9%] w-[20%] left-[40%]"
-            onClick={(e) => handleLevelButtonClick(0, e)}
-          >
+          <img
+            className="w-[100%] bottom-0 hover:scale-105 duration-300"
+            src={drawer_face_sprite}
+            onClick={(e: React.MouseEvent<HTMLImageElement>) => {
+              handleScreenButtonClick(Screen.MainMenuScreen, e);
+              play_sound();
+            }}
+            draggable={false}
+          />
+          <p className="absolute font-[alagard] opacity-70 text-[2rem] bottom-[10%] left-[47%] pointer-events-none">
             Back
-          </Button>
+          </p>
         </div>
       </div>
     </motion.div>

@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground hover:bg-primary/90 animated-btn',
+          'bg-primary text-primary-foreground w-2 font-semibold text-[#412f1e] px-[2em] py-[1.25em] bg-[#fffef0] border-[2px] border-[solid] border-[#716151] rounded-[0.75em] [transition:transform_0.15s] [transform-style:preserve-3d] before:absolute before:content-none before:w-full before:h-full before:top-[0] before:left-[0] before:right-[0] before:bottom-[0] before:bg-[#bea271] before:[border-radius:inherit] before:[box-shadow:0_0_0_2px_#716151] before:[transform:translate3d(0,_0.75em,_-1em)] before:[transition:transform_0.15s,_box-shadow_0.15s] hover:bg-[#fff6e9] hover:translate-x-[0] hover:translate-y-[0.25em] hover:text-[rgb(154,_70,_18)] before:[box-shadow:0_0_0_2px_#716151] before:[transform:translate3d(0,_0.5em,_-1em)] active:bg-[#fff5e9] active:translate-x-[0em] active:translate-y-[0.75em] active:text-[rgb(91,_44,_15)] before:[box-shadow:0_0_0_2px_#716151,_0_0_#fffce2] before:[transform:translate3d(0,_0,_-1em)]',
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline:

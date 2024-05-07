@@ -1,17 +1,22 @@
-import { Dialog, DialogContent, DialogFooter, DialogTrigger } from './dialog';
-import noteA from '../../assets/room/main_menu/conspiracy_board/noteA.png';
-import noteAHighlighted from '../../assets/room/main_menu/conspiracy_board/noteA-highlighted.png';
-import noteB from '../../assets/room/main_menu/conspiracy_board/noteB.png';
-import noteBHighlighted from '../../assets/room/main_menu/conspiracy_board/noteB-highlighted.png';
-import noteC from '../../assets/room/main_menu/conspiracy_board/noteC.png';
-import noteCHighlighted from '../../assets/room/main_menu/conspiracy_board/noteC-highlighted.png';
-import noteD from '../../assets/room/main_menu/conspiracy_board/noteD.png';
-import noteDHighlighted from '../../assets/room/main_menu/conspiracy_board/noteD-highlighted.png';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger
+} from '../ui/dialog';
+import noteA from '../../assets/room/main_menu/conspiracy_board/notes/noteA.png';
+import noteAHighlighted from '../../assets/room/main_menu/conspiracy_board/notes/noteA-highlighted.png';
+import noteB from '../../assets/room/main_menu/conspiracy_board/notes/noteB.png';
+import noteBHighlighted from '../../assets/room/main_menu/conspiracy_board/notes/noteB-highlighted.png';
+import noteC from '../../assets/room/main_menu/conspiracy_board/notes/noteC.png';
+import noteCHighlighted from '../../assets/room/main_menu/conspiracy_board/notes/noteC-highlighted.png';
+import noteD from '../../assets/room/main_menu/conspiracy_board/notes/noteD.png';
+import noteDHighlighted from '../../assets/room/main_menu/conspiracy_board/notes/noteD-highlighted.png';
 import paper from '../../assets/level-select/case_paper_sprite.png';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ConspiracyNoteData } from './conspiracy_board';
-import { WoodenCard } from './wooden_card';
+import { WoodenCard } from '../ui/wooden_card';
 
 interface ConspiracyNoteProps {
   index: number;
@@ -58,6 +63,7 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
         <img
           src={src}
           className="min-h-[153px] h-[calc(17vw*9/16)] cursor-pointer"
+          draggable={false}
         />
       </DialogTrigger>
       <DialogContent className="pt-[14rem] flex place-items-center justify-center min-w-[600px] min-h-[540px] w-fit h-[calc(60vw*9/16)] bg-transparent border-none">
@@ -71,7 +77,11 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
             }}
           >
             {/* Note background */}
-            <img className=" min-h-[540px] h-[calc(60vw*9/16)]" src={paper} />
+            <img
+              className=" min-h-[540px] h-[calc(60vw*9/16)]"
+              src={paper}
+              draggable={false}
+            />
             {/* Note title */}
             <p className="absolute opacity-[70%] text-[2rem] font-[alagard] left-[42%] top-[5%]">
               {`Note ${index + 1}`}
@@ -90,6 +100,7 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
                     <img
                       src={noteData.image}
                       className="w-[15rem] pulse-slow mb-[-5%] pt-[5%]"
+                      draggable={false}
                     />
                   </motion.div>
                 </WoodenCard>

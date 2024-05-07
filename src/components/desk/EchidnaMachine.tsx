@@ -1,12 +1,20 @@
-import * as ciphersExports from '@/ciphers';
-import { CipherType } from '@/Cipher';
+import * as ciphersExports from '@/ciphers/ciphers';
+import { CipherType } from '@/ciphers/Cipher';
 import { useState } from 'react';
+import { Screen } from '@/util';
 
 interface EchidnaMachineProps {
   phrase: string;
+  handleScreenButtonClick: (
+    screen: Screen,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => void;
 }
 
-const EchidnaMachine = ({ phrase }: EchidnaMachineProps) => {
+const EchidnaMachine = ({
+  phrase,
+  handleScreenButtonClick
+}: EchidnaMachineProps) => {
   const [selectedCipher, setSelectedCipher] = useState(
     Object.values(ciphersExports)[0].name.toString()
   );
@@ -114,6 +122,9 @@ const EchidnaMachine = ({ phrase }: EchidnaMachineProps) => {
         <p>{workingPhrase}</p>
         <button onClick={handleResetPhrase}>Reset</button>
       </div>
+      <button
+        onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
+      />
     </>
   );
 };
