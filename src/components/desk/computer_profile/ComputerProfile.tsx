@@ -22,7 +22,7 @@ export function ComputerProfile({
 }: ComputerProps) {
   // TODO: change to check if user is signed in
   // If player is not signed in
-  if (test != 'out') {
+  if (test == 'out') {
     return (
       <div className="flex justify-center items-center">
         <div className="absolute inset-0">
@@ -31,29 +31,29 @@ export function ComputerProfile({
             src={computer_screen_border}
             draggable={false}
           />
-          <div className="absolute inset-0 flex justify-center items-center flex-col">
-            <Button
-              className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
-              onClick={(e) => handleScreenButtonClick(Screen.SignIn, e)}
-              size={'sm'}
-            >
-              SIGN IN
-            </Button>
-            <Button
-              className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
-              onClick={(e) => handleScreenButtonClick(Screen.NewPlayer, e)}
-              size={'sm'}
-            >
-              NEW PLAYER
-            </Button>
-            <Button
-              className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
-              onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
-              size={'sm'}
-            >
-              BACK
-            </Button>
-          </div>
+        </div>
+        <div className="absolute inset-0 flex justify-center items-center flex-col">
+          <Button
+            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
+            onClick={(e) => handleScreenButtonClick(Screen.SignIn, e)}
+            size={'sm'}
+          >
+            SIGN IN
+          </Button>
+          <Button
+            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
+            onClick={(e) => handleScreenButtonClick(Screen.NewPlayer, e)}
+            size={'sm'}
+          >
+            NEW PLAYER
+          </Button>
+          <Button
+            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
+            onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
+            size={'sm'}
+          >
+            BACK
+          </Button>
         </div>
       </div>
     );
