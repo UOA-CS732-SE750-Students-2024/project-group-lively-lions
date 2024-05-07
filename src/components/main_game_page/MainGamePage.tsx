@@ -3,6 +3,7 @@ import table from '../../assets/room/main_menu/table.png';
 import Cabinet from './Cabinet';
 import Phone from './Phone';
 import { Screen } from '@/util';
+import Computer from './Computer';
 
 interface MainGamePageProps {
   handleScreenButtonClick: (
@@ -23,6 +24,9 @@ export default function MainGamePage({
         </div>
         <div className='relative top-[45%] left-[20%]'>
             <Phone/>
+        </div>
+        <div className='relative top-[25%] left-[82%]'>
+          <Computer handleScreenButtonClick={handleScreenButtonClick}/>
         </div>
         </div>
     );
