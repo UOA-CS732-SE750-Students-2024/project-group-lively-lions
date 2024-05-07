@@ -78,7 +78,7 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
           >
             {/* Note background */}
             <img
-              className=" min-h-[540px] h-[calc(60vw*9/16)]"
+              className="min-h-[540px] h-[calc(60vw*9/16)]"
               src={paper}
               draggable={false}
             />
