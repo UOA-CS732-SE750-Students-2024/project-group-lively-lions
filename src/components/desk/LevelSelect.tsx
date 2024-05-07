@@ -64,7 +64,7 @@ export function LevelSelect({
             className="w-[100%] bottom-0 hover:scale-105 duration-300"
             src={drawer_face_sprite}
             onClick={(e: React.MouseEvent<HTMLImageElement>) => {
-              handleScreenButtonClick(Screen.MainMenuScreen, e);
+              handleScreenButtonClick(Screen.MainGamePage, e);
               play_sound();
             }}
             draggable={false}
