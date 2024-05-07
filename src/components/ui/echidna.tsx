@@ -32,6 +32,8 @@ interface EchidnaProps {
 export function Echidna({
   solve_delay_ms,
   phrase,
+  solution,
+  onSolved,
   availableCiphers,
 }: EchidnaProps){
 
@@ -97,6 +99,11 @@ export function Echidna({
         const decodedPhrase = newCipher.decode({ phrase: phrase });
         setWorkingPhrase(decodedPhrase);
         console.log(decodedPhrase);
+      }
+      // Check for solution found
+      if(workingPhrase === solution){
+        onSolved();
+        console.log('solution found.')
       }
       // Animation logic
       setIsSolveLeverDown(false);
