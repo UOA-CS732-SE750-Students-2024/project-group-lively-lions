@@ -18,84 +18,151 @@ import {
   import { AnimatePresence, motion } from 'framer-motion';
   import EchidnaButton from './echidna_button';
   import EchidnaSolveLever from './echidna_solve_lever';
+  import * as ciphersExports from '@/ciphers';
+  import { CipherType } from '@/Cipher';
 
 interface EchidnaProps {
-  base_width_percent: number;
-  available_ciphers: string[];
+  solve_delay_ms: number;
+  phrase: string;
+  solution: string;
+  onSolved: () => void;
+  availableCiphers: (typeof ciphersExports.Caesar | typeof ciphersExports.Vigenere | typeof ciphersExports.Polybius | typeof ciphersExports.Morse | typeof ciphersExports.Binary | typeof ciphersExports.Emoji)[]
 }
 
 export function Echidna({
-  base_width_percent,
-  available_ciphers
+  solve_delay_ms,
+  phrase,
+  availableCiphers,
 }: EchidnaProps){
 
-  const [selectedCipher, setSelectedCipher] = useState<number>(0);
+  const [selectedCipher, setSelectedCipher] = useState<string>(availableCiphers[0].name.toString());
   const [cipherSelectUp, setCipherSelectUp] = useState<boolean>(true);
-  const [animatingOut, setAnimatingOut] = useState<boolean>(false);
+  const [cipherAnimatingOut, setCipherAnimatingOut] = useState<boolean>(false);
+  const [isSolveLeverDown, setIsSolveLeverDown] = useState<boolean>(false);
+  const [workingPhrase, setWorkingPhrase] = useState<string>(phrase);
+  const [shift, setShift] = useState<number>(1);
+  const [keyword, setKeyword] = useState('');
 
+  /** Cipher-select button function
+   * @param {boolean} up Used for animating the cipher-select rotor "spin" direction.
+   */
   const handleCipherChange = (up: boolean) => {
-    setAnimatingOut(true);
+    setCipherAnimatingOut(true);
     setCipherSelectUp(up);
     setTimeout(() => {
-    setSelectedCipher(up ? 
-      (selectedCipher + 1) % available_ciphers.length : 
-      ((selectedCipher - 1) + available_ciphers.length) % available_ciphers.length);
-      setAnimatingOut(false);
+      // Find position of current cipher type in ciphers list
+      const currentIndex = availableCiphers.findIndex(
+        (cipher) => cipher.name.toString() === selectedCipher
+      );
+      // Set the new cipher type
+      let nextIndex;
+      if (up) {
+        nextIndex =
+          (currentIndex - 1 + availableCiphers.length) % availableCiphers.length;
+      } else {
+        nextIndex = (currentIndex + 1) % availableCiphers.length;
+      }
+      setSelectedCipher(availableCiphers[nextIndex].name.toString());
+      setCipherAnimatingOut(false);
     }, 250);
   };
 
-  function handleSolve(){
+  /** Called when solve lever is clicked */
+  const handleSolve = () =>{
+    setIsSolveLeverDown(true);
+    setTimeout(() => {
+      // (Timeout called in sync with the lever coming back up)
+      // Decipher logic
+      const cipherValues = availableCiphers;
+      const index = cipherValues.findIndex(
+        (cipher) => cipher.name.toString() === selectedCipher
+      );
+      const cipher = cipherValues[index]
+      const newCipher = new cipher();
+      if (newCipher.type === CipherType.Caesar) {
+        const decodedPhrase = newCipher.decode({
+          caesarkey: shift,
+          phrase: phrase
+        });
+        setWorkingPhrase(decodedPhrase);
+        console.log(decodedPhrase);
+      } else if (newCipher.type === CipherType.Keyword) {
+        const decodedPhrase = newCipher.decode({
+          keyword: keyword,
+          phrase: phrase
+        });
+        setWorkingPhrase(decodedPhrase);
+        console.log(decodedPhrase);
+      } else if (newCipher.type === CipherType.Substitution) {
+        const decodedPhrase = newCipher.decode({ phrase: phrase });
+        setWorkingPhrase(decodedPhrase);
+        console.log(decodedPhrase);
+      }
+      // Animation logic
+      setIsSolveLeverDown(false);
+    }, solve_delay_ms);
+  }
 
+  const handleResetWorkingCipher = () => {
+    setWorkingPhrase(phrase);
   }
 
   return (
     /* Centers component with some top padding */
-    <div className='flex flex-col items-center w[100%] pt-[5%]'>
-      {/* The wood, bakelite and aluminum base of the mighty "Echidna I" cipher machine */}
-      <img src={EchidnaBase} alt="Echidna Base" className={`absolute w-[${base_width_percent}%]`}/>
-      {/* Masks the text outside the bounds of the cipher-select rotor display */}
-      <div className='absolute top-[49%] left-[37%] h-[5%] w-[14%] pl-[1%] pt-[0.5%] overflow-hidden'>
-        {/* Cipher-select display, populated with available cipher options for current puzzle */}
-        <AnimatePresence initial={false} mode='wait'>
-          <motion.p
-          key={available_ciphers[selectedCipher]}
-          className={"font-[alagard] text-[1.2rem] leading-[1.2rem]"}
-          initial={{ y: cipherSelectUp ? '-1.4rem' : '1.4rem' }}
-          animate={{ y: animatingOut ? cipherSelectUp ? '1.4rem' : '-1.5rem' : 0 }}
-          transition={{ type: 'spring', duration: 0.15 }}
+      <div className={`absolute w-[100%] pt-[5%]`}>
+        {/* The wood, bakelite and aluminum base of the mighty "Echidna I" cipher machine */}
+        <img src={EchidnaBase} alt="Echidna Base" className='w-[100%]'/>
+        {/* Masks the text outside the bounds of the cipher-select rotor display */}
+        <div className='absolute top-[50%] left-[17.5%] h-[5.4%] w-[34.5%] px-[1.5%] py-[1%] overflow-hidden'>
+          {/* Cipher-select display, populated with available cipher options for current puzzle */}
+          <AnimatePresence initial={false} mode='wait'>
+            <motion.p
+            key={selectedCipher}
+            className={"font-[alagard] text-[1.2rem] leading-[1.2rem]"}
+            initial={{ y: cipherSelectUp ? '-1.4rem' : '1.4rem' }}
+            animate={{ y: cipherAnimatingOut ? cipherSelectUp ? '1.4rem' : '-1.5rem' : 0 }}
+            transition={{ type: 'spring', duration: 0.15 }}
+            >
+            {selectedCipher}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+        {/* Cipher-select buttons */}
+        {/* UP */}
+        <div className='absolute w-[9.5%] top-[47%] left-[57%] '>
+          <EchidnaButton capImage={EchidnaCipherButtonCapUp} 
+          onClick={() => {handleCipherChange(true)}} />
+        </div>
+        {/* DOWN */}
+        <div className='absolute w-[9.5%] top-[52%] left-[57%] '>
+          <EchidnaButton capImage={EchidnaCipherButtonCapDown} 
+          onClick={() => {handleCipherChange(false)}} />
+        </div>
+        {/* Solve lever */}
+        <div className='absolute w-[22%] top-[33%] left-[70%]'>
+          <EchidnaSolveLever delay={solve_delay_ms} onClick={handleSolve}/>
+        </div>
+        {/* Paper feed */}
+        <div className='absolute w-[50%] h-[20.4%] top-[6.5%] left-[15.5%] pt-[1%] overflow-hidden'>
+          <motion.div
+          className='absolute w-[100%]'
+          key='paper_div'
+          animate={{ y: isSolveLeverDown ? 75 : 0 }}
+          transition={{ type: 'spring', stiffness: 1000, damping: 80 }}
           >
-          {available_ciphers[selectedCipher]}
+            <img className='absolute w-[100%] top-[9%]' src={EchidnaPaper} />
+            <p className='absolute pt-[20%] left-[10%]'>{phrase}</p>
+          </motion.div>
+          <img className='absolute w-[100%] opacity-[30%] h-[8%] top-[92%]' src={EchidnaPaperShadow}/>
+        </div>
+        {/* Display */}
+        <div className='absolute w-[50%] h-[9%] top-[33.5%] left-[15.5%] px-[1%] py-[0.5%]'>
+          <motion.p className='absolute text-[1rem] text-[#C1E7EB] font-[alagard] leading-tight'>
+            {workingPhrase}
           </motion.p>
-        </AnimatePresence>
+        </div>
       </div>
-      {/* Cipher-select buttons */}
-      {/* UP */}
-      <div className='absolute w-[4%] top-[46.5%] left-[52.5%] '>
-        <EchidnaButton capImage={EchidnaCipherButtonCapUp} 
-        onClick={() => {handleCipherChange(true)}} />
-      </div>
-      {/* DOWN */}
-      <div className='absolute w-[4%] top-[51.5%] left-[52.5%] '>
-        <EchidnaButton capImage={EchidnaCipherButtonCapDown} 
-        onClick={() => {handleCipherChange(false)}} />
-      </div>
-      {/* Solve lever */}
-      <div className='absolute w-[8.8%] top-[34%] left-[58%]'>
-        <EchidnaSolveLever delay={500} onClick={handleSolve}/>
-      </div>
-      {/* Display */}
       
-      {/* Paper feed */}
-      <div className='absolute w-[19.7%] h-[20.4%] top-[8.6%] left-[36.35%] overflow-hidden'>
-        <motion.div
-        >
-          <img
-          className='absolute w-[100%] top-[9%]' 
-          src={EchidnaPaper} />
-          <p className='absolute top-[50%] left-[10%]'>I am a cipher.</p>
-        </motion.div>
-      </div>
-    </div>  
   );
 }
   

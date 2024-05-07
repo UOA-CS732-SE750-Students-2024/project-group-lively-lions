@@ -14,7 +14,7 @@ const EchidnaSolveLever: React.FC<EchidnaSolveLeverProps> = ({delay, onClick}) =
   function pushLever(){
     if (!isPressed) {
       setPressed(true);
-      onClick;
+      onClick();
       setTimeout(() => {
         setPressed(false);
       }, delay);
@@ -26,14 +26,12 @@ const EchidnaSolveLever: React.FC<EchidnaSolveLeverProps> = ({delay, onClick}) =
       onClick={pushLever}
     >
       <motion.img
-      key='modal'
       className='absolute w-[100%]'
       src={EchidnaSolveLeverStem}
       animate={{ y: isPressed ? 28 : 0 }}
       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
       <motion.img
-      key='modal'
       className='absolute w-[100%] cursor-pointer'
       src={EchidnaSolveLeverHandle}
       animate={{ y: isPressed ? 44 : 0 }}

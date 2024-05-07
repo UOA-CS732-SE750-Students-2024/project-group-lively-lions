@@ -27,8 +27,7 @@ const EchidnaButton: React.FC<EchidnaCipherButtonProps> = ({capImage, onClick}) 
       alt="button base" 
       onDragStart={(e) => { e.preventDefault(); return false; }}
       />
-      <motion.img 
-      key='modal'
+      <motion.img
       src={capImage} 
       alt="button cap"
       animate={isPressed ? 'pressed' : 'notPressed'}
