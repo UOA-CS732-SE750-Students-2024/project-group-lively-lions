@@ -42,7 +42,7 @@ export function Echidna({
   const [cipherAnimatingOut, setCipherAnimatingOut] = useState<boolean>(false);
   const [isSolveLeverDown, setIsSolveLeverDown] = useState<boolean>(false);
   const [workingPhrase, setWorkingPhrase] = useState<string>(phrase);
-  const [shift, setShift] = useState<number>(0);
+  const [shift, setShift] = useState<number>(-1);
   const [keyword, setKeyword] = useState('');
 
   /** Cipher-select button function
@@ -87,6 +87,7 @@ export function Echidna({
           phrase: phrase
         });
         setWorkingPhrase(decodedPhrase);
+        decodedPhrase === solution ? handleSolutionFound() : handleSolutionNotFound();
         console.log(decodedPhrase);
       } else if (newCipher.type === CipherType.Keyword) {
         const decodedPhrase = newCipher.decode({
@@ -94,23 +95,25 @@ export function Echidna({
           phrase: phrase
         });
         setWorkingPhrase(decodedPhrase);
+        decodedPhrase === solution ? handleSolutionFound() : handleSolutionNotFound();
         console.log(decodedPhrase);
       } else if (newCipher.type === CipherType.Substitution) {
         const decodedPhrase = newCipher.decode({ phrase: phrase });
         setWorkingPhrase(decodedPhrase);
+        decodedPhrase === solution ? handleSolutionFound() : handleSolutionNotFound();
         console.log(decodedPhrase);
-      }
-      // Check for solution found
-      if(workingPhrase === solution){
-        // Solved animation
-        onSolved();
-        console.log('solution found.')
-      } else{
-        // Unsolved animation
       }
       // Animation logic
       setIsSolveLeverDown(false);
     }, solve_delay_ms);
+  }
+
+  function handleSolutionFound(){
+    console.log('Solution found.');
+  }
+
+  function handleSolutionNotFound(){
+    console.log('Solution not found.');
   }
 
   const handleResetWorkingCipher = () => {
