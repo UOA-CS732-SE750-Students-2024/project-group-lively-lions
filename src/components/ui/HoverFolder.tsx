@@ -4,7 +4,7 @@ import stamp_area_sprite from '../../assets/level-select/stamp_area_sprite.png';
 import solved_stamp_sprite from '../../assets/level-select/solved_stamp_sprite.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
-import { Levels } from '@/util';
+import { Levels, Story } from '@/util';
 
 interface HoverFolderProps {
   marginTop: string;
@@ -18,6 +18,7 @@ interface HoverFolderProps {
     level: Levels,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  story: Story;
 }
 
 export function HoverFolder({

@@ -1,28 +1,35 @@
 import * as ciphersExports from '@/ciphers/ciphers';
 import { CipherType } from '@/ciphers/Cipher';
-import { useState } from 'react';
-import { Screen } from '@/util';
+import { memo, useState } from 'react';
+import { Puzzle, Screen, Story } from '@/util';
+import { encode } from 'punycode';
 
 interface EchidnaMachineProps {
   phrase: string;
   handleScreenButtonClick: (
+    // eslint-disable-next-line no-unused-vars
     screen: Screen,
+    // eslint-disable-next-line no-unused-vars
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  puzzle: Puzzle;
 }
 
 const EchidnaMachine = ({
-  phrase,
-  handleScreenButtonClick
+  handleScreenButtonClick,
+  phrase
 }: EchidnaMachineProps) => {
   const [selectedCipher, setSelectedCipher] = useState(
     Object.values(ciphersExports)[0].name.toString()
   );
+
   const [shift, setShift] = useState<number>(0);
+
   const [keyword, setKeyword] = useState('');
   const [workingPhrase, setWorkingPhrase] = useState(phrase);
 
   const handleDecipher = () => {
+    console.log(shift);
     const cipherValues = Object.values(ciphersExports);
     const index = cipherValues.findIndex(
       (cipher) => cipher.name.toString() === selectedCipher
@@ -31,7 +38,7 @@ const EchidnaMachine = ({
     const newCipher = new cipher();
     if (newCipher.type === CipherType.Caesar) {
       const decodedPhrase = newCipher.decode({
-        caesarkey: shift,
+        caesarkey: -shift,
         phrase: phrase
       });
       setWorkingPhrase(decodedPhrase);
@@ -66,6 +73,7 @@ const EchidnaMachine = ({
   const handleResetPhrase = () => {
     setWorkingPhrase(phrase);
   };
+
   return (
     <>
       <p> Cipher Phrase </p>

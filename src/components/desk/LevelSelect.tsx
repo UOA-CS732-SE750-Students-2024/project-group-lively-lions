@@ -3,22 +3,28 @@ import { Button } from '../ui/button';
 import { useState } from 'react';
 import drawer_face_sprite from '../../assets/level-select/drawer_face_sprite.png';
 import { motion } from 'framer-motion';
-import { Screen } from '@/util';
+import { Screen, Story } from '@/util';
 
 interface LevelSelectProps {
   handleScreenButtonClick: (
+    // eslint-disable-next-line no-unused-vars
     screen: Screen,
+    // eslint-disable-next-line no-unused-vars
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
   handleLevel: (
+    // eslint-disable-next-line no-unused-vars
     level: number,
+    // eslint-disable-next-line no-unused-vars
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  story: Story;
 }
 
 export function LevelSelect({
   handleScreenButtonClick,
-  handleLevel
+  handleLevel,
+  story
 }: LevelSelectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
@@ -50,6 +56,7 @@ export function LevelSelect({
                 setClickedIndex={setClickedIndex}
                 levelIndex={index}
                 handleLevel={handleLevel}
+                story={story}
               />
             ))}
           </div>

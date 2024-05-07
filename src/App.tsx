@@ -12,17 +12,24 @@ import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels } from './util';
+import * as story from './lib/story.json';
+import EchidnaMachine from './components/desk/EchidnaMachine';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
-
+  const [currentStory, setCurrentStory] = useState(story.tutorial);
+  const [currentPhrase, setCurrentPhrase] = useState('');
+  const [currentPuzzle, setCurrentPuzzle] = useState(story.tutorial.puzzles[0]);
   const screens = [
     <MainMenuScreen
       key="mainMenu"
       handleScreenButtonClick={handleScreenButtonClick}
       handleLevel={handleLevel}
       level={currentLevel}
+      story={currentStory}
+      puzzle={currentPuzzle}
+      setCurrentPhrase={setCurrentPhrase}
     />,
     <LandingScreen
       key="landing"
@@ -47,25 +54,38 @@ function App() {
       key="levelSelect"
       handleScreenButtonClick={handleScreenButtonClick}
       handleLevel={handleLevel}
+      story={currentStory}
     />,
     <ComputerProfile
       key="computerProfile"
       handleScreenButtonClick={handleScreenButtonClick}
     />,
-    <Phone key="phone" handleScreenButtonClick={handleScreenButtonClick} />,
+    <Phone
+      key="phone"
+      story={currentStory}
+      handleScreenButtonClick={handleScreenButtonClick}
+    />,
     <PuzzlePage
       key="puzzlePage"
+      story={currentStory}
       handleScreenButtonClick={handleScreenButtonClick}
     />,
     <ReferenceBook
       key="referenceBook"
       handleScreenButtonClick={handleScreenButtonClick}
+    />,
+    <EchidnaMachine
+      key="echidnaMachine"
+      phrase={currentPhrase}
+      handleScreenButtonClick={handleScreenButtonClick}
+      puzzle={currentPuzzle}
     />
   ];
 
   function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     setCurrentLevel(level);
+    setCurrentStory(handleLoadStory() ?? story.tutorial);
     setCurrentScreen(Screen.MainMenuScreen);
   }
 
@@ -96,6 +116,22 @@ function App() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
+  }
+
+  function handleLoadStory() {
+    switch (currentLevel) {
+      case Levels.Tutorial:
+        return story.tutorial;
+      case Levels.Easy:
+        return story.easy;
+      case Levels.Medium:
+        return story.medium;
+        break;
+      case Levels.Hard:
+        return story.hard;
+      default:
+        break;
+    }
   }
 
   return (
