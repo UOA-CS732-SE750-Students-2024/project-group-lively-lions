@@ -6,6 +6,13 @@ import { CipherType } from '@/ciphers/Cipher';
 import { Transcript } from '../ui/hint_dialog';
 import HintDialog from '../ui/hint_dialog';
 import ReferenceBookEntryPoint from '../main_game_page/ReferenceBookEntryPoint';
+import paper from '../../assets/room/shared/crumpled_paper.png';
+import pencilHolder from '../../assets/room/shared/pencil_holder.png';
+import milk from '../../assets/room/shared/milk.png';
+import coffee from '../../assets/room/shared/coffee.png';
+import blueYarn from '../../assets/room/shared/blue_yarn.png';
+import purpleYarn from '../../assets/room/shared/purple_yarn.png';
+import conspiracyBoard from '../../assets/room/active_game/conspiracy_board.png';
 
 interface GameScreenProps {
     handleScreenButtonClick: (
@@ -58,14 +65,34 @@ export default function GameScreen({
                 opacity: [0, 0.5, 0.7, 1]
             }}
             exit={{ opacity: 0 }}>
-            {/* Lighting layer */}
-            <div className='absolute w-[100%] h-[100%] top-0 pointer-events-none' style={{ backgroundImage: `url(${lighting})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', imageRendering: 'auto' }} />
-            <div className='absolute w-[30%] scale-[150%] top-[32%] left-[10%]'>
+
+            {/* Interactive Components */}
+            {/* Conspiracy board asset linked to conspiracy board system */}
+            <div className='absolute left-[15%] scale-[120%]'>
+                <img src={conspiracyBoard} alt="conspiracy board" />
+            </div>
+            {/* Phone asset linked to hint system */}
+            <div className='absolute w-[20%] scale-[150%] top-[32%] left-[10%]'>
                 <HintDialog transcript={exampleTranscript} />
             </div>
-            <div className='absolute w-[30%] scale-[250%] top-[81%] left-[21%] rotate-12'>
+            {/* Reference book asset */}
+            <div className='absolute scale-[250%] top-[71%] left-[7%] rotate-12'>
                 <ReferenceBookEntryPoint handleScreenButtonClick={handleScreenButtonClick} />
             </div>
+
+            {/* Non-Interactive filler assets */}
+            <img className='absolute scale-[400%] top-[32%] left-[-1%]' src={pencilHolder} />
+            <img className='absolute scale-[150%] top-[48%] left-[-2%]' src={paper} />
+            <img className='absolute scale-[160%] top-[51%] left-[6%]' src={paper} />
+            <img className='absolute scale-[380%] top-[34%] left-[31%]' src={milk} />
+            <img className='absolute scale-[200%] top-[40%] left-[65%]' src={blueYarn} />
+            <img className='absolute scale-[200%] top-[44%] left-[72%]' src={purpleYarn} />
+            <img className='absolute scale-[270%] top-[38%] left-[83%]' src={coffee} />
+            <img className='absolute scale-[450%] top-[31%] left-[95%]' src={pencilHolder} />
+
+            {/* Lighting layer */}
+            <div className='absolute w-[100%] h-[100%] top-0 pointer-events-none' style={{ backgroundImage: `url(${lighting})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', imageRendering: 'auto' }} />
+
         </motion.div>
     )
 }
