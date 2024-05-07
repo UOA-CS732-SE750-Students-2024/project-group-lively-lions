@@ -9,20 +9,16 @@ The user can also press the back button to go back to the main menu.
 */
 
 interface ComputerProps {
-  test: string;
   handleScreenButtonClick: (
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
 
-export function ComputerProfile({
-  test,
-  handleScreenButtonClick
-}: ComputerProps) {
+export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
   // TODO: change to check if user is signed in
   // If player is not signed in
-  if (test == 'out') {
+  if (computer_screen_border == 'a') {
     return (
       <div className="flex justify-center items-center">
         <div className="absolute inset-0">
