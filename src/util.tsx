@@ -8,7 +8,8 @@ export enum Screen {
   ComputerProfile,
   Phone,
   PuzzlePage,
-  ReferenceBook
+  ReferenceBook,
+  MainGamePage,
 }
 
 export enum Levels {

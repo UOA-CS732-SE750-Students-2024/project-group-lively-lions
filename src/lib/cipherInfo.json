@@ -1,0 +1,29 @@
+{
+  "cipherList": [
+    {
+      "name": "Caesar Cipher",
+      "encoding": "The simple Caesar cipher takes each character in the phrase and shifts it caesarkey amount of times along in the alphabet. With a caesarkey value of 1, the phrase 'hello' becomes 'ifmmp' as h -> i, e -> f, l -> m, o -> p etc.",
+      "decoding": "The Caesar Cipher is reversible. You can give a negative number and have the shifted phrase move back. e.g. With a caesarkey value of -1, the phrase 'ifmmp' becomes 'hello'."
+    },
+    {
+      "name": "Vigenere Cipher",
+      "encoding": "The Vigenere cipher is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword. It employs a form of polyalphabetic substitution, which means it uses multiple substitution alphabets to encrypt the text.\nGiven a keyword of 'key' and a phrase of 'hello', the phrase is encoded by shifting each character in the phrase by a number of positions equal to the corresponding character in the keyword. For example, 'h' in 'hello' is shifted by 'k' in 'key', 'e' by 'e', 'l' by 'y', and so on. When the keyword is shorter than the phrase, the keyword is repeated.",
+      "decoding": "Vigenere Decoding"
+    },
+    {
+      "name": "Cipher 3",
+      "encoding": "en3",
+      "decoding": "de3"
+    },
+    {
+      "name": "Cipher 4",
+      "encoding": "en4",
+      "decoding": "de4"
+    },
+    {
+      "name": "Cipher 5",
+      "encoding": "en5",
+      "decoding": "de5"
+    }
+  ]
+}

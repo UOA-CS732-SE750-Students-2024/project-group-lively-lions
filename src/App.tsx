@@ -2,7 +2,6 @@ import { useState } from 'react';
 import MainMenuScreen from './components/levels/MainMenuScreen';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/desk/LevelSelect';
-import ConspiracyBoard from './components/desk/conspiracy_board';
 import { Phone } from './components/desk/Phone';
 import { PuzzlePage } from './components/desk/PuzzlePage';
 import { ReferenceBook } from './components/desk/ReferenceBook';
@@ -12,6 +11,7 @@ import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels } from './util';
+import MainGamePage from './components/main_game_page/MainGamePage';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
@@ -60,7 +60,10 @@ function App() {
     <ReferenceBook
       key="referenceBook"
       handleScreenButtonClick={handleScreenButtonClick}
-    />
+    />,
+    <MainGamePage
+      key="mainGamePage"
+      handleScreenButtonClick={handleScreenButtonClick} />
   ];
 
   function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
@@ -71,7 +74,7 @@ function App() {
 
   function handleScreenButtonClick(
     screen: Screen,
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLElement, MouseEvent>
   ) {
     e.preventDefault();
     setCurrentScreen(screen);
