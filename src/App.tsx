@@ -6,7 +6,7 @@ import ConspiracyBoard from './components/desk/conspiracy_board';
 import { Phone } from './components/desk/Phone';
 import { PuzzlePage } from './components/desk/PuzzlePage';
 import { ReferenceBook } from './components/desk/ReferenceBook';
-import { ComputerProfile } from './components/desk/ComputerProfile';
+import { ComputerProfile } from './components/desk/computer_profile/ComputerProfile';
 import { NewPlayer } from './components/desk/computer_profile/NewPlayer';
 import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
@@ -64,7 +64,8 @@ function App() {
     />,
     <MainGamePage
       key="mainGamePage"
-      handleScreenButtonClick={handleScreenButtonClick} />
+      handleScreenButtonClick={handleScreenButtonClick}
+    />
   ];
 
   function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
