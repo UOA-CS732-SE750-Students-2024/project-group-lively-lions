@@ -1,7 +1,8 @@
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { TextField } from '../ui/text_field';
-import { caesar } from '@/ciphers';
+import { Caesar } from '@/ciphers/ciphers';
+import { Screen } from '@/util';
 
 /* 
 This is the component for the Tutorial Page. It allows the user to play the tutorial.
@@ -14,15 +15,17 @@ interface TutorialProps {
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 
-  handleLevelButtonClick: (
+  handleScreenButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
 
+const caesar = new Caesar();
+
 export function Tutorial({
   handleCheckAnswer,
-  handleLevelButtonClick
+  handleScreenButtonClick
 }: TutorialProps) {
   const phrase = 'Surprise! Happy Birthday Detective Purrlock Holmes!';
   const caesarkey = 3;
@@ -60,7 +63,7 @@ export function Tutorial({
       </Button>
       <Button
         className="font-[alagard] text-[1rem] mt-5 mb-5 bottom-0"
-        onClick={(e) => handleLevelButtonClick(0, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
       >
         Back
       </Button>

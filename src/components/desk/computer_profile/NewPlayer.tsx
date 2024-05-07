@@ -1,6 +1,7 @@
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { useState } from 'react';
-import { TextField } from '../ui/text_field';
+import { TextField } from '../../ui/text_field';
+import { Screen } from '@/util';
 
 /* 
 This is the component for the new player menu. It allows the creation of a new player profile.
@@ -9,17 +10,15 @@ It also has a confirm button, which does nothing yet, and a back button to the l
 */
 
 interface NewPlayerProps {
-  handleLevelButtonClick: (
+  handleScreenButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
 
-const SERVER_MONGODB_URI = 'http://localhost:3000'
+const SERVER_MONGODB_URI = 'http://localhost:3000';
 
-export function NewPlayer({
-  handleLevelButtonClick
-}: NewPlayerProps) {
+export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -28,9 +27,9 @@ export function NewPlayer({
       const response = await fetch(SERVER_MONGODB_URI + '/player', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password })
       });
 
       if (response.ok) {
@@ -77,7 +76,7 @@ export function NewPlayer({
       </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(0, e)}
+        onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
         size={'sm'}
       >
         BACK

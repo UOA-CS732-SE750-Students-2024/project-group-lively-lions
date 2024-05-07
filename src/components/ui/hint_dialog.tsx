@@ -38,11 +38,12 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
             <img
               src={purrlock}
               className="w-[15rem] pulse-slow mb-[-5%] pt-[5%]"
+              draggable={false}
             />
           </motion.div>
         </WoodenCard>
         {/* The dialog */}
-        <div className="max-h-full p-2 overflow-auto scroll-smooth no-scrollbar">
+        <div className="max-h-full p-2 overflow-auto scroll-smooth scrollbar">
           <AnimatePresence>
             {transcript.messages.map((message, index) => (
               <motion.div
@@ -74,6 +75,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
             <img
               src={caperton}
               className="w-[10rem] pulse-fast mb-[-5%] pt-[5%]"
+              draggable={false}
             />
           </motion.div>
         </WoodenCard>

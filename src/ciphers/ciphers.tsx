@@ -1,15 +1,24 @@
-interface CaesarCipherProps {
-  caesarkey: number;
-  phrase: string;
-}
-interface VigenereCipherProps {
-  keyword: string;
-  phrase: string;
-}
+import {
+  CaesarCipherProps,
+  KeywordProps,
+  Cipher,
+  CipherType,
+  SubstitutionProps
+} from './Cipher';
 
-interface MorseCipherProps {
-  phrase: string;
-}
+type CipherProps = CaesarCipherProps | KeywordProps | SubstitutionProps;
+
+const checkType = (props: CipherProps): CipherType => {
+  if ('caesarkey' in props) {
+    return CipherType.Caesar;
+  } else if ('keyword' in props) {
+    return CipherType.Keyword;
+  } else if ('phrase' in props) {
+    return CipherType.Substitution;
+  } else {
+    throw new Error('Invalid props');
+  }
+};
 
 /**
  * A simple Caesar cipher component.
@@ -40,10 +49,26 @@ const simpleCaesarCipher = ({ caesarkey, phrase }: CaesarCipherProps) => {
     .join('');
 };
 
-export const caesar = {
-  encode: simpleCaesarCipher,
-  decode: simpleCaesarCipher
-};
+export class Caesar implements Cipher {
+  name = 'Caesar Cipher';
+  encode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Caesar) {
+      return simpleCaesarCipher(props as CaesarCipherProps);
+    }
+    throw new Error('Invalid props');
+  };
+
+  decode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Caesar) {
+      return simpleCaesarCipher({
+        caesarkey: -1 * (props as CaesarCipherProps).caesarkey,
+        phrase: (props as CaesarCipherProps).phrase
+      });
+    }
+    throw new Error('Invalid props');
+  };
+  type = CipherType.Caesar;
+}
 
 /**
  * VigenereCipher component for encoding a phrase using the Vigenere cipher.
@@ -51,7 +76,7 @@ export const caesar = {
  * @param phrase - The phrase to be encoded.
  * @returns The encoded phrase as a string.
  */
-const vigenereCipher = ({ keyword, phrase }: VigenereCipherProps) => {
+const vigenereCipher = ({ keyword, phrase }: KeywordProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const keyLength = keyword.length;
   let keyIndex = 0;
@@ -86,7 +111,7 @@ const vigenereCipher = ({ keyword, phrase }: VigenereCipherProps) => {
  * @param phrase - The phrase to be decoded.
  * @returns The decoded phrase as a string.
  */
-const vigenereDecipher = ({ keyword, phrase }: VigenereCipherProps) => {
+const vigenereDecipher = ({ keyword, phrase }: KeywordProps) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const keyLength = keyword.length;
   let keyIndex = 0;
@@ -115,10 +140,23 @@ const vigenereDecipher = ({ keyword, phrase }: VigenereCipherProps) => {
     .join('');
 };
 
-export const vigenere = {
-  encode: vigenereCipher,
-  decode: vigenereDecipher
-};
+export class Vigenere implements Cipher {
+  name = 'Vigenere Cipher';
+  encode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Keyword) {
+      return vigenereCipher(props as KeywordProps);
+    }
+    throw new Error('Invalid props');
+  };
+
+  decode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Keyword) {
+      return vigenereDecipher(props as KeywordProps);
+    }
+    throw new Error('Invalid props');
+  };
+  type = CipherType.Keyword;
+}
 
 /**
  * Encodes a given string using the Polybius cipher.
@@ -126,7 +164,7 @@ export const vigenere = {
  * @param str - The string to be encoded.
  * @returns The encoded string.
  */
-const encodePolybius = ({ phrase }: MorseCipherProps) => {
+const encodePolybius = ({ phrase }: SubstitutionProps) => {
   let row, col;
   let result = '';
 
@@ -160,7 +198,7 @@ const encodePolybius = ({ phrase }: MorseCipherProps) => {
  * @param str - The string to be decoded.
  * @returns The decoded string.
  */
-const decodePolybius = (phrase: string) => {
+const decodePolybius = ({ phrase }: SubstitutionProps) => {
   const polybiusSquare = [
     ['a', 'b', 'c', 'd', 'e'],
     ['f', 'g', 'h', 'i/j', 'k'],
@@ -182,10 +220,23 @@ const decodePolybius = (phrase: string) => {
   return encoded;
 };
 
-export const polybius = {
-  encode: encodePolybius,
-  decode: decodePolybius
-};
+export class Polybius implements Cipher {
+  name = 'Polybius Cipher';
+  encode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Substitution) {
+      return encodePolybius(props as SubstitutionProps);
+    }
+    throw new Error('Invalid props');
+  };
+  decode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Substitution) {
+      return decodePolybius(props as SubstitutionProps); // Fix: Pass the 'phrase' property of 'props' to 'decodePolybius'
+    }
+    throw new Error('Invalid props');
+  };
+  type = CipherType.Substitution;
+  class = Polybius;
+}
 
 /**
  * MorseCodeCipher encodes a given phrase into Morse code.
@@ -193,7 +244,7 @@ export const polybius = {
  * @param phrase - The phrase to be encoded into Morse code.
  * @returns The encoded phrase in Morse code.
  */
-export const encodeToMorse = ({ phrase }: MorseCipherProps) => {
+const encodeToMorse = ({ phrase }: SubstitutionProps) => {
   const morseCodeMap: { [key: string]: string } = {
     a: '.-',
     b: '-...',
@@ -238,7 +289,7 @@ export const encodeToMorse = ({ phrase }: MorseCipherProps) => {
  * @param morse - The Morse code string to convert.
  * @returns The ASCII representation of the Morse code string.
  */
-export const decodeMorseToAscii = ({ phrase }: MorseCipherProps) => {
+const decodeMorseToAscii = ({ phrase }: SubstitutionProps) => {
   const morseToAsciiMap: { [key: string]: string } = {
     '.-': 'a',
     '-...': 'b',
@@ -275,18 +326,29 @@ export const decodeMorseToAscii = ({ phrase }: MorseCipherProps) => {
     })
     .join('');
 };
-
-export const morse = {
-  encode: encodeToMorse,
-  decode: decodeMorseToAscii
-};
+export class Morse implements Cipher {
+  name = 'Morse Code';
+  encode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Substitution) {
+      return encodeToMorse(props as SubstitutionProps);
+    }
+    throw new Error('Invalid props');
+  };
+  decode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Substitution) {
+      return decodeMorseToAscii(props as SubstitutionProps); // Fix: Pass the 'phrase' property of 'props' to 'decodePolybius'
+    }
+    throw new Error('Invalid props');
+  };
+  type = CipherType.Substitution;
+}
 /**
  * Converts a string of ASCII characters to binary representation.
  *
  * @param phrase - The input string to convert.
  * @returns The binary representation of the input string.
  */
-const asciiToBinary = ({ phrase }: MorseCipherProps) => {
+const asciiToBinary = ({ phrase }: SubstitutionProps) => {
   return phrase
     .split('')
     .map((char) => {
@@ -306,7 +368,7 @@ const asciiToBinary = ({ phrase }: MorseCipherProps) => {
  * @param binary - The binary string to convert.
  * @returns The ASCII representation of the binary string.
  */
-const binaryToAscii = ({ phrase }: MorseCipherProps) => {
+const binaryToAscii = ({ phrase }: SubstitutionProps) => {
   return phrase
     .split(' ')
     .map((binaryCode) => {
@@ -317,10 +379,23 @@ const binaryToAscii = ({ phrase }: MorseCipherProps) => {
     .join('');
 };
 
-export const binary = {
-  encode: asciiToBinary,
-  decode: binaryToAscii
-};
+export class Binary implements Cipher {
+  name = 'Binary Converter';
+  encode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Substitution) {
+      return asciiToBinary(props as SubstitutionProps);
+    }
+    throw new Error('Invalid props');
+  };
+  decode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Substitution) {
+      return binaryToAscii(props as SubstitutionProps); // Fix: Pass the 'phrase' property of 'props' to 'decodePolybius'
+    }
+    throw new Error('Invalid props');
+  };
+  type = CipherType.Substitution;
+}
+
 /**
  * Component that performs emoji substitution cipher encoding on a given phrase.
  *
@@ -328,7 +403,7 @@ export const binary = {
  * @param {string} props.phrase - The phrase to be encoded.
  * @returns {JSX.Element} The encoded phrase wrapped in a paragraph element.
  */
-const encodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
+const encodeEmojiSubstitutionCipher = ({ phrase }: SubstitutionProps) => {
   const emojiMap: { [key: string]: string } = {
     a: '😀',
     b: '😃',
@@ -380,7 +455,7 @@ const encodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
  * @returns {string} The decoded phrase.
  */
 
-const decodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
+const decodeEmojiSubstitutionCipher = ({ phrase }: SubstitutionProps) => {
   const emojiMap: { [key: string]: string } = {
     '😀': 'a',
     '😃': 'b',
@@ -419,7 +494,19 @@ const decodeEmojiSubstitutionCipher = ({ phrase }: MorseCipherProps) => {
   return decodedPhrase;
 };
 
-export const emoji = {
-  encode: encodeEmojiSubstitutionCipher,
-  decode: decodeEmojiSubstitutionCipher
-};
+export class Emoji implements Cipher {
+  name = 'Emoji Substitution Cipher';
+  encode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Substitution) {
+      return encodeEmojiSubstitutionCipher(props as SubstitutionProps);
+    }
+    throw new Error('Invalid props');
+  };
+  decode = (props: CipherProps) => {
+    if (checkType(props) == CipherType.Substitution) {
+      return decodeEmojiSubstitutionCipher(props as SubstitutionProps);
+    }
+    throw new Error('Invalid props');
+  };
+  type = CipherType.Substitution;
+}
