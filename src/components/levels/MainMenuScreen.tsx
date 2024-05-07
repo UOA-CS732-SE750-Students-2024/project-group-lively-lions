@@ -1,6 +1,7 @@
 import { Levels, Screen } from '@/util';
 import { Button } from '../ui/button';
 import { LevelSelect } from '../desk/LevelSelect';
+import filing_cabinet_open from "../../assets/sounds/filing_cabinet_open.mp3";
 
 interface MainMenuScreenProps {
   handleScreenButtonClick: (
@@ -20,6 +21,10 @@ export default function MainMenuScreen({
   level
 }: MainMenuScreenProps) {
   console.log(level);
+
+  function play_sound() {
+    new Audio(filing_cabinet_open).play();
+  }
   return (
     <div>
       {/*Cabinet Difficulty Selection*/}
@@ -53,7 +58,7 @@ export default function MainMenuScreen({
       </Button> */}
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.LevelSelect, e)}
+        onClick={(e) => {handleScreenButtonClick(Screen.LevelSelect, e); play_sound()}}
         size={'sm'}
       >
         Level Select
