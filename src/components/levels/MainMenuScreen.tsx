@@ -58,7 +58,7 @@ export default function MainMenuScreen({
       </Button> */}
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => {handleScreenButtonClick(Screen.LevelSelect, e); play_sound()}}
+        onClick={(e) => { handleScreenButtonClick(Screen.LevelSelect, e); play_sound() }}
         size={'sm'}
       >
         Level Select
@@ -110,6 +110,14 @@ export default function MainMenuScreen({
         size={'sm'}
       >
         MAIN GAME PAGE
+      </Button>
+
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleScreenButtonClick(Screen.GameScreen, e)}
+        size={'sm'}
+      >
+        GAME SCREEN
       </Button>
     </div>
   );

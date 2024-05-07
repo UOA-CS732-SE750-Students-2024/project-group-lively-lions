@@ -12,9 +12,12 @@ import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels } from './util';
 import MainGamePage from './components/main_game_page/MainGamePage';
+import GameScreen from './components/levels/GameScreen';
+import { s } from 'vite/dist/node/types.d-aGj9QkWt';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
+  const [returnScreen, setReturnScreen] = useState(Screen.MainGamePage);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
 
   const screens = [
@@ -60,16 +63,27 @@ function App() {
     <ReferenceBook
       key="referenceBook"
       handleScreenButtonClick={handleScreenButtonClick}
+      returnToScreen={returnScreen}
     />,
     <MainGamePage
       key="mainGamePage"
-      handleScreenButtonClick={handleScreenButtonClick} />
+      handleScreenButtonClick={handleScreenButtonClick}
+      handleReturnScreen={handleReturnScreen} />,
+    <GameScreen
+      key="gameScreen"
+      handleScreenButtonClick={handleScreenButtonClick}
+      level={currentLevel}
+      handleReturnScreen={handleReturnScreen} />
   ];
 
   function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     setCurrentLevel(level);
     setCurrentScreen(Screen.MainMenuScreen);
+  }
+
+  function handleReturnScreen(screen: Screen) {
+    setReturnScreen(screen);
   }
 
   function handleScreenButtonClick(

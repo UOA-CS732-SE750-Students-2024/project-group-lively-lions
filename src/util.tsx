@@ -10,6 +10,7 @@ export enum Screen {
   PuzzlePage,
   ReferenceBook,
   MainGamePage,
+  GameScreen,
 }
 
 export enum Levels {

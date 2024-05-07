@@ -27,19 +27,25 @@ interface MainGamePageProps {
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  handleReturnScreen: (
+    screen: Screen
+  ) => void;
 }
 
 export default function MainGamePage({
-  handleScreenButtonClick
+  handleScreenButtonClick, handleReturnScreen
 }: MainGamePageProps) {
 
   const [thoughtShowing, setThoughtShowing] = useState(false);
   const [thought, setThought] = useState<string>('');
 
+  handleReturnScreen(Screen.MainGamePage);
+
   function configureThought(text: string) {
     setThought(text);
     setThoughtShowing(true);
   }
+
 
   return (
     <motion.div className='w-[100%] h-[100%]'
