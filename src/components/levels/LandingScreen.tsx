@@ -24,6 +24,7 @@ export default function LandingScreen({
           className="rounded-3xl w-[100%]"
           src={purrlock}
           alt="purrlocklock"
+          draggable={false}
         />
         <Button
           className="font-[alagard] text-[1.2rem] tracking-wide mt-2 w-[100%]"

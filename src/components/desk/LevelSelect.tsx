@@ -4,13 +4,10 @@ import { useState } from 'react';
 import drawer_face_sprite from '../../assets/level-select/drawer_face_sprite.png';
 import { motion } from 'framer-motion';
 import { Screen } from '@/util';
-import filing_cabinet_close from "../../assets/sounds/filing_cabinet_close.mp3";
+import filing_cabinet_close from '../../assets/sounds/filing_cabinet_close.mp3';
 
 interface LevelSelectProps {
-  handleScreenButtonClick: (
-    screen: Screen,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  handleScreenButtonClick: (screen: Screen, event: React.MouseEvent) => void;
   handleLevel: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
@@ -32,7 +29,7 @@ export function LevelSelect({
 
   return (
     <motion.div
-      className="absolute w-[100%] h-[100%]"
+      className="absolute w-[100%] h-[100%] select-none"
       key="modal"
       initial={{ y: '-100%' }}
       animate={{ y: '0%' }}
@@ -63,13 +60,18 @@ export function LevelSelect({
           style={{ imageRendering: 'pixelated' }}
           className="flex flex-col w-[52%] align-bottom"
         >
-          <img className="w-[100%] bottom-0" src={drawer_face_sprite} />
-          <Button
-            className="absolute font-[alagard] text-[1.1rem] mt-5 mb-5 bottom-[9%] w-[20%] left-[40%]"
-            onClick={(e) => {handleScreenButtonClick(Screen.MainGamePage, e); play_sound()}}
-          >
+          <img
+            className="w-[100%] bottom-0 hover:scale-105 duration-300"
+            src={drawer_face_sprite}
+            onClick={(e: React.MouseEvent<HTMLImageElement>) => {
+              handleScreenButtonClick(Screen.MainGamePage, e);
+              play_sound();
+            }}
+            draggable={false}
+          />
+          <p className="absolute font-[alagard] opacity-70 text-[2rem] bottom-[10%] left-[47%] pointer-events-none">
             Back
-          </Button>
+          </p>
         </div>
       </div>
     </motion.div>

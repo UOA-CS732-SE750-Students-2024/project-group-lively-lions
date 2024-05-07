@@ -9,7 +9,7 @@ const WoodenCard = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'rounded-lg border bg-card text-card-foreground shadow-sm card pixelated',
+      'rounded-lg bg-card text-card-foreground shadow-sm card bg-card-background disable-blur bg-contain border-[15px] border-b-[#3e332a] border-x-[#554639] border-t-[#796a59]',
       className
     )}
     {...props}
