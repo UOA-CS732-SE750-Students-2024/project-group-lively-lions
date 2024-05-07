@@ -42,7 +42,7 @@ export function Echidna({
   const [cipherAnimatingOut, setCipherAnimatingOut] = useState<boolean>(false);
   const [isSolveLeverDown, setIsSolveLeverDown] = useState<boolean>(false);
   const [workingPhrase, setWorkingPhrase] = useState<string>(phrase);
-  const [shift, setShift] = useState<number>(1);
+  const [shift, setShift] = useState<number>(0);
   const [keyword, setKeyword] = useState('');
 
   /** Cipher-select button function
@@ -102,8 +102,11 @@ export function Echidna({
       }
       // Check for solution found
       if(workingPhrase === solution){
+        // Solved animation
         onSolved();
         console.log('solution found.')
+      } else{
+        // Unsolved animation
       }
       // Animation logic
       setIsSolveLeverDown(false);
@@ -168,8 +171,9 @@ export function Echidna({
             {workingPhrase}
           </motion.p>
         </div>
+        {/* Shift setting controls */}
+        {/* Keyword setting controls */}
       </div>
-      
   );
 }
   
