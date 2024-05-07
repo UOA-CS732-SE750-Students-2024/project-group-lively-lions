@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { EchidnaCipherButtonBase } from '../../assets/echidna-2'
 
 
 interface EchidnaCipherButtonProps {
   capImage: string;
+  baseImage: string;
   onClick: () => void;
 }
 
-const EchidnaButton: React.FC<EchidnaCipherButtonProps> = ({capImage, onClick}) => {
+const EchidnaButton: React.FC<EchidnaCipherButtonProps> = ({capImage, baseImage, onClick}) => {
   const [isPressed, setPressed] = useState(false);
   const variants = {
-    pressed: { y: 3 },
+    pressed: { y: '10%' },
     notPressed: { y: 0 }
   };
   return (
@@ -23,7 +23,7 @@ const EchidnaButton: React.FC<EchidnaCipherButtonProps> = ({capImage, onClick}) 
     >
       <img 
       className="absolute w-[100%]" 
-      src={EchidnaCipherButtonBase} 
+      src={baseImage} 
       alt="button base" 
       onDragStart={(e) => { e.preventDefault(); return false; }}
       />
