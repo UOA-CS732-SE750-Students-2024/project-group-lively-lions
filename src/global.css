@@ -101,76 +101,49 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  /* Scrollbar css */
+  :root {
+    scrollbar-color: #888 #f1f1f1 !important;
+    scrollbar-width: thin !important;
+  }
+
+  .scrollbar {
+    scrollbar-color: #b5b5b5 #ffffff !important;
+    scrollbar-width: thin !important;
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 }
 
 /* Image rendering */
+.disable-blur {
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: -webkit-optimize-contrast; /* Safari */
+  image-rendering: -o-crisp-edges; /* Opera */
+  image-rendering: pixelated; /* Chrome and Edge */
+}
+
 img {
   image-rendering: -moz-crisp-edges; /* Firefox */
   image-rendering: -webkit-optimize-contrast; /* Safari */
   image-rendering: -o-crisp-edges; /* Opera */
   image-rendering: pixelated; /* Chrome and Edge */
-}
-
-/* Animated button css, tailwind can't do some of the fancy stuff like box shadows so I'm keeing it here*/
-button.animated-btn {
-  font-weight: 600;
-  color: #412f1e;
-  text-transform: uppercase;
-  padding: 1.25em 2em;
-  background: #fffef0;
-  border: 2px solid #716151;
-  border-radius: 0.75em;
-  transition: transform 0.15s;
-  transform-style: preserve-3d;
-}
-button.animated-btn::before {
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #bea271;
-  border-radius: inherit;
-  box-shadow: 0 0 0 2px #716151;
-  transform: translate3d(0, 0.75em, -1em);
-  transition:
-    transform 0.15s,
-    box-shadow 0.15s;
-}
-button.animated-btn:hover {
-  background: #fff6e9;
-  transform: translate(0, 0.25em);
-  color: rgb(154, 70, 18);
-}
-button.animated-btn:hover::before {
-  box-shadow: 0 0 0 2px #716151;
-  transform: translate3d(0, 0.5em, -1em);
-}
-button.animated-btn:active {
-  background: #fff5e9;
-  transform: translate(0em, 0.75em);
-  color: rgb(91, 44, 15);
-}
-button.animated-btn:active::before {
-  box-shadow:
-    0 0 0 2px #716151,
-    0 0 #fffce2;
-  transform: translate3d(0, 0, -1em);
-}
-
-/* Pixelated card */
-.card.pixelated {
-  background: url('./assets/common/card_texture.png');
-  background-size: contain;
-  image-rendering: -moz-crisp-edges; /* Firefox */
-  image-rendering: -webkit-optimize-contrast; /* Safari */
-  image-rendering: -o-crisp-edges; /* Opera */
-  image-rendering: pixelated; /* Chrome and Edge */
-  -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
-  border: 15px outset #716151;
 }
 
 @keyframes pulse {
@@ -194,32 +167,4 @@ button.animated-btn:active::before {
 .pulse-slow {
   animation: pulse 0.5s infinite;
   transition: 0.5s;
-}
-
-/* Scrollbar css */
-:root {
-  scrollbar-color: #888 #f1f1f1 !important;
-  scrollbar-width: thin !important;
-}
-
-.scrollbar {
-  scrollbar-color: #b5b5b5 #ffffff !important;
-  scrollbar-width: thin !important;
-}
-
-::-webkit-scrollbar {
-  width: 7px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 8px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
