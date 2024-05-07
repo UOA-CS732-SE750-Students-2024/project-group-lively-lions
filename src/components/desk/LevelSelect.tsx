@@ -67,6 +67,7 @@ export function LevelSelect({
               handleScreenButtonClick(Screen.MainMenuScreen, e);
               play_sound();
             }}
+            draggable={false}
           />
           <p className="absolute font-[alagard] opacity-70 text-[2rem] bottom-[10%] left-[47%] pointer-events-none">
             Back

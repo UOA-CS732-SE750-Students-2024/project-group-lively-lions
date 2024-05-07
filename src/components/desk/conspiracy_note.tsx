@@ -63,6 +63,7 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
         <img
           src={src}
           className="min-h-[153px] h-[calc(17vw*9/16)] cursor-pointer"
+          draggable={false}
         />
       </DialogTrigger>
       <DialogContent className="pt-[14rem] flex place-items-center justify-center min-w-[600px] min-h-[540px] w-fit h-[calc(60vw*9/16)] bg-transparent border-none">
@@ -76,7 +77,11 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
             }}
           >
             {/* Note background */}
-            <img className=" min-h-[540px] h-[calc(60vw*9/16)]" src={paper} />
+            <img
+              className=" min-h-[540px] h-[calc(60vw*9/16)]"
+              src={paper}
+              draggable={false}
+            />
             {/* Note title */}
             <p className="absolute opacity-[70%] text-[2rem] font-[alagard] left-[42%] top-[5%]">
               {`Note ${index + 1}`}
@@ -95,6 +100,7 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
                     <img
                       src={noteData.image}
                       className="w-[15rem] pulse-slow mb-[-5%] pt-[5%]"
+                      draggable={false}
                     />
                   </motion.div>
                 </WoodenCard>
