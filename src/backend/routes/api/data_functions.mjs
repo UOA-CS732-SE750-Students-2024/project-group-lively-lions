@@ -1,5 +1,5 @@
 // Defines the functions used for MongoDB data editing 
-import Player from "./playerSchema.js"
+import Player from "./playerSchema.mjs"
 
 async function create_new_player(username, password) {
   const new_player = new Player(username, password);
@@ -10,6 +10,10 @@ async function create_new_player(username, password) {
       new_player
   );
 };
+
+async function get_player_info(username, password) {
+
+}
 
 async function delete_player(client, databaseName, collectionName, player_id){
   const db = client.db(databaseName);
@@ -33,8 +37,4 @@ async function update_player(player_id, puzzles_unlocked, puzzles_completed, not
   };
 };
 
-export default {
-  create_new_player,
-  delete_player,
-  update_player
-}
+module.exports(create_new_player, update_player, delete_player);
