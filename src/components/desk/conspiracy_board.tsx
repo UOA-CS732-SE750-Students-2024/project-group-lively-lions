@@ -140,6 +140,7 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
         <img
           className="min-h-[540px] h-[calc(60vw*9/16)] hover:outline outline-white outline-7 cursor-pointer"
           src={board}
+          draggable={false}
         />
       </DialogTrigger>
       <DialogContent className="pt-[14rem] flex place-items-center justify-center min-w-[960px] min-h-[540px] w-[calc(60vw)] h-[calc(60vw*9/16)] bg-transparent border-none">
@@ -156,6 +157,7 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
             <img
               className="min-h-[540px] h-[calc(60vw*9/16)]"
               src={boardBackground}
+              draggable={false}
             />
             {/* Notes */}
             {notes.slice(0, progress).map((note, i) => (
@@ -173,6 +175,7 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
                 key={i}
                 className="absolute top-0 left-0 min-h-[540px] h-[calc(60vw*9/16)] pointer-events-none"
                 src={strings[i]}
+                draggable={false}
               />
             ))}
           </motion.div>
