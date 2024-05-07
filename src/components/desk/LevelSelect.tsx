@@ -1,5 +1,4 @@
 import { HoverFolder } from '../ui/HoverFolder';
-import { Button } from '../ui/button';
 import { useState } from 'react';
 import drawer_face_sprite from '../../assets/level-select/drawer_face_sprite.png';
 import { motion } from 'framer-motion';
@@ -7,7 +6,10 @@ import { Screen, Story } from '@/util';
 import filing_cabinet_close from '../../assets/sounds/filing_cabinet_close.mp3';
 
 interface LevelSelectProps {
-  handleScreenButtonClick: (screen: Screen, event: React.MouseEvent) => void;
+  handleScreenButtonClick: (
+    screen: Screen,
+    event: React.MouseEvent<HTMLElement>
+  ) => void;
   handleLevel: (
     // eslint-disable-next-line no-unused-vars
     level: number,

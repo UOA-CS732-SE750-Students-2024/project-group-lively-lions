@@ -2,7 +2,6 @@ import { useState } from 'react';
 import MainMenuScreen from './components/levels/MainMenuScreen';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/desk/LevelSelect';
-import ConspiracyBoard from './components/desk/conspiracy_board';
 import { Phone } from './components/desk/Phone';
 import { PuzzlePage } from './components/desk/PuzzlePage';
 import { ReferenceBook } from './components/desk/ReferenceBook';
@@ -147,7 +146,7 @@ function App() {
 
   function handleScreenButtonClick(
     screen: Screen,
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLElement, MouseEvent>
   ) {
     e.preventDefault();
     setCurrentScreen(screen);
