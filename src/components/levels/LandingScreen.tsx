@@ -2,16 +2,17 @@ import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import { Button } from '../ui/button';
 import { WoodenCard } from '../ui/wooden_card';
 import { randomTagline } from '@/lib/taglines';
+import { Screen } from '@/util';
 
 interface LandingScreenProps {
-  handleLevelButtonClick: (
-    level: number,
+  handleScreenButtonClick: (
+    screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
 
 export default function LandingScreen({
-  handleLevelButtonClick
+  handleScreenButtonClick
 }: LandingScreenProps) {
   return (
     <div className="flex flex-col place-items-center">
@@ -26,10 +27,10 @@ export default function LandingScreen({
         />
         <Button
           className="font-[alagard] text-[1.2rem] tracking-wide mt-2 w-[100%]"
-          onClick={(e) => handleLevelButtonClick(0, e)}
+          onClick={(e) => handleScreenButtonClick(Screen.MainMenuScreen, e)}
           size={'sm'}
         >
-          MEOW
+          START
         </Button>
       </WoodenCard>
     </div>

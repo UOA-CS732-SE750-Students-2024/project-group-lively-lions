@@ -25,7 +25,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'drawer-bottom': "url('/src/assets/level-select/drawer_bottom_sprite.png')",
+        'drawer-bottom':
+          "url('/src/assets/level-select/drawer_bottom_sprite.png')"
       },
       colors: {
         border: 'hsl(var(--border))',
