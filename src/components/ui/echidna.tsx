@@ -49,7 +49,7 @@ export function Echidna({
   const [cipherAnimatingOut, setCipherAnimatingOut] = useState<boolean>(false);
   const [isSolveLeverDown, setIsSolveLeverDown] = useState<boolean>(false);
   const [workingPhrase, setWorkingPhrase] = useState<string>(phrase);
-  const [shift, setShift] = useState<number>(-1);
+  const [shift, setShift] = useState<number>(0);
   const [keyword, setKeyword] = useState('');
   const [greenLampOn, setGreenLampOn] = useState<boolean>(false);
   const [redLampOn, setRedLampOn] = useState<boolean>(false);
