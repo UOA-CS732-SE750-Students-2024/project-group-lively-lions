@@ -10,7 +10,7 @@ import { Tutorial } from './components/levels/Tutorial';
 import MainGamePage from './components/main_game_page/MainGamePage';
 
 function App() {
-  const [currentLevel, setCurrentLevel] = useState(1);
+  const [currentLevel, setCurrentLevel] = useState(5);
 
   const levels = [
     <MainMenuScreen handleLevelButtonClick={handleLevelButtonClick} />,
