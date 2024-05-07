@@ -11,7 +11,8 @@ export enum Screen {
   Phone,
   PuzzlePage,
   ReferenceBook,
-  EchidnaMachine
+  EchidnaMachine,
+  MainGamePage
 }
 
 export enum Levels {

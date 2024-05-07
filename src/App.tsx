@@ -14,6 +14,8 @@ import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels } from './util';
 import * as story from './lib/story.json';
 import EchidnaMachine from './components/desk/EchidnaMachine';
+import MainGamePage from './components/mainpage/MainGamePage';
+import * as ciphersExports from './ciphers/ciphers';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
@@ -29,7 +31,7 @@ function App() {
       level={currentLevel}
       story={currentStory}
       puzzle={currentPuzzle}
-      setCurrentPhrase={setCurrentPhrase}
+      phrase={currentPhrase}
     />,
     <LandingScreen
       key="landing"
@@ -52,7 +54,12 @@ function App() {
     />,
     <LevelSelect
       key="levelSelect"
-      handleScreenButtonClick={handleScreenButtonClick}
+      handleScreenButtonClick={(screen, e) =>
+        handleScreenButtonClick(
+          screen,
+          e as React.MouseEvent<HTMLButtonElement, MouseEvent>
+        )
+      }
       handleLevel={handleLevel}
       story={currentStory}
     />,
@@ -79,13 +86,62 @@ function App() {
       phrase={currentPhrase}
       handleScreenButtonClick={handleScreenButtonClick}
       puzzle={currentPuzzle}
+    />,
+    <MainGamePage
+      key="mainGamePage"
+      handleScreenButtonClick={handleScreenButtonClick}
     />
   ];
+  function encodePhrase() {
+    const puzzleCipher = currentPuzzle.cipher;
+    const puzzleSolution = currentPuzzle.solution;
+
+    switch (puzzleCipher[0]) {
+      case 'caesar': {
+        const keyshift = Math.floor(Math.random() * 26);
+        return new ciphersExports.Caesar().encode({
+          phrase: puzzleSolution,
+          caesarkey: keyshift
+        });
+      }
+      case 'vigenere': {
+        const keyword = 'KEYWORD'; //tbd
+        return new ciphersExports.Vigenere().encode({
+          phrase: puzzleSolution,
+          keyword: keyword
+        });
+      }
+      case 'morse': {
+        return new ciphersExports.Morse().encode({
+          phrase: puzzleSolution
+        });
+      }
+      case 'binary': {
+        return new ciphersExports.Binary().encode({
+          phrase: puzzleSolution
+        });
+      }
+      case 'emoji': {
+        return new ciphersExports.Emoji().encode({
+          phrase: puzzleSolution
+        });
+      }
+      case 'polybius': {
+        return new ciphersExports.Polybius().encode({
+          phrase: puzzleSolution
+        });
+      }
+
+      default:
+        return '';
+    }
+  }
 
   function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     setCurrentLevel(level);
     setCurrentStory(handleLoadStory() ?? story.tutorial);
+    setCurrentPhrase(encodePhrase());
     setCurrentScreen(Screen.MainMenuScreen);
   }
 
@@ -105,6 +161,9 @@ function App() {
     e.preventDefault();
     if (userPhrase == phrase) {
       alert('Correct!');
+      // Go to next puzzle
+      // Generate next scramble
+      setCurrentPhrase(encodePhrase());
     } else {
       alert('Incorrect, try again!');
     }

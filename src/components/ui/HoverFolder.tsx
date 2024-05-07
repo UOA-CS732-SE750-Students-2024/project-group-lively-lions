@@ -67,7 +67,7 @@ export function HoverFolder({
         >
           {puzzles[index]}
         </p>
-        <img className="w-[100%]" src={folder_sprite} />
+        <img className="w-[100%]" src={folder_sprite} draggable={false} />
         <div className="absolute inset-0" style={{ overflow: 'hidden' }}>
           <AnimatePresence>
             {isClickedIndex === index ? (
@@ -103,13 +103,15 @@ export function HoverFolder({
                   <img
                     className="opacity-[50%] w-[100%] h-[100%] p-[4%]"
                     src={stamp_area_sprite}
+                    draggable={false}
                   />
                   <img
                     className="absolute inset-0 opacity-[75%] w-[100%] h-[100%]"
                     src={solved_stamp_sprite}
+                    draggable={false}
                   />
                 </div>
-                <img src={case_paper_sprite} />
+                <img src={case_paper_sprite} draggable={false} />
               </motion.div>
             ) : (
               // Empty when this folder is not selected
