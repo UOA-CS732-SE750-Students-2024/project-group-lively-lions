@@ -11,6 +11,7 @@ function EchidnaTestComponent(){
                     phrase="Gdkkn vnqkc."
                     solution="Hello world."
                     solve_delay_ms={500}
+                    showAuxControls={true}
                 />
             </div>
         </div>
