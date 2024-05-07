@@ -2,7 +2,6 @@ import phoneBase from '../../assets/room/shared/phone/phone_base_only.png';
 import phoneHandset from '../../assets/room/shared/phone/phone_handset_and_wire.png';
 
 export default function Phone() {
-
     return (
         <div className='h-[100px]' style={{ imageRendering: 'pixelated' }}>
             <img
