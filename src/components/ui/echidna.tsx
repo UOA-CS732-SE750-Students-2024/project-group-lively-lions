@@ -32,6 +32,7 @@ interface EchidnaProps {
   solution: string;
   onSolved: () => void;
   availableCiphers: (typeof ciphersExports.Caesar | typeof ciphersExports.Vigenere | typeof ciphersExports.Polybius | typeof ciphersExports.Morse | typeof ciphersExports.Binary | typeof ciphersExports.Emoji)[]
+  showAuxControls: boolean
 }
 
 export function Echidna({
@@ -40,6 +41,7 @@ export function Echidna({
   solution,
   onSolved,
   availableCiphers,
+  showAuxControls
 }: EchidnaProps){
 
   const [selectedCipher, setSelectedCipher] = useState<string>(availableCiphers[0].name.toString());
@@ -52,6 +54,7 @@ export function Echidna({
   const [greenLampOn, setGreenLampOn] = useState<boolean>(false);
   const [redLampOn, setRedLampOn] = useState<boolean>(false);
   const [displayOn, setDisplayOn] = useState<boolean>(false);
+  const [isAuxControls, setShowAuxControls] = useState<boolean>(showAuxControls)
 
   /** Cipher-select button function
    * @param {boolean} up Used for animating the cipher-select rotor "spin" direction.
@@ -217,7 +220,7 @@ export function Echidna({
             {displayOn ?
             <motion.p 
             key={workingPhrase}
-            className='absolute text-[1.5rem] text-[#C1E7EB] font-[alagard] leading-tight'
+            className='absolute text-[1.1rem] text-[#C1E7EB] font-[alagard] leading-tight'
             initial={{ opacity: 0 }}
             animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
             exit={{ opacity: [1, 0, 1, 0, 1, 0] }}
@@ -240,6 +243,7 @@ export function Echidna({
         <div className='absolute w-[55%] h-[21.2%] top-[60.9%] left-[13%] overflow-hidden'>
           <img src={EchidnaAuxPanel} className='absolute w-[100%] h-[100%]' />
           <AnimatePresence mode='wait'>
+            { isAuxControls ?
             <motion.div
             className='absolute w-[100%] h-[100%]'
             initial={{y: 1000}}
@@ -289,6 +293,8 @@ export function Echidna({
                 </motion.p>
               </div>
             </motion.div>
+            : <></>
+            }
           </AnimatePresence>
         </div>
         {/* Solution lamps */}
