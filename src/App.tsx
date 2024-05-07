@@ -64,7 +64,7 @@ function App() {
     />,
     <MainGamePage
       key="mainGamePage"
-      handleScreenButtonClick={handleScreenButtonClick}/>
+      handleScreenButtonClick={handleScreenButtonClick} />
   ];
 
   function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {

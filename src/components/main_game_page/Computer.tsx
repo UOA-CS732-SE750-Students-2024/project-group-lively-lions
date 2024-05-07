@@ -6,39 +6,43 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface ComputerProps {
     handleScreenButtonClick: (
-     screen: Screen,
-     event: React.MouseEvent<HTMLButtonElement>
-   ) => void;
-   }
+        screen: Screen,
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => void;
+}
 
-export default function({
+export default function ({
     handleScreenButtonClick
-  }: ComputerProps){
+}: ComputerProps) {
 
     const [computerIsOn, setComputerIsOn] = useState(false);
 
     return (
-        <div 
-        style={{imageRendering:'pixelated'}}
-        onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}>
-            <motion.img 
-                    className='scale-[400%]' 
+        <div
+            style={{ imageRendering: 'pixelated' }}>
+            <button
+                onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}>
+                <motion.img
+                    className='scale-[400%]'
                     onMouseEnter={() => setComputerIsOn(true)}
-                    src={computerOff} 
-                    alt="computer"/>
-            <AnimatePresence>
-                {computerIsOn && (
-                    <motion.img 
-                    className={computerIsOn? 'absolute top-[0%] scale-[400%] visible' : 'invisible'}
-                    onMouseLeave={() => setComputerIsOn(false)}
-                    initial={{ opacity: 0 }}
-                    animate={{ 
-                        opacity: [0.5,0.7,1,0.9,1] }}
-                    exit={{ opacity: 0 }}
-                    src={computerScreen} 
-                    alt='computer'/>
+                    src={computerOff}
+                    alt="computer" />
+                <AnimatePresence>
+                    {computerIsOn && (
+                        <motion.img
+                            className={computerIsOn ? 'absolute top-[0%] scale-[400%] visible' : 'invisible'}
+                            onMouseLeave={() => setComputerIsOn(false)}
+                            initial={{ opacity: 0 }}
+                            animate={{
+                                opacity: [0.5, 0.7, 1, 0.9, 1]
+                            }}
+                            exit={{ opacity: 0 }}
+                            src={computerScreen}
+                            alt='computer' />
                     )}
-            </AnimatePresence>
+                </AnimatePresence>
+            </button>
+
         </div>
     )
 }
