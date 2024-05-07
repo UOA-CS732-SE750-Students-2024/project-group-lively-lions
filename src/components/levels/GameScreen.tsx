@@ -67,6 +67,7 @@ export default function GameScreen({
             exit={{ opacity: 0 }}>
 
             {/* Interactive Components */}
+            {/* To do: Link conspiracy board */}
             {/* Conspiracy board asset linked to conspiracy board system */}
             <div className='absolute left-[15%] scale-[120%]'>
                 <img src={conspiracyBoard} alt="conspiracy board" />
@@ -79,6 +80,7 @@ export default function GameScreen({
             <div className='absolute scale-[250%] top-[71%] left-[7%] rotate-12'>
                 <ReferenceBookEntryPoint handleScreenButtonClick={handleScreenButtonClick} />
             </div>
+            {/* To do: add ECHIDNA */}
 
             {/* Non-Interactive filler assets */}
             <img className='absolute scale-[400%] top-[32%] left-[-1%]' src={pencilHolder} />
