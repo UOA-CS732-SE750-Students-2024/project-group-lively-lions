@@ -5,7 +5,7 @@ import lighting from '../../assets/room/active_game/lighting.png';
 import { CipherType } from '@/ciphers/Cipher';
 import { Transcript } from '../ui/hint_dialog';
 import HintDialog from '../ui/hint_dialog';
-import ReferenceBookEntryPoint from '../main_game_page/ReferenceBookEntryPoint';
+import ReferenceBookEntryPoint from '../mainpage/ReferenceBookEntryPoint';
 import paper from '../../assets/room/shared/crumpled_paper.png';
 import pencilHolder from '../../assets/room/shared/pencil_holder.png';
 import milk from '../../assets/room/shared/milk.png';

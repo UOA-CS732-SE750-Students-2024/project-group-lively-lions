@@ -1,7 +1,9 @@
-import { Levels, Screen } from '@/util';
+import { Levels, Puzzle, Screen, Story } from '@/util';
 import { Button } from '../ui/button';
 import { LevelSelect } from '../desk/LevelSelect';
-import filing_cabinet_open from "../../assets/sounds/filing_cabinet_open.mp3";
+import * as ciphersExports from '@/ciphers/ciphers';
+import { useState } from 'react';
+import filing_cabinet_open from '../../assets/sounds/filing_cabinet_open.mp3';
 
 interface MainMenuScreenProps {
   handleScreenButtonClick: (
@@ -13,12 +15,18 @@ interface MainMenuScreenProps {
     event: React.MouseEvent<HTMLButtonElement>
   ) => void; // Added handleLevel property
   level: Levels; // Added level property
+  story: Story;
+  puzzle: Puzzle;
+  phrase: string;
 }
 
 export default function MainMenuScreen({
   handleScreenButtonClick,
   handleLevel,
-  level
+  level,
+  story,
+  puzzle,
+  phrase
 }: MainMenuScreenProps) {
   console.log(level);
 
@@ -27,38 +35,12 @@ export default function MainMenuScreen({
   }
   return (
     <div>
-      {/*Cabinet Difficulty Selection*/}
-      {/* <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevel(Levels.Tutorial, e)}
-        size={'sm'}
-      >
-        TUTORIAL
-      </Button>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevel(Levels.Easy, e)}
-        size={'sm'}
-      >
-        EASY
-      </Button>
-      <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevel(Levels.Medium, e)}
-        size={'sm'}
-      >
-        MEDIUM
-      </Button>
-      <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevel(Levels.Hard, e)}
-        size={'sm'}
-      >
-        HARD
-      </Button> */}
-      <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => { handleScreenButtonClick(Screen.LevelSelect, e); play_sound() }}
+        onClick={(e) => {
+          handleScreenButtonClick(Screen.LevelSelect, e);
+          play_sound();
+        }}
         size={'sm'}
       >
         Level Select
@@ -102,6 +84,13 @@ export default function MainMenuScreen({
         size={'sm'}
       >
         PUZZLE PAGE
+      </Button>
+      <Button
+        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+        onClick={(e) => handleScreenButtonClick(Screen.EchidnaMachine, e)}
+        size={'sm'}
+      >
+        ECHIDNA MACHINE
       </Button>
 
       <Button
