@@ -4,14 +4,14 @@ import {
   DialogFooter,
   DialogTrigger
 } from '../ui/dialog';
-import noteA from '../../assets/room/main_menu/conspiracy_board/noteA.png';
-import noteAHighlighted from '../../assets/room/main_menu/conspiracy_board/noteA-highlighted.png';
-import noteB from '../../assets/room/main_menu/conspiracy_board/noteB.png';
-import noteBHighlighted from '../../assets/room/main_menu/conspiracy_board/noteB-highlighted.png';
-import noteC from '../../assets/room/main_menu/conspiracy_board/noteC.png';
-import noteCHighlighted from '../../assets/room/main_menu/conspiracy_board/noteC-highlighted.png';
-import noteD from '../../assets/room/main_menu/conspiracy_board/noteD.png';
-import noteDHighlighted from '../../assets/room/main_menu/conspiracy_board/noteD-highlighted.png';
+import noteA from '../../assets/room/main_menu/conspiracy_board/notes/noteA.png';
+import noteAHighlighted from '../../assets/room/main_menu/conspiracy_board/notes/noteA-highlighted.png';
+import noteB from '../../assets/room/main_menu/conspiracy_board/notes/noteB.png';
+import noteBHighlighted from '../../assets/room/main_menu/conspiracy_board/notes/noteB-highlighted.png';
+import noteC from '../../assets/room/main_menu/conspiracy_board/notes/noteC.png';
+import noteCHighlighted from '../../assets/room/main_menu/conspiracy_board/notes/noteC-highlighted.png';
+import noteD from '../../assets/room/main_menu/conspiracy_board/notes/noteD.png';
+import noteDHighlighted from '../../assets/room/main_menu/conspiracy_board/notes/noteD-highlighted.png';
 import paper from '../../assets/level-select/case_paper_sprite.png';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
