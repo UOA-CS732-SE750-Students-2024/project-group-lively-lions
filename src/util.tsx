@@ -23,6 +23,6 @@ export enum Levels {
   Hard
 }
 
-export type Story = (typeof story)['tutorial'];
+export type Story = (typeof story)['difficulties'][0];
 
 export type Puzzle = Story['puzzles'][0];
