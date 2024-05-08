@@ -76,7 +76,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
           >
             <img
               src={caperton}
-              className="w-[10rem] pulse-fast mb-[-5%] pt-[5%]"
+              className="w-[10rem] pulse-slow mb-[-5%] pt-[5%]"
               draggable={false}
             />
           </motion.div>

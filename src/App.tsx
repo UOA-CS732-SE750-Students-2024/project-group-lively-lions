@@ -53,7 +53,7 @@ function App() {
     />,
     <LandingScreen
       key="landing"
-      handleScreenButtonClick={handleScreenButtonClick}
+      handleContinue={handleScreenButtonClick}
     />,
 
     <NewPlayer
@@ -190,9 +190,9 @@ function App() {
 
   function handleScreenButtonClick(
     screen: Screen,
-    e: React.MouseEvent<HTMLElement, MouseEvent>
+    e?: React.MouseEvent<HTMLElement, MouseEvent>
   ) {
-    e.preventDefault();
+    e?.preventDefault();
 
     setCurrentScreen(screen);
   }
@@ -234,9 +234,6 @@ function App() {
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
-      <h1 className="text-[#d9b26f] font-[alagard] text-[3rem] leading-loose text-center text-pretty w-[100%]">
-        Purrlock Holmes' Crypawtography Agency
-      </h1>
       {/* Constrains game contents maximum and minimum dimensions */}
       <div
         className="
