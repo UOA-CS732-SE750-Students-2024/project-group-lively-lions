@@ -38,10 +38,11 @@ interface MainGamePageProps {
   handleReturnScreen: (
     screen: Screen
   ) => void;
+  isMuted: boolean;
 }
 
 export default function MainGamePage({
-  handleScreenButtonClick, handleReturnScreen
+  handleScreenButtonClick, handleReturnScreen, isMuted
 }: MainGamePageProps) {
 
   //Set return screen value to this screen
@@ -68,19 +69,27 @@ export default function MainGamePage({
 
   //Sound effects
   function playLampSound() {
-    new Audio(lampSound).play();
+    if (!isMuted) {
+      new Audio(lampSound).play();
+    }
   }
 
   function playWoodSound() {
-    new Audio(woodSound).play();
+    if (!isMuted) {
+      new Audio(woodSound).play();
+    }
   }
 
   function playFabricSound() {
-    new Audio(fabricSound).play();
+    if (!isMuted) {
+      new Audio(fabricSound).play();
+    }
   }
 
   function playGlassSound() {
-    new Audio(glassSound).play();
+    if (!isMuted) {
+      new Audio(glassSound).play();
+    }
   }
 
 
@@ -121,7 +130,7 @@ export default function MainGamePage({
       </div>
       {/* Cabinet leads to level select screen */}
       <div className="absolute top-[25%] left-[0.5%]">
-        <Cabinet handleScreenButtonClick={handleScreenButtonClick} />
+        <Cabinet handleScreenButtonClick={handleScreenButtonClick} isMuted={isMuted} />
       </div>
 
       {/* Phone shows thought about usage in game */}
@@ -133,18 +142,19 @@ export default function MainGamePage({
           )
         }
       >
-        <Phone />
+        <Phone isMuted={isMuted} />
       </div>
 
       {/* Computer leads to profile screen */}
       <div className="relative top-[25%] left-[82%]">
-        <Computer handleScreenButtonClick={handleScreenButtonClick} />
+        <Computer handleScreenButtonClick={handleScreenButtonClick} isMuted={isMuted} />
       </div>
 
       {/* Reference book entry point leads to reference book screen */}
       <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
         <ReferenceBookEntryPoint
           handleScreenButtonClick={handleScreenButtonClick}
+          isMuted={isMuted}
         />
       </div>
 

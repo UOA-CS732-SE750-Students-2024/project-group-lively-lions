@@ -9,17 +9,22 @@ interface CabinetProps {
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  isMuted: boolean
 }
 
-export default function Cabinet({ handleScreenButtonClick }: CabinetProps) {
+export default function Cabinet({ handleScreenButtonClick, isMuted }: CabinetProps) {
   function play_drawer_click_sound() {
-    new Audio(filing_cabinet_open).play();
+    if (!isMuted) {
+      new Audio(filing_cabinet_open).play();
+    }
   }
 
   function play_drawer_hover_sound() {
-    const sound = new Audio(filing_cabinet_open);
-    sound.volume = 0.2;
-    sound.play();
+    if (!isMuted) {
+      const sound = new Audio(filing_cabinet_open);
+      sound.volume = 0.2;
+      sound.play();
+    }
   }
 
   return (

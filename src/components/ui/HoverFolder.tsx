@@ -24,6 +24,7 @@ interface HoverFolderProps {
     screen: Screen,
     event: React.MouseEvent<HTMLElement>
   ) => void;
+  isMuted: boolean;
 }
 
 export function HoverFolder({
@@ -35,7 +36,8 @@ export function HoverFolder({
   setClickedIndex,
   levelIndex,
   handleLevel,
-  handleScreenButtonClick
+  handleScreenButtonClick,
+  isMuted
 }: HoverFolderProps) {
 
   const isAboveHovered = index <= isHoveredIndex;
@@ -47,11 +49,15 @@ export function HoverFolder({
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
 
   function playPageSlideSound() {
-    new Audio(pageSlideSound).play();
+    if (!isMuted) {
+      new Audio(pageSlideSound).play();
+    }
   }
 
   function playPageHoverSound() {
-    new Audio(pageHoverSound).play();
+    if (!isMuted) {
+      new Audio(pageHoverSound).play();
+    }
   }
 
   return (

@@ -17,11 +17,13 @@ interface LevelSelectProps {
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
   story: Story;
+  isMuted: boolean;
 }
 
 export function LevelSelect({
   handleScreenButtonClick,
-  handleLevel
+  handleLevel,
+  isMuted
 }: LevelSelectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
@@ -29,7 +31,9 @@ export function LevelSelect({
   const menuItemOffsets = ['-5%', '-87%', '-87%', '-87%'];
 
   function play_sound() {
-    new Audio(filing_cabinet_close).play();
+    if (!isMuted) {
+      new Audio(filing_cabinet_close).play();
+    }
   }
 
   return (
@@ -58,6 +62,7 @@ export function LevelSelect({
                 levelIndex={index}
                 handleLevel={handleLevel}
                 handleScreenButtonClick={handleScreenButtonClick}
+                isMuted={isMuted}
               />
             ))}
           </div>

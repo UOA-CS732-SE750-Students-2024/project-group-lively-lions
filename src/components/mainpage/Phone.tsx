@@ -3,10 +3,16 @@ import phoneHandset from '../../assets/room/shared/phone/phone_handset_and_wire.
 import phoneRing from '../../assets/sounds/phone_ring.mp4';
 import { motion } from 'framer-motion';
 
-export default function Phone() {
+interface PhoneProps {
+    isMuted: boolean;
+}
+
+export default function Phone({ isMuted }: PhoneProps) {
 
     function playPhoneRing() {
-        new Audio(phoneRing).play();
+        if (!isMuted) {
+            new Audio(phoneRing).play();
+        }
     }
 
     return (

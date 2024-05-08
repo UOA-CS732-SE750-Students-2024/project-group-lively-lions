@@ -17,7 +17,8 @@ interface EchidnaAuxPanelProps {
     currentCipher: string;
     handleKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleShift: (shiftValue: number) => void;
-    shift: number
+    shift: number;
+    isMuted: boolean;
 }
 
 export function EchidnaAuxPanel({
@@ -25,7 +26,8 @@ export function EchidnaAuxPanel({
     currentCipher,
     handleKeywordChange,
     handleShift,
-    shift
+    shift,
+    isMuted
 }: EchidnaAuxPanelProps) {
 
     const [isAuxControls, setShowAuxControls] =
@@ -57,7 +59,7 @@ export function EchidnaAuxPanel({
                         <EchidnaKeyWordInput handleKeywordChange={handleKeywordChange} />
                         :
                         currentCipher === "Caesar" ?
-                            <EchidnaShiftSetter handleShift={handleShift} shift={shift} />
+                            <EchidnaShiftSetter handleShift={handleShift} shift={shift} isMuted={isMuted} />
                             :
                             <motion.img src={echidnaAuxEngraving} className='absolute w-[100%] opacity-[10%]' />
                     }

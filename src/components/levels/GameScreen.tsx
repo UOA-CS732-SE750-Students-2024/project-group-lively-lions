@@ -29,6 +29,7 @@ interface GameScreenProps {
     puzzleIndex: number;
     handleSolvedPuzzle: () => void;
     story: Story;
+    isMuted: boolean;
 }
 
 export default function GameScreen({
@@ -38,7 +39,8 @@ export default function GameScreen({
     phrase,
     puzzleIndex,
     handleSolvedPuzzle,
-    story
+    story,
+    isMuted
 }: GameScreenProps) {
 
     handleReturnScreen(Screen.GameScreen);
@@ -85,7 +87,9 @@ export default function GameScreen({
     };
 
     function playWoodSound() {
-        new Audio(woodSound).play();
+        if (!isMuted) {
+            new Audio(woodSound).play();
+        }
     }
 
     return (
@@ -161,6 +165,7 @@ export default function GameScreen({
                     solution={story.puzzles[puzzleIndex].solution}
                     solve_delay_ms={500}
                     showAuxControls={true}
+                    isMuted={isMuted}
                 />
             </div>
 

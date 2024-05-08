@@ -12,15 +12,19 @@ import clickSound from '../../assets/sounds/click.mp4';
 interface EchidnaShiftSetterProps {
     shift: number
     handleShift: (shiftBy: number) => void;
+    isMuted: boolean;
 }
 
 export function EchidnaShiftSetter({
     shift,
-    handleShift
+    handleShift,
+    isMuted
 }: EchidnaShiftSetterProps) {
 
     function playClickSound() {
-        new Audio(clickSound).play();
+        if (!isMuted) {
+            new Audio(clickSound).play();
+        }
     }
 
     return (

@@ -18,11 +18,13 @@ interface ReferenceBookProps {
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
   returnToScreen: Screen;
+  isMuted: boolean;
 }
 
 export function ReferenceBook({
   handleScreenButtonClick,
-  returnToScreen
+  returnToScreen,
+  isMuted
 }: ReferenceBookProps) {
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -63,11 +65,15 @@ export function ReferenceBook({
   // Sound Effect functions
 
   function playPageSound() {
-    new Audio(pageSound).play();
+    if (!isMuted) {
+      new Audio(pageSound).play();
+    }
   }
 
   function playClickSound() {
-    new Audio(clickSound).play();
+    if (!isMuted) {
+      new Audio(clickSound).play();
+    }
   }
 
   // Please note that if the description of the cipher is too long, then it will come off the paper as the paper image may not be long enough.

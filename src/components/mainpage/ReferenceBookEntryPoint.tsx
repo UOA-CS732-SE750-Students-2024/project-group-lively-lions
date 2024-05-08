@@ -9,18 +9,23 @@ interface ReferenceBookEntryPointProps {
         screen: Screen,
         event: React.MouseEvent<HTMLButtonElement>
     ) => void;
+    isMuted: boolean;
 }
 
 export default function ReferenceBookEntryPoint({
-    handleScreenButtonClick
+    handleScreenButtonClick, isMuted
 }: ReferenceBookEntryPointProps) {
 
     function playBookHoverSound() {
-        new Audio(bookHoverSound).play();
+        if (!isMuted) {
+            new Audio(bookHoverSound).play();
+        }
     }
 
     function playBookOpenSound() {
-        new Audio(bookOpenSound).play();
+        if (!isMuted) {
+            new Audio(bookOpenSound).play();
+        }
     }
 
     return (

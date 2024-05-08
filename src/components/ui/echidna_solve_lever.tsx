@@ -7,18 +7,22 @@ import leverSound from '../../assets/sounds/echidna_crank.mp4';
 interface EchidnaSolveLeverProps {
   delay: number;
   onClick: () => void;
+  isMuted: boolean;
 }
 
 const EchidnaSolveLever: React.FC<EchidnaSolveLeverProps> = ({
   delay,
-  onClick
+  onClick,
+  isMuted
 }) => {
   const [isPressed, setPressed] = useState(false);
 
   function pushLever() {
     if (!isPressed) {
+      if (!isMuted) {
+        new Audio(leverSound).play();
+      }
       setPressed(true);
-      new Audio(leverSound).play();
       onClick();
       setTimeout(() => {
         setPressed(false);

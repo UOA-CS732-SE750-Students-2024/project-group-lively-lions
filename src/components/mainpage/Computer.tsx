@@ -11,20 +11,25 @@ interface ComputerProps {
         screen: Screen,
         event: React.MouseEvent<HTMLButtonElement>
     ) => void;
+    isMuted: boolean;
 }
 
 export default function ({
-    handleScreenButtonClick
+    handleScreenButtonClick, isMuted
 }: ComputerProps) {
 
     const [computerIsOn, setComputerIsOn] = useState(false);
 
     function playComputerBuzzSound() {
-        new Audio(computerBuzzSound).play();
+        if (!isMuted) {
+            new Audio(computerBuzzSound).play();
+        }
     }
 
     function playComputerKeyboardSound() {
-        new Audio(computerKeyboardSound).play();
+        if (!isMuted) {
+            new Audio(computerKeyboardSound).play();
+        }
     }
 
     return (

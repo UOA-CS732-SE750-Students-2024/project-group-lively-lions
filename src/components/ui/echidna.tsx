@@ -39,6 +39,7 @@ interface EchidnaProps {
   )[];
   showAuxControls: boolean;
   handleSolvedPuzzle: () => void;
+  isMuted: boolean;
 }
 
 export function Echidna({
@@ -47,7 +48,8 @@ export function Echidna({
   solution,
   handleSolvedPuzzle,
   availableCiphers,
-  showAuxControls
+  showAuxControls,
+  isMuted
 }: EchidnaProps) {
   const [selectedCipher, setSelectedCipher] = useState<string>(
     availableCiphers[0].displayName
@@ -135,7 +137,9 @@ export function Echidna({
   };
 
   function handleSolutionFound() {
-    new Audio(successSound).play();
+    if (!isMuted) {
+      new Audio(successSound).play();
+    }
     setRedLampOn(false);
     setGreenLampOn(true);
     console.log('Solution found.');
@@ -143,7 +147,9 @@ export function Echidna({
   }
 
   function handleSolutionNotFound() {
-    new Audio(errorSound).play();
+    if (!isMuted) {
+      new Audio(errorSound).play();
+    }
     if (!greenLampOn) {
       setRedLampOn(true);
       setTimeout(() => {
@@ -173,11 +179,15 @@ export function Echidna({
 
   //Sound effects
   function playCipherButtonSound() {
-    new Audio(cipherButtonSound).play();
+    if (!isMuted) {
+      new Audio(cipherButtonSound).play();
+    }
   }
 
   function playResetButtonSound() {
-    new Audio(resetButtonSound).play();
+    if (!isMuted) {
+      new Audio(resetButtonSound).play();
+    }
   }
 
   // Anything that needs to happen on first load goes here
@@ -236,7 +246,7 @@ export function Echidna({
       </div>
       {/* Solve lever */}
       <div className="absolute w-[24.4%] top-[51%] left-[69.52%]">
-        <EchidnaSolveLever delay={solve_delay_ms} onClick={handleSolve} />
+        <EchidnaSolveLever delay={solve_delay_ms} onClick={handleSolve} isMuted={isMuted} />
       </div>
       {/* Paper feed */}
       <div className="absolute w-[50%] h-[28%] top-[0%] left-[15.5%] overflow-hidden">
@@ -303,6 +313,7 @@ export function Echidna({
           handleShift={handleShift}
           showAuxControls={isAuxControls}
           shift={shift}
+          isMuted={isMuted}
         />
       </div>
       {/* Solution lamps */}
