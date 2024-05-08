@@ -51,10 +51,7 @@ function App() {
       handleLevel={handleLevel}
       level={currentLevel}
     />,
-    <LandingScreen
-      key="landing"
-      handleContinue={handleScreenButtonClick}
-    />,
+    <LandingScreen key="landing" handleContinue={handleScreenButtonClick} />,
 
     <NewPlayer
       key="newPlayer"
@@ -221,14 +218,6 @@ function App() {
       //   setCurrentScreen(Screen.MainGamePage);
       // }, 2500);
     }
-  }
-
-  function handleConfirm(
-    username: string,
-    password: string,
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    e.preventDefault();
   }
 
   return (

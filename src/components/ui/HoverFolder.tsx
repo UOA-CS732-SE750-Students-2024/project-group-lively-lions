@@ -5,7 +5,7 @@ import solved_stamp_sprite from '../../assets/level-select/solved_stamp_sprite.p
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
 import { Screen, Levels, getStory } from '@/util';
-import { count } from 'console';
+
 interface HoverFolderProps {
   marginTop: string;
   index: number;
@@ -52,7 +52,6 @@ export function HoverFolder({
     return count;
   };
 
-  // const user = { solved: false }; // Placeholder for user data
   const hoverOffset = -3; // Distance moved by folder when hovered over
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
   const solved =
