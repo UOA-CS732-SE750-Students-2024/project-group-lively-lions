@@ -101,15 +101,19 @@ export function HoverFolder({
                 className="absolute inset-x-[3%] inset-y-[3%] flex"
               >
                 <div>
-                  <Button
-                    className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
-                    onClick={(e) => {
-                      handleLevel(levelIndex, e);
-                      handleScreenButtonClick(Screen.GameScreen, e);
-                    }}
-                  >
-                    Open
-                  </Button>
+                  {!solved ? (
+                    <Button
+                      className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
+                      onClick={(e) => {
+                        handleLevel(levelIndex, e);
+                        handleScreenButtonClick(Screen.GameScreen, e);
+                      }}
+                    >
+                      Open
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 <div className="absolute left-[10%] top-[10%] w-[42%] h-[100%]">
                   <p className="opacity-[70%] text-[1rem] font-[alagard] h-[35%] overflow-y-scroll scrollbar">
