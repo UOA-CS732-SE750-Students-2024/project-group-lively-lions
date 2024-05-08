@@ -9,7 +9,7 @@ import string5 from '../../assets/room/main_menu/conspiracy_board/strings/string
 import string6 from '../../assets/room/main_menu/conspiracy_board/strings/string6.png';
 import string7 from '../../assets/room/main_menu/conspiracy_board/strings/string7.png';
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
-import ConspiracyNote from './conspiracy_note';
+import ConspiracyNote from './ConspiracyNote';
 import { Button } from '../ui/button';
 
 export interface ConspiracyNoteData {

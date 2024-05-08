@@ -7,7 +7,7 @@ const TextField = ({ ...props }) => {
   return (
     <input
       type="text"
-      className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
+      className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%] rounded-lg pl-1"
       placeholder={props.placeholder}
       value={props.value}
       onChange={props.onChange}

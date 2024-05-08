@@ -9,7 +9,7 @@ import cors from "cors"
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT ?? 3001;
+const PORT = process.env.PORT ?? 3000;
 const BACKUP_PORT = 3000
 
 // Middleware
@@ -46,7 +46,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Define schema and model
-import Player from "./playerSchema.js"
+import Player from "./playerSchema.mjs"
 
 // CRUD endpoints
 
@@ -68,7 +68,7 @@ app.get('/player', async (req, res) => {
   const { username, password } = req.query;
 
     try {
-        const player = await Player.findOne({ username, password }, { _id: 1 });
+        const player = await Player.findOne({ username, password });
         if (player) {
             return res.json(player);
         } else {
@@ -107,9 +107,4 @@ app.delete('/player/:id', async (req, res) => {
     console.error('Error deleting player:', error);
     res.status(500).json({ error: 'An error occurred while deleting the player' });
   }
-});
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
 });
