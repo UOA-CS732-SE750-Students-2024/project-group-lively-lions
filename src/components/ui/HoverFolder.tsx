@@ -5,6 +5,8 @@ import solved_stamp_sprite from '../../assets/level-select/solved_stamp_sprite.p
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
 import { Screen, Levels, Story } from '@/util';
+import pageSlideSound from '../../assets/sounds/paper_slide.mp4';
+import pageHoverSound from '../../assets/sounds/folder_hover.mp4';
 
 interface HoverFolderProps {
   marginTop: string;
@@ -36,23 +38,35 @@ export function HoverFolder({
   handleLevel,
   handleScreenButtonClick
 }: HoverFolderProps) {
+
   const isAboveHovered = index <= isHoveredIndex;
   const isAboveClicked = index <= isClickedIndex;
 
   const hoverOffset = -3; // Distance moved by folder when hovered over
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
   const puzzles = ['Tutorial', 'Easy', 'Medium', 'Hard'];
+
+  function playPageSlideSound() {
+    new Audio(pageSlideSound).play();
+  }
+
+  function playPageHoverSound() {
+    new Audio(pageHoverSound).play();
+  }
+
   return (
     <div className="w-[94%]">
       <motion.div
         className="relative inline-block w-[100%]"
         style={{ marginTop: marginTop, imageRendering: 'pixelated' }} // marginTop controls the initial vertical overlap
-        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseEnter={() => { setHoveredIndex(index); playPageHoverSound() }}
         onMouseLeave={() => setHoveredIndex(-1)} // Clear hover status
-        onClick={() =>
+        onClick={() => {
           isClickedIndex === index
             ? setClickedIndex(-1)
-            : setClickedIndex(index)
+            : setClickedIndex(index);
+          playPageSlideSound()
+        }
         }
         animate={{
           y: `${(isAboveClicked ? clickedOffset : 0) +
