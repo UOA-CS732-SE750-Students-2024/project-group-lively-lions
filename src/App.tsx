@@ -3,26 +3,23 @@ import MainMenuScreen from './components/levels/MainMenuScreen';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/desk/LevelSelect';
 import { Phone } from './components/desk/Phone';
-import { PuzzlePage } from './components/desk/PuzzlePage';
 import { ReferenceBook } from './components/desk/ReferenceBook';
 import { ComputerProfile } from './components/desk/computer_profile/ComputerProfile';
 import { NewPlayer } from './components/desk/computer_profile/NewPlayer';
 import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
-import { Screen, Levels, Puzzle } from './util';
+import { Screen, Levels, Puzzle, getStory } from './util';
 import GameScreen from './components/levels/GameScreen';
-import * as story from './lib/story.json';
 import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
-import { set } from 'mongoose';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
   const [returnScreen, setReturnScreen] = useState(Screen.MainGamePage);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
-  const [currentStory, setCurrentStory] = useState(story.difficulties[0]);
+  const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
 
@@ -83,11 +80,6 @@ function App() {
     />,
     <Phone
       key="phone"
-      story={currentStory}
-      handleScreenButtonClick={handleScreenButtonClick}
-    />,
-    <PuzzlePage
-      key="puzzlePage"
       story={currentStory}
       handleScreenButtonClick={handleScreenButtonClick}
     />,
@@ -199,10 +191,16 @@ function App() {
 
       setCurrentPuzzleIndex(index);
       setCurrentEncodedPhrase(encodePhrase(puzzles[index]));
-      // setCurrentScreen(Screen.EchidnaMachine);
+
+      //Set current screen to new note with conspiracy board
     } else {
       // TODO: Handle 'congrats you've completed all of the puzzles'
-      setCurrentScreen(Screen.MainGamePage);
+      //
+      // wait 5 seconds
+
+      setTimeout(() => {
+        setCurrentScreen(Screen.MainGamePage);
+      }, 2500);
     }
   }
 
@@ -212,22 +210,6 @@ function App() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
-  }
-
-  function getStory(level: Levels) {
-    switch (level) {
-      case Levels.Tutorial:
-        return story.difficulties[0];
-      case Levels.Easy:
-        return story.difficulties[1];
-      case Levels.Medium:
-        return story.difficulties[2];
-        break;
-      case Levels.Hard:
-        return story.difficulties[3];
-      default:
-        return story.difficulties[0];
-    }
   }
 
   return (
