@@ -168,7 +168,6 @@ function App() {
     // Check the completed puzzles in the profile
     const userProfile = JSON.parse(localStorage.getItem('profile') || '');
     const completedPuzzles = userProfile.profile.completed_puzzles;
-    //of the completed puzzles, which is the highest.
 
     let count = 0;
     for (let i = 0; i < story.puzzles.length; i++) {
@@ -218,11 +217,9 @@ function App() {
       //Set current screen to new note with conspiracy board
     } else {
       // TODO: Handle 'congrats you've completed all of the puzzles'
-      //
-      // wait 2.5 seconds
-      setTimeout(() => {
-        setCurrentScreen(Screen.MainGamePage);
-      }, 2500);
+      // setTimeout(() => {
+      //   setCurrentScreen(Screen.MainGamePage);
+      // }, 2500);
     }
   }
 
