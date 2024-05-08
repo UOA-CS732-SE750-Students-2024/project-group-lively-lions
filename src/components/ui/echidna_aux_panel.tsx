@@ -18,7 +18,7 @@ interface EchidnaAuxPanelProps {
     handleKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleShift: (shiftValue: number) => void;
     shift: number
-  }
+}
 
 export function EchidnaAuxPanel({
     showAuxControls,
@@ -28,11 +28,11 @@ export function EchidnaAuxPanel({
     shift
 }: EchidnaAuxPanelProps) {
 
-    const  [isAuxControls, setShowAuxControls] =
-    useState<boolean>(showAuxControls);
+    const [isAuxControls, setShowAuxControls] =
+        useState<boolean>(showAuxControls);
 
-    function cipherFunctions(cipherName: string){
-        switch(cipherName){
+    function cipherFunctions(cipherName: string) {
+        switch (cipherName) {
             case 'Vigenere':
                 return 'Keyword';
             case 'Caesar':
@@ -46,25 +46,25 @@ export function EchidnaAuxPanel({
         <div className="absolute w-[55%] h-[18.2%] top-[64.1%] left-[13%] overflow-hidden">
             <img src={echidnaAuxPanel} className="absolute w-[100%] h-[100%]" />
             <AnimatePresence mode="wait">
-                <motion.div 
+                <motion.div
                     key={cipherFunctions(currentCipher)}
                     className="absolute w-[100%] h-[100%]"
                     initial={{ y: 100 }}
                     animate={{ y: 0 }}
                     exit={{ y: -100 }}
                     transition={{ type: 'spring', duration: 0.3 }}>
-                        { currentCipher === "Vigenere" ?
+                    {currentCipher === "Vigenere" ?
                         <EchidnaKeyWordInput handleKeywordChange={handleKeywordChange} />
                         :
                         currentCipher === "Caesar" ?
-                        <EchidnaShiftSetter handleShift={handleShift} shift={shift} />
-                        :
-                        <motion.img src={echidnaAuxEngraving} className='absolute w-[100%] opacity-[10%]' />
-                        }
+                            <EchidnaShiftSetter handleShift={handleShift} shift={shift} />
+                            :
+                            <motion.img src={echidnaAuxEngraving} className='absolute w-[100%] opacity-[10%]' />
+                    }
                 </motion.div>
             </AnimatePresence>
         </div>
-        
+
     );
 }
 

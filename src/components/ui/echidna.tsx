@@ -20,6 +20,9 @@ import * as ciphersExports from '../../ciphers/ciphers';
 import { CipherType } from '../../ciphers/Cipher';
 import EchidnaAuxPanel from './echidna_aux_panel';
 
+import cipherButtonSound from '../../assets/sounds/echidna_roll_button.mp4';
+import resetButtonSound from '../../assets/sounds/echidna_reset.mp4';
+
 interface EchidnaProps {
   solve_delay_ms: number;
   phrase: string;
@@ -164,6 +167,15 @@ export function Echidna({
     setKeyword(e.target.value);
   };
 
+  //Sound effects
+  function playCipherButtonSound() {
+    new Audio(cipherButtonSound).play();
+  }
+
+  function playResetButtonSound() {
+    new Audio(resetButtonSound).play();
+  }
+
   // Anything that needs to happen on first load goes here
   useEffect(() => {
     initialDisplayDelay();
@@ -203,6 +215,7 @@ export function Echidna({
           baseImage={echidnaCipherButtonBase}
           onClick={() => {
             handleCipherChange(true);
+            playCipherButtonSound();
           }}
         />
       </div>
@@ -213,6 +226,7 @@ export function Echidna({
           baseImage={echidnaCipherButtonBase}
           onClick={() => {
             handleCipherChange(false);
+            playCipherButtonSound();
           }}
         />
       </div>
@@ -224,13 +238,13 @@ export function Echidna({
       <div className="absolute w-[50%] h-[28%] top-[0%] left-[15.5%] pt-[5%] overflow-hidden">
         {/* Paper Motion */}
         <motion.div
-        className="absolute w-[100%] h-[100%] overflow-scroll"
-        initial={{ y: -1000 }}
-        key="paper_div"
-        animate={{ y: isSolveLeverDown ? 190 : 0 }}
-        transition={{ type: 'spring', stiffness: 1000, damping: 80 }}>
+          className="absolute w-[100%] h-[100%] overflow-scroll"
+          initial={{ y: -1000 }}
+          key="paper_div"
+          animate={{ y: isSolveLeverDown ? 190 : 0 }}
+          transition={{ type: 'spring', stiffness: 1000, damping: 80 }}>
           <motion.div
-          className="absolute w-[100%]"
+            className="absolute w-[100%]"
           >
             <img className="absolute w-[100%] top-[9%]" src={echidnaPaper} />
             <p className="absolute font-[alagard] pt-[10%] left-[10%]">
@@ -240,9 +254,9 @@ export function Echidna({
         </motion.div>
       </div>
       <img
-          className="absolute w-[100%] opacity-[30%] h-[8%] top-[92%]"
-          src={echidnaPaperShadow}
-        />
+        className="absolute w-[100%] opacity-[30%] h-[8%] top-[92%]"
+        src={echidnaPaperShadow}
+      />
       <img
         className="absolute w-[53%] h-[5%] top-[22.5%] left-[14%]"
         src={echidnaPaperFeedArms}
@@ -271,12 +285,15 @@ export function Echidna({
         <EchidnaButton
           capImage={echidnaResetButtonCap}
           baseImage={echidnaResetButtonBase}
-          onClick={handleResetWorkingCipher}
+          onClick={() => {
+            handleResetWorkingCipher;
+            playResetButtonSound();
+          }}
         />
       </div>
       <div>
         {/* Auxilliary controls panel */}
-        <EchidnaAuxPanel 
+        <EchidnaAuxPanel
           currentCipher={selectedCipher}
           handleKeywordChange={handleKeywordChange}
           handleShift={handleShift}

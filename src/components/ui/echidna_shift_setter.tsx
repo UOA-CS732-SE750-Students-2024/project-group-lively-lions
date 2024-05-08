@@ -7,8 +7,9 @@ import EchidnaButton from "./echidna_button";
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
+import clickSound from '../../assets/sounds/click.mp4';
 
-interface EchidnaShiftSetterProps{
+interface EchidnaShiftSetterProps {
     shift: number
     handleShift: (shiftBy: number) => void;
 }
@@ -16,42 +17,46 @@ interface EchidnaShiftSetterProps{
 export function EchidnaShiftSetter({
     shift,
     handleShift
-}: EchidnaShiftSetterProps){
+}: EchidnaShiftSetterProps) {
+
+    function playClickSound() {
+        new Audio(clickSound).play();
+    }
 
     return (
         <div className="absolute w-[100%] h-[100%]">
             {/* Shift setting block */}
             <p className="absolute font-[alagard] opacity-[60%] text-[1.2rem] top-[5%] left-[37%]">
-            Shift
+                Shift
             </p>
             {/* Shift setting controls */}
             <div className="absolute w-[15%] left-[60%] top-[37%]">
-            <EchidnaButton
-                capImage={echidnaAuxButtonCapUp}
-                baseImage={echidnaAuxButtonBase}
-                onClick={() => { handleShift(1); }}
-            />
+                <EchidnaButton
+                    capImage={echidnaAuxButtonCapUp}
+                    baseImage={echidnaAuxButtonBase}
+                    onClick={() => { handleShift(1); playClickSound() }}
+                />
             </div>
             <div className="absolute w-[15%] left-[60%] top-[60%]">
-            <EchidnaButton
-            capImage={echidnaAuxButtonCapDown}
-            baseImage={echidnaAuxButtonBase}
-            onClick={() => { handleShift(-1) }}
-            />
+                <EchidnaButton
+                    capImage={echidnaAuxButtonCapDown}
+                    baseImage={echidnaAuxButtonBase}
+                    onClick={() => { handleShift(-1); playClickSound() }}
+                />
             </div>
             {/* Shift setting display */}
             <div className="absolute w-[20%] h-[57%] top-[34%] left-[37%]">
                 <img
-                src={echidnaAuxDisplay}
-                className="absolute w-[100%] h-[100%]"
+                    src={echidnaAuxDisplay}
+                    className="absolute w-[100%] h-[100%]"
                 />
                 <motion.p
-                className="absolute w-[100%] h-[100%] font-[alagard] text-[1.3rem] text-center text-[#C1E7EB] pt-[25%]"
-                key={shift + 'shift'}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
-                exit={{ opacity: [1, 0, 1, 0, 1, 0] }}
-                transition={{ duration: 0.1 }}
+                    className="absolute w-[100%] h-[100%] font-[alagard] text-[1.3rem] text-center text-[#C1E7EB] pt-[25%]"
+                    key={shift + 'shift'}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
+                    exit={{ opacity: [1, 0, 1, 0, 1, 0] }}
+                    transition={{ duration: 0.1 }}
                 >
                     {shift}
                 </motion.p>
