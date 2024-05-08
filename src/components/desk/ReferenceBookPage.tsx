@@ -19,6 +19,7 @@ export function ReferenceBookPage({
       <img
         className="min-w-[400px] w-[calc(24vw)] bottom-0"
         src={case_paper_sprite}
+        draggable={false}
       />
       <div className="absolute left-[10%] top-[20%] w-[80%] h-[70%] overflow-y-scroll scrollbar">
         <p className="opacity-[70%] text-[1.3rem] font-[alagard]">

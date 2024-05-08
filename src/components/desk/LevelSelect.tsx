@@ -34,7 +34,7 @@ export function LevelSelect({
 
   return (
     <motion.div
-      className="absolute w-[100%] h-[100%] select-none"
+      className="absolute w-[100%] h-[100%]"
       key="modal"
       initial={{ y: '-100%' }}
       animate={{ y: '0%' }}
