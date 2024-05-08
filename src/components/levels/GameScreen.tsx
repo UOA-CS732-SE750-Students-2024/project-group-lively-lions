@@ -1,4 +1,4 @@
-import { Screen } from '@/util';
+import { Puzzle, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
 import lighting from '../../assets/room/active_game/lighting.png';
@@ -14,6 +14,8 @@ import blueYarn from '../../assets/room/shared/blue_yarn.png';
 import purpleYarn from '../../assets/room/shared/purple_yarn.png';
 import conspiracyBoard from '../../assets/room/active_game/conspiracy_board.png';
 import exitSign from '../../assets/room/active_game/exit.png';
+import * as ciphersExports from '@/ciphers/ciphers';
+import Echidna from '../ui/echidna';
 
 interface GameScreenProps {
     handleScreenButtonClick: (
@@ -22,12 +24,16 @@ interface GameScreenProps {
     ) => void;
     level: number;
     handleReturnScreen: (screen: Screen) => void;
+    phrase: string;
+    puzzle: Puzzle;
 }
 
 export default function GameScreen({
     handleScreenButtonClick,
     level,
-    handleReturnScreen
+    handleReturnScreen,
+    phrase,
+    puzzle
 }: GameScreenProps) {
     handleReturnScreen(Screen.GameScreen);
 
@@ -110,7 +116,6 @@ export default function GameScreen({
             >
                 <img src={exitSign} alt="Exit" />
             </div>
-            {/* To do: add ECHIDNA */}
 
             {/* Non-Interactive filler assets */}
             <img
@@ -136,6 +141,20 @@ export default function GameScreen({
                 className="absolute scale-[450%] top-[31%] left-[95%]"
                 src={pencilHolder}
             />
+
+            {/* ECHIDNA machine at the bottom so it is the highest element */}
+            <div className="absolute w-[40%] left-[30%]">
+                <Echidna
+                    availableCiphers={Object.values(ciphersExports)}
+                    onSolved={() => {
+                        console.log('solved');
+                    }}
+                    phrase={phrase}
+                    solution={puzzle.solution}
+                    solve_delay_ms={500}
+                    showAuxControls={true}
+                />
+            </div>
 
             {/* Lighting layer */}
             <div
