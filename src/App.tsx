@@ -21,9 +21,11 @@ function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
   const [returnScreen, setReturnScreen] = useState(Screen.MainGamePage);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
-  const [currentStory, setCurrentStory] = useState(story.tutorial);
+  const [currentStory, setCurrentStory] = useState(story.difficulties[0]);
   const [currentPhrase, setCurrentPhrase] = useState('');
-  const [currentPuzzle, setCurrentPuzzle] = useState(story.tutorial.puzzles[0]);
+  const [currentPuzzle, setCurrentPuzzle] = useState(
+    story.difficulties[0].puzzles[0]
+  );
   const screens = [
     <MainMenuScreen
       key="mainMenu"
@@ -149,7 +151,7 @@ function App() {
   function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     setCurrentLevel(level);
-    setCurrentStory(handleLoadStory() ?? story.tutorial);
+    setCurrentStory(handleLoadStory() ?? story.difficulties[0]);
     setCurrentPhrase(encodePhrase());
   }
 
@@ -192,14 +194,14 @@ function App() {
   function handleLoadStory() {
     switch (currentLevel) {
       case Levels.Tutorial:
-        return story.tutorial;
+        return story.difficulties[0];
       case Levels.Easy:
-        return story.easy;
+        return story.difficulties[1];
       case Levels.Medium:
-        return story.medium;
+        return story.difficulties[2];
         break;
       case Levels.Hard:
-        return story.hard;
+        return story.difficulties[3];
       default:
         break;
     }
