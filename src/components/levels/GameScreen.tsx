@@ -117,7 +117,10 @@ export default function GameScreen({
     >
       {/* Interactive Components */}
       <div className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer">
-        <ConspiracyBoard boardData={boardData} maxNotes={7}>
+        <ConspiracyBoard
+          boardData={boardData}
+          maxNotes={boardData.notes.length as 1 | 3 | 5 | 7}
+        >
           <img
             className="hover:outline outline-white outline-7 cursor-pointer"
             src={conspiracyBoard}
