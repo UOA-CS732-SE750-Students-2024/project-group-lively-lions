@@ -8,7 +8,7 @@ function EchidnaTestComponent(){
                 <Echidna 
                     availableCiphers={Object.values(ciphers)}
                     onSolved={() => { console.log('solved') }}
-                    phrase="Gdkkn vnqkc."
+                    phrase="Gdkkn vnqkc adsijdsaoij asdompdsapok asdopmasdpom asdpomsa."
                     solution="Hello world."
                     solve_delay_ms={500}
                     showAuxControls={true}

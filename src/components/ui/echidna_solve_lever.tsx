@@ -28,13 +28,13 @@ const EchidnaSolveLever: React.FC<EchidnaSolveLeverProps> = ({
       <motion.img
         className="absolute w-[100%]"
         src={echidnaSolveLeverStem}
-        animate={{ y: isPressed ? 28 : 0 }}
+        animate={{ y: isPressed ? 35 : 0 }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
       <motion.img
         className="absolute w-[100%] cursor-pointer"
         src={echidnaSolveLeverHandle}
-        animate={{ y: isPressed ? 44 : 0 }}
+        animate={{ y: isPressed ? 60 : 0 }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
     </div>
