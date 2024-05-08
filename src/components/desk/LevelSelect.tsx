@@ -21,8 +21,7 @@ interface LevelSelectProps {
 
 export function LevelSelect({
   handleScreenButtonClick,
-  handleLevel,
-  story
+  handleLevel
 }: LevelSelectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
@@ -58,7 +57,6 @@ export function LevelSelect({
                 setClickedIndex={setClickedIndex}
                 levelIndex={index}
                 handleLevel={handleLevel}
-                story={story}
                 handleScreenButtonClick={handleScreenButtonClick}
               />
             ))}
