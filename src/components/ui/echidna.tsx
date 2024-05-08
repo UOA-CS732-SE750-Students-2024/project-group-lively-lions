@@ -224,23 +224,23 @@ export function Echidna({
       <div className="absolute w-[50%] h-[28%] top-[0%] left-[15.5%] pt-[5%] overflow-hidden">
         {/* Paper Motion */}
         <motion.div
-        className="absolute w-[100%] h-[100%] overflow-scroll"
+        className="absolute w-[98%] h-[100%] left-[1%] overflow-scroll no-scrollbar"
         initial={{ y: -1000 }}
         key="paper_div"
-        animate={{ y: isSolveLeverDown ? 190 : 0 }}
+        animate={{ y: isSolveLeverDown ? 120 : 0 }}
         transition={{ type: 'spring', stiffness: 1000, damping: 80 }}>
           <motion.div
           className="absolute w-[100%]"
           >
             <img className="absolute w-[100%] top-[9%]" src={echidnaPaper} />
-            <p className="absolute font-[alagard] pt-[10%] left-[10%]">
+            <p className="absolute font-[alagard] pt-[10%] px-[5%] left-[0%] [overflow-wrap:anywhere]">
               {phrase}
             </p>
           </motion.div>
         </motion.div>
       </div>
       <img
-          className="absolute w-[100%] opacity-[30%] h-[8%] top-[92%]"
+          className="absolute w-[49%] opacity-[30%] h-[2%] top-[26%] left-[16.1%]"
           src={echidnaPaperShadow}
         />
       <img
@@ -248,12 +248,12 @@ export function Echidna({
         src={echidnaPaperFeedArms}
       />
       {/* Display */}
-      <div className="absolute w-[69%] h-[12.2%] top-[34.4%] left-[15.5%] px-[1.5%] pl-[1.2%] pr-[3%] overflow-scroll">
+      <div className="absolute w-[69%] h-[12.2%] top-[34.4%] left-[15.5%] px-[1.5%] pl-[1.2%] pr-[3%] overflow-scroll no-scrollbar">
         <AnimatePresence>
           {displayOn ? (
             <motion.p
               key={workingPhrase}
-              className="absolute text-[1.2rem] text-[#C1E7EB] font-[alagard] leading-tight"
+              className="absolute text-[1.2rem] text-[#C1E7EB] font-[alagard] leading-tight [overflow-wrap:anywhere]"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
               exit={{ opacity: [1, 0, 1, 0, 1, 0] }}
