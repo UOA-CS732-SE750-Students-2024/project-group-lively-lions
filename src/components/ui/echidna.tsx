@@ -45,7 +45,7 @@ export function Echidna({
   showAuxControls
 }: EchidnaProps) {
   const [selectedCipher, setSelectedCipher] = useState<string>(
-    availableCiphers[0].name.toString()
+    availableCiphers[0].displayName
   );
   const [cipherSelectUp, setCipherSelectUp] = useState<boolean>(true);
   const [cipherAnimatingOut, setCipherAnimatingOut] = useState<boolean>(false);
@@ -68,7 +68,7 @@ export function Echidna({
     setTimeout(() => {
       // Find position of current cipher type in ciphers list
       const currentIndex = availableCiphers.findIndex(
-        (cipher) => cipher.name.toString() === selectedCipher
+        (cipher) => cipher.displayName === selectedCipher
       );
       // Set the new cipher type
       let nextIndex;
@@ -79,7 +79,7 @@ export function Echidna({
       } else {
         nextIndex = (currentIndex + 1) % availableCiphers.length;
       }
-      setSelectedCipher(availableCiphers[nextIndex].name.toString());
+      setSelectedCipher(availableCiphers[nextIndex].displayName);
       setCipherAnimatingOut(false);
     }, 250);
   };
@@ -92,7 +92,7 @@ export function Echidna({
       // Decipher logic
       const cipherValues = availableCiphers;
       const index = cipherValues.findIndex(
-        (cipher) => cipher.name.toString() === selectedCipher
+        (cipher) => cipher.displayName === selectedCipher
       );
       const cipher = cipherValues[index];
       const newCipher = new cipher();
