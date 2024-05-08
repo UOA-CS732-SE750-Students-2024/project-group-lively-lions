@@ -11,7 +11,7 @@ async function create_new_player(username, password) {
   );
 };
 
-async function get_player_info(username, password) {
+async function get_profile(username, password) {
 
 }
 
