@@ -30,7 +30,6 @@ interface EchidnaProps {
   solve_delay_ms: number;
   phrase: string;
   solution: string;
-  onSolved: () => void;
   availableCiphers: (
     | typeof ciphersExports.Caesar
     | typeof ciphersExports.Vigenere
@@ -40,13 +39,14 @@ interface EchidnaProps {
     | typeof ciphersExports.Emoji
   )[];
   showAuxControls: boolean;
+  handleSolvedPuzzle: () => void;
 }
 
 export function Echidna({
   solve_delay_ms,
   phrase,
   solution,
-  onSolved,
+  handleSolvedPuzzle,
   availableCiphers,
   showAuxControls
 }: EchidnaProps) {
@@ -125,7 +125,7 @@ export function Echidna({
       } else if (newCipher.type === CipherType.Substitution) {
         const decodedPhrase = newCipher.decode({ phrase: workingPhrase });
         setWorkingPhrase(decodedPhrase);
-        decodedPhrase === solution
+        decodedPhrase.toLowerCase() === solution.toLowerCase()
           ? handleSolutionFound()
           : handleSolutionNotFound();
         console.log(decodedPhrase);
@@ -136,10 +136,10 @@ export function Echidna({
   };
 
   function handleSolutionFound() {
-    onSolved();
     setRedLampOn(false);
     setGreenLampOn(true);
     console.log('Solution found.');
+    handleSolvedPuzzle();
   }
 
   function handleSolutionNotFound() {
