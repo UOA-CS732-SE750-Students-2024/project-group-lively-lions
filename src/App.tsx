@@ -10,29 +10,27 @@ import { NewPlayer } from './components/desk/computer_profile/NewPlayer';
 import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
-import { Screen, Levels } from './util';
+import { Screen, Levels, Puzzle } from './util';
 import GameScreen from './components/levels/GameScreen';
 import * as story from './lib/story.json';
 import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
+import { set } from 'mongoose';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
   const [returnScreen, setReturnScreen] = useState(Screen.MainGamePage);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
-  const [currentStory, setCurrentStory] = useState(story.tutorial);
-  const [currentPhrase, setCurrentPhrase] = useState('');
-  const [currentPuzzle, setCurrentPuzzle] = useState(story.tutorial.puzzles[0]);
+  const [currentStory, setCurrentStory] = useState(story.difficulties[0]);
+  const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
+  const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
   const screens = [
     <MainMenuScreen
       key="mainMenu"
       handleScreenButtonClick={handleScreenButtonClick}
       handleLevel={handleLevel}
       level={currentLevel}
-      story={currentStory}
-      puzzle={currentPuzzle}
-      phrase={currentPhrase}
     />,
     <LandingScreen
       key="landing"
@@ -43,11 +41,7 @@ function App() {
       key="newPlayer"
       handleScreenButtonClick={handleScreenButtonClick}
     />,
-    <SignIn
-      key="signIn"
-      handleScreenButtonClick={handleScreenButtonClick}
-      handleConfirm={handleConfirm}
-    />,
+    <SignIn key="signIn" handleScreenButtonClick={handleScreenButtonClick} />,
     <PlayerInfo
       key="playerInfo"
       handleScreenButtonClick={handleScreenButtonClick}
@@ -85,9 +79,11 @@ function App() {
     />,
     <EchidnaMachine
       key="echidnaMachine"
-      phrase={currentPhrase}
+      phrase={currentEncodedPhrase}
+      story={currentStory}
       handleScreenButtonClick={handleScreenButtonClick}
-      puzzle={currentPuzzle}
+      puzzleIndex={currentPuzzleIndex}
+      handleSolvedPuzzle={handleSolvedPuzzle}
     />,
     <MainGamePage
       key="mainGamePage"
@@ -99,11 +95,15 @@ function App() {
       handleScreenButtonClick={handleScreenButtonClick}
       level={currentLevel}
       handleReturnScreen={handleReturnScreen}
+      phrase={currentEncodedPhrase}
+      puzzleIndex={currentPuzzleIndex}
+      handleSolvedPuzzle={handleSolvedPuzzle}
+      story={currentStory}
     />
   ];
-  function encodePhrase() {
-    const puzzleCipher = currentPuzzle.cipher;
-    const puzzleSolution = currentPuzzle.solution;
+  function encodePhrase(puzzle: Puzzle) {
+    const puzzleCipher = puzzle.cipher;
+    const puzzleSolution = puzzle.solution;
 
     switch (puzzleCipher[0]) {
       case 'caesar': {
@@ -147,10 +147,12 @@ function App() {
   }
 
   function handleLevel(level: Levels, e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
     setCurrentLevel(level);
-    setCurrentStory(handleLoadStory() ?? story.tutorial);
-    setCurrentPhrase(encodePhrase());
+    const story = getStory(level);
+    setCurrentStory(story);
+    setCurrentPuzzleIndex(0);
+    setCurrentEncodedPhrase(encodePhrase(story.puzzles[0]));
+    e.preventDefault();
   }
 
   function handleReturnScreen(screen: Screen) {
@@ -162,22 +164,25 @@ function App() {
     e: React.MouseEvent<HTMLElement, MouseEvent>
   ) {
     e.preventDefault();
+
     setCurrentScreen(screen);
   }
 
-  function handleCheckAnswer(
-    userPhrase: string,
-    phrase: string,
-    e: React.MouseEvent<HTMLButtonElement>
-  ) {
-    e.preventDefault();
-    if (userPhrase == phrase) {
-      alert('Correct!');
-      // Go to next puzzle
-      // Generate next scramble
-      setCurrentPhrase(encodePhrase());
+  function handleSolvedPuzzle() {
+    //Check current level number of puzzles
+    const puzzles = currentStory.puzzles;
+    const index = currentPuzzleIndex + 1;
+    if (index < puzzles.length) {
+      //Add puzzle id to player's completed puzzles in local storage
+
+      //add index of next puzzle to unlocked puzzles.
+
+      setCurrentPuzzleIndex(index);
+      setCurrentEncodedPhrase(encodePhrase(puzzles[index]));
+      // setCurrentScreen(Screen.EchidnaMachine);
     } else {
-      alert('Incorrect, try again!');
+      // TODO: Handle 'congrats you've completed all of the puzzles'
+      setCurrentScreen(Screen.MainGamePage);
     }
   }
 
@@ -189,19 +194,19 @@ function App() {
     e.preventDefault();
   }
 
-  function handleLoadStory() {
-    switch (currentLevel) {
+  function getStory(level: Levels) {
+    switch (level) {
       case Levels.Tutorial:
-        return story.tutorial;
+        return story.difficulties[0];
       case Levels.Easy:
-        return story.easy;
+        return story.difficulties[1];
       case Levels.Medium:
-        return story.medium;
+        return story.difficulties[2];
         break;
       case Levels.Hard:
-        return story.hard;
+        return story.difficulties[3];
       default:
-        break;
+        return story.difficulties[0];
     }
   }
 
