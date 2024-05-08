@@ -15,18 +15,11 @@ interface MainMenuScreenProps {
     event: React.MouseEvent<HTMLButtonElement>
   ) => void; // Added handleLevel property
   level: Levels; // Added level property
-  story: Story;
-  puzzle: Puzzle;
-  phrase: string;
 }
 
 export default function MainMenuScreen({
   handleScreenButtonClick,
-  handleLevel,
-  level,
-  story,
-  puzzle,
-  phrase
+  level
 }: MainMenuScreenProps) {
   console.log(level);
 
