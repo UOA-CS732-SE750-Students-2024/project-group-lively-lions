@@ -10,20 +10,15 @@ import echidnaPaper from '/echidna_paper.png?url';
 import echidnaPaperShadow from '/echidna_paper_shadow.png?url';
 import echidnaRedLampOff from '/echidna_red_lamp_off.png?url';
 import echidnaRedLampOn from '/echidna_red_lamp_on.png?url';
-import echidnaAuxButtonBase from '/echidna_aux_button_base.png?url';
-import echidnaAuxButtonCapDown from '/echidna_aux_button_cap_down.png?url';
-import echidnaAuxButtonCapUp from '/echidna_aux_button_cap_up.png?url';
-import echidnaAuxDisplayInput from '/echidna_aux_display_input.png?url';
-import echidnaAuxDisplay from '/echidna_aux_display.png?url';
 import echidnaResetButtonBase from '/echidna_reset_button_base.png?url';
 import echidnaResetButtonCap from '/echidna_reset_button_cap.png?url';
-import echidnaAuxPanel from '/echidna_aux_panel.png?url';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import EchidnaButton from './echidna_button';
 import EchidnaSolveLever from './echidna_solve_lever';
 import * as ciphersExports from '../../ciphers/ciphers';
 import { CipherType } from '../../ciphers/Cipher';
+import EchidnaAuxPanel from './echidna_aux_panel';
 
 interface EchidnaProps {
   solve_delay_ms: number;
@@ -50,7 +45,7 @@ export function Echidna({
   showAuxControls
 }: EchidnaProps) {
   const [selectedCipher, setSelectedCipher] = useState<string>(
-    availableCiphers[0].name.toString()
+    availableCiphers[0].displayName
   );
   const [cipherSelectUp, setCipherSelectUp] = useState<boolean>(true);
   const [cipherAnimatingOut, setCipherAnimatingOut] = useState<boolean>(false);
@@ -73,7 +68,7 @@ export function Echidna({
     setTimeout(() => {
       // Find position of current cipher type in ciphers list
       const currentIndex = availableCiphers.findIndex(
-        (cipher) => cipher.name.toString() === selectedCipher
+        (cipher) => cipher.displayName === selectedCipher
       );
       // Set the new cipher type
       let nextIndex;
@@ -84,7 +79,7 @@ export function Echidna({
       } else {
         nextIndex = (currentIndex + 1) % availableCiphers.length;
       }
-      setSelectedCipher(availableCiphers[nextIndex].name.toString());
+      setSelectedCipher(availableCiphers[nextIndex].displayName);
       setCipherAnimatingOut(false);
     }, 250);
   };
@@ -97,7 +92,7 @@ export function Echidna({
       // Decipher logic
       const cipherValues = availableCiphers;
       const index = cipherValues.findIndex(
-        (cipher) => cipher.name.toString() === selectedCipher
+        (cipher) => cipher.displayName === selectedCipher
       );
       const cipher = cipherValues[index];
       const newCipher = new cipher();
@@ -180,7 +175,7 @@ export function Echidna({
       {/* The wood, bakelite and aluminum base of the mighty "Echidna I" cipher machine */}
       <img src={echidnaBase} alt="Echidna Base" className="w-[100%]" />
       {/* Masks the text outside the bounds of the cipher-select rotor display */}
-      <div className="absolute top-[50%] left-[17.5%] h-[5.4%] w-[34.5%] px-[1.5%] py-[1%] overflow-hidden">
+      <div className="absolute top-[53.5%] left-[17.5%] h-[5.4%] w-[34.5%] px-[1.5%] py-[1%] overflow-hidden">
         {/* Cipher-select display, populated with available cipher options for current puzzle */}
         <AnimatePresence initial={false} mode="wait">
           <motion.p
@@ -202,7 +197,7 @@ export function Echidna({
       </div>
       {/* Cipher-select buttons */}
       {/* UP */}
-      <div className="absolute w-[9.5%] top-[47%] left-[57%] ">
+      <div className="absolute w-[9.5%] top-[51%] left-[57%] ">
         <EchidnaButton
           capImage={echidnaCipherButtonCapUp}
           baseImage={echidnaCipherButtonBase}
@@ -212,7 +207,7 @@ export function Echidna({
         />
       </div>
       {/* DOWN */}
-      <div className="absolute w-[9.5%] top-[52%] left-[57%] ">
+      <div className="absolute w-[9.5%] top-[56%] left-[57%] ">
         <EchidnaButton
           capImage={echidnaCipherButtonCapDown}
           baseImage={echidnaCipherButtonBase}
@@ -222,40 +217,43 @@ export function Echidna({
         />
       </div>
       {/* Solve lever */}
-      <div className="absolute w-[22%] top-[33%] left-[70%]">
+      <div className="absolute w-[24.4%] top-[51%] left-[69.52%]">
         <EchidnaSolveLever delay={solve_delay_ms} onClick={handleSolve} />
       </div>
       {/* Paper feed */}
-      <div className="absolute w-[50%] h-[20.4%] top-[6.5%] left-[15.5%] pt-[1%] overflow-hidden">
+      <div className="absolute w-[50%] h-[28%] top-[0%] left-[15.5%] pt-[5%] overflow-hidden">
         {/* Paper Motion */}
         <motion.div
+        className="absolute w-[100%] h-[100%] overflow-scroll"
+        initial={{ y: -1000 }}
+        key="paper_div"
+        animate={{ y: isSolveLeverDown ? 190 : 0 }}
+        transition={{ type: 'spring', stiffness: 1000, damping: 80 }}>
+          <motion.div
           className="absolute w-[100%]"
-          initial={{ y: -1000 }}
-          key="paper_div"
-          animate={{ y: isSolveLeverDown ? 75 : 0 }}
-          transition={{ type: 'spring', stiffness: 1000, damping: 80 }}
-        >
-          <img className="absolute w-[100%] top-[9%]" src={echidnaPaper} />
-          <p className="absolute font-[alagard] pt-[20%] left-[10%]">
-            {phrase}
-          </p>
+          >
+            <img className="absolute w-[100%] top-[9%]" src={echidnaPaper} />
+            <p className="absolute font-[alagard] pt-[10%] left-[10%]">
+              {phrase}
+            </p>
+          </motion.div>
         </motion.div>
-        <img
+      </div>
+      <img
           className="absolute w-[100%] opacity-[30%] h-[8%] top-[92%]"
           src={echidnaPaperShadow}
         />
-      </div>
       <img
         className="absolute w-[53%] h-[5%] top-[22.5%] left-[14%]"
         src={echidnaPaperFeedArms}
       />
       {/* Display */}
-      <div className="absolute w-[50%] h-[9%] top-[33.5%] left-[15.5%] px-[1%] py-[0.5%]">
+      <div className="absolute w-[69%] h-[12.2%] top-[34.4%] left-[15.5%] px-[1.5%] pl-[1.2%] pr-[3%] overflow-scroll">
         <AnimatePresence>
           {displayOn ? (
             <motion.p
               key={workingPhrase}
-              className="absolute text-[1.1rem] text-[#C1E7EB] font-[alagard] leading-tight"
+              className="absolute text-[1.2rem] text-[#C1E7EB] font-[alagard] leading-tight"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
               exit={{ opacity: [1, 0, 1, 0, 1, 0] }}
@@ -269,85 +267,25 @@ export function Echidna({
         </AnimatePresence>
       </div>
       {/* Reset Button */}
-      <div className="absolute w-[8.5%] top-[48%] left-[6%]">
+      <div className="absolute w-[18.5%] top-[21%] left-[71%]">
         <EchidnaButton
           capImage={echidnaResetButtonCap}
           baseImage={echidnaResetButtonBase}
           onClick={handleResetWorkingCipher}
         />
       </div>
-      {/* Auxilliary controls panel */}
-      <div className="absolute w-[55%] h-[21.2%] top-[60.9%] left-[13%] overflow-hidden">
-        <img src={echidnaAuxPanel} className="absolute w-[100%] h-[100%]" />
-        <AnimatePresence mode="wait">
-          {isAuxControls ? (
-            <motion.div
-              className="absolute w-[100%] h-[100%]"
-              initial={{ y: 1000 }}
-              key="aux_control_panel"
-              animate={{ y: 0 }}
-              transition={{ type: 'spring', stiffness: 1000, damping: 80 }}
-            >
-              {/* Keyword setting block */}
-              <p className="absolute font-[alagard] opacity-[40%] text-[1.2rem] top-[5%] left-[13%]">
-                Keyword
-              </p>
-              <img
-                src={echidnaAuxDisplayInput}
-                className="absolute w-[55%] h-[38%] top-[40%] left-[3%]"
-              />
-              <input
-                className="absolute w-[55%] h-[38%] top-[40%] left-[3%] bg-transparent font-[alagard] text-[0.9rem] text-[#C1E7EB] p-[5%] outline-none"
-                onChange={handleKeywordChange}
-              />
-              {/* Shift setting block */}
-              <p className="absolute font-[alagard] opacity-[40%] text-[1.2rem] top-[5%] right-[11%]">
-                Shift
-              </p>
-              {/* Shift setting block */}
-              <div className="absolute w-[15%] left-[82%] top-[35%]">
-                <EchidnaButton
-                  capImage={echidnaAuxButtonCapUp}
-                  baseImage={echidnaAuxButtonBase}
-                  onClick={() => {
-                    handleShift(1);
-                  }}
-                />
-              </div>
-              <div className="absolute w-[15%] left-[82%] top-[58%]">
-                <EchidnaButton
-                  capImage={echidnaAuxButtonCapDown}
-                  baseImage={echidnaAuxButtonBase}
-                  onClick={() => {
-                    handleShift(-1);
-                  }}
-                />
-              </div>
-              {/* Shift setting display */}
-              <div className="absolute w-[20%] h-[50%] top-[34%] left-[60%]">
-                <img
-                  src={echidnaAuxDisplay}
-                  className="absolute w-[100%] h-[100%]"
-                />
-                <motion.p
-                  className="absolute w-[100%] h-[100%] font-[alagard] text-[1.3rem] text-center text-[#C1E7EB] pt-[25%]"
-                  key={shift + 'shift'}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
-                  exit={{ opacity: [1, 0, 1, 0, 1, 0] }}
-                  transition={{ duration: 0.1 }}
-                >
-                  {shift}
-                </motion.p>
-              </div>
-            </motion.div>
-          ) : (
-            <></>
-          )}
-        </AnimatePresence>
+      <div>
+        {/* Auxilliary controls panel */}
+        <EchidnaAuxPanel 
+          currentCipher={selectedCipher}
+          handleKeywordChange={handleKeywordChange}
+          handleShift={handleShift}
+          showAuxControls={isAuxControls}
+          shift={shift}
+        />
       </div>
       {/* Solution lamps */}
-      <div className="absolute w-[25%] top-[11%] left-[63%]">
+      <div className="absolute w-[25%] top-[3.6%] left-[60%]">
         <img src={echidnaGreenLampOff} className="absolute w-[100%]" />
         <AnimatePresence mode="wait">
           {greenLampOn ? (
@@ -364,7 +302,7 @@ export function Echidna({
           )}
         </AnimatePresence>
       </div>
-      <div className="absolute w-[22%] top-[12.7%] left-[75%]">
+      <div className="absolute w-[22%] top-[5.4%] left-[75%]">
         <img src={echidnaRedLampOff} className="absolute w-[100%]" />
         <AnimatePresence mode="wait">
           {redLampOn ? (

@@ -1,4 +1,4 @@
-import { Screen } from '@/util';
+import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
 import lighting from '../../assets/room/active_game/lighting.png';
@@ -18,6 +18,8 @@ import ConspiracyBoard, { ConspiracyBoardData } from '../desk/ConspiracyBoard';
 import Keith from '../../assets/common/Keiththerat.png';
 import Purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import Caperton from '../../assets/common/CapybaraFella.png';
+import * as ciphersExports from '@/ciphers/ciphers';
+import Echidna from '../ui/echidna';
 
 interface GameScreenProps {
   handleScreenButtonClick: (
@@ -26,12 +28,20 @@ interface GameScreenProps {
   ) => void;
   level: number;
   handleReturnScreen: (screen: Screen) => void;
+  phrase: string;
+  puzzleIndex: number;
+  handleSolvedPuzzle: () => void;
+  story: Story;
 }
 
 export default function GameScreen({
   handleScreenButtonClick,
   level,
-  handleReturnScreen
+  handleReturnScreen,
+  phrase,
+  puzzleIndex,
+  handleSolvedPuzzle,
+  story
 }: GameScreenProps) {
   handleReturnScreen(Screen.GameScreen);
 
@@ -106,8 +116,6 @@ export default function GameScreen({
       exit={{ opacity: 0 }}
     >
       {/* Interactive Components */}
-      {/* To do: Link conspiracy board */}
-      {/* Conspiracy board asset linked to conspiracy board system */}
       <div className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer">
         <ConspiracyBoard boardData={boardData} maxNotes={7}>
           <img
@@ -129,12 +137,11 @@ export default function GameScreen({
       </div>
       {/* Exit sign to go back to main game page */}
       <div
-        className="absolute left-[87%] scale-[200%]"
+        className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
         onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
       >
         <img src={exitSign} alt="Exit" />
       </div>
-      {/* To do: add ECHIDNA */}
 
       {/* Non-Interactive filler assets */}
       <img
@@ -160,6 +167,18 @@ export default function GameScreen({
         className="absolute scale-[450%] top-[31%] left-[95%]"
         src={pencilHolder}
       />
+
+      {/* ECHIDNA machine at the bottom so it is the highest element */}
+      <div className="absolute w-[40%] left-[30%]">
+        <Echidna
+          availableCiphers={Object.values(ciphersExports)}
+          handleSolvedPuzzle={handleSolvedPuzzle}
+          phrase={phrase}
+          solution={story.puzzles[puzzleIndex].solution}
+          solve_delay_ms={500}
+          showAuxControls={true}
+        />
+      </div>
 
       {/* Lighting layer */}
       <div

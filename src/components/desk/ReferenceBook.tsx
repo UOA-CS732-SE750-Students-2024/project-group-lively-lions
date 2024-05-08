@@ -96,7 +96,7 @@ export function ReferenceBook({
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide w-[90%]"
-        onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
+        onClick={(e) => handleScreenButtonClick(returnToScreen, e)}
         size={'sm'}
       >
         EXIT

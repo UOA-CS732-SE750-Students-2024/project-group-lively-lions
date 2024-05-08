@@ -9,6 +9,7 @@ import { useState } from 'react';
 import shadow from '../../assets/room/shared/pop_up_shadow.png';
 import lamp from '../../assets/room/main_menu/lamp.png';
 import lighting from '../../assets/room/main_menu/lighting.png';
+import lightingOff from '../../assets/room/main_menu/lighting_off.png';
 import paper from '../../assets/room/shared/crumpled_paper.png';
 import pencilHolder from '../../assets/room/shared/pencil_holder.png';
 import milk from '../../assets/room/shared/milk.png';
@@ -38,6 +39,7 @@ export default function MainGamePage({
 
   const [thoughtShowing, setThoughtShowing] = useState(false);
   const [thought, setThought] = useState<string>('');
+  const [lightOn, setLightOn] = useState(true);
 
   handleReturnScreen(Screen.MainGamePage);
 
@@ -61,8 +63,8 @@ export default function MainGamePage({
       }}
       exit={{ opacity: 0 }}
     >
-      {/* Non interactive visual items lower in scene order*/}
-      <img className="absolute right-0" src={lamp} alt="lamp" />
+      {/* visual items lower in scene order*/}
+      <img className="absolute right-0 cursor-pointer" onClick={() => setLightOn(!lightOn)} src={lamp} alt="lamp" />
       <img className="absolute bottom-0 w-screen" src={table} alt="table" />
 
       {/* Main interactive elements */}
@@ -177,7 +179,7 @@ export default function MainGamePage({
       <div
         className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
         style={{
-          backgroundImage: `url(${lighting})`,
+          backgroundImage: `url(${lightOn ? lighting : lightingOff})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           imageRendering: 'auto'
