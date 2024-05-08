@@ -5,7 +5,6 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import phoneCall from '../../assets/sounds/phonecall.mp4';
 
 const Dialog = DialogPrimitive.Root;
 
@@ -30,8 +29,6 @@ const DialogOverlay = React.forwardRef<
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-const phoneCallSound = new Audio(phoneCall);
-
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
@@ -47,7 +44,7 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close onFocus={() => phoneCallSound.play()} onClick={() => { phoneCallSound.pause() }} className="absolute right-4 top-4 inline-block box-border after:content-[''] after:block after:absolute after:box-border [box-shadow:0_-4px_#fff,_0_-8px_#000,_4px_0_#fff,_4px_-4px_#000,_8px_0_#000,_0_4px_#fff,_0_8px_#000,_-4px_0_#fff,_-4px_4px_#000,_-8px_0_#000,_-4px_-4px_#000,_4px_4px_#000,_4px_12px_rgba(0,0,0,0.1),_12px_4px_rgba(0,0,0,0.1),_8px_8px_rgba(0,0,0,0.1)] after:h-[4px] after:w-[4px] after:top-[20px] after:-left-[8px]">
+      <DialogPrimitive.Close className="absolute right-4 top-4 inline-block box-border after:content-[''] after:block after:absolute after:box-border [box-shadow:0_-4px_#fff,_0_-8px_#000,_4px_0_#fff,_4px_-4px_#000,_8px_0_#000,_0_4px_#fff,_0_8px_#000,_-4px_0_#fff,_-4px_4px_#000,_-8px_0_#000,_-4px_-4px_#000,_4px_4px_#000,_4px_12px_rgba(0,0,0,0.1),_12px_4px_rgba(0,0,0,0.1),_8px_8px_rgba(0,0,0,0.1)] after:h-[4px] after:w-[4px] after:top-[20px] after:-left-[8px]">
         <X className="h-4 w-4 bg-white" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>

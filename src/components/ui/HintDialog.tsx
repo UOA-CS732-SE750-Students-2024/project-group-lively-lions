@@ -1,5 +1,5 @@
 import SpeechBubble from './SpeechBubble';
-import { Dialog, DialogContent, DialogFooter, DialogTrigger } from './dialog';
+import { Dialog, DialogContent, DialogFooter, DialogTrigger } from './phoneDialog';
 import { AnimatePresence, motion } from 'framer-motion';
 import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import caperton from '../../assets/common/CapybaraFella.png';
