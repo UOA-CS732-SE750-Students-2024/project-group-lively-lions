@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MainMenuScreen from './components/levels/MainMenuScreen';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/desk/LevelSelect';
@@ -22,6 +22,26 @@ function App() {
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+
+  useEffect(() => {
+    createGuestProfile();
+  }, []);
+
+  function createGuestProfile() {
+    // Check if 'profile' object exists in local storage
+    const existingProfile = localStorage.getItem('profile');
+    console.log(existingProfile);
+    if (!existingProfile) {
+      // If 'profile' object doesn't exist, create a default guest profile and save it to local storage
+      const defaultProfile = { "profile": {
+        username: 'guest',
+        password: 'guest_password',
+        completed_puzzles: []
+      }};
+      localStorage.setItem('profile', JSON.stringify(defaultProfile));
+    };
+  };
+
   const screens = [
     <MainMenuScreen
       key="mainMenu"
@@ -42,7 +62,6 @@ function App() {
     <PlayerInfo
       key="playerInfo"
       handleScreenButtonClick={handleScreenButtonClick}
-      handleConfirm={handleConfirm}
     />,
     <LevelSelect
       key="levelSelect"
@@ -93,6 +112,7 @@ function App() {
       story={currentStory}
     />
   ];
+
   function encodePhrase(puzzle: Puzzle) {
     const puzzleCipher = puzzle.cipher;
     const puzzleSolution = puzzle.solution;

@@ -25,20 +25,37 @@ export function SignIn({ handleScreenButtonClick}: SignInProps) {
   const [data, setData] = useState(null);
 
   const handleConfirm = () => {
-    fetch(`${SERVER_MONGODB_URI}/player?username=${username}&password=${password}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        setData(data);
-        console.log(data); // Moved console.log inside the .then() block
-      })
-      .catch(error => {
-        console.error(error); // Changed console.log to console.error for errors
-      });
+    const existingPlayerInfo = localStorage.getItem('profile');
+
+    if (existingPlayerInfo) {
+      // Parse the existing player information from local storage
+      const existingPlayerData = JSON.parse(existingPlayerInfo);
+
+      // Check if the existing account is a guest account
+      if (existingPlayerData.profile.username === 'guest') {
+        fetch(`${SERVER_MONGODB_URI}/player?username=${username}&password=${password}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            setData(data);
+            console.log(data); // Moved console.log inside the .then() block
+            // If it's a guest account, remove it from local storage
+            localStorage.removeItem('profile');
+            localStorage.setItem('profile', JSON.stringify({ profile: data }));
+          })
+          .catch(error => {
+            alert("Username or password is incorrect.")
+
+          });
+      } else {
+        // If it's not a guest account, prompt the user to log out first
+        alert('Please log out before logging in with a new account.');
+      };
+    };
   };
 
   return (
