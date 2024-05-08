@@ -10,21 +10,15 @@ import echidnaPaper from '/echidna_paper.png?url';
 import echidnaPaperShadow from '/echidna_paper_shadow.png?url';
 import echidnaRedLampOff from '/echidna_red_lamp_off.png?url';
 import echidnaRedLampOn from '/echidna_red_lamp_on.png?url';
-import echidnaAuxButtonBase from '/echidna_aux_button_base.png?url';
-import echidnaAuxButtonCapDown from '/echidna_aux_button_cap_down.png?url';
-import echidnaAuxButtonCapUp from '/echidna_aux_button_cap_up.png?url';
-import echidnaAuxDisplayInput from '/echidna_aux_display_input.png?url';
-import echidnaAuxDisplay from '/echidna_aux_display.png?url';
 import echidnaResetButtonBase from '/echidna_reset_button_base.png?url';
 import echidnaResetButtonCap from '/echidna_reset_button_cap.png?url';
-import echidnaAuxPanel from '/echidna_aux_panel.png?url';
-import echidnaAuxEngraving from '/echidna_aux_engraving.png?url'
 
 import { AnimatePresence, motion } from 'framer-motion';
 import EchidnaButton from './echidna_button';
 import EchidnaSolveLever from './echidna_solve_lever';
 import * as ciphersExports from '../../ciphers/ciphers';
 import { CipherType } from '../../ciphers/Cipher';
+import EchidnaAuxPanel from './echidna_aux_panel';
 
 interface EchidnaProps {
   solve_delay_ms: number;
@@ -280,75 +274,15 @@ export function Echidna({
           onClick={handleResetWorkingCipher}
         />
       </div>
-      {/* Auxilliary controls panel */}
-      <div className="absolute w-[55%] h-[18.2%] top-[64.1%] left-[13%] overflow-hidden">
-        <img src={echidnaAuxPanel} className="absolute w-[100%] h-[100%]" />
-        <AnimatePresence mode="wait">
-          {isAuxControls ? (
-            <motion.div
-              className="absolute w-[100%] h-[100%]"
-              initial={{ y: 1000 }}
-              key="aux_control_panel"
-              animate={{ y: 0 }}
-              transition={{ type: 'spring', stiffness: 1000, damping: 80 }}
-            >
-              {/* Keyword setting block */}
-              <p className="absolute font-[alagard] opacity-[40%] text-[1.2rem] top-[5%] left-[13%]">
-                Keyword
-              </p>
-              <img
-                src={echidnaAuxDisplayInput}
-                className="absolute w-[55%] h-[38%] top-[40%] left-[3%]"
-              />
-              <input
-                className="absolute w-[55%] h-[38%] top-[40%] left-[3%] bg-transparent font-[alagard] text-[0.9rem] text-[#C1E7EB] p-[5%] outline-none"
-                onChange={handleKeywordChange}
-              />
-              {/* Shift setting block */}
-              <p className="absolute font-[alagard] opacity-[40%] text-[1.2rem] top-[5%] right-[11%]">
-                Shift
-              </p>
-              {/* Shift setting controls */}
-              <div className="absolute w-[15%] left-[82%] top-[37%]">
-                <EchidnaButton
-                  capImage={echidnaAuxButtonCapUp}
-                  baseImage={echidnaAuxButtonBase}
-                  onClick={() => {
-                    handleShift(1);
-                  }}
-                />
-              </div>
-              <div className="absolute w-[15%] left-[82%] top-[60%]">
-                <EchidnaButton
-                  capImage={echidnaAuxButtonCapDown}
-                  baseImage={echidnaAuxButtonBase}
-                  onClick={() => {
-                    handleShift(-1);
-                  }}
-                />
-              </div>
-              {/* Shift setting display */}
-              <div className="absolute w-[20%] h-[57%] top-[34%] left-[60%]">
-                <img
-                  src={echidnaAuxDisplay}
-                  className="absolute w-[100%] h-[100%]"
-                />
-                <motion.p
-                  className="absolute w-[100%] h-[100%] font-[alagard] text-[1.3rem] text-center text-[#C1E7EB] pt-[25%]"
-                  key={shift + 'shift'}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: [0, 1, 0, 1, 0, 1] }}
-                  exit={{ opacity: [1, 0, 1, 0, 1, 0] }}
-                  transition={{ duration: 0.1 }}
-                >
-                  {shift}
-                </motion.p>
-              </div>
-            </motion.div>
-          ) : (
-            <></>
-          )}
-        </AnimatePresence>
+      <div>
+        {/* Auxilliary controls panel */}
+        <EchidnaAuxPanel 
+          currentCipher={selectedCipher}
+          handleKeywordChange={handleKeywordChange}
+          handleShift={handleShift}
+          showAuxControls={isAuxControls}
+          shift={shift}
+        />
       </div>
       {/* Solution lamps */}
       <div className="absolute w-[25%] top-[3.6%] left-[60%]">
