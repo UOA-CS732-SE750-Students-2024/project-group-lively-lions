@@ -42,7 +42,6 @@ export function HoverFolder({
     const story = getStory(levelIndex);
     userProfile.profile.completed_puzzles;
     let count = 0;
-
     for (let i = 0; i < story.puzzles.length; i++) {
       for (let j = 0; j < userProfile.profile.completed_puzzles.length; j++) {
         if (story.puzzles[i].id === userProfile.profile.completed_puzzles[j]) {

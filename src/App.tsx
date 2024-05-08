@@ -164,8 +164,24 @@ function App() {
     setCurrentLevel(level);
     const story = getStory(level);
     setCurrentStory(story);
-    setCurrentPuzzleIndex(0);
-    setCurrentEncodedPhrase(encodePhrase(story.puzzles[0]));
+
+    // Check the completed puzzles in the profile
+    const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+    const completedPuzzles = userProfile.profile.completed_puzzles;
+    //of the completed puzzles, which is the highest.
+
+    let count = 0;
+    for (let i = 0; i < story.puzzles.length; i++) {
+      for (let j = 0; j < completedPuzzles.length; j++) {
+        if (story.puzzles[i].id === completedPuzzles[j]) {
+          count++;
+        }
+      }
+    }
+    const index = count;
+
+    setCurrentPuzzleIndex(index);
+    setCurrentEncodedPhrase(encodePhrase(story.puzzles[index]));
     e.preventDefault();
   }
 
@@ -187,8 +203,13 @@ function App() {
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
     const userProfile = JSON.parse(localStorage.getItem('profile') || '');
-    userProfile.profile.completed_puzzles.push(puzzles[currentPuzzleIndex].id);
-    console.log(userProfile);
+
+    const puzzleId = puzzles[currentPuzzleIndex].id;
+    if (!userProfile.profile.completed_puzzles.includes(puzzleId)) {
+      userProfile.profile.completed_puzzles.push(puzzleId);
+    } else {
+      console.log('puzzle already solved');
+    }
 
     localStorage.setItem('profile', JSON.stringify(userProfile));
     if (index < puzzles.length) {
