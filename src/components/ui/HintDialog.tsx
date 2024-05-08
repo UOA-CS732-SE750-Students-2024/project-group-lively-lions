@@ -1,10 +1,10 @@
-import SpeechBubble from './speech_bubble';
+import SpeechBubble from './SpeechBubble';
 import { Dialog, DialogContent, DialogFooter, DialogTrigger } from './dialog';
-import { Button } from './button';
 import { AnimatePresence, motion } from 'framer-motion';
 import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import caperton from '../../assets/common/CapybaraFella.png';
-import { WoodenCard } from './wooden_card';
+import { WoodenCard } from './WoodenCard';
+import Phone from '../mainpage/Phone';
 
 export interface Message {
   sender: string;
@@ -24,7 +24,9 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Transcript</Button>
+        <div style={{ imageRendering: 'pixelated', cursor: 'pointer' }}>
+          <Phone />
+        </div>
       </DialogTrigger>
       <DialogContent className="flex flex-row place-items-center justify-between min-w-[960px] min-h-[540px] w-[calc(60vw)] h-[calc(60vw*9/16)] bg-slate-500 bg-opacity-10 border-none">
         {/* Left Sprite */}
@@ -43,7 +45,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
           </motion.div>
         </WoodenCard>
         {/* The dialog */}
-        <div className="max-h-full p-2 overflow-auto scroll-smooth scrollbar">
+        <div className="max-h-full p-2 overflow-auto scroll-smooth no-scrollbar">
           <AnimatePresence>
             {transcript.messages.map((message, index) => (
               <motion.div
@@ -58,7 +60,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
               >
                 <SpeechBubble
                   text={message.text}
-                  arrow={index % 2 === 0 ? 'left' : 'right'}
+                  arrow={message.sender === 'Purrlock' ? 'left' : 'right'}
                 />
               </motion.div>
             ))}

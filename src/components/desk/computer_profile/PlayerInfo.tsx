@@ -1,7 +1,8 @@
 import { Button } from '../../ui/button';
 import { useState } from 'react';
-import { TextField } from '../../ui/text_field';
+import { TextField } from '../../ui/TextField';
 import { Screen } from '@/util';
+import computer_screen_border from '../../../assets/room/main_menu/computer/computer_screen_border.png';
 
 /* 
 This is the component for the player info menu. It allows the user to view profile details.
@@ -33,41 +34,52 @@ export function PlayerInfo({
   const [password, setPassword] = useState('');
 
   return (
-    <div>
-      <form>
-        <p>Identity:</p>
-        <TextField
-          value={username}
-          onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setUsername(e.target.value)
-          }
-          placeholder={'Username'}
+    <div className="flex justify-center items-center">
+      <div className="absolute inset-0">
+        <img
+          className="w-[100%]"
+          src={computer_screen_border}
+          draggable={false}
         />
-        <p>Password:</p>
-        <TextField
-          value={password}
-          onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPassword(e.target.value)
-          }
-          placeholder={'Password'}
-        />
-      </form>
-      <p>Game Completion Percentage: </p>
-      <p>Hints Used: </p>
-      <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleConfirm(username, password, e)}
-        size={'sm'}
-      >
-        CONFIRM CHANGES
-      </Button>
-      <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
-        size={'sm'}
-      >
-        BACK
-      </Button>
+      </div>
+      <div className="absolute inset-0 flex justify-center items-center flex-col">
+        <form>
+          <p className="font-[alagard] text-[1.5rem]">Identity:</p>
+          <TextField
+            value={username}
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setUsername(e.target.value)
+            }
+            placeholder={'Username'}
+          />
+          <p className="font-[alagard] text-[1.5rem]">Password:</p>
+          <TextField
+            value={password}
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
+            placeholder={'Password'}
+          />
+        </form>
+        <p className="font-[alagard] text-[1.5rem]">
+          Game Completion Percentage:{' '}
+        </p>
+        <p className="font-[alagard] text-[1.5rem]">Hints Used: </p>
+        <Button
+          className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[50%]"
+          onClick={(e) => handleConfirm(username, password, e)}
+          size={'sm'}
+        >
+          CONFIRM CHANGES
+        </Button>
+        <Button
+          className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[50%]"
+          onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
+          size={'sm'}
+        >
+          BACK
+        </Button>
+      </div>
     </div>
   );
 }

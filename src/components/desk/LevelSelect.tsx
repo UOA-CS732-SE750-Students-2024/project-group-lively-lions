@@ -1,22 +1,28 @@
 import { HoverFolder } from '../ui/HoverFolder';
-import { Button } from '../ui/button';
 import { useState } from 'react';
 import drawer_face_sprite from '../../assets/level-select/drawer_face_sprite.png';
 import { motion } from 'framer-motion';
-import { Screen } from '@/util';
+import { Screen, Story } from '@/util';
 import filing_cabinet_close from '../../assets/sounds/filing_cabinet_close.mp3';
 
 interface LevelSelectProps {
-  handleScreenButtonClick: (screen: Screen, event: React.MouseEvent) => void;
+  handleScreenButtonClick: (
+    screen: Screen,
+    event: React.MouseEvent<HTMLElement>
+  ) => void;
   handleLevel: (
+    // eslint-disable-next-line no-unused-vars
     level: number,
+    // eslint-disable-next-line no-unused-vars
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  story: Story;
 }
 
 export function LevelSelect({
   handleScreenButtonClick,
-  handleLevel
+  handleLevel,
+  story
 }: LevelSelectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
@@ -52,6 +58,8 @@ export function LevelSelect({
                 setClickedIndex={setClickedIndex}
                 levelIndex={index}
                 handleLevel={handleLevel}
+                story={story}
+                handleScreenButtonClick={handleScreenButtonClick}
               />
             ))}
           </div>
@@ -64,7 +72,7 @@ export function LevelSelect({
             className="w-[100%] bottom-0 hover:scale-105 duration-300"
             src={drawer_face_sprite}
             onClick={(e: React.MouseEvent<HTMLImageElement>) => {
-              handleScreenButtonClick(Screen.MainMenuScreen, e);
+              handleScreenButtonClick(Screen.MainGamePage, e);
               play_sound();
             }}
             draggable={false}

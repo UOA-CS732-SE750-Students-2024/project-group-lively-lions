@@ -1,5 +1,6 @@
 import { Screen } from '@/util';
 import { Button } from '../ui/button';
+import { Story } from '@/util';
 
 /* 
 This is the component for the puzzle page. This comment will need to be updated.
@@ -10,9 +11,13 @@ interface PuzzlePageProps {
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  story: Story;
 }
 
-export function PuzzlePage({ handleScreenButtonClick }: PuzzlePageProps) {
+export function PuzzlePage({
+  handleScreenButtonClick,
+  story
+}: PuzzlePageProps) {
   return (
     <div>
       <p>PUZZLE PAGE</p>

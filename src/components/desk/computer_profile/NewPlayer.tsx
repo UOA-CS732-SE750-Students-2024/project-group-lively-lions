@@ -1,7 +1,8 @@
 import { Button } from '../../ui/button';
 import { useState } from 'react';
-import { TextField } from '../../ui/text_field';
+import { TextField } from '../../ui/TextField';
 import { Screen } from '@/util';
+import computer_screen_border from '../../../assets/room/main_menu/computer/computer_screen_border.png';
 
 /* 
 This is the component for the new player menu. It allows the creation of a new player profile.
@@ -48,39 +49,55 @@ export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
   };
 
   return (
-    <div>
-      <form>
-        <p>New Identity Name:</p>
-        <TextField
-          value={username}
-          onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setUsername(e.target.value)
-          }
-          placeholder={'Username'}
+    <div className="flex justify-center items-center">
+      <div className="absolute inset-0">
+        <img
+          className="w-[100%]"
+          src={computer_screen_border}
+          draggable={false}
         />
-        <p>New Identity Password:</p>
-        <TextField
-          value={password}
-          onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPassword(e.target.value)
-          }
-          placeholder={'Password'}
-        />
-      </form>
-      <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={handleConfirm}
-        size={'sm'}
-      >
-        CONFIRM
-      </Button>
-      <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
-        size={'sm'}
-      >
-        BACK
-      </Button>
+      </div>
+      <div className="absolute inset-0 flex justify-center items-center flex-col">
+        <Button
+          className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[40%]"
+          onClick={(e) => handleScreenButtonClick(Screen.SignIn, e)}
+          size={'sm'}
+        >
+          SIGN IN TO EXISTING PROFILE
+        </Button>
+        <form>
+          <p className="font-[alagard] text-[1.5rem]">New Identity Name:</p>
+          <TextField
+            value={username}
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setUsername(e.target.value)
+            }
+            placeholder={'Username'}
+          />
+          <p className="font-[alagard] text-[1.5rem]">New Identity Password:</p>
+          <TextField
+            value={password}
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
+            placeholder={'Password'}
+          />
+        </form>
+        <Button
+          className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[50%]"
+          onClick={handleConfirm}
+          size={'sm'}
+        >
+          CONFIRM
+        </Button>
+        <Button
+          className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[50%]"
+          onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
+          size={'sm'}
+        >
+          BACK
+        </Button>
+      </div>
     </div>
   );
 }
