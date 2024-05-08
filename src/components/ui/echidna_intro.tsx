@@ -4,7 +4,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import echidnaLid from '/echidna_lid.png?url';
 
-function EchidnaIntro() {
+interface EchidnaIntroProps{
+  handleContinue: () => void;
+}
+
+function EchidnaIntro({
+  handleContinue
+}: EchidnaIntroProps) {
   const [liftLid, setLiftLid] = useState<boolean>(false);
   const [liftEchidna, setLiftEchidna] = useState<boolean>(false);
 
@@ -12,7 +18,7 @@ function EchidnaIntro() {
     setLiftLid(true);
   };
 
-  const handleNextLevel = () => {
+  const handleSolvedPuzzle = () => {
     setTimeout(() => {
       setLiftEchidna(true);
     }, 1500);
@@ -31,7 +37,7 @@ function EchidnaIntro() {
             <Echidna
               availableCiphers={[ciphers.Binary]}
               handleSolvedPuzzle={() => {
-                handleNextLevel();
+                handleSolvedPuzzle();
               }}
               phrase="01001101 01100101 01101111 01110111"
               solution="Meow"
