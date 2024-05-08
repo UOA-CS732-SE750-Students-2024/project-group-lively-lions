@@ -16,7 +16,7 @@ interface EchidnaIntroProps{
 function EchidnaIntro({
   handleContinue,
   startDelay = 1000,
-  liftDelay = 2000,
+  liftDelay = 1500,
   titleCardDelay = 1000,
   startGameDelay = 4000,
 }: EchidnaIntroProps) {
@@ -48,7 +48,11 @@ function EchidnaIntro({
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <motion.div className="flex flex-col items-center"
+    initial={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ type: 'easeOut', duration: 2 }}
+    >
       <AnimatePresence mode="wait">
         {!liftEchidna ? (
           <motion.div
@@ -57,7 +61,7 @@ function EchidnaIntro({
             initial={{ y: -800 }}
             animate={{ y: 0 }}
             exit={{ y: -800 }}
-            transition={{ duration: 1 }}
+            transition={{ type: 'easeInOut', duration: 0.6 }}
           >
             <Echidna
               availableCiphers={[ciphers.Binary]}
@@ -112,7 +116,7 @@ function EchidnaIntro({
           <></>
         }
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 

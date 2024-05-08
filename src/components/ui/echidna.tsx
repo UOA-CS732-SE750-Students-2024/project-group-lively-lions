@@ -175,9 +175,10 @@ export function Echidna({
 
   return (
     /* Centers component with some top padding */
-    <div className={`absolute w-[100%] pt-[5%]`}>
+    <div className='absolute w-[100%] pt-[5%]'>
       {/* The wood, bakelite and aluminum base of the mighty "Echidna I" cipher machine */}
       <img src={echidnaBase} alt="Echidna Base" className="w-[100%]" />
+      {/* Cipher-select Section */}
       {/* Masks the text outside the bounds of the cipher-select rotor display */}
       <div className="absolute top-[53.5%] left-[17.5%] h-[5.4%] w-[34.5%] px-[1.5%] py-[1%] overflow-hidden">
         {/* Cipher-select display, populated with available cipher options for current puzzle */}
@@ -229,22 +230,22 @@ export function Echidna({
         <EchidnaSolveLever delay={solve_delay_ms} onClick={() => { if (active) handleSolve()}} />
       </div>
       {/* Paper feed */}
-      <div className="absolute w-[50%] h-[28%] top-[0%] left-[15.5%] overflow-hidden">
+      <div className="absolute w-[50%] h-[28%] left-[15.5%] top-[0%] overflow-hidden">
         {/* Paper Motion */}
         <AnimatePresence mode='wait'>
           { active ? 
           <motion.div
-          className="absolute w-[98%] h-[100%] left-[1%] top-[10%] overflow-scroll no-scrollbar"
+          className="absolute w-[98%] h-[100%] left-[1%] top-[0%] overflow-scroll no-scrollbar"
           key="paper_div"
           initial={{ y: -500 }}
           exit={{ y: -500, transition: { ease: 'easeIn', duration: 0.6 }}}
           animate={{ y: isSolveLeverDown ? 120 : 0 }}
           transition={{ type: 'spring', stiffness: 1000, damping: 80 }}>
             <motion.div
-            className="absolute w-[100%]"
+            className="absolute w-[100%] h-[100%]"
             >
-              <img className="absolute w-[100%] top-[9%]" src={echidnaPaper} />
-              <p className="absolute font-[alagard] text-[0.9rem] pt-[10%] px-[5%] left-[0%] [overflow-wrap:anywhere] leading-tight">
+              <img className="absolute w-[100%] top-[25%]" src={echidnaPaper} />
+              <p className="absolute font-[alagard] text-[0.9rem] pt-[30%] px-[5%] left-[0%] [overflow-wrap:anywhere] leading-tight">
                 {phrase}
               </p>
             </motion.div>
