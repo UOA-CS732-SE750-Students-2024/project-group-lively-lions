@@ -140,32 +140,54 @@ export default function GameScreen({
         className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
         onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
       >
-        <img src={exitSign} alt="Exit" />
+        <img
+          className="hover:scale-105 active:scale-110 cursor-pointer "
+          src={exitSign}
+          alt="Exit"
+          draggable={false}
+        />
       </div>
 
       {/* Non-Interactive filler assets */}
       <img
         className="absolute scale-[400%] top-[32%] left-[-1%]"
         src={pencilHolder}
+        draggable={false}
       />
-      <img className="absolute scale-[150%] top-[48%] left-[-2%]" src={paper} />
-      <img className="absolute scale-[160%] top-[51%] left-[6%]" src={paper} />
-      <img className="absolute scale-[380%] top-[34%] left-[31%]" src={milk} />
+      <img
+        className="absolute scale-[150%] top-[48%] left-[-2%]"
+        src={paper}
+        draggable={false}
+      />
+      <img
+        className="absolute scale-[160%] top-[51%] left-[6%]"
+        src={paper}
+        draggable={false}
+      />
+      <img
+        className="absolute scale-[380%] top-[34%] left-[31%]"
+        src={milk}
+        draggable={false}
+      />
       <img
         className="absolute scale-[200%] top-[40%] left-[65%]"
         src={blueYarn}
+        draggable={false}
       />
       <img
         className="absolute scale-[200%] top-[44%] left-[72%]"
         src={purpleYarn}
+        draggable={false}
       />
       <img
         className="absolute scale-[270%] top-[38%] left-[83%]"
         src={coffee}
+        draggable={false}
       />
       <img
         className="absolute scale-[450%] top-[31%] left-[95%]"
         src={pencilHolder}
+        draggable={false}
       />
 
       {/* ECHIDNA machine at the bottom so it is the highest element */}

@@ -28,15 +28,13 @@ interface MainGamePageProps {
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  handleReturnScreen: (
-    screen: Screen
-  ) => void;
+  handleReturnScreen: (screen: Screen) => void;
 }
 
 export default function MainGamePage({
-  handleScreenButtonClick, handleReturnScreen
+  handleScreenButtonClick,
+  handleReturnScreen
 }: MainGamePageProps) {
-
   const [thoughtShowing, setThoughtShowing] = useState(false);
   const [thought, setThought] = useState<string>('');
   const [lightOn, setLightOn] = useState(true);
@@ -64,8 +62,19 @@ export default function MainGamePage({
       exit={{ opacity: 0 }}
     >
       {/* visual items lower in scene order*/}
-      <img className="absolute right-0 cursor-pointer" onClick={() => setLightOn(!lightOn)} src={lamp} alt="lamp" />
-      <img className="absolute bottom-0 w-screen" src={table} alt="table" />
+      <img
+        className="absolute right-0 cursor-pointer"
+        onClick={() => setLightOn(!lightOn)}
+        src={lamp}
+        alt="lamp"
+        draggable={false}
+      />
+      <img
+        className="absolute bottom-0 w-screen"
+        src={table}
+        alt="table"
+        draggable={false}
+      />
 
       {/* Main interactive elements */}
       {/* Conspiracy board shows thought about usage in game */}
@@ -79,6 +88,7 @@ export default function MainGamePage({
           }
           src={conspiracyBoard}
           alt="conspiracy board"
+          draggable={false}
         />
       </div>
       {/* Cabinet leads to level select screen */}
@@ -111,21 +121,51 @@ export default function MainGamePage({
       </div>
 
       {/* Non interactive visual items higher in scene order*/}
-      <img className="absolute top-[74%] left-[3%]" src={paper} />
-      <img className="absolute top-[77%] scale-[110%]" src={paper} />
-      <img className="absolute top-[68%] left-[9%] scale-[95%]" src={paper} />
-      <img className="absolute top-[69%] left-[12%] scale-[80%]" src={paper} />
+      <img
+        className="absolute top-[74%] left-[3%]"
+        src={paper}
+        draggable={false}
+      />
+      <img
+        className="absolute top-[77%] scale-[110%]"
+        src={paper}
+        draggable={false}
+      />
+      <img
+        className="absolute top-[68%] left-[9%] scale-[95%]"
+        src={paper}
+        draggable={false}
+      />
+      <img
+        className="absolute top-[69%] left-[12%] scale-[80%]"
+        src={paper}
+        draggable={false}
+      />
       <img
         className="absolute scale-[210%] top-[46%] left-[19%]"
         src={pencilHolder}
+        draggable={false}
       />
-      <img className="absolute top-[56%] left-[18%] scale-[85%]" src={paper} />
-      <img className="absolute top-[59%] left-[21%]" src={paper} />
+      <img
+        className="absolute top-[56%] left-[18%] scale-[85%]"
+        src={paper}
+        draggable={false}
+      />
+      <img
+        className="absolute top-[59%] left-[21%]"
+        src={paper}
+        draggable={false}
+      />
       <img
         className="absolute scale-[230%] top-[49%] left-[68%]"
         src={pencilHolder}
+        draggable={false}
       />
-      <img className="absolute top-[79%] left-[93%] scale-[125%]" src={paper} />
+      <img
+        className="absolute top-[79%] left-[93%] scale-[125%]"
+        src={paper}
+        draggable={false}
+      />
 
       {/* Interactive visual filler items high in scene order*/}
       <img
@@ -134,6 +174,7 @@ export default function MainGamePage({
           configureThought('Mmmmmmmmmmmilkk, I simply must buy some more.')
         }
         src={milk}
+        draggable={false}
       />
       <img
         className="absolute top-[50%] left-[61%] scale-[160%] cursor-pointer"
@@ -143,12 +184,14 @@ export default function MainGamePage({
           )
         }
         src={coffee}
+        draggable={false}
       />
       {/* Cat Heaven */}
       <img
         className="absolute top-[65%] left-[90%] scale-[160%] cursor-pointer"
         onClick={() => configureThought('Now wait just a meowment…')}
         src={greenYarn}
+        draggable={false}
       />
       <img
         className="absolute top-[72%] left-[87%] scale-[160%] cursor-pointer"
@@ -156,11 +199,13 @@ export default function MainGamePage({
           configureThought('That case was a total cat-astrophe!!!')
         }
         src={redYarn}
+        draggable={false}
       />
       <img
         className="absolute top-[51%] left-[47%] scale-[160%] cursor-pointer"
         onClick={() => configureThought("Meow you're talking!")}
         src={blueYarn}
+        draggable={false}
       />
       <img
         className="absolute top-[53%] left-[53%] scale-[160%] cursor-pointer"
@@ -168,11 +213,13 @@ export default function MainGamePage({
           configureThought('I need a meowtini. Shaken, not purred, of course.')
         }
         src={purpleYarn}
+        draggable={false}
       />
       <img
         className="absolute top-[78%] left-[9%] scale-[150%] cursor-pointer"
         onClick={() => configureThought('This case will go down in hiss-tory!')}
         src={pinkYarn}
+        draggable={false}
       />
 
       {/* Lighting layer */}
