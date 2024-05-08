@@ -1,27 +1,18 @@
-import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
-import { Button } from '../ui/button';
 import EchidnaIntro from '../ui/echidna_intro';
-import { WoodenCard } from '../ui/WoodenCard';
-import { randomTagline } from '@/lib/taglines';
 import { Screen } from '@/util';
 
 interface LandingScreenProps {
-  handleScreenButtonClick: (
-    screen: Screen,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  handleContinue: (screen: Screen) => void;
 }
 
-function continueToGame(){
-  console.log('continue')
-}
-
-export default function LandingScreen({
-  handleScreenButtonClick
+export function LandingScreen({
+  handleContinue
 }: LandingScreenProps) {
   return (
     <div className="flex flex-col place-items-center">
-      <EchidnaIntro handleContinue={continueToGame}/>
+      <EchidnaIntro handleContinue={handleContinue}/>
     </div>
   );
 }
+
+export default LandingScreen
