@@ -16,6 +16,7 @@ import conspiracyBoard from '../../assets/room/active_game/conspiracy_board.png'
 import exitSign from '../../assets/room/active_game/exit.png';
 import * as ciphersExports from '@/ciphers/ciphers';
 import Echidna from '../ui/echidna';
+import woodSound from '../../assets/sounds/wooden_tap.mp4';
 
 interface GameScreenProps {
     handleScreenButtonClick: (
@@ -39,6 +40,7 @@ export default function GameScreen({
     handleSolvedPuzzle,
     story
 }: GameScreenProps) {
+
     handleReturnScreen(Screen.GameScreen);
 
     // Replace cypher with actual cypher used by the task
@@ -82,6 +84,10 @@ export default function GameScreen({
         ]
     };
 
+    function playWoodSound() {
+        new Audio(woodSound).play();
+    }
+
     return (
         <motion.div
             className="w-[100%] h-[100%]"
@@ -101,7 +107,7 @@ export default function GameScreen({
             {/* To do: Link conspiracy board */}
             {/* Conspiracy board asset linked to conspiracy board system */}
             <div className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer">
-                <img src={conspiracyBoard} alt="conspiracy board" />
+                <img onClick={() => playWoodSound()} src={conspiracyBoard} alt="conspiracy board" />
             </div>
             {/* Phone asset linked to hint system */}
             <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
@@ -116,7 +122,7 @@ export default function GameScreen({
             {/* Exit sign to go back to main game page */}
             <div
                 className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
-                onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
+                onClick={(e) => { handleScreenButtonClick(Screen.MainGamePage, e); playWoodSound() }}
             >
                 <img src={exitSign} alt="Exit" />
             </div>
