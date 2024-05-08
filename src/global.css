@@ -162,11 +162,6 @@
     }
   }
 
-  .pulse-fast {
-    animation: pulse 0.2s infinite;
-    transition: 0.5s;
-  }
-
   .pulse-slow {
     animation: pulse 0.5s infinite;
     transition: 0.5s;
