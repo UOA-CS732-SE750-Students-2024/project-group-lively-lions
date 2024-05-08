@@ -4,8 +4,7 @@ import stamp_area_sprite from '../../assets/level-select/stamp_area_sprite.png';
 import solved_stamp_sprite from '../../assets/level-select/solved_stamp_sprite.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
-import { Screen, Levels, Story } from '@/util';
-
+import { Screen, Levels, getStory } from '@/util';
 interface HoverFolderProps {
   marginTop: string;
   index: number;
@@ -18,7 +17,6 @@ interface HoverFolderProps {
     level: Levels,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  story: Story;
   handleScreenButtonClick: (
     screen: Screen,
     event: React.MouseEvent<HTMLElement>
@@ -34,14 +32,16 @@ export function HoverFolder({
   setClickedIndex,
   levelIndex,
   handleLevel,
-  handleScreenButtonClick,
-  story
+  handleScreenButtonClick
 }: HoverFolderProps) {
   const isAboveHovered = index <= isHoveredIndex;
   const isAboveClicked = index <= isClickedIndex;
-
+  // const blah = fetch('api/players/1');
+  // await get_player_data();
+  const user = { solved: false }; // Placeholder for user data
   const hoverOffset = -3; // Distance moved by folder when hovered over
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
+
   return (
     <div className="w-[94%]">
       <motion.div
@@ -70,7 +70,7 @@ export function HoverFolder({
           className="absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
           style={{ pointerEvents: 'none' }}
         >
-          {story.difficulty}
+          {getStory(levelIndex).difficulty}
         </p>
         <img className="w-[100%]" src={folder_sprite} draggable={false} />
         <div className="absolute inset-0" style={{ overflow: 'hidden' }}>
@@ -98,23 +98,28 @@ export function HoverFolder({
                 </div>
                 <div className="absolute left-[10%] top-[10%] w-[42%] h-[100%]">
                   <p className="opacity-[70%] text-[1rem] font-[alagard] h-[35%] overflow-y-scroll scrollbar">
-                    {story.introduction}
+                    {getStory(levelIndex).introduction}
                   </p>
                 </div>
                 <div className="absolute top-[6%] right-[6%] w-[40%] h-[20%]">
                   <p className="absolute opacity-[25%] text-[1.3rem] text-center leading-tight font-[alagard] wrap w-[80%] top-[18%] left-[10%]">
-                    0/5 Deciphered
+                    {/*Get the user number of puzzles deciphered for the level */}
+                    {/** Usser */}/ {getStory(levelIndex).puzzles.length}{' '}
+                    Deciphered
                   </p>
                   <img
                     className="opacity-[50%] w-[100%] h-[100%] p-[4%]"
                     src={stamp_area_sprite}
                     draggable={false}
                   />
-                  <img
-                    className="absolute inset-0 opacity-[75%] w-[100%] h-[100%]"
-                    src={solved_stamp_sprite}
-                    draggable={false}
-                  />
+                  {/* If the user has solved all puzzles in the level, show the solved stamp */}
+                  {user.solved ?? (
+                    <img
+                      className="absolute inset-0 opacity-[75%] w-[100%] h-[100%]"
+                      src={solved_stamp_sprite}
+                      draggable={false}
+                    />
+                  )}
                 </div>
                 <img src={case_paper_sprite} draggable={false} />
               </motion.div>

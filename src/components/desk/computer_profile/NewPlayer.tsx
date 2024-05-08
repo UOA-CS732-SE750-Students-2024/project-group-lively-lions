@@ -25,6 +25,17 @@ export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
 
   const handleConfirm = async () => {
     try {
+      // Check if the current profile in local storage is 'guest'
+      const currentProfile = localStorage.getItem('profile');
+      if (currentProfile !== null) {
+        const parsedProfile = JSON.parse(currentProfile);
+        if (parsedProfile && parsedProfile.profile && parsedProfile.profile.username === 'guest') {
+          // Delete the current 'profile' object in local storage
+          localStorage.removeItem('profile');
+        };
+      };
+  
+      // Send a POST request to create a new player profile
       const response = await fetch(SERVER_MONGODB_URI + '/player', {
         method: 'POST',
         headers: {
@@ -32,13 +43,13 @@ export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
         },
         body: JSON.stringify({ username, password })
       });
-
+  
       if (response.ok) {
         // Handle success
         console.log('Player profile created successfully');
-        // Add more code so 1) the player knows the account
-        // was made, and 2) that account gets loaded in locally
-        // as the account currently logged in (maybe)
+        const newPlayer = await response.json();
+        // Set the new player profile returned by the POST request to local storage
+        localStorage.setItem('profile', JSON.stringify({ profile: newPlayer }));
       } else {
         // Handle error
         console.error('Failed to create player profile');
