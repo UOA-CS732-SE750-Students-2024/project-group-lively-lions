@@ -68,6 +68,7 @@ export function ReferenceBook({
           className="min-w-[48px] w-[calc(3vw)] min-h-[80px] h-[calc(5vw)] rotate-180 hover:scale-105 active:scale-110 cursor-pointer m-x-10"
           onClick={() => handlePageChange(-2)}
           src={arrow}
+          draggable={false}
         />
         {/* Left Page */}
         <ReferenceBookPage
@@ -86,11 +87,13 @@ export function ReferenceBook({
           className="min-w-[48px] w-[calc(3vw)] min-h-[80px] h-[calc(5vw)] hover:scale-105 active:scale-110 cursor-pointer m-x-10"
           onClick={() => handlePageChange(2)}
           src={arrow}
+          draggable={false}
         />
         {/* Page Binder */}
         <img
           className="absolute min-w-[49px] w-[calc(3vw)] min-h-[267px] h-[calc(16vw)] top-[20%] left-[47%] drop-shadow-2xl"
           src={binders}
+          draggable={false}
         />
       </div>
 
