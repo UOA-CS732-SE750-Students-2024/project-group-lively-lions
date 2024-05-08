@@ -12,7 +12,7 @@ export interface SubstitutionProps {
 }
 
 export abstract class Cipher {
-  abstract name: string;
+  static displayName: string;
   abstract encode(
     props: CaesarCipherProps | KeywordProps | SubstitutionProps
   ): string;
