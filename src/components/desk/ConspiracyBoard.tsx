@@ -24,10 +24,7 @@ export interface ConspiracyBoardData {
 interface ConspiracyBoardProps {
   boardData: ConspiracyBoardData;
   maxNotes: 1 | 3 | 5 | 7;
-  handleLevelButtonClick: (
-    level: number,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  children: React.ReactNode;
 }
 
 // This component represents the conspiracy board, notes and strings on the board are rendered
@@ -35,7 +32,7 @@ interface ConspiracyBoardProps {
 const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
   boardData,
   maxNotes,
-  handleLevelButtonClick
+  children
 }) => {
   const progress = boardData.notes.length;
   const strings = [
@@ -136,13 +133,7 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <img
-          className="min-h-[540px] h-[calc(60vw*9/16)] hover:outline outline-white outline-7 cursor-pointer"
-          src={board}
-          draggable={false}
-        />
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="pt-[14rem] flex place-items-center justify-center min-w-[960px] min-h-[540px] w-[calc(60vw)] h-[calc(60vw*9/16)] bg-transparent border-none">
         <AnimatePresence>
           <motion.div
@@ -181,14 +172,6 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
           </motion.div>
         </AnimatePresence>
       </DialogContent>
-      <p>PHONE</p>
-      <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleLevelButtonClick(0, e)}
-        size={'sm'}
-      >
-        BACK
-      </Button>
     </Dialog>
   );
 };
