@@ -10,24 +10,36 @@ So far it has input fields for a profile name and password. These are not yet co
 It also has a confirm button, which does nothing yet, and a back button to the landing page.
 */
 
+const SERVER_MONGODB_URI = 'http://localhost:3000'
+
 interface SignInProps {
   handleScreenButtonClick: (
     level: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  handleConfirm: (
-    username: string,
-    password: string,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
 }
 
-export function SignIn({
-  handleScreenButtonClick,
-  handleConfirm
-}: SignInProps) {
+export function SignIn({ handleScreenButtonClick}: SignInProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [data, setData] = useState(null);
+
+  const handleConfirm = () => {
+    fetch(`${SERVER_MONGODB_URI}/player?username=${username}&password=${password}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        setData(data);
+        console.log(data); // Moved console.log inside the .then() block
+      })
+      .catch(error => {
+        console.error(error); // Changed console.log to console.error for errors
+      });
+  };
 
   return (
     <div className="flex justify-center items-center">
@@ -66,7 +78,7 @@ export function SignIn({
         </form>
         <Button
           className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[50%]"
-          onClick={(e) => handleConfirm(username, password, e)}
+          onClick={handleConfirm}
           size={'sm'}
         >
           SIGN IN

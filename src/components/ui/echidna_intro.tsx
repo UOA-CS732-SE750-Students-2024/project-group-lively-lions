@@ -30,7 +30,7 @@ function EchidnaIntro() {
           >
             <Echidna
               availableCiphers={[ciphers.Binary]}
-              onSolved={() => {
+              handleSolvedPuzzle={() => {
                 handleNextLevel();
               }}
               phrase="01001101 01100101 01101111 01110111"
