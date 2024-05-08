@@ -84,6 +84,7 @@ function EchidnaIntro({
                   whileHover={{ y: liftLid ? -800 : -10 }}
                   exit={{ y: -800 }}
                   transition={{ duration: 1 }}
+                  drag={false}
                 />
               ) : 
               <></>
