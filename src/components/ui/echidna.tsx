@@ -22,6 +22,8 @@ import EchidnaAuxPanel from './echidna_aux_panel';
 
 import cipherButtonSound from '../../assets/sounds/echidna_roll_button.mp4';
 import resetButtonSound from '../../assets/sounds/echidna_reset.mp4';
+import successSound from '../../assets/sounds/echidna_success.mp4';
+import errorSound from '../../assets/sounds/echidna_error.mp4';
 
 interface EchidnaProps {
   solve_delay_ms: number;
@@ -133,6 +135,7 @@ export function Echidna({
   };
 
   function handleSolutionFound() {
+    new Audio(successSound).play();
     setRedLampOn(false);
     setGreenLampOn(true);
     console.log('Solution found.');
@@ -140,6 +143,7 @@ export function Echidna({
   }
 
   function handleSolutionNotFound() {
+    new Audio(errorSound).play();
     if (!greenLampOn) {
       setRedLampOn(true);
       setTimeout(() => {
