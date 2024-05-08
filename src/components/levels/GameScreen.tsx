@@ -18,6 +18,8 @@ import ConspiracyBoard, { ConspiracyBoardData } from '../desk/ConspiracyBoard';
 import Caperton from '../../assets/common/CapybaraFella.png';
 import * as ciphersExports from '@/ciphers/ciphers';
 import Echidna from '../ui/echidna';
+import NotePopup from '../desk/NotePopup';
+import { useState } from 'react';
 
 interface GameScreenProps {
   handleScreenButtonClick: (
@@ -99,6 +101,8 @@ export default function GameScreen({
     story: story.conclusion,
     image: Caperton
   });
+
+  const [showNote, setShowNote] = useState(false);
 
   return (
     <motion.div
@@ -214,6 +218,13 @@ export default function GameScreen({
           backgroundSize: 'cover',
           imageRendering: 'auto'
         }}
+      />
+      {/* Invisible component for displaying new notes */}
+      <NotePopup
+        index={boardData.notes.length}
+        noteData={boardData.notes[boardData.notes.length - 1]}
+        open={showNote}
+        setOpen={setShowNote}
       />
     </motion.div>
   );

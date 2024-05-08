@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import boardBackground from '../../assets/room/main_menu/conspiracy_board/conspiracy_board.png';
-import board from '../../assets/room/main_menu/conspiracy_board/conspiracy_board_notes_and_text.png';
 import string1 from '../../assets/room/main_menu/conspiracy_board/strings/string1.png';
 import string2 from '../../assets/room/main_menu/conspiracy_board/strings/string2.png';
 import string3 from '../../assets/room/main_menu/conspiracy_board/strings/string3.png';
@@ -10,7 +9,6 @@ import string6 from '../../assets/room/main_menu/conspiracy_board/strings/string
 import string7 from '../../assets/room/main_menu/conspiracy_board/strings/string7.png';
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
 import ConspiracyNote from './ConspiracyNote';
-import { Button } from '../ui/button';
 
 export interface ConspiracyNoteData {
   story: string;
