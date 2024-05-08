@@ -58,10 +58,6 @@ export function HoverFolder({
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
   const solved =
     countPuzzlesPerDifficulty() === getStory(levelIndex).puzzles.length;
-  console.log('solved' + solved);
-  console.log('count' + countPuzzlesPerDifficulty());
-  console.log(typeof countPuzzlesPerDifficulty());
-  console.log('story' + getStory(levelIndex).puzzles.length);
   return (
     <div className="w-[94%]">
       <motion.div

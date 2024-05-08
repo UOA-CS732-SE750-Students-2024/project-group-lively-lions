@@ -33,14 +33,16 @@ function App() {
     console.log(existingProfile);
     if (!existingProfile) {
       // If 'profile' object doesn't exist, create a default guest profile and save it to local storage
-      const defaultProfile = { "profile": {
-        username: 'guest',
-        password: 'guest_password',
-        completed_puzzles: []
-      }};
+      const defaultProfile = {
+        profile: {
+          username: 'guest',
+          password: 'guest_password',
+          completed_puzzles: []
+        }
+      };
       localStorage.setItem('profile', JSON.stringify(defaultProfile));
-    };
-  };
+    }
+  }
 
   const screens = [
     <MainMenuScreen
@@ -184,20 +186,19 @@ function App() {
     //Check current level number of puzzles
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
+    const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+    userProfile.profile.completed_puzzles.push(puzzles[currentPuzzleIndex].id);
+    console.log(userProfile);
+
+    localStorage.setItem('profile', JSON.stringify(userProfile));
     if (index < puzzles.length) {
-      //Add puzzle id to player's completed puzzles in local storage
-
-      //add index of next puzzle to unlocked puzzles.
-
       setCurrentPuzzleIndex(index);
       setCurrentEncodedPhrase(encodePhrase(puzzles[index]));
-
       //Set current screen to new note with conspiracy board
     } else {
       // TODO: Handle 'congrats you've completed all of the puzzles'
       //
-      // wait 5 seconds
-
+      // wait 2.5 seconds
       setTimeout(() => {
         setCurrentScreen(Screen.MainGamePage);
       }, 2500);
