@@ -1,4 +1,4 @@
-import { Puzzle, Screen } from '@/util';
+import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
 import lighting from '../../assets/room/active_game/lighting.png';
@@ -25,7 +25,9 @@ interface GameScreenProps {
     level: number;
     handleReturnScreen: (screen: Screen) => void;
     phrase: string;
-    puzzle: Puzzle;
+    puzzleIndex: number;
+    handleSolvedPuzzle: () => void;
+    story: Story;
 }
 
 export default function GameScreen({
@@ -33,7 +35,9 @@ export default function GameScreen({
     level,
     handleReturnScreen,
     phrase,
-    puzzle
+    puzzleIndex,
+    handleSolvedPuzzle,
+    story
 }: GameScreenProps) {
     handleReturnScreen(Screen.GameScreen);
 
@@ -146,11 +150,9 @@ export default function GameScreen({
             <div className="absolute w-[40%] left-[30%]">
                 <Echidna
                     availableCiphers={Object.values(ciphersExports)}
-                    onSolved={() => {
-                        console.log('solved');
-                    }}
+                    handleSolvedPuzzle={handleSolvedPuzzle}
                     phrase={phrase}
-                    solution={puzzle.solution}
+                    solution={story.puzzles[puzzleIndex].solution}
                     solve_delay_ms={500}
                     showAuxControls={true}
                 />

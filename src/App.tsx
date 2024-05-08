@@ -95,8 +95,10 @@ function App() {
       handleScreenButtonClick={handleScreenButtonClick}
       level={currentLevel}
       handleReturnScreen={handleReturnScreen}
-      phrase={currentPhrase}
-      puzzle={currentPuzzle}
+      phrase={currentEncodedPhrase}
+      puzzleIndex={currentPuzzleIndex}
+      handleSolvedPuzzle={handleSolvedPuzzle}
+      story={currentStory}
     />
   ];
   function encodePhrase(puzzle: Puzzle) {
