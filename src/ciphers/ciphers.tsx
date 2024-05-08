@@ -50,7 +50,7 @@ const simpleCaesarCipher = ({ caesarkey, phrase }: CaesarCipherProps) => {
 };
 
 export class Caesar implements Cipher {
-  name = 'Caesar Cipher';
+  static displayName = 'Caesar';
   encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Caesar) {
       return simpleCaesarCipher(props as CaesarCipherProps);
@@ -141,7 +141,7 @@ const vigenereDecipher = ({ keyword, phrase }: KeywordProps) => {
 };
 
 export class Vigenere implements Cipher {
-  name = 'Vigenere Cipher';
+  static displayName = 'Vigenere';
   encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Keyword) {
       return vigenereCipher(props as KeywordProps);
@@ -221,7 +221,7 @@ const decodePolybius = ({ phrase }: SubstitutionProps) => {
 };
 
 export class Polybius implements Cipher {
-  name = 'Polybius Cipher';
+  static displayName = 'Polybius';
   encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return encodePolybius(props as SubstitutionProps);
@@ -327,7 +327,7 @@ const decodeMorseToAscii = ({ phrase }: SubstitutionProps) => {
     .join('');
 };
 export class Morse implements Cipher {
-  name = 'Morse Code';
+  static displayName = 'Morse Code';
   encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return encodeToMorse(props as SubstitutionProps);
@@ -380,7 +380,7 @@ const binaryToAscii = ({ phrase }: SubstitutionProps) => {
 };
 
 export class Binary implements Cipher {
-  name = 'Binary Converter';
+  static displayName = 'Binary';
   encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return asciiToBinary(props as SubstitutionProps);
@@ -495,7 +495,7 @@ const decodeEmojiSubstitutionCipher = ({ phrase }: SubstitutionProps) => {
 };
 
 export class Emoji implements Cipher {
-  name = 'Emoji Substitution Cipher';
+  static displayName = 'Emoji';
   encode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
       return encodeEmojiSubstitutionCipher(props as SubstitutionProps);
