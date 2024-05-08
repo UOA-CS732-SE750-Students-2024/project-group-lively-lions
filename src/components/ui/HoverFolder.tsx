@@ -96,8 +96,8 @@ export function HoverFolder({
                     Open
                   </Button>
                 </div>
-                <div className="absolute left-[10%] top-[10%] w-[36%]">
-                  <p className="opacity-[70%] text-[1rem] font-[alagard]">
+                <div className="absolute left-[10%] top-[10%] w-[42%] h-[100%]">
+                  <p className="opacity-[70%] text-[1rem] font-[alagard] h-[35%] overflow-y-scroll scrollbar">
                     {story.introduction}
                   </p>
                 </div>
