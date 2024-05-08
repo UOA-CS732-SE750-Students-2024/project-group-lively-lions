@@ -8,7 +8,7 @@ async function create_new_player(username, password) {
   return new_player;
 };
 
-async function get_player_info(username, password) {
+async function get_profile(username, password) {
     try {
         const player = await Player.findOne({ username, password });
         if (player) {
@@ -56,7 +56,7 @@ players.post("/", async (req, res) => {
 players.get("/:id", async (req, res) => {
     const { username, password } = req.query;   
 
-    return await get_player_info(username, password);
+    return await get_profile(username, password);
 });
 
 // Update the player
