@@ -33,14 +33,16 @@ function App() {
     console.log(existingProfile);
     if (!existingProfile) {
       // If 'profile' object doesn't exist, create a default guest profile and save it to local storage
-      const defaultProfile = { "profile": {
-        username: 'guest',
-        password: 'guest_password',
-        completed_puzzles: []
-      }};
+      const defaultProfile = {
+        profile: {
+          username: 'guest',
+          password: 'guest_password',
+          completed_puzzles: []
+        }
+      };
       localStorage.setItem('profile', JSON.stringify(defaultProfile));
-    };
-  };
+    }
+  }
 
   const screens = [
     <MainMenuScreen
@@ -49,10 +51,7 @@ function App() {
       handleLevel={handleLevel}
       level={currentLevel}
     />,
-    <LandingScreen
-      key="landing"
-      handleContinue={handleScreenButtonClick}
-    />,
+    <LandingScreen key="landing" handleContinue={handleScreenButtonClick} />,
 
     <NewPlayer
       key="newPlayer"
@@ -162,8 +161,23 @@ function App() {
     setCurrentLevel(level);
     const story = getStory(level);
     setCurrentStory(story);
-    setCurrentPuzzleIndex(0);
-    setCurrentEncodedPhrase(encodePhrase(story.puzzles[0]));
+
+    // Check the completed puzzles in the profile
+    const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+    const completedPuzzles = userProfile.profile.completed_puzzles;
+
+    let count = 0;
+    for (let i = 0; i < story.puzzles.length; i++) {
+      for (let j = 0; j < completedPuzzles.length; j++) {
+        if (story.puzzles[i].id === completedPuzzles[j]) {
+          count++;
+        }
+      }
+    }
+    const index = count;
+
+    setCurrentPuzzleIndex(index);
+    setCurrentEncodedPhrase(encodePhrase(story.puzzles[index]));
     e.preventDefault();
   }
 
@@ -184,32 +198,26 @@ function App() {
     //Check current level number of puzzles
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
+    const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+
+    const puzzleId = puzzles[currentPuzzleIndex].id;
+    if (!userProfile.profile.completed_puzzles.includes(puzzleId)) {
+      userProfile.profile.completed_puzzles.push(puzzleId);
+    } else {
+      console.log('puzzle already solved');
+    }
+
+    localStorage.setItem('profile', JSON.stringify(userProfile));
     if (index < puzzles.length) {
-      //Add puzzle id to player's completed puzzles in local storage
-
-      //add index of next puzzle to unlocked puzzles.
-
       setCurrentPuzzleIndex(index);
       setCurrentEncodedPhrase(encodePhrase(puzzles[index]));
-
       //Set current screen to new note with conspiracy board
     } else {
       // TODO: Handle 'congrats you've completed all of the puzzles'
-      //
-      // wait 5 seconds
-
-      setTimeout(() => {
-        setCurrentScreen(Screen.MainGamePage);
-      }, 2500);
+      // setTimeout(() => {
+      //   setCurrentScreen(Screen.MainGamePage);
+      // }, 2500);
     }
-  }
-
-  function handleConfirm(
-    username: string,
-    password: string,
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    e.preventDefault();
   }
 
   return (
