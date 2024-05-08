@@ -221,10 +221,10 @@ export function Echidna({
         <EchidnaSolveLever delay={solve_delay_ms} onClick={handleSolve} />
       </div>
       {/* Paper feed */}
-      <div className="absolute w-[50%] h-[28%] top-[0%] left-[15.5%] pt-[5%] overflow-hidden">
+      <div className="absolute w-[50%] h-[28%] top-[0%] left-[15.5%] overflow-hidden">
         {/* Paper Motion */}
         <motion.div
-        className="absolute w-[98%] h-[100%] left-[1%] overflow-scroll no-scrollbar"
+        className="absolute w-[98%] h-[100%] left-[1%] top-[10%] overflow-scroll no-scrollbar"
         initial={{ y: -1000 }}
         key="paper_div"
         animate={{ y: isSolveLeverDown ? 120 : 0 }}
@@ -233,7 +233,7 @@ export function Echidna({
           className="absolute w-[100%]"
           >
             <img className="absolute w-[100%] top-[9%]" src={echidnaPaper} />
-            <p className="absolute font-[alagard] pt-[10%] px-[5%] left-[0%] [overflow-wrap:anywhere]">
+            <p className="absolute font-[alagard] text-[0.9rem] pt-[10%] px-[5%] left-[0%] [overflow-wrap:anywhere] leading-tight">
               {phrase}
             </p>
           </motion.div>
