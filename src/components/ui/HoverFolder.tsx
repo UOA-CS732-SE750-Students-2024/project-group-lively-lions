@@ -34,7 +34,8 @@ export function HoverFolder({
   setClickedIndex,
   levelIndex,
   handleLevel,
-  handleScreenButtonClick
+  handleScreenButtonClick,
+  story
 }: HoverFolderProps) {
   const isAboveHovered = index <= isHoveredIndex;
   const isAboveClicked = index <= isClickedIndex;
@@ -55,9 +56,10 @@ export function HoverFolder({
             : setClickedIndex(index)
         }
         animate={{
-          y: `${(isAboveClicked ? clickedOffset : 0) +
+          y: `${
+            (isAboveClicked ? clickedOffset : 0) +
             (isAboveHovered ? hoverOffset : 0)
-            }%`
+          }%`
         }}
         transition={{
           type: 'spring',
@@ -87,17 +89,17 @@ export function HoverFolder({
                 <div>
                   <Button
                     className="absolute font-[alagard] text-[1rem] top-[28%] right-[8%] w-[35%]"
-                    onClick={(e) => { handleLevel(levelIndex, e); handleScreenButtonClick(Screen.GameScreen, e) }}
+                    onClick={(e) => {
+                      handleLevel(levelIndex, e);
+                      handleScreenButtonClick(Screen.GameScreen, e);
+                    }}
                   >
                     Open
                   </Button>
                 </div>
                 <div className="absolute left-[10%] top-[10%] w-[36%]">
-                  <p className="opacity-[70%] text-[1.3rem] font-[alagard]">
-                    Puzzle File Description:
-                  </p>
                   <p className="opacity-[70%] text-[1rem] font-[alagard]">
-                    This is where we describe the puzzle!
+                    {story.introduction}
                   </p>
                 </div>
                 <div className="absolute top-[6%] right-[6%] w-[40%] h-[20%]">
