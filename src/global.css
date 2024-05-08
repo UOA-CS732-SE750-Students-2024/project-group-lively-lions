@@ -84,6 +84,7 @@
 @layer base {
   * {
     @apply border-border;
+    user-select: none;
   }
 
   body {

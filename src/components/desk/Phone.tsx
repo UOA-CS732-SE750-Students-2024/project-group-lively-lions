@@ -16,7 +16,7 @@ interface PhoneProps {
 
 export function Phone({ handleScreenButtonClick, story }: PhoneProps) {
   return (
-    <div>
+    <>
       <p>PHONE</p>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
@@ -25,6 +25,6 @@ export function Phone({ handleScreenButtonClick, story }: PhoneProps) {
       >
         BACK
       </Button>
-    </div>
+    </>
   );
 }

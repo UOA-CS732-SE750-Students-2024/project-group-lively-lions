@@ -19,7 +19,7 @@ export function PuzzlePage({
   story
 }: PuzzlePageProps) {
   return (
-    <div>
+    <>
       <p>PUZZLE PAGE</p>
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
@@ -28,6 +28,6 @@ export function PuzzlePage({
       >
         BACK
       </Button>
-    </div>
+    </>
   );
 }
