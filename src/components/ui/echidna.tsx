@@ -221,7 +221,7 @@ export function Echidna({
         <EchidnaSolveLever delay={solve_delay_ms} onClick={handleSolve} />
       </div>
       {/* Paper feed */}
-      <div className="absolute w-[50%] h-[28%] top-[0%] left-[15.5%] pt-[5%] overflow-hidden">
+      <div className="absolute w-[50%] h-[27.9%] top-[0%] left-[15.5%] pt-[5%] overflow-hidden">
         {/* Paper Motion */}
         <motion.div
         className="absolute w-[100%] h-[100%] overflow-scroll"
@@ -239,10 +239,7 @@ export function Echidna({
           </motion.div>
         </motion.div>
       </div>
-      <img
-          className="absolute w-[100%] opacity-[30%] h-[8%] top-[92%]"
-          src={echidnaPaperShadow}
-        />
+      <img className="absolute w-[50%] opacity-[30%] h-[2%] top-[26%] left-[15.5%]" src={echidnaPaperShadow} />
       <img
         className="absolute w-[53%] h-[5%] top-[22.5%] left-[14%]"
         src={echidnaPaperFeedArms}
