@@ -87,10 +87,9 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
               {`Note ${index + 1}`}
             </p>
             {/* Note content */}
-            <div className="flex flex-col place-items-center absolute h-[calc(45vw*9/16)] w-[80%] left-[10%] top-[20%] text-[1rem] font-[alagard] overflow-y-auto max-h-full scrollbar">
-              <p className="opacity-[70%] antialiased">{noteData.story}</p>
+            <div className="absolute h-[calc(45vw*9/16)] w-[80%] left-[10%] top-[20%] text-[1rem] font-[alagard] overflow-y-scroll max-h-full scrollbar">
               {noteData.image ? (
-                <WoodenCard className="overflow-hidden">
+                <WoodenCard className="min-h-[210px] h-[calc(12vw*9/16)] overflow-hidden float-left mr-4">
                   <motion.div
                     className="items-center justify-center"
                     initial={{ opacity: 0 }}
@@ -107,6 +106,7 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
               ) : (
                 <></>
               )}
+              <p className="opacity-[70%] antialiased">{noteData.story}</p>
             </div>
           </motion.div>
         </AnimatePresence>
