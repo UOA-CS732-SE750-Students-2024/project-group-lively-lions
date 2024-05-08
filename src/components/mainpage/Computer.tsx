@@ -3,6 +3,8 @@ import computerScreen from '../../assets/room/main_menu/computer/computer_only_s
 import { Screen } from '@/util';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import computerBuzzSound from '../../assets/sounds/computer_buzz.mp4';
+import computerKeyboardSound from '../../assets/sounds/keyboard.mp4';
 
 interface ComputerProps {
     handleScreenButtonClick: (
@@ -17,14 +19,22 @@ export default function ({
 
     const [computerIsOn, setComputerIsOn] = useState(false);
 
+    function playComputerBuzzSound() {
+        new Audio(computerBuzzSound).play();
+    }
+
+    function playComputerKeyboardSound() {
+        new Audio(computerKeyboardSound).play();
+    }
+
     return (
         <div
             style={{ imageRendering: 'pixelated' }}>
             <button
-                onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}>
+                onClick={(e) => { handleScreenButtonClick(Screen.ComputerProfile, e); playComputerKeyboardSound() }}>
                 <motion.img
                     className='scale-[400%]'
-                    onMouseEnter={() => setComputerIsOn(true)}
+                    onMouseEnter={() => { setComputerIsOn(true); playComputerBuzzSound() }}
                     src={computerOff}
                     alt="computer" />
                 <AnimatePresence>
