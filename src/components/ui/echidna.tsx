@@ -290,7 +290,7 @@ export function Echidna({
           capImage={echidnaResetButtonCap}
           baseImage={echidnaResetButtonBase}
           onClick={() => {
-            handleResetWorkingCipher;
+            handleResetWorkingCipher();
             playResetButtonSound();
           }}
         />
