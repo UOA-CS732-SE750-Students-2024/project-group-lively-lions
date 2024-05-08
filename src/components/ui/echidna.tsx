@@ -285,7 +285,7 @@ export function Echidna({
         />
       </div>
       {/* Solution lamps */}
-      <div className="absolute w-[25%] top-[3.6%] left-[60%]">
+      <div className="absolute w-[25%] top-[3.7%] left-[62%]">
         <img src={echidnaGreenLampOff} className="absolute w-[100%]" />
         <AnimatePresence mode="wait">
           {greenLampOn ? (
@@ -302,7 +302,7 @@ export function Echidna({
           )}
         </AnimatePresence>
       </div>
-      <div className="absolute w-[22%] top-[5.4%] left-[75%]">
+      <div className="absolute w-[22%] top-[5.3%] left-[74.5%]">
         <img src={echidnaRedLampOff} className="absolute w-[100%]" />
         <AnimatePresence mode="wait">
           {redLampOn ? (
