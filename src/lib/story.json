@@ -24,7 +24,7 @@
         "id": "0002",
         "description": "The Sphinx has gone missing from an exhibit in the Museum of Feline Antiquities, leaving a mysterious cipher in its place. Can you follow the clues to uncover this mystery?",
         "story": "A series of cat-themed burglaries has left the city in disarray. The latest burglary is at the Museum of Feline Antiquities. Purrlock has been assigned the case. The beloved Sphinx is missing, and in its place a riddle has been written among the sand. Purrlock must carefully solve this puzzle without disturbing the sand.",
-        "solution": "Fifth column from the north side of the volcano exhibit. Press in the brick on the right side of the column, second layer from the floor. Catch me if you can!",
+        "solution": "Fifth column from the north side of the volcano exhibit",
         "jumble": "",
         "cipher": [
           "emoji"
@@ -35,7 +35,7 @@
         "id": "0003",
         "description": "Can you make it out of the labyrinth?",
         "story": "Purrlock followed the clue from the sphinx and discovered a set of sandy paw prints leading to a secret passage. This passageway led him down to a circular room, deep below the museum. This room contained several doorways. After cautiously trying out a few doorways, Purrlock found himself back in the circular room. The walls of this room were covered in strange symbols. Navigating the maze requires decoding the symbols to find the correct path.",
-        "solution": "The following compass directions will lead you to me: NNW, W, NE, S, SE, SW, S, E, SSE, SE, E. Don't get lost, these tunnels stretch for miles ;3",
+        "solution": "The following compass directions will lead you to me",
         "jumble": "",
         "cipher": [
           "morse"
@@ -46,7 +46,7 @@
         "id": "0004",
         "description": "Can you solve the final puzzle to uncover the identity of the Cat Burglar, and put a stop to their thievery once and for all?",
         "story": "After making his way through the maze, Purrlock found the hidden lair of the Cat Burglar. The Burglar was not to be found, likely out on the prowl, committing their next crime. In a strange way, the lair was not all that unlike his own office. There even was a corkboard behind the desk, undoubtedly used to figure out where to commit thievery next. Purrlock looked more closely at the corkboard. The plans were all written in cipher. Purrlock would need to solve the cipher on the corkboard to uncover the location of the next crime and to reveal the identity of the thief.",
-        "solution": "FOR CAT BURGLAR EYES ONLY: Next target is the purrised necklace at Lady Ragdoll's estate.",
+        "solution": "FOR CAT BURGLAR EYES ONLY Next target is the purrised necklace at Lady Ragdolls estate",
         "jumble": "",
         "cipher": [
           "binary"
@@ -63,7 +63,7 @@
         "id": "0005",
         "description": "Purrlock has received a mysterious seemingly blank piece of paper, smelling faintly of lemon. Could this be relevant to the mysterious cryptic messages being spread around the city?",
         "story": "A mysterious figure known as the Whiskered Phantom is leaving cryptic messages throughout the city. Purrlock has received a seemingly blank piece of paper, slotted through the mail slot of his front door. He noticed a faint hint of lemon wafting from the page, and using a heat-sensitive ink reveal technique, a message written in cipher appeared.",
-        "solution": "Nearest alleyway to fifth Bombay St. Come find me Purrlock, I know you cannot resist ;3.",
+        "solution": "Nearest alleyway to fifth Bombay St Come find me Purrlock, I know you cannot resist ;3.",
         "jumble": "",
         "cipher": [
           "polybius"
