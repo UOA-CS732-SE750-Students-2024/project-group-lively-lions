@@ -7,57 +7,59 @@ import computerBuzzSound from '../../assets/sounds/computer_buzz.mp4';
 import computerKeyboardSound from '../../assets/sounds/keyboard.mp4';
 
 interface ComputerProps {
-    handleScreenButtonClick: (
-        screen: Screen,
-        event: React.MouseEvent<HTMLButtonElement>
-    ) => void;
-    isMuted: boolean;
+  handleScreenButtonClick: (
+    screen: Screen,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => void;
+  isMuted: boolean;
 }
 
 export default function ({
-    handleScreenButtonClick, isMuted
+  handleScreenButtonClick, isMuted
 }: ComputerProps) {
 
-    const [computerIsOn, setComputerIsOn] = useState(false);
+  const [computerIsOn, setComputerIsOn] = useState(false);
 
-    function playComputerBuzzSound() {
-        if (!isMuted) {
-            new Audio(computerBuzzSound).play();
-        }
+  function playComputerBuzzSound() {
+    if (!isMuted) {
+      new Audio(computerBuzzSound).play();
     }
+  }
 
-    function playComputerKeyboardSound() {
-        if (!isMuted) {
-            new Audio(computerKeyboardSound).play();
-        }
+  function playComputerKeyboardSound() {
+    if (!isMuted) {
+      new Audio(computerKeyboardSound).play();
     }
+  }
 
-    return (
-        <div
-            style={{ imageRendering: 'pixelated' }}>
-            <button
-                onClick={(e) => { handleScreenButtonClick(Screen.ComputerProfile, e); playComputerKeyboardSound() }}>
-                <motion.img
-                    className='scale-[400%]'
-                    onMouseEnter={() => { setComputerIsOn(true); playComputerBuzzSound() }}
-                    src={computerOff}
-                    alt="computer" />
-                <AnimatePresence>
-                    {computerIsOn && (
-                        <motion.img
-                            className={computerIsOn ? 'absolute top-[0%] scale-[400%] visible' : 'invisible'}
-                            onMouseLeave={() => setComputerIsOn(false)}
-                            initial={{ opacity: 0 }}
-                            animate={{
-                                opacity: [0.5, 0.7, 1, 0.9, 1]
-                            }}
-                            exit={{ opacity: 0 }}
-                            src={computerScreen}
-                            alt='computer' />
-                    )}
-                </AnimatePresence>
-            </button>
+  return (
+    <div
+      style={{ imageRendering: 'pixelated' }}>
+      <button
+        onClick={(e) => { handleScreenButtonClick(Screen.ComputerProfile, e); playComputerKeyboardSound() }}>
+        <motion.img
+          className='scale-[400%]'
+          onMouseEnter={() => { setComputerIsOn(true); playComputerBuzzSound() }}
+          src={computerOff}
+          alt="computer"
+          drag={false} />
+        <AnimatePresence>
+          {computerIsOn && (
+            <motion.img
+              className={computerIsOn ? 'absolute top-[0%] scale-[400%] visible' : 'invisible'}
+              onMouseLeave={() => setComputerIsOn(false)}
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: [0.5, 0.7, 1, 0.9, 1]
+              }}
+              exit={{ opacity: 0 }}
+              src={computerScreen}
+              alt='computer'
+              drag={false} />
+          )}
+        </AnimatePresence>
+      </button>
 
-        </div>
-    )
+    </div>
+  )
 }

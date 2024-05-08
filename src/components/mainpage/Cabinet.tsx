@@ -29,7 +29,7 @@ export default function Cabinet({ handleScreenButtonClick, isMuted }: CabinetPro
 
   return (
     <div style={{ imageRendering: 'pixelated' }}>
-      <img src={cabinetFrame} alt="cabinet" />
+      <img src={cabinetFrame} alt="cabinet" draggable={false} />
       {/* Cabinet Drawer */}
       <button
         onClick={(e) => {
@@ -51,6 +51,7 @@ export default function Cabinet({ handleScreenButtonClick, isMuted }: CabinetPro
           }}
           src={drawer}
           alt="drawer"
+          drag={false}
         />
       </button>
     </div>

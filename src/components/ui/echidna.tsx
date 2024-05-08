@@ -199,7 +199,12 @@ export function Echidna({
     /* Centers component with some top padding */
     <div className={`absolute w-[100%] pt-[5%]`}>
       {/* The wood, bakelite and aluminum base of the mighty "Echidna I" cipher machine */}
-      <img src={echidnaBase} alt="Echidna Base" className="w-[100%]" />
+      <img
+        src={echidnaBase}
+        alt="Echidna Base"
+        className="w-[100%]"
+        draggable={false}
+      />
       {/* Masks the text outside the bounds of the cipher-select rotor display */}
       <div className="absolute top-[53.5%] left-[17.5%] h-[5.4%] w-[34.5%] px-[1.5%] py-[1%] overflow-hidden">
         {/* Cipher-select display, populated with available cipher options for current puzzle */}
@@ -260,7 +265,10 @@ export function Echidna({
           <motion.div
             className="absolute w-[100%]"
           >
-            <img className="absolute w-[100%] top-[9%]" src={echidnaPaper} />
+            <img
+              className="absolute w-[100%] top-[9%]"
+              src={echidnaPaper}
+              draggable={false} />
             <p className="absolute font-[alagard] text-[0.9rem] pt-[10%] px-[5%] left-[0%] [overflow-wrap:anywhere] leading-tight">
               {phrase}
             </p>
@@ -270,10 +278,12 @@ export function Echidna({
       <img
         className="absolute w-[49%] opacity-[30%] h-[2%] top-[26%] left-[16.1%]"
         src={echidnaPaperShadow}
+        draggable={false}
       />
       <img
         className="absolute w-[53%] h-[5%] top-[22.5%] left-[14%]"
         src={echidnaPaperFeedArms}
+        draggable={false}
       />
       {/* Display */}
       <div className="absolute w-[69%] h-[12.2%] top-[34.4%] left-[15.5%] px-[1.5%] pl-[1.2%] pr-[3%] overflow-scroll no-scrollbar">
@@ -318,7 +328,11 @@ export function Echidna({
       </div>
       {/* Solution lamps */}
       <div className="absolute w-[25%] top-[3.7%] left-[62%]">
-        <img src={echidnaGreenLampOff} className="absolute w-[100%]" />
+        <img
+          src={echidnaGreenLampOff}
+          className="absolute w-[100%]"
+          draggable={false}
+        />
         <AnimatePresence mode="wait">
           {greenLampOn ? (
             <motion.img
@@ -328,6 +342,7 @@ export function Echidna({
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 0.5, 0, 0.5] }}
               transition={{ duration: 0.2 }}
+              drag={false}
             />
           ) : (
             <></>
@@ -335,7 +350,11 @@ export function Echidna({
         </AnimatePresence>
       </div>
       <div className="absolute w-[22%] top-[5.3%] left-[74.5%]">
-        <img src={echidnaRedLampOff} className="absolute w-[100%]" />
+        <img
+          src={echidnaRedLampOff}
+          className="absolute w-[100%]"
+          draggable={false}
+        />
         <AnimatePresence mode="wait">
           {redLampOn ? (
             <motion.img
@@ -346,6 +365,7 @@ export function Echidna({
               animate={{ opacity: [0, 0.5, 0, 0.5] }}
               exit={{ opacity: [0.5, 0, 0.5, 0] }}
               transition={{ duration: 0.1 }}
+              drag={false}
             />
           ) : (
             <></>

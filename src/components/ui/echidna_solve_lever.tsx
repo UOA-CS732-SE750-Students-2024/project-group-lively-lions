@@ -37,12 +37,14 @@ const EchidnaSolveLever: React.FC<EchidnaSolveLeverProps> = ({
         src={echidnaSolveLeverStem}
         animate={{ y: isPressed ? 35 : 0 }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+        drag={false}
       />
       <motion.img
         className="absolute w-[100%] cursor-pointer"
         src={echidnaSolveLeverHandle}
         animate={{ y: isPressed ? 60 : 0 }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+        drag={false}
       />
     </div>
   );

@@ -5,38 +5,39 @@ import bookHoverSound from '../../assets/sounds/book_slide.mp4';
 import bookOpenSound from '../../assets/sounds/book_open.mp4';
 
 interface ReferenceBookEntryPointProps {
-    handleScreenButtonClick: (
-        screen: Screen,
-        event: React.MouseEvent<HTMLButtonElement>
-    ) => void;
-    isMuted: boolean;
+  handleScreenButtonClick: (
+    screen: Screen,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => void;
+  isMuted: boolean;
 }
 
 export default function ReferenceBookEntryPoint({
-    handleScreenButtonClick, isMuted
+  handleScreenButtonClick, isMuted
 }: ReferenceBookEntryPointProps) {
 
-    function playBookHoverSound() {
-        if (!isMuted) {
-            new Audio(bookHoverSound).play();
-        }
+  function playBookHoverSound() {
+    if (!isMuted) {
+      new Audio(bookHoverSound).play();
     }
+  }
 
-    function playBookOpenSound() {
-        if (!isMuted) {
-            new Audio(bookOpenSound).play();
-        }
+  function playBookOpenSound() {
+    if (!isMuted) {
+      new Audio(bookOpenSound).play();
     }
+  }
 
-    return (
-        <div>
-            <button onClick={(e) => { handleScreenButtonClick(Screen.ReferenceBook, e); playBookOpenSound() }}>
-                <motion.img
-                    className=' hover:animate-book-shuffle'
-                    onMouseOver={() => playBookHoverSound()}
-                    src={refBook}
-                    alt='book' />
-            </button>
-        </div>
-    )
+  return (
+    <div>
+      <button onClick={(e) => { handleScreenButtonClick(Screen.ReferenceBook, e); playBookOpenSound() }}>
+        <motion.img
+          className=' hover:animate-book-shuffle'
+          onMouseOver={() => playBookHoverSound()}
+          src={refBook}
+          alt='book'
+          draggable={false} />
+      </button>
+    </div>
+  )
 }
