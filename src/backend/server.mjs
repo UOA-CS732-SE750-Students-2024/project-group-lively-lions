@@ -81,21 +81,38 @@ app.get('/player', async (req, res) => {
 });
 
 // This endpoint updates out database player info with our local info (our save function)
-app.put('/player/:id', async (req, res) => {
+app.put('/player', async (req, res) => {
   try {
-    const { id } = req.params;
-    const { puzzles_completed, puzzles_unlocked, notes_unlocked } = req.body;
-    const updatedPlayer = await Player.findByIdAndUpdate(id, { 
-      $addToSet: { puzzles_unlocked: { $each: puzzles_unlocked } },
-      $addToSet: { puzzles_completed: { $each: puzzles_completed } },
-      $addToSet: { notes_unlocked: { $each: notes_unlocked } } }, 
-    { new: true });
-    res.json(updatedPlayer);
+    const { old_username, old_password, username, password, completed_puzzles} = req.body;
+
+    let filter, update;
+
+    // Check if old_username and old_password are supplied
+    if (old_username && old_password) {
+      // Use old_username and old_password as filter
+      filter = { username: old_username, password: old_password };
+      // Use username and password as update
+      update = { username, password };
+    } else {
+      // Use username and password as filter
+      filter = { username, password };
+      // Use completed_puzzles as update
+      update = { completed_puzzles };
+    }
+    // Find the player by username and password and update their information
+    const updatedPlayer = await Player.findOneAndUpdate(
+      filter,
+      update, // Replace the entire player object with the incoming object
+      { new: true }
+    );
+    // Return the updated player object
+    console.log(updatedPlayer);
   } catch (error) {
     console.error('Error updating player:', error);
     res.status(500).json({ error: 'An error occurred while updating the player' });
   }
 });
+
 
 // This endpoint deletes our player from the database 
 app.delete('/player/:id', async (req, res) => {
