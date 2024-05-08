@@ -12,12 +12,16 @@ interface LandingScreenProps {
   ) => void;
 }
 
+function continueToGame(){
+  console.log('continue')
+}
+
 export default function LandingScreen({
   handleScreenButtonClick
 }: LandingScreenProps) {
   return (
     <div className="flex flex-col place-items-center">
-      <EchidnaIntro />
+      <EchidnaIntro handleContinue={continueToGame}/>
     </div>
   );
 }
