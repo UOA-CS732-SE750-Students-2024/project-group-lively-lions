@@ -41,7 +41,6 @@ export function HoverFolder({
   const user = { solved: false }; // Placeholder for user data
   const hoverOffset = -3; // Distance moved by folder when hovered over
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
-  const puzzles = ['Tutorial', 'Easy', 'Medium', 'Hard'];
 
   return (
     <div className="w-[94%]">
@@ -71,7 +70,7 @@ export function HoverFolder({
           className="absolute opacity-[70%] top-[2%] left-[8%] font-[alagard] text-[1.5rem]"
           style={{ pointerEvents: 'none' }}
         >
-          {puzzles[index]}
+          {getStory(levelIndex).difficulty}
         </p>
         <img className="w-[100%]" src={folder_sprite} draggable={false} />
         <div className="absolute inset-0" style={{ overflow: 'hidden' }}>
@@ -97,18 +96,15 @@ export function HoverFolder({
                     Open
                   </Button>
                 </div>
-                <div className="absolute left-[10%] top-[10%] w-[36%]">
-                  <p className="opacity-[70%] text-[1.3rem] font-[alagard]">
-                    Puzzle File Description:
-                  </p>
-                  <p className="opacity-[70%] text-[1rem] font-[alagard]">
-                    This is where we describe the puzzle!
+                <div className="absolute left-[10%] top-[10%] w-[42%] h-[100%]">
+                  <p className="opacity-[70%] text-[1rem] font-[alagard] h-[35%] overflow-y-scroll scrollbar">
+                    {getStory(levelIndex).introduction}
                   </p>
                 </div>
                 <div className="absolute top-[6%] right-[6%] w-[40%] h-[20%]">
                   <p className="absolute opacity-[25%] text-[1.3rem] text-center leading-tight font-[alagard] wrap w-[80%] top-[18%] left-[10%]">
                     {/*Get the user number of puzzles deciphered for the level */}
-                    {/** Usser */}/{getStory(levelIndex).puzzles.length}{' '}
+                    {/** Usser */}/ {getStory(levelIndex).puzzles.length}{' '}
                     Deciphered
                   </p>
                   <img

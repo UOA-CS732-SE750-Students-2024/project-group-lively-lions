@@ -25,18 +25,18 @@ export enum Levels {
 export function getStory(level: Levels) {
   switch (level) {
     case Levels.Tutorial:
-      return story.tutorial;
+      return story.difficulties[0];
     case Levels.Easy:
-      return story.easy;
+      return story.difficulties[1];
     case Levels.Medium:
-      return story.medium;
+      return story.difficulties[2];
     case Levels.Hard:
-      return story.hard;
+      return story.difficulties[3];
     default:
-      return story.tutorial;
+      return story.difficulties[0];
   }
 }
 
-export type Story = (typeof story)['tutorial'];
+export type Story = (typeof story)['difficulties'][0];
 
 export type Puzzle = Story['puzzles'][0];
