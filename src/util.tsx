@@ -1,4 +1,4 @@
-import * as story from 'src/lib/story.json';
+import * as story from '../src/lib/story.json';
 
 export enum Screen {
   MainMenuScreen,
@@ -9,7 +9,6 @@ export enum Screen {
   LevelSelect,
   ComputerProfile,
   Phone,
-  PuzzlePage,
   ReferenceBook,
   EchidnaMachine,
   MainGamePage,
@@ -21,6 +20,21 @@ export enum Levels {
   Easy,
   Medium,
   Hard
+}
+
+export function getStory(level: Levels) {
+  switch (level) {
+    case Levels.Tutorial:
+      return story.tutorial;
+    case Levels.Easy:
+      return story.easy;
+    case Levels.Medium:
+      return story.medium;
+    case Levels.Hard:
+      return story.hard;
+    default:
+      return story.tutorial;
+  }
 }
 
 export type Story = (typeof story)['tutorial'];

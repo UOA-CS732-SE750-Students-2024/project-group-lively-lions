@@ -58,7 +58,6 @@ export function LevelSelect({
                 setClickedIndex={setClickedIndex}
                 levelIndex={index}
                 handleLevel={handleLevel}
-                story={story}
                 handleScreenButtonClick={handleScreenButtonClick}
               />
             ))}

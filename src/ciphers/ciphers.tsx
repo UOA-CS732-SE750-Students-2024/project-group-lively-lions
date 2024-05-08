@@ -201,7 +201,7 @@ const encodePolybius = ({ phrase }: SubstitutionProps) => {
 const decodePolybius = ({ phrase }: SubstitutionProps) => {
   const polybiusSquare = [
     ['a', 'b', 'c', 'd', 'e'],
-    ['f', 'g', 'h', 'i/j', 'k'],
+    ['f', 'g', 'h', 'i', 'k'],
     ['l', 'm', 'n', 'o', 'p'],
     ['q', 'r', 's', 't', 'u'],
     ['v', 'w', 'x', 'y', 'z']
@@ -230,7 +230,7 @@ export class Polybius implements Cipher {
   };
   decode = (props: CipherProps) => {
     if (checkType(props) == CipherType.Substitution) {
-      return decodePolybius(props as SubstitutionProps); // Fix: Pass the 'phrase' property of 'props' to 'decodePolybius'
+      return decodePolybius(props as SubstitutionProps);
     }
     throw new Error('Invalid props');
   };
