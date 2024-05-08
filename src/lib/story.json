@@ -2,7 +2,7 @@
   "difficulties": [
     {
       "difficulty": "Tutorial",
-      "introduction": "In the heart of the bustling city, Purrlock Holmes, the city's sharpest feline with a knack for solving mysteries, faces his first challenge: Mrs. Calico's prized milk saucer has vanished. With his keen senses and sharp mind, Purrlock sets out to crack the case and prove himself as a budding detective",
+      "introduction": "In the heart of the bustling city, Purrlock Holmes faces his first challenge: Mrs. Calico's prized milk saucer has vanished.",
       "puzzles": [
         {
           "name": "The Case of the Missing Saucer",
@@ -25,7 +25,7 @@
           "id": "0002",
           "description": "The Sphinx has gone missing from an exhibit in the Museum of Feline Antiquities, leaving a mysterious cipher in its place. Can you follow the clues to uncover this mystery?",
           "story": "A series of cat-themed burglaries has left the city in disarray. The latest burglary is at the Museum of Feline Antiquities. Purrlock has been assigned the case. The beloved Sphinx is missing, and in its place a riddle has been written among the sand. Purrlock must carefully solve this puzzle without disturbing the sand.",
-          "solution": "Fifth column from the north side of the volcano exhibit. Press in the brick on the right side of the column, second layer from the floor. Catch me if you can!",
+          "solution": "Fifth column Volcano Push on right side of the column",
           "image": "",
           "cipher": ["emoji"]
         },
@@ -34,7 +34,7 @@
           "id": "0003",
           "description": "Can you make it out of the labyrinth?",
           "story": "Purrlock followed the clue from the sphinx and discovered a set of sandy paw prints leading to a secret passage. This passageway led him down to a circular room, deep below the museum. This room contained several doorways. After cautiously trying out a few doorways, Purrlock found himself back in the circular room. The walls of this room were covered in strange symbols. Navigating the maze requires decoding the symbols to find the correct path.",
-          "solution": "The following compass directions will lead you to me: NNW, W, NE, S, SE, SW, S, E, SSE, SE, E. Don't get lost, these tunnels stretch for miles ;3",
+          "solution": "Follow the path NNW W NE S SE SW S E SSE SE E",
           "image": "",
           "cipher": ["morse"]
         },
@@ -43,7 +43,7 @@
           "id": "0004",
           "description": "Can you solve the final puzzle to uncover the identity of the Cat Burglar, and put a stop to their thievery once and for all?",
           "story": "After making his way through the maze, Purrlock found the hidden lair of the Cat Burglar. The Burglar was not to be found, likely out on the prowl, committing their next crime. In a strange way, the lair was not all that unlike his own office. There even was a corkboard behind the desk, undoubtedly used to figure out where to commit thievery next. Purrlock looked more closely at the corkboard. The plans were all written in cipher. Purrlock would need to solve the cipher on the corkboard to uncover the location of the next crime and to reveal the identity of the thief.",
-          "solution": "FOR CAT BURGLAR EYES ONLY: Next target is the purrised necklace at Lady Ragdoll's estate.",
+          "solution": "Next target is the purrised necklace at Lady Ragdoll's estate",
           "image": "",
           "cipher": ["binary"]
         }
@@ -59,7 +59,7 @@
           "id": "0005",
           "description": "Purrlock has received a mysterious seemingly blank piece of paper, smelling faintly of lemon. Could this be relevant to the mysterious cryptic messages being spread around the city?",
           "story": "A mysterious figure known as the Whiskered Phantom is leaving cryptic messages throughout the city. Purrlock has received a seemingly blank piece of paper, slotted through the mail slot of his front door. He noticed a faint hint of lemon wafting from the page, and using a heat-sensitive ink reveal technique, a message written in cipher appeared.",
-          "solution": "Nearest alleyway to fifth Bombay St. Come find me Purrlock, I know you cannot resist ;3.",
+          "solution": "Nearest alleyway to fifth Bombay St",
           "image": "",
           "cipher": ["polybius"]
         },
@@ -68,7 +68,7 @@
           "id": "0006",
           "description": "Down an alleyway in the heart of the city, a group of alleycats meow strangely at Purrlock. Is this just random, or is there a hidden meaning among the noise?",
           "story": "The letter led Purrlock down an alleyway in the heart of the city. As he entered, he was greeted by a group of alley cats meowing at him. At first their meows seemed nonsensical. Realising it's an encoded message, Purrlock must decipher their communication to find the next clue.",
-          "solution": "Go to the sewers! Follow our path! Five steps, left, fifteen steps, right, fifty steps, right, ten steps, left, twenty five steps, left, follow the passageway all the way down. All the way down. Down, down!",
+          "solution": "Sewers 5 steps left 15 steps right follow the passageway",
           "image": "",
           "cipher": ["binary"]
         },
@@ -77,7 +77,7 @@
           "id": "0007",
           "description": "Following the clues, Purrlock finds himself in the sewers in front of a mysterious golden door. Can you figure out how to open it?",
           "story": "The message from the alleycats revealed a secret temple within the sewers. Purrlock tried to make his way to this hidden temple, but found his way blocked by what he initially thought was a grimy wall. After noticing a strange glint, he used his claws to scrape away some of the grime, and found gold underneath, to great contrast with the rest of the sewer. Scrunching up his face, he begrudgingly used his handkerchief and nearby sewer water to clean off the door. This revealed a series of riddles, as well as many buttons, levers and other strange contraptions on a mysterious golden door. He must solve the riddles to open the door.",
-          "solution": "Flick the cat's tail. Up, up, down, down. Step on the see saws. Left, right, left, right. Seek the cat's noses, with letters enscribed. B, A, Start.",
+          "solution": "Up up down down Left right left right B A Start",
           "image": "",
           "cipher": ["morse"]
         },
@@ -86,7 +86,7 @@
           "id": "0008",
           "description": "Down, down, far below the city lies a strange temple. What secrets hide there?",
           "story": "Purrlock opened the golden door and followed the path downwards. At the end, a grand temple was revealed. Crumbling statues lined the walls, plants reached down from the ceiling. Purrlock deduced that this temple has been here for a long time. In front of lines of chairs in the middle lay a sacrificial altar. A fresh kill was left atop the altar, surrounded by carved bones, fur, and other offerings. Purrlock heard the sound of a distant rock fall, followed by the flicker of a shadow in his purriferal vision. He felt a presence that would not reveal itself. His fur prickled on end. He looked back towards the altar, and noticed a small slip of paper with a complex cipher written on it. Would this give any answers of which Purrlock was seeking?",
-          "solution": "Speak aloud these words. Our master must be appeased: 'Whiskers whisper, shadows creep, In the alley where secrets sleep. Paws that prowl, tails that weave, Unlock the truth, if you believe.'",
+          "solution": "Paws prowl tails weave Speak the truth if you believe",
           "image": "",
           "cipher": ["caesar"]
         },
@@ -95,7 +95,7 @@
           "id": "0009",
           "description": "Time for a showdown against the Whiskered Phantom!",
           "story": "Purrlock spoke the solved note aloud. The words slipped strangely off his hooked tongue. He looked up to find that he was no longer alone, instead being surrounded by the very alley cats that lead him here. He looks back at the altar, and with horror he realises that the fresh kill on the altar is the corpse of a very mangled cat. This was much more dangerous than Purrlock expected, or had ever encountered before! A particularly large ginger cat stepped forward, his coat washed in some strange, sticky liquid. He welcomed Purrlock with his scratchy voice, then proceeded to challenge him in a challenge of wits, in order to appease their master. ",
-          "solution": "Behind the moon's shadow lies the key to our fate, whispered in the language of stars. But beware the silent watcher, for even shadows have eyes.",
+          "solution": "Beware the silent watcher for even shadows have eyes",
           "image": "",
           "cipher": ["vigenere"]
         }
@@ -104,14 +104,14 @@
     },
     {
       "difficulty": "Hard",
-      "introduction": "Since the case of the Whiskered Phantom, crime has been on the rise. Puzzles are graffitied on the streets, civilians murdered in their sheets. Purrlock has a feeling that this is all linked to the mysterious master, but nothing so far he has found has linked to this master, except the occasional crazed criminal mentioning a master of some sort. Purrlock solves many cases, becoming known as the greatest detective in the 9 realms, yet he feels that he is missing something, and a storm is on the horizon.",
+      "introduction": "Crime is on the rise. Puzzles are graffitied on the streets, civilians murdered in their sheets. Purrlock feels a storm on the horizon.",
       "puzzles": [
         {
           "name": "You’ve Got Mail!",
           "id": "0010",
           "description": "Purrlock receives a mysterious letter in his mailbox, containing a imaged message. Can you solve the cipher?",
           "story": "One fateful day as Purrlock arrived home, he found a mysterious letter left in his mailbox, with the inscription 'For my favourite archenemy ;)' upon the envelope. He looked around, but saw nothing out of the ordinary. He carefully entered his home. When no threats revealed themselves, he slowly opened the letter. Inside was a message, written in what looks like imaged garbage. He must complete the cipher to read what it says.",
-          "solution": "Well done Purrlock, you discovered my secret cult. But you'll never find me! You have already missed several clues. I can't bare to see my poor little detective so stuck, so let me give you a hint: look at cases A34, F23, I81, D74 and J27. ;3",
+          "solution": "Find me Purrlock A34 F23 I81 D74 J27",
           "image": "",
           "cipher": ["morse"]
         },
@@ -120,7 +120,7 @@
           "id": "0011",
           "description": "Purrlock is told to look at the evidence from recent crimes. Can he find the connection between them to find the root of corruption within the city?",
           "story": "The letter told Purrlock to look at evidence from a list of recent cases, all with seemingly no link. After looking closer at the files of these cases, he noticed a pattern in what is graffitied on the wall at each crime scene. Upon matching up these images to create a shape, he noticed that it results in a cipher.",
-          "solution": "21 Furr Ave, 1:03am. Don't be late!",
+          "solution": "21 Furr Ave 1 03am Don't be late",
           "image": "",
           "cipher": ["binary"]
         },
@@ -129,7 +129,7 @@
           "id": "0012",
           "description": "Purrlock has been framed! Can you prove his innocence and find the next clue to find the purrpetrator behind this?",
           "story": "The graffiti cipher gave him a time and place. 221C Biscuit Street, 2am the next day. He arrived at the location at the given time. He knocked at the door. No response. He paused, thinking for a moment. Curious, he tried the door handle. Unlocked. Folding his ears upon his head, he slowly stepped inside. \nIt was a modest apartment, with only a few rooms: a bathroom, kitchen-living area and a bedroom. He looked around, noticing a peculiar piece of paper on the floor. Before he could check it, he heard a knocking on the door. It was the pawlice. Purrlock was startled. Before he could compose himself and respond, a heavy thud shook the building as the door was knocked down. \nAs Purrlock tried to explain and ask what was going on, he was arrested. As he was dragged away, he spied the pawlice knock open a hidden compartment behind the fireplace to reveal a stash of catnip. Purrlock realised the pawlice must have had an anonymouse tip. \nPurrlock was arrested for smuggling illegal catnip. Caperton knew that, despite Purrlock’s history of catnip abuse, that Purrlock would not do such a thing, and sent another detective to gather evidence for Purrlock. This detective returned with the mysterious pieces of paper that they found around the house, as well as pictures of strange symbols on the walls. With this evidence, Purrlock must solve the ciphers to prove his innocence, and prove that he was investigating a different case, as well as finding the next clue to reveal the identity of the master.",
-          "solution": "Catnip has been hidden. Whiskered Phantom has been notified of completion. Letter has been planted. Soon our little detective friend will no longer be a problem. Sent delivery of cheese to 33 Whisker Dr.",
+          "solution": "Catnip hidden Letter planted Delivery of cheese to 33 Whisker Dr",
           "image": "",
           "cipher": ["binary"]
         },
@@ -138,7 +138,7 @@
           "id": "0013",
           "description": "With the location of the criminal mastermind, Purrlock must now find a way into the lair to confront them once and for all.",
           "story": "Purrlock now had the location of the master’s lair. With the location clocked into his GPS, Purrlock headed off right away. The route took him right into the heart of the city, to the mysterious, haunted, abandoned mansion. While the public always wanted the house to get hauled away to make space for something better for the community, the council always seemed to ignore these requests, never making a comment on the building, completely avoiding all mention of it.\nClouds closed in, blanketing the sky in grey fluff. Purrlock’s fur prickled; a mighty storm was approaching. As he stepped out of his car, Purrlock drew his flashlight. He jumped over the crumbling brick outer walls and into the front yard. Weeds ran wild, almost completely obscuring the footpath. He looked up. The door was slightly ajar, as if taunting him to enter. Purrlock found his curious feet walk up the stairs, across the porch, and finally enter the building.\nThe interior, still proud despite its wear, was surprisingly well kept. Something, or someone, had been preventing ramsackers from ruining this place. The mysterious master, no doubt. As he explored each room, Purrlock found that the rest of the house was also tidy, with the exception of crazed symbols decorating the walls. Each room seemed to have a different cipher. \nAfter checking the ground floor and upstairs, Purrlock approached the basement. Purrlock, an avid reader and puzzle solver, was well aware that the basement would be where the climax of this case would occur. Surely the master could not resist a good clique, after all. Walking down the stairs, he came to a large set of locked doors, with a final hint on how to combine the ciphers from around the house.",
-          "solution": "The door is unlocked. There isn't even a lock on the door, you silly goose.",
+          "solution": "The door is already unlocked you silly goose",
           "image": "",
           "cipher": ["binary"]
         },
@@ -147,7 +147,7 @@
           "id": "0014",
           "description": "Purrlock has finally tracked the real Whiskered Phantom to his lair. It is time to confront Purrlock’s archenemy and put an end to his scheming ways for good!",
           "story": "As he finished inputting the final solution, Purrlock jumped as thunder roared down the stoney staircase. The doors creaked open, to reveal none other than Keith. Keith shot a piercing gaze from his blood red eyes at Purrlock and rose on his back legs, revealing his greatest invention: the cipher gun. Locked and loaded with ciphers a-plenty.",
-          "solution": "Hi, my name is Keith. I love puzzles. I see you love them too! Please solve my puzzles. Everyone else complained that they are too hard, or that they didn't have the time right now. It doesn't help that I don't have any real friends. I wish I had friends. Please be my friend. Did you know that there are over 2000 variants of cheese world-wide? I know! It's crazy!",
+          "solution": "Did you know there are over 2000 variants of cheese",
           "image": "",
           "cipher": ["morse"]
         }
