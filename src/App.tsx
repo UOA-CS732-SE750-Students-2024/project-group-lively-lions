@@ -41,11 +41,7 @@ function App() {
       key="newPlayer"
       handleScreenButtonClick={handleScreenButtonClick}
     />,
-    <SignIn
-      key="signIn"
-      handleScreenButtonClick={handleScreenButtonClick}
-      handleConfirm={handleConfirm}
-    />,
+    <SignIn key="signIn" handleScreenButtonClick={handleScreenButtonClick} />,
     <PlayerInfo
       key="playerInfo"
       handleScreenButtonClick={handleScreenButtonClick}
