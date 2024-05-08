@@ -4,6 +4,7 @@ import drawer_face_sprite from '../../assets/level-select/drawer_face_sprite.png
 import { motion } from 'framer-motion';
 import { Screen, Story } from '@/util';
 import filing_cabinet_close from '../../assets/sounds/filing_cabinet_close.mp3';
+import storyJson from '../../lib/story.json';
 
 interface LevelSelectProps {
   handleScreenButtonClick: (
@@ -21,8 +22,7 @@ interface LevelSelectProps {
 
 export function LevelSelect({
   handleScreenButtonClick,
-  handleLevel,
-  story
+  handleLevel
 }: LevelSelectProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
   const [clickedIndex, setClickedIndex] = useState<number>(-1);
@@ -58,7 +58,7 @@ export function LevelSelect({
                 setClickedIndex={setClickedIndex}
                 levelIndex={index}
                 handleLevel={handleLevel}
-                story={story}
+                story={storyJson.difficulties[index]}
                 handleScreenButtonClick={handleScreenButtonClick}
               />
             ))}

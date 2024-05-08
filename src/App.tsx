@@ -22,7 +22,7 @@ function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
   const [returnScreen, setReturnScreen] = useState(Screen.MainGamePage);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
-  const [currentStory, setCurrentStory] = useState(story.tutorial);
+  const [currentStory, setCurrentStory] = useState(story.difficulties[0]);
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
   const screens = [
@@ -197,15 +197,16 @@ function App() {
   function getStory(level: Levels) {
     switch (level) {
       case Levels.Tutorial:
-        return story.tutorial;
+        return story.difficulties[0];
       case Levels.Easy:
-        return story.easy;
+        return story.difficulties[1];
       case Levels.Medium:
-        return story.medium;
+        return story.difficulties[2];
+        break;
       case Levels.Hard:
-        return story.hard;
+        return story.difficulties[3];
       default:
-        return story.tutorial;
+        return story.difficulties[0];
     }
   }
 
