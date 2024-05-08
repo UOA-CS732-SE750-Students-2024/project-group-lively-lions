@@ -5,6 +5,7 @@ import solved_stamp_sprite from '../../assets/level-select/solved_stamp_sprite.p
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
 import { Screen, Levels, getStory } from '@/util';
+import { count } from 'console';
 interface HoverFolderProps {
   marginTop: string;
   index: number;
@@ -36,12 +37,31 @@ export function HoverFolder({
 }: HoverFolderProps) {
   const isAboveHovered = index <= isHoveredIndex;
   const isAboveClicked = index <= isClickedIndex;
-  // const blah = fetch('api/players/1');
-  // await get_player_data();
-  const user = { solved: false }; // Placeholder for user data
+  const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+  const countPuzzlesPerDifficulty = () => {
+    const story = getStory(levelIndex);
+    userProfile.profile.completed_puzzles;
+    let count = 0;
+
+    for (let i = 0; i < story.puzzles.length; i++) {
+      for (let j = 0; j < userProfile.profile.completed_puzzles.length; j++) {
+        if (story.puzzles[i].id === userProfile.profile.completed_puzzles[j]) {
+          count++;
+        }
+      }
+    }
+    return count;
+  };
+
+  // const user = { solved: false }; // Placeholder for user data
   const hoverOffset = -3; // Distance moved by folder when hovered over
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
-
+  const solved =
+    countPuzzlesPerDifficulty() === getStory(levelIndex).puzzles.length;
+  console.log('solved' + solved);
+  console.log('count' + countPuzzlesPerDifficulty());
+  console.log(typeof countPuzzlesPerDifficulty());
+  console.log('story' + getStory(levelIndex).puzzles.length);
   return (
     <div className="w-[94%]">
       <motion.div
@@ -103,9 +123,8 @@ export function HoverFolder({
                 </div>
                 <div className="absolute top-[6%] right-[6%] w-[40%] h-[20%]">
                   <p className="absolute opacity-[25%] text-[1.3rem] text-center leading-tight font-[alagard] wrap w-[80%] top-[18%] left-[10%]">
-                    {/*Get the user number of puzzles deciphered for the level */}
-                    {/** Usser */}/ {getStory(levelIndex).puzzles.length}{' '}
-                    Deciphered
+                    {countPuzzlesPerDifficulty()} /{' '}
+                    {getStory(levelIndex).puzzles.length} Deciphered
                   </p>
                   <img
                     className="opacity-[50%] w-[100%] h-[100%] p-[4%]"
@@ -113,12 +132,14 @@ export function HoverFolder({
                     draggable={false}
                   />
                   {/* If the user has solved all puzzles in the level, show the solved stamp */}
-                  {user.solved ?? (
+                  {solved ? (
                     <img
                       className="absolute inset-0 opacity-[75%] w-[100%] h-[100%]"
                       src={solved_stamp_sprite}
                       draggable={false}
                     />
+                  ) : (
+                    <></>
                   )}
                 </div>
                 <img src={case_paper_sprite} draggable={false} />
