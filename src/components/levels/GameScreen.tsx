@@ -179,16 +179,16 @@ export default function GameScreen({
       </div>
 
       {/* Exit sign to go back to main game page */}
-      <div
-        className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
+      <img
+        className="absolute top-[-4%] left-[84%] transition ease-in-out hover:translate-y-1 cursor-pointer min-h-[110px] h-[calc(12vw*9/16)]"
+        src={exitSign}
+        alt="Exit"
         onClick={(e) => {
           handleScreenButtonClick(Screen.MainGamePage, e);
           playWoodSound();
           setAllPuzzleSolved(false);
         }}
-      >
-        <img src={exitSign} alt="Exit" />
-      </div>
+      />
 
       {/* Non-Interactive filler assets */}
       <img
