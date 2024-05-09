@@ -1,7 +1,6 @@
 import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
-import lighting from '../../assets/room/active_game/lighting.png';
 import { CipherType } from '@/ciphers/Cipher';
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
@@ -18,6 +17,9 @@ import ConspiracyBoard, { ConspiracyBoardData } from '../desk/ConspiracyBoard';
 import Caperton from '../../assets/common/CapybaraFella.png';
 import * as ciphersExports from '@/ciphers/ciphers';
 import Echidna from '../ui/echidna';
+import sepia from '../../assets/room/active_game/sepia.png';
+import vignettePixel from '../../assets/room/active_game/vignettePixel.png';
+import vignetteSmooth from '../../assets/room/active_game/vignetteSmooth.png';
 
 interface GameScreenProps {
   handleScreenButtonClick: (
@@ -132,12 +134,6 @@ export default function GameScreen({
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
         <HintDialog transcript={exampleTranscript} />
       </div>
-      {/* Reference book asset */}
-      <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
-        <ReferenceBookEntryPoint
-          handleScreenButtonClick={handleScreenButtonClick}
-        />
-      </div>
       {/* Exit sign to go back to main game page */}
       <div
         className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
@@ -205,16 +201,47 @@ export default function GameScreen({
         />
       </div>
 
-      {/* Lighting layer */}
+      {/* Hard Pixel Vignette */}
       <div
-        className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
         style={{
-          backgroundImage: `url(${lighting})`,
+          backgroundImage: `url(${vignettePixel})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          imageRendering: 'auto'
+          imageRendering: 'pixelated'
         }}
       />
+
+      {/* Reference book asset */}
+      <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
+        <ReferenceBookEntryPoint
+          handleScreenButtonClick={handleScreenButtonClick}
+        />
+      </div>
+
+      {/* Sepia Filter */}
+      <div
+        className="absolute opacity-[9%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${sepia})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+      {/* Soft Pixel Vignette */}
+      <div
+        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${vignetteSmooth})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+
     </motion.div>
   );
 }

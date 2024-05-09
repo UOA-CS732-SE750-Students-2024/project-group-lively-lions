@@ -22,6 +22,10 @@ import pinkYarn from '../../assets/room/shared/pink_yarn.png';
 import { motion } from 'framer-motion';
 import conspiracyBoard from '../../assets/room/main_menu/conspiracy_board/conspiracy_board_notes_and_text.png';
 import SpeechBubble from '../ui/SpeechBubble';
+import sepia from '../../assets/room/active_game/sepia.png';
+import vignettePixel from '../../assets/room/active_game/vignettePixelMainMenu.png';
+import vignetteSmooth from '../../assets/room/active_game/vignetteSmoothMainMenu.png';
+import coolDark from '../../assets/room/active_game/coolDark.png';
 
 interface MainGamePageProps {
   handleScreenButtonClick: (
@@ -222,14 +226,63 @@ export default function MainGamePage({
         draggable={false}
       />
 
-      {/* Lighting layer */}
-      <div
-        className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+      {/* Lighting elements */}
+
+      {/* Cool Dark Overlay */}
+      <motion.div
+      className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+      initial={{ opacity: lightOn ? 0 : 1 }}
+      animate={{ opacity: lightOn ? 0 : 1 }}
+      transition={{ type: 'spring' }}
+      >
+        <div
+        className="absolute opacity-[50%] w-[100%] h-[100%] top-0 pointer-events-none"
         style={{
-          backgroundImage: `url(${lightOn ? lighting : lightingOff})`,
+          backgroundImage: `url(${coolDark})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          imageRendering: 'auto'
+          imageRendering: 'pixelated'
+        }}
+        />
+      </motion.div>
+
+      <motion.div
+      className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+      initial={{ opacity: lightOn ? 1 : 0 }}
+      animate={{ opacity: lightOn ? 1 : 0 }}
+      transition={{ type: 'spring' }}
+      >
+      {/* Hard Pixel Vignette */}
+      <div
+        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${vignettePixel})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+      {/* Sepia Filter */}
+      <div
+        className="absolute opacity-[8%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${sepia})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+      </motion.div>
+
+      {/* Soft Pixel Vignette */}
+      <div
+        className="absolute opacity-[30%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${vignetteSmooth})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
         }}
       />
 
