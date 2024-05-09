@@ -18,11 +18,7 @@ So far it has input fields for changing profile name and password. These are not
 It also has a change info button and a back button to the landing page.
 */
 
-<<<<<<< HEAD
-const SERVER_MONGODB_URI = 'http://localhost:3000';
-=======
-const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL
->>>>>>> main
+const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL;
 
 interface ProfileProps {
   handleScreenButtonClick: (
