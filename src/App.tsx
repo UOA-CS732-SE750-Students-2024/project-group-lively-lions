@@ -62,11 +62,17 @@ function App() {
     <NewPlayer
       key="newPlayer"
       handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
     />,
-    <SignIn key="signIn" handleScreenButtonClick={handleScreenButtonClick} />,
+    <SignIn
+      key="signIn"
+      handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
+    />,
     <PlayerInfo
       key="playerInfo"
       handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
     />,
     <LevelSelect
       key="levelSelect"
