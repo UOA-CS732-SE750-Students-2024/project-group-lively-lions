@@ -1,6 +1,6 @@
 import { Button } from '../../ui/button';
 import { useState } from 'react';
-import { TextField } from '../../ui/TextField';
+import { TextField, PassField } from '../../ui/TextField';
 import { Screen } from '@/util';
 import computer_screen from '../../../assets/room/main_menu/computer/computer_sign_in_new_profile.png';
 import new_account_cap from '../../../assets/room/main_menu/computer/new_account_cap.png';
@@ -105,7 +105,7 @@ export function SignIn({ handleScreenButtonClick, isMuted }: SignInProps) {
                 }
                 placeholder={'Username'}
               />
-              <TextField
+              <PassField
                 value={password}
                 onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setPassword(e.target.value)

@@ -1,6 +1,6 @@
 import { Button } from '../../ui/button';
 import { useState, useEffect } from 'react';
-import { TextField } from '../../ui/TextField';
+import { TextField, PassField } from '../../ui/TextField';
 import { Screen } from '@/util';
 import computer_screen_main from '../../../assets/room/main_menu/computer/computer_screen_main.png';
 import confirm_cap from '../../../assets/room/main_menu/computer/confirm_cap.png';
@@ -148,7 +148,7 @@ export function PlayerInfo({ handleScreenButtonClick, isMuted }: ProfileProps) {
               }
               placeholder={'Username'}
             />
-            <TextField
+            <PassField
               value={password}
               onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setPassword(e.target.value)
