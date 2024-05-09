@@ -41,6 +41,7 @@ interface EchidnaProps {
   handleSolvedPuzzle: () => void;
   isMuted: boolean;
   active?: boolean;
+  resetDisplay?: boolean;
 }
 
 export function Echidna({
@@ -51,7 +52,8 @@ export function Echidna({
   availableCiphers,
   showAuxControls,
   isMuted,
-  active = true
+  active = true,
+  resetDisplay = false
 }: EchidnaProps) {
   const [selectedCipher, setSelectedCipher] = useState<string>(
     availableCiphers[0].displayName
@@ -146,6 +148,9 @@ export function Echidna({
     setGreenLampOn(true);
     console.log('Solution found.');
     handleSolvedPuzzle();
+    setTimeout(() => {
+      setGreenLampOn(false);
+    }, 3000);
   }
 
   function handleSolutionNotFound() {

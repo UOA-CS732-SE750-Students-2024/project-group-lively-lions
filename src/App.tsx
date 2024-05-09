@@ -218,7 +218,6 @@ function App() {
   }
 
   async function handleSolvedPuzzle() {
-    await delay(2000);
     //Check current level number of puzzles
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
