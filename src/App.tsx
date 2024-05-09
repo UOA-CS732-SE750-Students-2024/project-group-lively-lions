@@ -35,7 +35,7 @@ function App() {
     if (!existingProfile) {
       // If 'profile' object doesn't exist, create a default guest profile and save it to local storage
       const defaultProfile = {
-        "profile": {
+        profile: {
           username: 'guest',
           password: 'guest_password',
           completed_puzzles: []
@@ -52,7 +52,11 @@ function App() {
       handleLevel={handleLevel}
       level={currentLevel}
     />,
-    <LandingScreen key="landing" handleContinue={handleScreenButtonClick} />,
+    <LandingScreen
+      key="landing"
+      handleContinue={handleScreenButtonClick}
+      isMuted={isMuted}
+    />,
 
     <NewPlayer
       key="newPlayer"
@@ -97,6 +101,7 @@ function App() {
       handleScreenButtonClick={handleScreenButtonClick}
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
+      isMuted={isMuted}
     />,
     <MainGamePage
       key="mainGamePage"
@@ -231,7 +236,7 @@ function App() {
       <h1 className="text-[#d9b26f] font-[alagard] text-[3rem] leading-loose text-center text-pretty w-[100%]">
         Purrlock Holmes' Crypawtography Agency
       </h1>
-      <button onClick={() => setIsMuted(!isMuted)} className='text-[#FFFFFF]'>
+      <button onClick={() => setIsMuted(!isMuted)} className="text-[#FFFFFF]">
         {isMuted ? 'click to unmute' : 'click to mute'}
       </button>
       {/* Constrains game contents maximum and minimum dimensions */}

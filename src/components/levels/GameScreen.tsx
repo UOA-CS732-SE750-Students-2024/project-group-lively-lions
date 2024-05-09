@@ -44,7 +44,6 @@ export default function GameScreen({
   story,
   isMuted
 }: GameScreenProps) {
-
   handleReturnScreen(Screen.GameScreen);
 
   // Replace cypher with actual cypher used by the task
@@ -127,7 +126,10 @@ export default function GameScreen({
     >
       {/* Interactive Components */}
       {/* Conspiracy board asset linked to conspiracy board system */}
-      <div onClick={() => playWoodSound()} className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer">
+      <div
+        onClick={() => playWoodSound()}
+        className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer"
+      >
         <ConspiracyBoard
           boardData={boardData}
           maxNotes={boardData.notes.length as 1 | 3 | 5 | 7}
@@ -141,18 +143,22 @@ export default function GameScreen({
       </div>
       {/* Phone asset linked to hint system */}
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
-        <HintDialog transcript={exampleTranscript} />
+        <HintDialog transcript={exampleTranscript} isMuted={isMuted} />
       </div>
       {/* Reference book asset */}
       <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
         <ReferenceBookEntryPoint
-          handleScreenButtonClick={handleScreenButtonClick} isMuted={isMuted}
+          handleScreenButtonClick={handleScreenButtonClick}
+          isMuted={isMuted}
         />
       </div>
       {/* Exit sign to go back to main game page */}
       <div
         className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
-        onClick={(e) => { handleScreenButtonClick(Screen.MainGamePage, e); playWoodSound() }}
+        onClick={(e) => {
+          handleScreenButtonClick(Screen.MainGamePage, e);
+          playWoodSound();
+        }}
       >
         <img src={exitSign} alt="Exit" />
       </div>
@@ -222,6 +228,6 @@ export default function GameScreen({
           imageRendering: 'auto'
         }}
       />
-    </motion.div >
+    </motion.div>
   );
 }
