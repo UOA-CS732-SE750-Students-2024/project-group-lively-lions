@@ -22,6 +22,9 @@ function App() {
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+  const [showNote, setShowNote] = useState(false);
+  const [showBoard, setShowBoard] = useState(false);
+  const [puzzleSolved, setPuzzleSolved] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const SERVER_MONGODB_URI = 'http://localhost:3000';
 
@@ -118,6 +121,12 @@ function App() {
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
       story={currentStory}
+      showNote={showNote}
+      setShowNote={setShowNote}
+      showBoard={showBoard}
+      setShowBoard={setShowBoard}
+      puzzleSolved={puzzleSolved}
+      setPuzzleSolved={setPuzzleSolved}
       isMuted={isMuted}
     />
   ];
@@ -225,11 +234,14 @@ function App() {
       setCurrentPuzzleIndex(index);
       setCurrentEncodedPhrase(encodePhrase(puzzles[index]));
       //Set current screen to new note with conspiracy board
+      setShowBoard(true);
     } else {
       // TODO: Handle 'congrats you've completed all of the puzzles'
       // setTimeout(() => {
       //   setCurrentScreen(Screen.MainGamePage);
       // }, 2500);
+      setPuzzleSolved(true);
+      setShowBoard(true);
     }
     const requestBody = {
       username: userProfile.profile.username,
