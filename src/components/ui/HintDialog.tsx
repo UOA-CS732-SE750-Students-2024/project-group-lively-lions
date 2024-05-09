@@ -26,7 +26,7 @@ interface HintDialogProps {
 }
 
 // This component takes a transcript
-const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
+const HintDialog: React.FC<HintDialogProps> = ({ transcript, isMuted }) => {
 
   return (
     <Dialog>
@@ -34,7 +34,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
         <div
           style={{ imageRendering: 'pixelated', cursor: 'pointer' }}
         >
-          <Phone isMuted={false} />
+          <Phone isMuted={isMuted} />
         </div>
       </DialogTrigger>
       <DialogContent className="flex flex-row place-items-center justify-between min-w-[960px] min-h-[540px] w-[calc(60vw)] h-[calc(60vw*9/16)] bg-slate-500 bg-opacity-10 border-none">
