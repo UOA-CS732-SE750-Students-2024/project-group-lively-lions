@@ -328,7 +328,7 @@ export default function MainGamePage({
           imageRendering: 'pixelated'
         }}
       />
-
+      
       {/* Reference book entry point leads to reference book screen */}
       <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
         <ReferenceBookEntryPoint
