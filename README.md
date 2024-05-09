@@ -1,6 +1,6 @@
 # COMPSCI 732 / SOFTENG 750 project - Team Lively Lions
 ## *Acknowledgement*
-*This project was done under the University of Auckland for the COMPSCI 732/ SOFTENG 750 course taught under Andrew Meads. This project was completed as a group assigment for the course, and as such all assets and code created in this project is under the universities licesning.*
+*This project was done under the University of Auckland for the COMPSCI 732/ SOFTENG 750 course taught under Andrew Meads. This project was completed as a group assignment for the course, and as such all assets and code created in this project is under the universities licensing.*
 
 *This project is the submission for the 'Lively Lions' team.*
 

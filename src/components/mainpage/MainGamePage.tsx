@@ -324,7 +324,7 @@ export default function MainGamePage({
       </motion.div>
 
       <motion.div
-        className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+        className="absolute w-[100%] h-[100%] top-0"
         initial={{ opacity: lightOn ? 1 : 0 }}
         animate={{ opacity: lightOn ? 1 : 0 }}
         transition={{ type: 'spring' }}
