@@ -14,6 +14,7 @@ import GameScreen from './components/levels/GameScreen';
 import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
+import { delay } from './lib/utils';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
@@ -214,7 +215,8 @@ function App() {
     setCurrentScreen(screen);
   }
 
-  function handleSolvedPuzzle() {
+  async function handleSolvedPuzzle() {
+    await delay(2000);
     //Check current level number of puzzles
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
@@ -236,9 +238,6 @@ function App() {
       setShowNote(true);
     } else {
       // TODO: Handle 'congrats you've completed all of the puzzles'
-      // setTimeout(() => {
-      //   setCurrentScreen(Screen.MainGamePage);
-      // }, 2500);
       setAllPuzzleSolved(true);
       setShowBoard(true);
       setShowNote(true);
