@@ -23,8 +23,7 @@ function App() {
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
-  const SERVER_MONGODB_URI = "http://localhost:3000";
-  const [isMuted, setIsMuted] = useState(false);
+  const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL;
 
   useEffect(() => {
     createGuestProfile();
@@ -236,7 +235,7 @@ function App() {
       completed_puzzles: userProfile.profile.completed_puzzles
     }
     // Update database account info with puzzle completion 
-    fetch(`${SERVER_MONGODB_URI}/player`, {
+    fetch(`${SERVER_API_URL}/player`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
