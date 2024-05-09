@@ -254,7 +254,7 @@ function App() {
       username: userProfile.profile.username,
       password: userProfile.profile.password,
       completed_puzzles: userProfile.profile.completed_puzzles
-
+    };
     // Update database account info with puzzle completion 
     fetch(`${SERVER_API_URL}/player`, {
       method: 'PUT',
