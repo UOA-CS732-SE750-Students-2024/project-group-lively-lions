@@ -284,28 +284,6 @@ export default function GameScreen({
         }}
       />
 
-      {/* Sepia Filter */}
-      <div
-        className="absolute opacity-[9%] w-[100%] h-[100%] top-0 pointer-events-none"
-        style={{
-          backgroundImage: `url(${sepia})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          imageRendering: 'pixelated'
-        }}
-      />
-
-      {/* Soft Pixel Vignette */}
-      <div
-        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
-        style={{
-          backgroundImage: `url(${vignetteSmooth})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          imageRendering: 'pixelated'
-        }}
-      />
-
       {/* Invisible component for displaying new notes */}
       <NotePopup
         index={allPuzzleSolved ? puzzleIndex + 1 : puzzleIndex}
