@@ -1,6 +1,10 @@
 import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
+<<<<<<< HEAD
+=======
+import { CipherType } from '@/ciphers/Cipher';
+>>>>>>> 1f3e08d2d766382ef1319729d11dd690fa607ed4
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
 import ReferenceBookEntryPoint from '../mainpage/ReferenceBookEntryPoint';
@@ -145,6 +149,7 @@ export default function GameScreen({
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
+      
       {/* Exit sign to go back to main game page */}
       <div
         className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
@@ -251,8 +256,6 @@ export default function GameScreen({
           imageRendering: 'pixelated'
         }}
       />
-
-
     </motion.div>
   );
 }
