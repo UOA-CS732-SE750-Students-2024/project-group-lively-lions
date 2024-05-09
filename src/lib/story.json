@@ -141,7 +141,7 @@
           "solution": "Find me Purrlock A34 F23 I81 D74 J27",
           "image": "",
           "cipher": [
-            "morse"
+            "binary"
           ]
         },
         {
@@ -152,7 +152,7 @@
           "solution": "21 Furr Ave 1 03am Don't be late",
           "image": "",
           "cipher": [
-            "binary"
+            "caesar"
           ]
         },
         {
@@ -160,10 +160,10 @@
           "id": "0012",
           "description": "Purrlock has been framed! Can you prove his innocence and find the next clue to find the purrpetrator behind this?",
           "story": "The graffiti cipher gave him a time and place. 221C Biscuit Street, 2am the next day. He arrived at the location at the given time. He knocked at the door. No response. He paused, thinking for a moment. Curious, he tried the door handle. Unlocked. Folding his ears upon his head, he slowly stepped inside. \nIt was a modest apartment, with only a few rooms: a bathroom, kitchen-living area and a bedroom. He looked around, noticing a peculiar piece of paper on the floor. Before he could check it, he heard a knocking on the door. It was the pawlice. Purrlock was startled. Before he could compose himself and respond, a heavy thud shook the building as the door was knocked down. \nAs Purrlock tried to explain and ask what was going on, he was arrested. As he was dragged away, he spied the pawlice knock open a hidden compartment behind the fireplace to reveal a stash of catnip. Purrlock realised the pawlice must have had an anonymouse tip. \nPurrlock was arrested for smuggling illegal catnip. Caperton knew that, despite Purrlock’s history of catnip abuse, that Purrlock would not do such a thing, and sent another detective to gather evidence for Purrlock. This detective returned with the mysterious pieces of paper that they found around the house, as well as pictures of strange symbols on the walls. With this evidence, Purrlock must solve the ciphers to prove his innocence, and prove that he was investigating a different case, as well as finding the next clue to reveal the identity of the master.",
-          "solution": "Catnip hidden Letter planted Delivery of cheese to 33 Whisker Dr",
+          "solution": "Catnip hidden Letter planted Delivery of cheese to Whisker Dr",
           "image": "Pawlice",
           "cipher": [
-            "binary"
+            "morse"
           ]
         },
         {
@@ -174,7 +174,7 @@
           "solution": "The door is already unlocked you silly goose",
           "image": "",
           "cipher": [
-            "binary"
+            "polybius"
           ]
         },
         {
@@ -185,7 +185,7 @@
           "solution": "Did you know there are over 2000 variants of cheese",
           "image": "Keiththerat",
           "cipher": [
-            "morse"
+            "vigenere"
           ]
         }
       ],
