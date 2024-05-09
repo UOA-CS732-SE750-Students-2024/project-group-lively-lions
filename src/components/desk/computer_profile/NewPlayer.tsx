@@ -84,13 +84,13 @@ export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
           />
         </div>
         <p className="font-[alagard] text-[1.3rem]">Create New Account</p>
-        <form className="w-[40%]">
+        <form className="w-[30%]">
           <div className="flex">
-            <div className="">
+            <div className="pr-1">
               <p className="font-[alagard] text-[1.3rem] p-2">Identity:</p>
               <p className="font-[alagard] text-[1.3rem]">Password:</p>
             </div>
-            <div className="p1-1">
+            <div>
               <TextField
                 value={username}
                 onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
