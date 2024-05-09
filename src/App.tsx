@@ -17,8 +17,8 @@ import * as ciphersExports from './ciphers/ciphers';
 import muted from './assets/common/muted.png';
 import notMuted from './assets/common/not_muted.png';
 import gameSound from './assets/sounds/gameMusic.mp4';
-
-let gameMusic = new Audio(gameSound);
+import { delay } from './lib/utils';
+const gameMusic = new Audio(gameSound);
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
@@ -29,7 +29,7 @@ function App() {
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
   const [showNote, setShowNote] = useState(false);
   const [showBoard, setShowBoard] = useState(false);
-  const [puzzleSolved, setPuzzleSolved] = useState(false);
+  const [allPuzzleSolved, setAllPuzzleSolved] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL;
 
@@ -132,8 +132,8 @@ function App() {
       setShowNote={setShowNote}
       showBoard={showBoard}
       setShowBoard={setShowBoard}
-      puzzleSolved={puzzleSolved}
-      setPuzzleSolved={setPuzzleSolved}
+      allPuzzleSolved={allPuzzleSolved}
+      setAllPuzzleSolved={setAllPuzzleSolved}
       isMuted={isMuted}
     />
   ];
@@ -223,7 +223,8 @@ function App() {
     setCurrentScreen(screen);
   }
 
-  function handleSolvedPuzzle() {
+  async function handleSolvedPuzzle() {
+    await delay(2000);
     //Check current level number of puzzles
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
@@ -242,13 +243,12 @@ function App() {
       setCurrentEncodedPhrase(encodePhrase(puzzles[index]));
       //Set current screen to new note with conspiracy board
       setShowBoard(true);
+      setShowNote(true);
     } else {
       // TODO: Handle 'congrats you've completed all of the puzzles'
-      // setTimeout(() => {
-      //   setCurrentScreen(Screen.MainGamePage);
-      // }, 2500);
-      setPuzzleSolved(true);
+      setAllPuzzleSolved(true);
       setShowBoard(true);
+      setShowNote(true);
     }
     const requestBody = {
       username: userProfile.profile.username,
