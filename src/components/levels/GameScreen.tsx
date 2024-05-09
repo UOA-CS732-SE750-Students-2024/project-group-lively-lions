@@ -44,8 +44,8 @@ interface GameScreenProps {
 }
 
 /*
-* This component holds the creation of the main game screen, and holds navigation to the interactive components.
-*/
+ * This component holds the creation of the main game screen, and holds navigation to the interactive components.
+ */
 export default function GameScreen({
   handleScreenButtonClick,
   phrase,
@@ -60,7 +60,6 @@ export default function GameScreen({
   setAllPuzzleSolved,
   isMuted
 }: GameScreenProps) {
-
   const [echidnaOn, setEchidnaOn] = useState(true);
   const [resetEchidnaDisplay, setResetEchidnaDisplay] = useState(false);
 
@@ -139,7 +138,7 @@ export default function GameScreen({
   }
 
   async function solvedCurrentPuzzle() {
-    await delay(3000)
+    await delay(3000);
     setEchidnaOn(false);
     handleSolvedPuzzle();
     await delay(2000);
@@ -179,7 +178,7 @@ export default function GameScreen({
           setOpen={setShowBoard}
         >
           <img
-            className="hover:outline outline-white outline-7 cursor-pointer"
+            className="min-h-[150px] h-[calc(17vw*9/16)] hover:outline outline-white outline-7 cursor-pointer"
             src={conspiracyBoard}
             draggable={false}
           />
@@ -187,60 +186,61 @@ export default function GameScreen({
       </div>
 
       {/* Phone asset linked to hint system */}
-      <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
+      <div className="absolute w-[25%] top-[26%] left-[5%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
 
       {/* Exit sign to go back to main game page */}
-      <div
-        className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
+      <img
+        className="absolute top-[-4%] left-[84%] transition ease-in-out hover:translate-y-1 cursor-pointer min-h-[110px] h-[calc(12vw*9/16)]"
+        src={exitSign}
+        alt="Exit"
         onClick={(e) => {
           handleScreenButtonClick(Screen.MainGamePage, e);
           playWoodSound();
           setAllPuzzleSolved(false);
         }}
-      >
-        <img src={exitSign} alt="Exit" draggable={false} />
-      </div>
+        draggable={false}
+      />
 
       {/* Non-Interactive filler assets */}
       <img
-        className="absolute scale-[400%] top-[32%] left-[-1%]"
+        className="absolute min-h-[240px] h-[calc(27vw*9/16)] top-[13%] left-[-9%]"
         src={pencilHolder}
         draggable={false}
       />
       <img
-        className="absolute scale-[150%] top-[48%] left-[-2%]"
+        className="absolute min-h-[80px] h-[calc(8vw*9/16)] top-[45%] left-[-5%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute scale-[160%] top-[51%] left-[6%]"
+        className="absolute min-h-[80px] h-[calc(8vw*9/16)] top-[48%] left-[3%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute scale-[380%] top-[34%] left-[31%]"
+        className="absolute min-h-[200px] h-[calc(23vw*9/16)] top-[22%] left-[27%]"
         src={milk}
         draggable={false}
       />
       <img
-        className="absolute scale-[200%] top-[40%] left-[65%]"
+        className="absolute min-h-[130px] h-[calc(14vw*9/16)] top-[36%] left-[61%]"
         src={blueYarn}
         draggable={false}
       />
       <img
-        className="absolute scale-[200%] top-[44%] left-[72%]"
+        className="absolute min-h-[100px] h-[calc(11vw*9/16)] top-[42%] left-[70%]"
         src={purpleYarn}
         draggable={false}
       />
       <img
-        className="absolute scale-[270%] top-[38%] left-[83%]"
+        className="absolute min-h-[120px] h-[calc(13vw*9/16)] top-[32%] left-[78%]"
         src={coffee}
         draggable={false}
       />
       <img
-        className="absolute scale-[450%] top-[31%] left-[95%]"
+        className="absolute min-h-[240px] h-[calc(27vw*9/16)] top-[17%] left-[87%]"
         src={pencilHolder}
         draggable={false}
       />
@@ -272,8 +272,7 @@ export default function GameScreen({
       />
 
       {/* Reference book */}
-      {/* This asset just looks better when on top of the hard pixel vignette, sorry for throwing off the nice grouping. */}
-      <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
+      <div className="absolute top-[62%] left-[2%] rotate-12">
         <ReferenceBook isMuted={isMuted} />
       </div>
 

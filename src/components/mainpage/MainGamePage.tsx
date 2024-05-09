@@ -115,7 +115,7 @@ export default function MainGamePage({
     >
       {/* visual items lower in scene order*/}
       <img
-        className="absolute right-0 cursor-pointer"
+        className="absolute min-h-[400px] h-[calc(45vw*9/16)] right-0 cursor-pointer"
         onClick={() => {
           playLampSound();
           handleLight();
@@ -125,7 +125,7 @@ export default function MainGamePage({
         draggable={false}
       />
       <img
-        className="absolute bottom-0 w-screen"
+        className="absolute min-h-[250px] h-[calc(28vw*9/16)] min-w-[960px] w-[60vw] bottom-[0%]"
         onClick={() => playWoodSound()}
         src={table}
         alt="table"
@@ -136,7 +136,7 @@ export default function MainGamePage({
       {/* Conspiracy board shows thought about usage in game */}
       <div>
         <img
-          className="absolute scale-[300%] top-[17%] left-[44%] transition ease-in-out hover:translate-y-1 cursor-pointer"
+          className="absolute min-h-[240px] h-[calc(27vw*9/16)] top-[2%] left-[31%] transition ease-in-out hover:translate-y-1 cursor-pointer"
           onClick={() => {
             configureThought(
               'This conspiracy board lets me keep track of information during cases!'
@@ -163,7 +163,7 @@ export default function MainGamePage({
 
       {/* Phone shows thought about usage in game */}
       <div
-        className="relative top-[45%] left-[23.5%]"
+        className="relative scale-[65%] top-[45%] left-[20%]"
         style={{ maxWidth: '20vw' }}
         onClick={() =>
           configureThought(
@@ -175,10 +175,7 @@ export default function MainGamePage({
       </div>
 
       {/* Computer leads to profile screen */}
-      <div
-        className="relative top-[25%] left-[82%]"
-        style={{ maxWidth: 'fit-content' }}
-      >
+      <div className="absolute bottom-[29%] left-[72%]">
         <Computer
           handleScreenButtonClick={handleScreenButtonClick}
           isMuted={isMuted}
@@ -192,54 +189,54 @@ export default function MainGamePage({
 
       {/* Non interactive visual items higher in scene order*/}
       <img
-        className="absolute top-[74%] left-[3%]"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[74%] left-[3%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute top-[77%] scale-[110%]"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[77%] scale-[110%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute top-[68%] left-[9%] scale-[95%]"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[68%] left-[9%] scale-[95%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute top-[69%] left-[12%] scale-[80%]"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[69%] left-[12%] scale-[80%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute scale-[210%] top-[46%] left-[19%]"
+        className="absolute min-h-[55px] h-[calc(6vw*9/16)] scale-[210%] top-[46%] left-[19%]"
         src={pencilHolder}
         draggable={false}
       />
       <img
-        className="absolute top-[56%] left-[18%] scale-[85%]"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[56%] left-[18%] scale-[85%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute top-[59%] left-[21%]"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[59%] left-[21%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute scale-[230%] top-[49%] left-[68%]"
+        className="absolute min-h-[55px] h-[calc(6vw*9/16)] scale-[230%] top-[49%] left-[68%]"
         src={pencilHolder}
         draggable={false}
       />
       <img
-        className="absolute top-[79%] left-[93%] scale-[125%]"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[79%] left-[93%] scale-[125%]"
         src={paper}
         draggable={false}
       />
 
       {/* Interactive visual filler items high in scene order*/}
       <img
-        className="absolute top-[47%] left-[40%] scale-[250%] cursor-pointer"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[47%] left-[43%] scale-[250%] cursor-pointer"
         onClick={() => {
           configureThought('Mmmmmmmmmmmilkk, I simply must buy some more.');
           playGlassSound();
@@ -248,8 +245,13 @@ export default function MainGamePage({
         draggable={false}
       />
 
+      {/* Reference book entry point leads to reference book screen */}
+      <div className="absolute scale-[60%] top-[62%] left-[15%] rotate-12">
+        <ReferenceBook isMuted={isMuted} />
+      </div>
+
       <img
-        className="absolute top-[50%] left-[61%] scale-[160%] cursor-pointer"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[50%] left-[61%] scale-[160%] cursor-pointer"
         onClick={() => {
           configureThought(
             'Coffee has gotten me through many rough nights of casework.'
@@ -261,7 +263,7 @@ export default function MainGamePage({
       />
       {/* Cat Heaven */}
       <img
-        className="absolute top-[65%] left-[90%] scale-[160%] cursor-pointer"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[65%] left-[90%] scale-[160%] cursor-pointer"
         onClick={() => {
           configureThought('Now wait just a meowment…');
           playFabricSound();
@@ -270,7 +272,7 @@ export default function MainGamePage({
         draggable={false}
       />
       <img
-        className="absolute top-[72%] left-[87%] scale-[160%] cursor-pointer"
+        className="absolute min-h-[66px] h-[calc(7vw*9/16)] top-[72%] left-[87%] scale-[160%] cursor-pointer"
         onClick={() => {
           configureThought('That case was a total cat-astrophe!!!');
           playFabricSound();
@@ -279,7 +281,7 @@ export default function MainGamePage({
         draggable={false}
       />
       <img
-        className="absolute top-[51%] left-[47%] scale-[160%] cursor-pointer"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[51%] left-[47%] scale-[160%] cursor-pointer"
         onClick={() => {
           configureThought("Meow you're talking!");
           playFabricSound();
@@ -288,7 +290,7 @@ export default function MainGamePage({
         draggable={false}
       />
       <img
-        className="absolute top-[53%] left-[53%] scale-[160%] cursor-pointer"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[53%] left-[53%] scale-[160%] cursor-pointer"
         onClick={() => {
           configureThought('I need a meowtini. Shaken, not purred, of course.');
           playFabricSound();
@@ -297,7 +299,7 @@ export default function MainGamePage({
         draggable={false}
       />
       <img
-        className="absolute top-[78%] left-[9%] scale-[150%] cursor-pointer"
+        className="absolute min-h-[66px] h-[calc(7vw*9/16)] top-[78%] left-[9%] scale-[150%] cursor-pointer"
         onClick={() => {
           configureThought('This case will go down in hiss-tory!');
           playFabricSound();

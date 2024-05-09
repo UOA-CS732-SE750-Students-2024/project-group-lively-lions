@@ -11,7 +11,6 @@ interface PhoneProps {
 * This component creates the phone asset
 */
 export default function Phone({ isMuted }: PhoneProps) {
-
   function playPhoneRing() {
     if (!isMuted) {
       new Audio(phoneRing).play();
@@ -19,16 +18,16 @@ export default function Phone({ isMuted }: PhoneProps) {
   }
 
   return (
-    <div className='h-[100px]' style={{ imageRendering: 'pixelated' }}>
+    <div style={{ imageRendering: 'pixelated' }}>
       <img
-        className='absolute top-[10%] left-[3%]'
+        className="absolute min-h-[200px] min-w-[200px] h-[calc(24vw*9/16)] left-[3%]"
         style={{ imageRendering: 'pixelated' }}
         src={phoneBase}
         alt="phone base"
         draggable={false}
       />
       <motion.img
-        className='absolute left-[3%] hover:animate-phone-ring'
+        className="absolute min-h-[130px] min-w-[220px] h-[calc(15vw*9/16)] left-[5%] hover:animate-phone-ring"
         style={{ imageRendering: 'pixelated' }}
         onMouseEnter={() => playPhoneRing()}
         src={phoneHandset}
@@ -36,5 +35,5 @@ export default function Phone({ isMuted }: PhoneProps) {
         draggable={false}
       />
     </div>
-  )
+  );
 }

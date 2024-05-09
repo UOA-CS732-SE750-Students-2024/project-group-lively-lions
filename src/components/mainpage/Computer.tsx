@@ -20,7 +20,6 @@ interface ComputerProps {
 export default function ({
   handleScreenButtonClick, isMuted
 }: ComputerProps) {
-
   const [computerIsOn, setComputerIsOn] = useState(false);
 
   function playComputerBuzzSound() {
@@ -44,8 +43,7 @@ export default function ({
         }}
       >
         <motion.img
-          draggable={false}
-          className="scale-[400%]"
+          className="min-h-[230px] h-[calc(26vw*9/16)]"
           onMouseEnter={() => {
             setComputerIsOn(true);
             playComputerBuzzSound();
@@ -57,10 +55,9 @@ export default function ({
         <AnimatePresence>
           {computerIsOn && (
             <motion.img
-              draggable={false}
               className={
                 computerIsOn
-                  ? 'absolute top-[0%] scale-[400%] visible'
+                  ? 'absolute top-[0%] min-h-[230px] h-[calc(26vw*9/16)] visible'
                   : 'invisible'
               }
               onMouseLeave={() => setComputerIsOn(false)}
