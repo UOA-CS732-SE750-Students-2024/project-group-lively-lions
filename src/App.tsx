@@ -266,14 +266,20 @@ function App() {
 
   function playMusic() {
     if (!isMuted) {
+      gameMusic.loop = true;
       gameMusic.play();
     }
+  }
+
+  function restartMusic() {
+    gameMusic.loop = true;
+    gameMusic.play();
   }
 
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
-      <button className='absolute self-end pr-2 top-[0%] scale-[80%]' onClick={() => { setIsMuted(!isMuted); isMuted ? gameMusic.play() : gameMusic.pause() }}>
+      <button className='absolute self-end pr-2 top-[0%] scale-[80%]' onClick={() => { setIsMuted(!isMuted); isMuted ? restartMusic() : gameMusic.pause() }}>
         <img src={isMuted ? muted : notMuted} />
       </button>
       {/* Constrains game contents maximum and minimum dimensions */}
