@@ -14,7 +14,7 @@ export function ReferenceBookPage({
   cipherName,
   encoding,
   decoding,
-  diagram,
+  diagram
 }: ReferencePageProps) {
   return (
     <div className="flex justify-center relative min-w-[400px] w-[calc(24vw)]">
@@ -27,12 +27,18 @@ export function ReferenceBookPage({
         <p className="opacity-[70%] text-[1.3rem] font-[alagard] leading-tight">
           {cipherName}
         </p>
-        <p className="opacity-[70%] text-[1rem] font-[alagard] leadind-tight">{encoding}</p>
-        { diagram != "" ?
-        <img className="inline-block mix-blend-multiply py-[1rem] px-[6%] leading-tight" src={diagram} /> 
-        :
-        <></>
-        }
+        <p className="opacity-[70%] text-[1rem] font-[alagard] leadind-tight">
+          {encoding}
+        </p>
+        {diagram != '' ? (
+          <img
+            className="inline-block mix-blend-multiply py-[1rem] px-[6%] leading-tight"
+            src={diagram}
+            draggable={false}
+          />
+        ) : (
+          <></>
+        )}
         <p className="opacity-[70%] text-[1rem] font-[alagard]">{decoding}</p>
       </div>
     </div>

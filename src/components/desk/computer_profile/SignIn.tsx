@@ -1,4 +1,3 @@
-import { Button } from '../../ui/button';
 import { useState } from 'react';
 import { TextField, PassField } from '../../ui/TextField';
 import { Screen } from '@/util';
@@ -21,10 +20,7 @@ It also has a confirm button, which does nothing yet, and a back button to the l
 const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL;
 
 interface SignInProps {
-  handleScreenButtonClick: (
-    level: number,
-    event?: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  handleScreenButtonClick: (level: number) => void;
   isMuted: boolean;
 }
 
