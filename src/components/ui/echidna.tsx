@@ -25,6 +25,7 @@ import resetButtonSound from '../../assets/sounds/echidna_reset.mp4';
 import successSound from '../../assets/sounds/echidna_success.mp4';
 import errorSound from '../../assets/sounds/echidna_error.mp4';
 
+// This component holds the creation and overall logic of the entire ECHIDNA machine
 interface EchidnaProps {
   solve_delay_ms: number;
   phrase: string;
@@ -41,6 +42,7 @@ interface EchidnaProps {
   handleSolvedPuzzle: () => void;
   isMuted: boolean;
   active?: boolean;
+  resetDisplay?: boolean;
 }
 
 export function Echidna({
@@ -51,7 +53,8 @@ export function Echidna({
   availableCiphers,
   showAuxControls,
   isMuted,
-  active = true
+  active = true,
+  resetDisplay = false
 }: EchidnaProps) {
   const [selectedCipher, setSelectedCipher] = useState<string>(
     availableCiphers[0].displayName
@@ -146,6 +149,9 @@ export function Echidna({
     setGreenLampOn(true);
     console.log('Solution found.');
     handleSolvedPuzzle();
+    setTimeout(() => {
+      setGreenLampOn(false);
+    }, 3000);
   }
 
   function handleSolutionNotFound() {
@@ -218,7 +224,7 @@ export function Echidna({
             <motion.p
               key={selectedCipher}
               className={'font-[alagard] text-[1.2rem] leading-[1.2rem]'}
-              initial={{ y: cipherSelectUp ? 50 : -50 }}
+              initial={{ y: cipherSelectUp ? -50 : 50 }}
               animate={{
                 y: cipherAnimatingOut ? (cipherSelectUp ? 50 : -50) : 0
               }}
@@ -354,6 +360,7 @@ export function Echidna({
         <AnimatePresence mode="wait">
           {active && greenLampOn ? (
             <motion.img
+              draggable={false}
               src={echidnaGreenLampOn}
               className="absolute w-[100%]"
               key="greenlampon"
@@ -376,6 +383,7 @@ export function Echidna({
         <AnimatePresence mode="wait">
           {active && redLampOn ? (
             <motion.img
+              draggable={false}
               src={echidnaRedLampOn}
               className="absolute w-[100%]"
               key="redlampon"

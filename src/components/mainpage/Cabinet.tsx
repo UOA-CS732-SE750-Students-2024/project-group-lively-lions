@@ -12,10 +12,10 @@ interface CabinetProps {
   isMuted: boolean;
 }
 
-export default function Cabinet({
-  handleScreenButtonClick,
-  isMuted
-}: CabinetProps) {
+/**
+ *  This component builds the cabinet asset and handles the navigation to the level select.
+*/
+export default function Cabinet({ handleScreenButtonClick, isMuted }: CabinetProps) {
   function play_drawer_click_sound() {
     if (!isMuted) {
       new Audio(filing_cabinet_open).play();

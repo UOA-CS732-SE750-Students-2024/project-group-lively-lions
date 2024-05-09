@@ -4,6 +4,7 @@ interface EchidnaKeyWordInputProps {
   handleKeywordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+// This component handles the creation of the keyboard input for the ECHIDNA
 export function EchidnaKeyWordInput({
   handleKeywordChange
 }: EchidnaKeyWordInputProps) {

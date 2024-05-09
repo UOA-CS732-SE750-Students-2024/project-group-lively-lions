@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/desk/LevelSelect';
-import { ReferenceBook } from './components/desk/ReferenceBook';
 import { ComputerProfile } from './components/desk/computer_profile/ComputerProfile';
 import { NewPlayer } from './components/desk/computer_profile/NewPlayer';
 import { SignIn } from './components/desk/computer_profile/SignIn';
@@ -9,10 +8,8 @@ import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels, Puzzle, getStory } from './util';
 import GameScreen from './components/levels/GameScreen';
-import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
-import { set } from 'mongoose';
 import muted from './assets/common/muted.png';
 import notMuted from './assets/common/not_muted.png';
 import gameSound from './assets/sounds/gameMusic.mp4';
@@ -22,7 +19,6 @@ const gameMusic = new Audio(gameSound);
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
-  const [returnScreen, setReturnScreen] = useState(Screen.MainGamePage);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
@@ -54,9 +50,6 @@ function App() {
       localStorage.setItem('profile', JSON.stringify(defaultProfile));
     } else {
       const profile = JSON.parse(existingProfile);
-      if (profile.profile.completed_puzzles.length > 0) {
-        setIsFirstJoin(false);
-      }
     }
   }
 
@@ -71,11 +64,17 @@ function App() {
     <NewPlayer
       key="newPlayer"
       handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
     />,
-    <SignIn key="signIn" handleScreenButtonClick={handleScreenButtonClick} />,
+    <SignIn
+      key="signIn"
+      handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
+    />,
     <PlayerInfo
       key="playerInfo"
       handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
     />,
     <LevelSelect
       key="levelSelect"
@@ -91,28 +90,18 @@ function App() {
     <ComputerProfile
       key="computerProfile"
       handleScreenButtonClick={handleScreenButtonClick}
-    />,
-    <EchidnaMachine
-      key="echidnaMachine"
-      phrase={currentEncodedPhrase}
-      story={currentStory}
-      handleScreenButtonClick={handleScreenButtonClick}
-      puzzleIndex={currentPuzzleIndex}
-      handleSolvedPuzzle={handleSolvedPuzzle}
       isMuted={isMuted}
     />,
     <MainGamePage
       key="mainGamePage"
       handleScreenButtonClick={handleScreenButtonClick}
-      handleReturnScreen={handleReturnScreen}
       isMuted={isMuted}
       isFirstJoin={isFirstJoin}
+      handleFirstJoin={handleFirstJoin}
     />,
     <GameScreen
       key="gameScreen"
       handleScreenButtonClick={handleScreenButtonClick}
-      level={currentLevel}
-      handleReturnScreen={handleReturnScreen}
       phrase={currentEncodedPhrase}
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
@@ -126,6 +115,10 @@ function App() {
       isMuted={isMuted}
     />
   ];
+
+  function handleFirstJoin() {
+    setIsFirstJoin(false);
+  }
 
   function encodePhrase(puzzle: Puzzle) {
     const puzzleCipher = puzzle.cipher;
@@ -199,10 +192,6 @@ function App() {
     e.preventDefault();
   }
 
-  function handleReturnScreen(screen: Screen) {
-    setReturnScreen(screen);
-  }
-
   function handleScreenButtonClick(
     screen: Screen,
     e?: React.MouseEvent<HTMLElement, MouseEvent>
@@ -213,7 +202,6 @@ function App() {
   }
 
   async function handleSolvedPuzzle() {
-    await delay(2000);
     //Check current level number of puzzles
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
@@ -281,7 +269,7 @@ function App() {
           isMuted ? restartMusic() : pauseMusic();
         }}
       >
-        <img src={isMuted ? muted : notMuted} />
+        <img src={isMuted ? muted : notMuted} draggable={false} />
       </button>
       {/* Constrains game contents maximum and minimum dimensions */}
       <div

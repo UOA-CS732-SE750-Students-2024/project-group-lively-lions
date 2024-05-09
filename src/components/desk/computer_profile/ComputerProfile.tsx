@@ -1,6 +1,14 @@
 import { Screen } from '@/util';
-import { Button } from '../../ui/button';
-import computer_screen_border from '../../../assets/room/main_menu/computer/computer_screen_border.png';
+import computer_screen_main from '../../../assets/room/main_menu/computer/computer_screen_main.png';
+import switch_account_icon from '../../../assets/room/main_menu/computer/SwitchAccount.png';
+import turn_off_icon from '../../../assets/room/main_menu/computer/TurnOff.png';
+import log_out_base from '../../../assets/room/main_menu/computer/log_out_base.png';
+import log_out_cap from '../../../assets/room/main_menu/computer/log_out_cap.png';
+import EchidnaButton from '../../../components/ui/echidna_button';
+import profile_base from '../../../assets/room/main_menu/computer/ProfileInfoIcon_base.png';
+import profile_cap from '../../../assets/room/main_menu/computer/ProfileInfoIcon_cap.png';
+import { motion } from 'framer-motion';
+import click_sound from '../../../assets/sounds/click.mp4';
 
 /* 
 This is the component for the computer visible on the desk on the main menu. The computer is where the user 
@@ -9,116 +17,105 @@ The user can also press the back button to go back to the main menu.
 */
 
 interface ComputerProps {
-  handleScreenButtonClick: (
-    screen: Screen,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  handleScreenButtonClick: (screen: Screen) => void;
+  isMuted: boolean;
 }
 
-export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
-  // TODO: change to check if user is signed in
-  // If player is not signed in
+
+export function ComputerProfile({
+  handleScreenButtonClick,
+  isMuted
+}: ComputerProps) {
+  const currentProfile = localStorage.getItem('profile');
+
+  const getUsername = (): string => {
+    if (currentProfile) {
+      const parsedProfile = JSON.parse(currentProfile);
+      return parsedProfile.profile.username;
+    }
+    return 'guest';
+  };
+
   const logout = async () => {
-    const currentProfile = localStorage.getItem('profile');
     if (currentProfile) {
       const parsedProfile = JSON.parse(currentProfile);
       if (parsedProfile.profile.username === 'guest') {
-        alert("Cannot log out of guest account.");
+        alert('Cannot log out of guest account.');
       }
-      localStorage.removeItem('profile');
-      const defaultProfile = { "profile": {
-        username: 'guest',
-        password: 'guest_password',
-        completed_puzzles: []
-      }};
+      const defaultProfile = {
+        profile: {
+          username: 'guest',
+          password: 'guest_password',
+          completed_puzzles: []
+        }
+      };
       localStorage.setItem('profile', JSON.stringify(defaultProfile));
     }
   };
- 
-  if (computer_screen_border == 'a') {
-    return (
-      <div className="flex justify-center items-center">
-        <div className="absolute inset-0">
-          <img
-            className="w-[100%]"
-            src={computer_screen_border}
-            draggable={false}
-          />
-        </div>
-        <div className="absolute inset-0 flex justify-center items-center flex-col">
-          <Button
-            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
-            onClick={(e) => handleScreenButtonClick(Screen.SignIn, e)}
-            size={'sm'}
-          >
-            SIGN IN
-          </Button>
-          <Button
-            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
-            onClick={(e) => handleScreenButtonClick(Screen.NewPlayer, e)}
-            size={'sm'}
-          >
-            NEW PLAYER
-          </Button>
-          <Button
-            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
-            onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
-            size={'sm'}
-          >
-          <Button
-            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[40%]"
-            onClick={logout}
-            size={'sm'}
-          >
-            LOGOUT
-          </Button>
-            BACK
-          </Button>
-        </div>
-      </div>
-    );
-  } else {
-    // If player is signed in
-    return (
-      <div className="flex justify-center items-center">
-        <div className="absolute inset-0">
-          <img
-            className="w-[100%]"
-            src={computer_screen_border}
-            draggable={false}
-          />
-        </div>
-        <div className="absolute inset-0 flex justify-center items-center flex-col">
-          <Button
-            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
-            onClick={(e) => handleScreenButtonClick(Screen.SignIn, e)}
-            size={'sm'}
-          >
-            SWITCH PROFILE
-          </Button>
-          <Button
-            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
-            onClick={(e) => handleScreenButtonClick(Screen.PlayerInfo, e)}
-            size={'sm'}
-          >
-            PLAYER INFO
-          </Button>
-          <Button
-            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
-            onClick={logout}
-            size={'sm'}
-          >
-            LOGOUT
-          </Button>
-          <Button
-            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
-            onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
-            size={'sm'}
-          >
-            BACK
-          </Button>
-        </div>
-      </div>
-    );
+
+  function playClickSound() {
+    if (!isMuted) {
+      new Audio(click_sound).play();
+    }
   }
+
+  return (
+    <div className="flex justify-center items-center">
+      <div className="absolute inset-0">
+        <img
+          className="w-[100%]"
+          src={computer_screen_main}
+          draggable={false}
+        />
+      </div>
+      <motion.img
+        className="absolute w-[25%] top-[43%] left-[55%] cursor-pointer"
+        onClick={() => {
+          handleScreenButtonClick(Screen.SignIn);
+          playClickSound();
+        }}
+        src={switch_account_icon}
+        alt="switch_account_icon"
+        draggable={false}
+        whileHover={{ opacity: 0.6 }}
+      />
+      <div className="absolute top-[19%] right-[13%] w-[8%] cursor-pointer">
+        <EchidnaButton
+          baseImage={profile_base}
+          capImage={profile_cap}
+          onClick={() => {
+            handleScreenButtonClick(Screen.PlayerInfo);
+            playClickSound();
+          }}
+        />
+      </div>
+      <div className="absolute top-[60%] right-[26%] w-[12%] cursor-pointer">
+        <EchidnaButton
+          baseImage={log_out_base}
+          capImage={log_out_cap}
+          onClick={() => {
+            logout;
+            playClickSound();
+          }}
+        />
+      </div>
+      <motion.img
+        className="absolute scale-[300%] top-[77%] left-[22%] cursor-pointer"
+        onClick={() => {
+          handleScreenButtonClick(Screen.MainGamePage);
+          playClickSound();
+        }}
+        src={turn_off_icon}
+        alt="turn_off_icon"
+        draggable={false}
+        whileHover={{ opacity: 1 }}
+        animate={{ opacity: 0.8 }}
+      />
+      <div className="absolute left-[10%] top-[55%] w-[40%]">
+        <p className="opacity-[70%] text-[2rem] font-[alagard] h-[35%] text-center inset-0">
+          Welcome, {getUsername()}
+        </p>
+      </div>
+    </div>
+  );
 }

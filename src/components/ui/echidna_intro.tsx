@@ -5,7 +5,6 @@ import { useState } from 'react';
 import echidnaLid from '/echidna_lid.png?url';
 import { Screen } from '@/util';
 import lidSound from '../../assets/sounds/lift_box.mp3';
-import gameSound from '../../assets/sounds/gameMusic.mp4';
 
 interface EchidnaIntroProps {
   handleContinue: (level: Screen) => void;
@@ -17,10 +16,13 @@ interface EchidnaIntroProps {
   playMusic: () => void;
 }
 
+/*
+* This handles the logic for creating the ECHIDNA in the intro locked state
+*/
 function EchidnaIntro({
   handleContinue,
-  startDelay = 1000,
-  liftDelay = 1500,
+  startDelay = 2000,
+  liftDelay = 1000,
   titleCardDelay = 1000,
   startGameDelay = 4000,
   isMuted,
@@ -87,8 +89,8 @@ function EchidnaIntro({
               handleSolvedPuzzle={() => {
                 handleSolvedPuzzle();
               }}
-              phrase="01001101 01100101 01101111 01110111"
-              solution="Meow"
+              phrase="01001101 01100101 01101111 01110111 01110010 01101001 01100001 01110010 01110100 01111001 00100000 01000111 01100001 01101101 01100101 01110011 00100000 01010000 01110010 01100101 01110011 01100101 01101110 01110100 01110011 00101110 00101110 00101110"
+              solution="Meowriarty Games Presents..."
               solve_delay_ms={1000}
               showAuxControls={false}
               active={startEchidna}
@@ -97,6 +99,7 @@ function EchidnaIntro({
             <AnimatePresence mode="wait">
               {!liftLid ? (
                 <motion.img
+                  draggable={false}
                   key="lid"
                   className="absolute w-[100%] pt-[5%] cursor-pointer"
                   src={echidnaLid}
