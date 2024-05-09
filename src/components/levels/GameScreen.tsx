@@ -14,6 +14,7 @@ import conspiracyBoard from '../../assets/room/active_game/conspiracy_board.png'
 import exitSign from '../../assets/room/active_game/exit.png';
 import ConspiracyBoard, { ConspiracyBoardData } from '../desk/ConspiracyBoard';
 import Caperton from '../../assets/common/CapybaraFella.png';
+import Purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import * as ciphersExports from '@/ciphers/ciphers';
 import Echidna from '../ui/echidna';
 import sepia from '../../assets/room/active_game/sepia.png';
@@ -106,12 +107,13 @@ export default function GameScreen({
       {
         story: story.introduction,
         description: story.introduction,
-        image: Caperton
+        image: Purrlock
       },
       ...story.puzzles.map((puzzle) => ({
         puzzleName: puzzle.name,
         story: puzzle.story,
-        description: puzzle.description
+        description: puzzle.description,
+        image: puzzle.image
       })),
       {
         story: story.conclusion,
