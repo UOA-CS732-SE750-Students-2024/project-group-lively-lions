@@ -5,6 +5,7 @@ import { useState } from 'react';
 import echidnaLid from '/echidna_lid.png?url';
 import { Screen } from '@/util';
 import lidSound from '../../assets/sounds/lift_box.mp3';
+import gameSound from '../../assets/sounds/gameMusic.mp4';
 
 interface EchidnaIntroProps {
   handleContinue: (level: Screen) => void;
@@ -13,6 +14,7 @@ interface EchidnaIntroProps {
   titleCardDelay?: number;
   startGameDelay?: number;
   isMuted: boolean;
+  playMusic: () => void;
 }
 
 function EchidnaIntro({
@@ -21,7 +23,8 @@ function EchidnaIntro({
   liftDelay = 1500,
   titleCardDelay = 1000,
   startGameDelay = 4000,
-  isMuted
+  isMuted,
+  playMusic
 }: EchidnaIntroProps) {
   const [liftLid, setLiftLid] = useState<boolean>(false);
   const [liftEchidna, setLiftEchidna] = useState<boolean>(false);
@@ -39,6 +42,9 @@ function EchidnaIntro({
   };
 
   const handleSolvedPuzzle = () => {
+    if (!isMuted) {
+      playMusic();
+    }
     setTimeout(() => {
       setStartEchidna(false);
     }, startDelay);

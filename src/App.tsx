@@ -16,6 +16,9 @@ import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
 import muted from './assets/common/muted.png';
 import notMuted from './assets/common/not_muted.png';
+import gameSound from './assets/sounds/gameMusic.mp4';
+
+let gameMusic = new Audio(gameSound);
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
@@ -59,6 +62,7 @@ function App() {
       key="landing"
       handleContinue={handleScreenButtonClick}
       isMuted={isMuted}
+      playMusic={playMusic}
     />,
 
     <NewPlayer
@@ -246,10 +250,16 @@ function App() {
     })
   }
 
+  function playMusic() {
+    if (!isMuted) {
+      gameMusic.play();
+    }
+  }
+
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
-      <button className='absolute self-end pr-2 top-[0%] scale-[80%]' onClick={() => setIsMuted(!isMuted)}>
+      <button className='absolute self-end pr-2 top-[0%] scale-[80%]' onClick={() => { setIsMuted(!isMuted); isMuted ? gameMusic.play() : gameMusic.pause() }}>
         <img src={isMuted ? muted : notMuted} />
       </button>
       {/* Constrains game contents maximum and minimum dimensions */}
