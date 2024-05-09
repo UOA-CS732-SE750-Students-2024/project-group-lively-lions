@@ -71,7 +71,7 @@ export default function GameScreen({
       {
         sender: 'Capo',
         text:
-          'Found it!' + hintText
+          'Found it! ' + hintText
       },
       {
         sender: 'Capo',
