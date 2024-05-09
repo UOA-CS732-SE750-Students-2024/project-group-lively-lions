@@ -245,7 +245,7 @@ export default function MainGamePage({
         draggable={false}
       />
       {/* Reference book entry point leads to reference book screen */}
-      <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
+      <div className="absolute top-[65%] left-[20%] rotate-12">
         <ReferenceBook isMuted={isMuted} />
       </div>
 

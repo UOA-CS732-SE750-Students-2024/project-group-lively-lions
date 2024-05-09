@@ -167,14 +167,14 @@ export default function GameScreen({
           setOpen={setShowBoard}
         >
           <img
-            className="hover:outline outline-white outline-7 cursor-pointer"
+            className="min-h-[150px] h-[calc(17vw*9/16)] hover:outline outline-white outline-7 cursor-pointer"
             src={conspiracyBoard}
             draggable={false}
           />
         </ConspiracyBoard>
       </div>
       {/* Phone asset linked to hint system */}
-      <div className="absolute w-[20%] top-[32%] left-[10%]">
+      <div className="absolute w-[20%] top-[32%] left-[8%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
 
@@ -207,27 +207,27 @@ export default function GameScreen({
         draggable={false}
       />
       <img
-        className="absolute min-h-[228px] h-[calc(7vw*9/16)]  top-[34%] left-[31%]"
+        className="absolute min-h-[200px] h-[calc(7vw*9/16)]  top-[34%] left-[31%]"
         src={milk}
         draggable={false}
       />
       <img
-        className="absolute scale-[200%] top-[40%] left-[65%]"
+        className="absolute min-h-[100px] h-[calc(11vw*9/16)] top-[36%] left-[64%]"
         src={blueYarn}
         draggable={false}
       />
       <img
-        className="absolute scale-[200%] top-[44%] left-[72%]"
+        className="absolute min-h-[100px] h-[calc(11vw*9/16)] top-[42%] left-[70%]"
         src={purpleYarn}
         draggable={false}
       />
       <img
-        className="absolute scale-[270%] top-[38%] left-[83%]"
+        className="absolute min-h-[120px] h-[calc(13vw*9/16)] top-[32%] left-[78%]"
         src={coffee}
         draggable={false}
       />
       <img
-        className="absolute scale-[450%] top-[31%] left-[95%]"
+        className="absolute min-h-[240px] h-[calc(27vw*9/16)] top-[17%] left-[87%]"
         src={pencilHolder}
         draggable={false}
       />
@@ -257,7 +257,7 @@ export default function GameScreen({
       />
 
       {/* Reference book */}
-      <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
+      <div className="absolute top-[65%] left-[7%] rotate-12">
         <ReferenceBook isMuted={isMuted} />
       </div>
 

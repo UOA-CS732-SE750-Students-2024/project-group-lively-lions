@@ -87,7 +87,7 @@ export function ReferenceBook({ isMuted }: ReferenceBookProps) {
     <Dialog>
       <DialogTrigger>
         <motion.img
-          className=" hover:animate-book-shuffle"
+          className="hover:animate-book-shuffle min-h-[100px] h-[calc(12vw*9/16)]"
           onMouseOver={() => playBookHoverSound()}
           onClick={() => playBookOpenSound()}
           src={refBook}
