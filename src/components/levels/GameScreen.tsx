@@ -29,7 +29,6 @@ interface GameScreenProps {
     screen: Screen,
     event: React.MouseEvent<HTMLElement>
   ) => void;
-  level: number;
   phrase: string;
   puzzleIndex: number;
   handleSolvedPuzzle: () => void;
