@@ -1,10 +1,7 @@
 import { Screen } from '@/util';
-import { Button } from '../../ui/button';
 import computer_screen_main from '../../../assets/room/main_menu/computer/computer_screen_main.png';
-import profile_icon from '../../../assets/room/main_menu/computer/ProfileInfoIcon.png';
 import switch_account_icon from '../../../assets/room/main_menu/computer/SwitchAccount.png';
 import turn_off_icon from '../../../assets/room/main_menu/computer/TurnOff.png';
-import log_out_icon from '../../../assets/room/main_menu/computer/log_out.png';
 import log_out_base from '../../../assets/room/main_menu/computer/log_out_base.png';
 import log_out_cap from '../../../assets/room/main_menu/computer/log_out_cap.png';
 import EchidnaButton from '../../../components/ui/echidna_button';
@@ -19,10 +16,7 @@ The user can also press the back button to go back to the main menu.
 */
 
 interface ComputerProps {
-  handleScreenButtonClick: (
-    screen: Screen,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  handleScreenButtonClick: (screen: Screen) => void;
 }
 
 export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
@@ -65,17 +59,17 @@ export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
       </div>
       <motion.img
         className="absolute w-[25%] top-[43%] left-[55%] cursor-pointer"
-        onClick={(e) => handleScreenButtonClick(Screen.SignIn, e)}
+        onClick={() => handleScreenButtonClick(Screen.SignIn)}
         src={switch_account_icon}
         alt="switch_account_icon"
         draggable={false}
         whileHover={{ opacity: 0.6 }}
       />
-      <div className="absolute top-[19%] left-[13%] w-[8%] cursor-pointer">
+      <div className="absolute top-[19%] right-[13%] w-[8%] cursor-pointer">
         <EchidnaButton
           baseImage={profile_base}
           capImage={profile_cap}
-          onClick={(e) => handleScreenButtonClick(Screen.PlayerInfo, e)}
+          onClick={() => handleScreenButtonClick(Screen.PlayerInfo)}
         />
       </div>
       <div className="absolute top-[60%] right-[26%] w-[12%] cursor-pointer">
@@ -87,7 +81,7 @@ export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
       </div>
       <motion.img
         className="absolute scale-[300%] top-[77%] left-[22%] cursor-pointer"
-        onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
+        onClick={() => handleScreenButtonClick(Screen.MainGamePage)}
         src={turn_off_icon}
         alt="turn_off_icon"
         draggable={false}
