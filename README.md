@@ -4,11 +4,22 @@
 
 *This project is the submission for the 'Lively Lions' team.*
 
+![alt text](./readme-images/echidna.png)
+<p style="text-align: center; "><em>The ECIDNA machine</em></p>
+
 # Purrlock Holmes' Cryptography Agency
 
-Welcome to Purrlock Holme's Crypawtography Agency! This is a MERN stack web game where you are Purrlock Holmes, a feline detective, attempting to solve multiple ciphers and mysteries. The game is designed to be educational and fun, with a focus on teaching the player about cryptography and ciphers. The game is designed to be played in a web browser, and is designed to be played on a desktop or laptop computer with a large fixed aspect ratio, ideally 1920 x 1080.
+Welcome to Purrlock Holme's Crypawtography Agency! Put on your detective hat and get ready to be immersed into a thrilling world where you get to follow the tales of our very own feline detective. Solve complex ciphers, from modern day emoji substitutions to old school ceaser shift ciphers. Follow the cases as you learn about this detectives world, find all the notes and save the day! Dont worry if you get stuck, your office is well stocked with a reference book and conspiracy board. If you ever need some help then Caperton Capybaraton, the Director of the Bureau of International Obscure Mystery Exploration (B.I.O.M.E), is just a phone call away. Now get ready, hold on steady and start decoding!
+
+![alt text](./readme-images/purrlock.png)
+<p style="text-align: center; "><em>Portrait of Purrlock Holmes</em></p>
+
+## Starting Information
+This is a MERN stack web game where you are Purrlock Holmes attempting to solve multiple ciphers and mysteries. The game is designed to be educational and fun, with a focus on teaching the player about cryptography and ciphers. The game is designed to be played in a web browser, and is designed to be played on a desktop or laptop computer with a large fixed aspect ratio, ideally 1920 x 1080.
 
 The live deployment of this game can be found at: https://project-group-lively-lions.onrender.com/
+
+Have a look at our [wiki](https://github.com/UOA-CS732-SE750-Students-2024/project-group-lively-lions/wiki) for a detailed breakdown of our project development, the ciphers used in this game, the backend and database used, the game visual and audio assets, our meeting notes from the past few months, and our contribution breakdown.
 
 ## Getting Started
 
