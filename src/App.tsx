@@ -52,9 +52,6 @@ function App() {
       localStorage.setItem('profile', JSON.stringify(defaultProfile));
     } else {
       const profile = JSON.parse(existingProfile);
-      if (profile.profile.completed_puzzles.length > 0) {
-        setIsFirstJoin(false);
-      }
     }
   }
 
@@ -102,6 +99,7 @@ function App() {
       handleScreenButtonClick={handleScreenButtonClick}
       isMuted={isMuted}
       isFirstJoin={isFirstJoin}
+      handleFirstJoin={handleFirstJoin}
     />,
     <GameScreen
       key="gameScreen"
@@ -119,6 +117,10 @@ function App() {
       isMuted={isMuted}
     />
   ];
+
+  function handleFirstJoin() {
+    setIsFirstJoin(false);
+  }
 
   function encodePhrase(puzzle: Puzzle) {
     const puzzleCipher = puzzle.cipher;
