@@ -20,6 +20,7 @@ import Echidna from '../ui/echidna';
 import sepia from '../../assets/room/active_game/sepia.png';
 import vignettePixel from '../../assets/room/active_game/vignettePixel.png';
 import vignetteSmooth from '../../assets/room/active_game/vignetteSmooth.png';
+import woodSound from '../../assets/sounds/wooden_tap.mp4';
 
 interface GameScreenProps {
   handleScreenButtonClick: (
@@ -32,6 +33,7 @@ interface GameScreenProps {
   puzzleIndex: number;
   handleSolvedPuzzle: () => void;
   story: Story;
+  isMuted: boolean;
 }
 
 export default function GameScreen({
@@ -41,7 +43,8 @@ export default function GameScreen({
   phrase,
   puzzleIndex,
   handleSolvedPuzzle,
-  story
+  story,
+  isMuted
 }: GameScreenProps) {
   handleReturnScreen(Screen.GameScreen);
 
@@ -102,6 +105,12 @@ export default function GameScreen({
     image: Caperton
   });
 
+  function playWoodSound() {
+    if (!isMuted) {
+      new Audio(woodSound).play();
+    }
+  }
+
   return (
     <motion.div
       className="w-[100%] h-[100%]"
@@ -118,7 +127,11 @@ export default function GameScreen({
       exit={{ opacity: 0 }}
     >
       {/* Interactive Components */}
-      <div className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer">
+      {/* Conspiracy board asset linked to conspiracy board system */}
+      <div
+        onClick={() => playWoodSound()}
+        className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer"
+      >
         <ConspiracyBoard
           boardData={boardData}
           maxNotes={boardData.notes.length as 1 | 3 | 5 | 7}
@@ -132,19 +145,18 @@ export default function GameScreen({
       </div>
       {/* Phone asset linked to hint system */}
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
-        <HintDialog transcript={exampleTranscript} />
+        <HintDialog transcript={exampleTranscript} isMuted={isMuted} />
       </div>
+      
       {/* Exit sign to go back to main game page */}
       <div
         className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
-        onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
+        onClick={(e) => {
+          handleScreenButtonClick(Screen.MainGamePage, e);
+          playWoodSound();
+        }}
       >
-        <img
-          className="hover:scale-105 active:scale-110 cursor-pointer "
-          src={exitSign}
-          alt="Exit"
-          draggable={false}
-        />
+        <img src={exitSign} alt="Exit" />
       </div>
 
       {/* Non-Interactive filler assets */}
@@ -198,6 +210,7 @@ export default function GameScreen({
           solution={story.puzzles[puzzleIndex].solution}
           solve_delay_ms={500}
           showAuxControls={true}
+          isMuted={isMuted}
         />
       </div>
 
@@ -240,8 +253,7 @@ export default function GameScreen({
           imageRendering: 'pixelated'
         }}
       />
-
-
+      
     </motion.div>
   );
 }
