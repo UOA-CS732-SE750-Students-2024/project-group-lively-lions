@@ -187,6 +187,11 @@ export default function MainGamePage({
         />
       </div>
 
+      {/* Reference book entry point leads to reference book screen */}
+      <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
+        <ReferenceBook isMuted={isMuted} />
+      </div>
+
       {/* Non interactive visual items higher in scene order*/}
       <img
         className="absolute top-[74%] left-[3%]"
@@ -324,7 +329,7 @@ export default function MainGamePage({
       </motion.div>
 
       <motion.div
-        className="absolute w-[100%] h-[100%] top-0"
+        className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
         initial={{ opacity: lightOn ? 1 : 0 }}
         animate={{ opacity: lightOn ? 1 : 0 }}
         transition={{ type: 'spring' }}
@@ -339,11 +344,6 @@ export default function MainGamePage({
             imageRendering: 'pixelated'
           }}
         />
-
-        {/* Reference book entry point leads to reference book screen */}
-        <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
-          <ReferenceBook isMuted={isMuted} />
-        </div>
 
         {/* Sepia Filter */}
         <div
