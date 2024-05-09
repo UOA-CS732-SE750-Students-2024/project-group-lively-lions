@@ -18,6 +18,23 @@ interface ComputerProps {
 export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
   // TODO: change to check if user is signed in
   // If player is not signed in
+  const logout = async () => {
+    const currentProfile = localStorage.getItem('profile');
+    if (currentProfile) {
+      const parsedProfile = JSON.parse(currentProfile);
+      if (parsedProfile.profile.username === 'guest') {
+        alert("Cannot log out of guest account.");
+      }
+      localStorage.removeItem('profile');
+      const defaultProfile = { "profile": {
+        username: 'guest',
+        password: 'guest_password',
+        completed_puzzles: []
+      }};
+      localStorage.setItem('profile', JSON.stringify(defaultProfile));
+    }
+  };
+ 
   if (computer_screen_border == 'a') {
     return (
       <div className="flex justify-center items-center">
@@ -48,6 +65,13 @@ export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
             onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
             size={'sm'}
           >
+          <Button
+            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[40%]"
+            onClick={logout}
+            size={'sm'}
+          >
+            LOGOUT
+          </Button>
             BACK
           </Button>
         </div>
@@ -78,6 +102,13 @@ export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
             size={'sm'}
           >
             PLAYER INFO
+          </Button>
+          <Button
+            className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"
+            onClick={logout}
+            size={'sm'}
+          >
+            LOGOUT
           </Button>
           <Button
             className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[30%]"

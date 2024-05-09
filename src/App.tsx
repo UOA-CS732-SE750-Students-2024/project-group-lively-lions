@@ -1,30 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MainMenuScreen from './components/levels/MainMenuScreen';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/desk/LevelSelect';
 import { Phone } from './components/desk/Phone';
-import { PuzzlePage } from './components/desk/PuzzlePage';
 import { ReferenceBook } from './components/desk/ReferenceBook';
 import { ComputerProfile } from './components/desk/computer_profile/ComputerProfile';
 import { NewPlayer } from './components/desk/computer_profile/NewPlayer';
 import { SignIn } from './components/desk/computer_profile/SignIn';
 import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
-import { Screen, Levels, Puzzle } from './util';
+import { Screen, Levels, Puzzle, getStory } from './util';
 import GameScreen from './components/levels/GameScreen';
-import * as story from './lib/story.json';
 import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
-import { set } from 'mongoose';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
   const [returnScreen, setReturnScreen] = useState(Screen.MainGamePage);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
-  const [currentStory, setCurrentStory] = useState(story.difficulties[0]);
+  const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+
+  useEffect(() => {
+    createGuestProfile();
+  }, []);
+
+  function createGuestProfile() {
+    // Check if 'profile' object exists in local storage
+    const existingProfile = localStorage.getItem('profile');
+    console.log(existingProfile);
+    if (!existingProfile) {
+      // If 'profile' object doesn't exist, create a default guest profile and save it to local storage
+      const defaultProfile = {
+        profile: {
+          username: 'guest',
+          password: 'guest_password',
+          completed_puzzles: []
+        }
+      };
+      localStorage.setItem('profile', JSON.stringify(defaultProfile));
+    }
+  }
+
   const screens = [
     <MainMenuScreen
       key="mainMenu"
@@ -32,10 +51,7 @@ function App() {
       handleLevel={handleLevel}
       level={currentLevel}
     />,
-    <LandingScreen
-      key="landing"
-      handleScreenButtonClick={handleScreenButtonClick}
-    />,
+    <LandingScreen key="landing" handleContinue={handleScreenButtonClick} />,
 
     <NewPlayer
       key="newPlayer"
@@ -45,7 +61,6 @@ function App() {
     <PlayerInfo
       key="playerInfo"
       handleScreenButtonClick={handleScreenButtonClick}
-      handleConfirm={handleConfirm}
     />,
     <LevelSelect
       key="levelSelect"
@@ -64,11 +79,6 @@ function App() {
     />,
     <Phone
       key="phone"
-      story={currentStory}
-      handleScreenButtonClick={handleScreenButtonClick}
-    />,
-    <PuzzlePage
-      key="puzzlePage"
       story={currentStory}
       handleScreenButtonClick={handleScreenButtonClick}
     />,
@@ -101,6 +111,7 @@ function App() {
       story={currentStory}
     />
   ];
+
   function encodePhrase(puzzle: Puzzle) {
     const puzzleCipher = puzzle.cipher;
     const puzzleSolution = puzzle.solution;
@@ -150,8 +161,23 @@ function App() {
     setCurrentLevel(level);
     const story = getStory(level);
     setCurrentStory(story);
-    setCurrentPuzzleIndex(0);
-    setCurrentEncodedPhrase(encodePhrase(story.puzzles[0]));
+
+    // Check the completed puzzles in the profile
+    const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+    const completedPuzzles = userProfile.profile.completed_puzzles;
+
+    let count = 0;
+    for (let i = 0; i < story.puzzles.length; i++) {
+      for (let j = 0; j < completedPuzzles.length; j++) {
+        if (story.puzzles[i].id === completedPuzzles[j]) {
+          count++;
+        }
+      }
+    }
+    const index = count;
+
+    setCurrentPuzzleIndex(index);
+    setCurrentEncodedPhrase(encodePhrase(story.puzzles[index]));
     e.preventDefault();
   }
 
@@ -161,9 +187,9 @@ function App() {
 
   function handleScreenButtonClick(
     screen: Screen,
-    e: React.MouseEvent<HTMLElement, MouseEvent>
+    e?: React.MouseEvent<HTMLElement, MouseEvent>
   ) {
-    e.preventDefault();
+    e?.preventDefault();
 
     setCurrentScreen(screen);
   }
@@ -172,50 +198,31 @@ function App() {
     //Check current level number of puzzles
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
+    const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+
+    const puzzleId = puzzles[currentPuzzleIndex].id;
+    if (!userProfile.profile.completed_puzzles.includes(puzzleId)) {
+      userProfile.profile.completed_puzzles.push(puzzleId);
+    } else {
+      console.log('puzzle already solved');
+    }
+
+    localStorage.setItem('profile', JSON.stringify(userProfile));
     if (index < puzzles.length) {
-      //Add puzzle id to player's completed puzzles in local storage
-
-      //add index of next puzzle to unlocked puzzles.
-
       setCurrentPuzzleIndex(index);
       setCurrentEncodedPhrase(encodePhrase(puzzles[index]));
-      // setCurrentScreen(Screen.EchidnaMachine);
+      //Set current screen to new note with conspiracy board
     } else {
       // TODO: Handle 'congrats you've completed all of the puzzles'
-      setCurrentScreen(Screen.MainGamePage);
-    }
-  }
-
-  function handleConfirm(
-    username: string,
-    password: string,
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    e.preventDefault();
-  }
-
-  function getStory(level: Levels) {
-    switch (level) {
-      case Levels.Tutorial:
-        return story.difficulties[0];
-      case Levels.Easy:
-        return story.difficulties[1];
-      case Levels.Medium:
-        return story.difficulties[2];
-        break;
-      case Levels.Hard:
-        return story.difficulties[3];
-      default:
-        return story.difficulties[0];
+      // setTimeout(() => {
+      //   setCurrentScreen(Screen.MainGamePage);
+      // }, 2500);
     }
   }
 
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
-      <h1 className="text-[#d9b26f] font-[alagard] text-[3rem] leading-loose text-center text-pretty w-[100%]">
-        Purrlock Holmes' Crypawtography Agency
-      </h1>
       {/* Constrains game contents maximum and minimum dimensions */}
       <div
         className="

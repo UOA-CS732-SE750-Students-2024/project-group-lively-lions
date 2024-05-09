@@ -84,6 +84,7 @@
 @layer base {
   * {
     @apply border-border;
+    user-select: none;
   }
 
   body {
@@ -159,11 +160,6 @@
     70% {
       transform: scaleX(0.99) scaleY(1.01);
     }
-  }
-
-  .pulse-fast {
-    animation: pulse 0.2s infinite;
-    transition: 0.5s;
   }
 
   .pulse-slow {
