@@ -9,7 +9,7 @@ interface CabinetProps {
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  isMuted: boolean
+  isMuted: boolean;
 }
 
 /**
@@ -41,6 +41,7 @@ export default function Cabinet({ handleScreenButtonClick, isMuted }: CabinetPro
         }}
       >
         <motion.img
+          draggable={false}
           className="absolute top-[26%] left-[10%]"
           style={{ imageRendering: 'pixelated' }}
           onMouseEnter={() => play_drawer_hover_sound()}

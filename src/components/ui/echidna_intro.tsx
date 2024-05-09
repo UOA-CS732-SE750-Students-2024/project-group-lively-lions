@@ -5,7 +5,6 @@ import { useState } from 'react';
 import echidnaLid from '/echidna_lid.png?url';
 import { Screen } from '@/util';
 import lidSound from '../../assets/sounds/lift_box.mp3';
-import gameSound from '../../assets/sounds/gameMusic.mp4';
 
 interface EchidnaIntroProps {
   handleContinue: (level: Screen) => void;
@@ -100,6 +99,7 @@ function EchidnaIntro({
             <AnimatePresence mode="wait">
               {!liftLid ? (
                 <motion.img
+                  draggable={false}
                   key="lid"
                   className="absolute w-[100%] pt-[5%] cursor-pointer"
                   src={echidnaLid}

@@ -38,6 +38,7 @@ const EchidnaButton: React.FC<EchidnaCipherButtonProps> = ({
         draggable={false}
       />
       <motion.img
+        draggable={false}
         src={capImage}
         alt="button cap"
         animate={isPressed ? 'pressed' : 'notPressed'}

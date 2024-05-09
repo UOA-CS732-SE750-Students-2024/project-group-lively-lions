@@ -1,4 +1,3 @@
-import { Button } from '../../ui/button';
 import { useState, useEffect } from 'react';
 import { TextField, PassField } from '../../ui/TextField';
 import { Screen } from '@/util';
@@ -21,10 +20,7 @@ It also has a change info button and a back button to the landing page.
 const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL;
 
 interface ProfileProps {
-  handleScreenButtonClick: (
-    screen: Screen,
-    event?: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  handleScreenButtonClick: (screen: Screen) => void;
   isMuted: boolean;
 }
 

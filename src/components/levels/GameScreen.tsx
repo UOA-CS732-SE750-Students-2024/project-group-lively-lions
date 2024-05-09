@@ -188,7 +188,7 @@ export default function GameScreen({
           setAllPuzzleSolved(false);
         }}
       >
-        <img src={exitSign} alt="Exit" />
+        <img src={exitSign} alt="Exit" draggable={false} />
       </div>
 
       {/* Non-Interactive filler assets */}

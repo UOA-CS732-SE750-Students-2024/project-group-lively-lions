@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/desk/LevelSelect';
-import { ReferenceBook } from './components/desk/ReferenceBook';
 import { ComputerProfile } from './components/desk/computer_profile/ComputerProfile';
 import { NewPlayer } from './components/desk/computer_profile/NewPlayer';
 import { SignIn } from './components/desk/computer_profile/SignIn';
@@ -11,7 +10,6 @@ import { Screen, Levels, Puzzle, getStory } from './util';
 import GameScreen from './components/levels/GameScreen';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
-import { set } from 'mongoose';
 import muted from './assets/common/muted.png';
 import notMuted from './assets/common/not_muted.png';
 import gameSound from './assets/sounds/gameMusic.mp4';
@@ -272,7 +270,7 @@ function App() {
           isMuted ? restartMusic() : pauseMusic();
         }}
       >
-        <img src={isMuted ? muted : notMuted} />
+        <img src={isMuted ? muted : notMuted} draggable={false} />
       </button>
       {/* Constrains game contents maximum and minimum dimensions */}
       <div

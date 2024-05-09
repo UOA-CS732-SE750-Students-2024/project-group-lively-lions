@@ -1,4 +1,3 @@
-import { Button } from '../../ui/button';
 import { useState } from 'react';
 import { TextField, PassField } from '../../ui/TextField';
 import { Screen } from '@/util';
@@ -19,10 +18,7 @@ It also has a confirm button, which does nothing yet, and a back button to the l
 */
 
 interface NewPlayerProps {
-  handleScreenButtonClick: (
-    level: number,
-    event?: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  handleScreenButtonClick: (level: number) => void;
   isMuted: boolean;
 }
 

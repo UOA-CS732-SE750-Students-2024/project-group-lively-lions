@@ -355,6 +355,7 @@ export function Echidna({
         <AnimatePresence mode="wait">
           {active && greenLampOn ? (
             <motion.img
+              draggable={false}
               src={echidnaGreenLampOn}
               className="absolute w-[100%]"
               key="greenlampon"
@@ -377,6 +378,7 @@ export function Echidna({
         <AnimatePresence mode="wait">
           {active && redLampOn ? (
             <motion.img
+              draggable={false}
               src={echidnaRedLampOn}
               className="absolute w-[100%]"
               key="redlampon"
