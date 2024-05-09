@@ -13,6 +13,7 @@ import ConspiracyNote from './ConspiracyNote';
 export interface ConspiracyNoteData {
   story: string;
   description: string;
+  puzzleName?: string;
   image?: string;
 }
 
