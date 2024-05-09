@@ -27,15 +27,11 @@ interface HintDialogProps {
 
 // This component takes a transcript
 const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
-  function playCallSound() {
-    //new Audio(phoneCallSound).play();
-  }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div
-          onClick={() => playCallSound()}
           style={{ imageRendering: 'pixelated', cursor: 'pointer' }}
         >
           <Phone isMuted={false} />

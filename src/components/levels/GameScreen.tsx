@@ -2,7 +2,6 @@ import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
 import lighting from '../../assets/room/active_game/lighting.png';
-import { CipherType } from '@/ciphers/Cipher';
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
 import ReferenceBookEntryPoint from '../mainpage/ReferenceBookEntryPoint';
