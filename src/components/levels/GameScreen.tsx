@@ -4,7 +4,6 @@ import background from '../../assets/room/active_game/background.png';
 import { CipherType } from '@/ciphers/Cipher';
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
-import ReferenceBookEntryPoint from '../mainpage/ReferenceBookEntryPoint';
 import paper from '../../assets/room/shared/crumpled_paper.png';
 import pencilHolder from '../../assets/room/shared/pencil_holder.png';
 import milk from '../../assets/room/shared/milk.png';
@@ -23,6 +22,7 @@ import vignetteSmooth from '../../assets/room/active_game/vignetteSmooth.png';
 import NotePopup from '../desk/NotePopup';
 import { useEffect, useState } from 'react';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
+import { ReferenceBook } from '../desk/ReferenceBook';
 
 interface GameScreenProps {
   handleScreenButtonClick: (
@@ -86,8 +86,7 @@ export default function GameScreen({
       { sender: 'Capo', text: 'Let me have a look....' },
       {
         sender: 'Capo',
-        text:
-          'Found it! ' + hintText
+        text: 'Found it! ' + hintText
       },
       {
         sender: 'Capo',
@@ -179,7 +178,7 @@ export default function GameScreen({
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
-      
+
       {/* Exit sign to go back to main game page */}
       <div
         className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
@@ -257,13 +256,10 @@ export default function GameScreen({
           imageRendering: 'pixelated'
         }}
       />
-            
-      {/* Reference book asset */}
+
+      {/* Reference book */}
       <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
-        <ReferenceBookEntryPoint
-          handleScreenButtonClick={handleScreenButtonClick}
-          isMuted={isMuted}
-        />
+        <ReferenceBook isMuted={isMuted} />
       </div>
 
       {/* Sepia Filter */}

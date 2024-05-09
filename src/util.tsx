@@ -7,7 +7,6 @@ export enum Screen {
   PlayerInfo,
   LevelSelect,
   ComputerProfile,
-  ReferenceBook,
   EchidnaMachine,
   MainGamePage,
   GameScreen
