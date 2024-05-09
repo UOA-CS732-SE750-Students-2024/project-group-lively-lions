@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import MainMenuScreen from './components/levels/MainMenuScreen';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/desk/LevelSelect';
 import { Phone } from './components/desk/Phone';
@@ -14,6 +13,7 @@ import GameScreen from './components/levels/GameScreen';
 import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
+import { set } from 'mongoose';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
@@ -23,6 +23,7 @@ function App() {
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
+  const [isFirstJoin, setIsFirstJoin] = useState(true);
   const SERVER_MONGODB_URI = 'http://localhost:3000';
 
   useEffect(() => {
@@ -43,16 +44,15 @@ function App() {
         }
       };
       localStorage.setItem('profile', JSON.stringify(defaultProfile));
+    } else {
+      const profile = JSON.parse(existingProfile);
+      if (profile.profile.completed_puzzles.length > 0) {
+        setIsFirstJoin(false);
+      }
     }
   }
 
   const screens = [
-    <MainMenuScreen
-      key="mainMenu"
-      handleScreenButtonClick={handleScreenButtonClick}
-      handleLevel={handleLevel}
-      level={currentLevel}
-    />,
     <LandingScreen
       key="landing"
       handleContinue={handleScreenButtonClick}
@@ -108,6 +108,7 @@ function App() {
       handleScreenButtonClick={handleScreenButtonClick}
       handleReturnScreen={handleReturnScreen}
       isMuted={isMuted}
+      isFirstJoin={isFirstJoin}
     />,
     <GameScreen
       key="gameScreen"

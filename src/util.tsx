@@ -1,7 +1,6 @@
 import * as story from '../src/lib/story.json';
 
 export enum Screen {
-  MainMenuScreen,
   LandingScreen,
   NewPlayer,
   SignIn,

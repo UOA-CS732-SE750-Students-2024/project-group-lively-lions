@@ -37,12 +37,14 @@ interface MainGamePageProps {
   ) => void;
   handleReturnScreen: (screen: Screen) => void;
   isMuted: boolean;
+  isFirstJoin: boolean;
 }
 
 export default function MainGamePage({
   handleScreenButtonClick,
   handleReturnScreen,
-  isMuted
+  isMuted,
+  isFirstJoin
 }: MainGamePageProps) {
   //Set return screen value to this screen
   handleReturnScreen(Screen.MainGamePage);
@@ -50,7 +52,10 @@ export default function MainGamePage({
   //Handle thought bubbles
   const [thoughtShowing, setThoughtShowing] = useState(false);
   const [thought, setThought] = useState<string>('');
-
+  console.log(isFirstJoin);
+  // if (isFirstJoin) {
+  //   configureThought('Welcome to the game!');
+  // }
   function configureThought(text: string) {
     setThought(text);
     setThoughtShowing(true);
@@ -141,6 +146,11 @@ export default function MainGamePage({
           draggable={false}
         />
       </div>
+      {isFirstJoin ?? (
+        <div>
+          <p onLoad={() => configureThought('Welcome to the game!')}></p>
+        </div>
+      )}
       {/* Cabinet leads to level select screen */}
       <div className="absolute top-[25%] left-[0.5%]">
         <Cabinet
