@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import echidnaLid from '/echidna_lid.png?url';
 import { Screen } from '@/util';
+import lidSound from '../../assets/sounds/lift_box.mp3';
 
 interface EchidnaIntroProps {
   handleContinue: (level: Screen) => void;
@@ -28,6 +29,9 @@ function EchidnaIntro({
   const [showTitleCard, setShowTitleCard] = useState<boolean>(false);
 
   const handleLidClick = () => {
+    if (!isMuted) {
+      new Audio(lidSound).play();
+    }
     setLiftLid(true);
     setTimeout(() => {
       setStartEchidna(true);
