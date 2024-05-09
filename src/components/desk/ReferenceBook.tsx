@@ -62,6 +62,14 @@ export function ReferenceBook({
     }
   };
 
+  const handleGetDiagram = (increment: number): string => {
+    if (currentPage + increment < cipherInfo.cipherList.length) {
+      return cipherInfo.cipherList[currentPage + increment].diagram;
+    } else {
+      return '';
+    }
+  };
+
   // Sound Effect functions
 
   function playPageSound() {
@@ -91,12 +99,14 @@ export function ReferenceBook({
         <ReferenceBookPage
           cipherName={handleGetName(0)}
           encoding={handleGetEncoding(0)}
+          diagram={handleGetDiagram(0)}
           decoding={handleGetDecoding(0)}
         />
         {/* Right Page */}
         <ReferenceBookPage
           cipherName={handleGetName(1)}
           encoding={handleGetEncoding(1)}
+          diagram={handleGetDiagram(1)}
           decoding={handleGetDecoding(1)}
         />
         {/* Right Arrow */}
