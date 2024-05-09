@@ -1,7 +1,7 @@
 import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
-import lighting from '../../assets/room/active_game/lighting.png';
+import { CipherType } from '@/ciphers/Cipher';
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
 import ReferenceBookEntryPoint from '../mainpage/ReferenceBookEntryPoint';
@@ -17,6 +17,11 @@ import ConspiracyBoard, { ConspiracyBoardData } from '../desk/ConspiracyBoard';
 import Caperton from '../../assets/common/CapybaraFella.png';
 import * as ciphersExports from '@/ciphers/ciphers';
 import Echidna from '../ui/echidna';
+import sepia from '../../assets/room/active_game/sepia.png';
+import vignettePixel from '../../assets/room/active_game/vignettePixel.png';
+import vignetteSmooth from '../../assets/room/active_game/vignetteSmooth.png';
+import NotePopup from '../desk/NotePopup';
+import { useEffect, useState } from 'react';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
 
 interface GameScreenProps {
@@ -30,6 +35,12 @@ interface GameScreenProps {
   puzzleIndex: number;
   handleSolvedPuzzle: () => void;
   story: Story;
+  showNote: boolean;
+  setShowNote: React.Dispatch<React.SetStateAction<boolean>>;
+  showBoard: boolean;
+  setShowBoard: React.Dispatch<React.SetStateAction<boolean>>;
+  allPuzzleSolved: boolean;
+  setAllPuzzleSolved: React.Dispatch<React.SetStateAction<boolean>>;
   isMuted: boolean;
 }
 
@@ -41,6 +52,12 @@ export default function GameScreen({
   puzzleIndex,
   handleSolvedPuzzle,
   story,
+  showNote,
+  setShowNote,
+  showBoard,
+  setShowBoard,
+  allPuzzleSolved,
+  setAllPuzzleSolved,
   isMuted
 }: GameScreenProps) {
   handleReturnScreen(Screen.GameScreen);
@@ -89,23 +106,40 @@ export default function GameScreen({
     notes: [
       {
         story: story.introduction,
+        description: story.introduction,
+        image: Caperton
+      },
+      ...story.puzzles.map((puzzle) => ({
+        puzzleName: puzzle.name,
+        story: puzzle.story,
+        description: puzzle.description
+      })),
+      {
+        story: story.conclusion,
+        description: story.conclusion,
         image: Caperton
       }
     ]
   };
-  story.puzzles.forEach((puzzle) => {
-    boardData.notes.push({ story: puzzle.story });
-  });
-  boardData.notes.push({
-    story: story.conclusion,
-    image: Caperton
-  });
+
+  const maxNotes = story.puzzles.length + 2;
+  const displayBoardData: ConspiracyBoardData = {
+    notes: []
+  };
+  displayBoardData.notes = allPuzzleSolved
+    ? boardData.notes.slice(0, puzzleIndex + 3)
+    : boardData.notes.slice(0, puzzleIndex + 2);
 
   function playWoodSound() {
     if (!isMuted) {
       new Audio(woodSound).play();
     }
   }
+
+  // Show newest note on load
+  useEffect(() => {
+    setShowNote(true);
+  }, [puzzleIndex]);
 
   return (
     <motion.div
@@ -129,8 +163,10 @@ export default function GameScreen({
         className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer"
       >
         <ConspiracyBoard
-          boardData={boardData}
-          maxNotes={boardData.notes.length as 1 | 3 | 5 | 7}
+          boardData={displayBoardData}
+          maxNotes={maxNotes as 1 | 3 | 5 | 7}
+          open={showBoard}
+          setOpen={setShowBoard}
         >
           <img
             className="hover:outline outline-white outline-7 cursor-pointer"
@@ -143,19 +179,14 @@ export default function GameScreen({
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
-      {/* Reference book asset */}
-      <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
-        <ReferenceBookEntryPoint
-          handleScreenButtonClick={handleScreenButtonClick}
-          isMuted={isMuted}
-        />
-      </div>
+      
       {/* Exit sign to go back to main game page */}
       <div
         className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
         onClick={(e) => {
           handleScreenButtonClick(Screen.MainGamePage, e);
           playWoodSound();
+          setAllPuzzleSolved(false);
         }}
       >
         <img src={exitSign} alt="Exit" />
@@ -216,15 +247,79 @@ export default function GameScreen({
         />
       </div>
 
-      {/* Lighting layer */}
+      {/* Hard Pixel Vignette */}
       <div
-        className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
         style={{
-          backgroundImage: `url(${lighting})`,
+          backgroundImage: `url(${vignettePixel})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          imageRendering: 'auto'
+          imageRendering: 'pixelated'
         }}
+      />
+            
+      {/* Reference book asset */}
+      <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
+        <ReferenceBookEntryPoint
+          handleScreenButtonClick={handleScreenButtonClick}
+          isMuted={isMuted}
+        />
+      </div>
+
+      {/* Sepia Filter */}
+      <div
+        className="absolute opacity-[9%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${sepia})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+      {/* Soft Pixel Vignette */}
+      <div
+        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${vignetteSmooth})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+      {/* Sepia Filter */}
+      <div
+        className="absolute opacity-[9%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${sepia})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+      {/* Soft Pixel Vignette */}
+      <div
+        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${vignetteSmooth})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+      {/* Invisible component for displaying new notes */}
+      <NotePopup
+        index={allPuzzleSolved ? puzzleIndex + 1 : puzzleIndex}
+        noteData={
+          allPuzzleSolved
+            ? boardData.notes[puzzleIndex + 2]
+            : boardData.notes[puzzleIndex + 1]
+        }
+        open={showNote}
+        setOpen={setShowNote}
       />
     </motion.div>
   );

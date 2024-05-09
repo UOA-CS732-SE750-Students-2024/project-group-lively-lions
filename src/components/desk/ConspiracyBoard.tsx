@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import boardBackground from '../../assets/room/main_menu/conspiracy_board/conspiracy_board.png';
-import board from '../../assets/room/main_menu/conspiracy_board/conspiracy_board_notes_and_text.png';
 import string1 from '../../assets/room/main_menu/conspiracy_board/strings/string1.png';
 import string2 from '../../assets/room/main_menu/conspiracy_board/strings/string2.png';
 import string3 from '../../assets/room/main_menu/conspiracy_board/strings/string3.png';
@@ -10,10 +9,11 @@ import string6 from '../../assets/room/main_menu/conspiracy_board/strings/string
 import string7 from '../../assets/room/main_menu/conspiracy_board/strings/string7.png';
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
 import ConspiracyNote from './ConspiracyNote';
-import { Button } from '../ui/button';
 
 export interface ConspiracyNoteData {
   story: string;
+  description: string;
+  puzzleName?: string;
   image?: string;
 }
 
@@ -25,6 +25,8 @@ interface ConspiracyBoardProps {
   boardData: ConspiracyBoardData;
   maxNotes: 1 | 3 | 5 | 7;
   children: React.ReactNode;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // This component represents the conspiracy board, notes and strings on the board are rendered
@@ -32,7 +34,9 @@ interface ConspiracyBoardProps {
 const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
   boardData,
   maxNotes,
-  children
+  children,
+  open,
+  setOpen
 }) => {
   const progress = boardData.notes.length;
   const strings = [
@@ -132,7 +136,7 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="pt-[14rem] flex place-items-center justify-center min-w-[960px] min-h-[540px] w-[calc(60vw)] h-[calc(60vw*9/16)] bg-transparent border-none">
         <AnimatePresence>
@@ -154,9 +158,10 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
             {notes.slice(0, progress).map((note, i) => (
               <div key={i} className={note.css}>
                 <ConspiracyNote
-                  index={i}
+                  index={i - 1}
                   type={note.type as 'A' | 'B' | 'D' | 'C'}
                   noteData={boardData.notes[i]}
+                  newLabel={i === progress - 1}
                 />
               </div>
             ))}

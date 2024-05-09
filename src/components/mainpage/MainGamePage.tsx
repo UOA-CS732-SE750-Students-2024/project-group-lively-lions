@@ -24,6 +24,10 @@ import Phone from './Phone';
 import Computer from './Computer';
 import ReferenceBookEntryPoint from './ReferenceBookEntryPoint';
 import SpeechBubble from '../ui/SpeechBubble';
+import sepia from '../../assets/room/active_game/sepia.png';
+import vignettePixel from '../../assets/room/active_game/vignettePixelMainMenu.png';
+import vignetteSmooth from '../../assets/room/active_game/vignetteSmoothMainMenu.png';
+import coolDark from '../../assets/room/active_game/coolDark.png';
 //sound imports
 import lampSound from '../../assets/sounds/lamp.mp4';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
@@ -183,14 +187,6 @@ export default function MainGamePage({
         />
       </div>
 
-      {/* Reference book entry point leads to reference book screen */}
-      <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
-        <ReferenceBookEntryPoint
-          handleScreenButtonClick={handleScreenButtonClick}
-          isMuted={isMuted}
-        />
-      </div>
-
       {/* Non interactive visual items higher in scene order*/}
       <img
         className="absolute top-[74%] left-[3%]"
@@ -248,6 +244,13 @@ export default function MainGamePage({
         src={milk}
         draggable={false}
       />
+      {/* Reference book entry point leads to reference book screen */}
+      <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
+        <ReferenceBookEntryPoint
+          handleScreenButtonClick={handleScreenButtonClick}
+          isMuted={isMuted}
+        />
+      </div>
       <img
         className="absolute top-[50%] left-[61%] scale-[160%] cursor-pointer"
         onClick={() => {
@@ -306,14 +309,63 @@ export default function MainGamePage({
         draggable={false}
       />
 
-      {/* Lighting layer */}
-      <div
+      {/* Lighting elements */}
+
+      {/* Cool Dark Overlay */}
+      <motion.div
         className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+        initial={{ opacity: lightOn ? 0 : 1 }}
+        animate={{ opacity: lightOn ? 0 : 1 }}
+        transition={{ type: 'spring' }}
+      >
+        <div
+          className="absolute opacity-[50%] w-[100%] h-[100%] top-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${coolDark})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            imageRendering: 'pixelated'
+          }}
+        />
+      </motion.div>
+
+      <motion.div
+        className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+        initial={{ opacity: lightOn ? 1 : 0 }}
+        animate={{ opacity: lightOn ? 1 : 0 }}
+        transition={{ type: 'spring' }}
+      >
+        {/* Hard Pixel Vignette */}
+        <div
+          className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${vignettePixel})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            imageRendering: 'pixelated'
+          }}
+        />
+
+        {/* Sepia Filter */}
+        <div
+          className="absolute opacity-[8%] w-[100%] h-[100%] top-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${sepia})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            imageRendering: 'pixelated'
+          }}
+        />
+      </motion.div>
+
+      {/* Soft Pixel Vignette */}
+      <div
+        className="absolute opacity-[30%] w-[100%] h-[100%] top-0 pointer-events-none"
         style={{
-          backgroundImage: `url(${lightOn ? lighting : lightingOff})`,
+          backgroundImage: `url(${vignetteSmooth})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          imageRendering: 'auto'
+          imageRendering: 'pixelated'
         }}
       />
 

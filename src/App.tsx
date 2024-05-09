@@ -14,6 +14,11 @@ import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
 import { set } from 'mongoose';
+import muted from './assets/common/muted.png';
+import notMuted from './assets/common/not_muted.png';
+import gameSound from './assets/sounds/gameMusic.mp4';
+import { delay } from './lib/utils';
+const gameMusic = new Audio(gameSound);
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
@@ -22,9 +27,12 @@ function App() {
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+  const [showNote, setShowNote] = useState(false);
+  const [showBoard, setShowBoard] = useState(false);
+  const [allPuzzleSolved, setAllPuzzleSolved] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isFirstJoin, setIsFirstJoin] = useState(true);
-  const SERVER_MONGODB_URI = 'http://localhost:3000';
+  const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL;
 
   useEffect(() => {
     createGuestProfile();
@@ -57,6 +65,7 @@ function App() {
       key="landing"
       handleContinue={handleScreenButtonClick}
       isMuted={isMuted}
+      playMusic={playMusic}
     />,
 
     <NewPlayer
@@ -119,6 +128,12 @@ function App() {
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
       story={currentStory}
+      showNote={showNote}
+      setShowNote={setShowNote}
+      showBoard={showBoard}
+      setShowBoard={setShowBoard}
+      allPuzzleSolved={allPuzzleSolved}
+      setAllPuzzleSolved={setAllPuzzleSolved}
       isMuted={isMuted}
     />
   ];
@@ -208,7 +223,8 @@ function App() {
     setCurrentScreen(screen);
   }
 
-  function handleSolvedPuzzle() {
+  async function handleSolvedPuzzle() {
+    await delay(2000);
     //Check current level number of puzzles
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
@@ -226,11 +242,13 @@ function App() {
       setCurrentPuzzleIndex(index);
       setCurrentEncodedPhrase(encodePhrase(puzzles[index]));
       //Set current screen to new note with conspiracy board
+      setShowBoard(true);
+      setShowNote(true);
     } else {
       // TODO: Handle 'congrats you've completed all of the puzzles'
-      // setTimeout(() => {
-      //   setCurrentScreen(Screen.MainGamePage);
-      // }, 2500);
+      setAllPuzzleSolved(true);
+      setShowBoard(true);
+      setShowNote(true);
     }
     const requestBody = {
       username: userProfile.profile.username,
@@ -238,7 +256,7 @@ function App() {
       completed_puzzles: userProfile.profile.completed_puzzles
     };
     // Update database account info with puzzle completion
-    fetch(`${SERVER_MONGODB_URI}/player`, {
+    fetch(`${SERVER_API_URL}/player`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -247,11 +265,29 @@ function App() {
     });
   }
 
+  function playMusic() {
+    if (!isMuted) {
+      gameMusic.loop = true;
+      gameMusic.play();
+    }
+  }
+
+  function restartMusic() {
+    gameMusic.loop = true;
+    gameMusic.play();
+  }
+
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
-      <button onClick={() => setIsMuted(!isMuted)} className="text-[#FFFFFF]">
-        {isMuted ? 'click to unmute' : 'click to mute'}
+      <button
+        className="absolute self-end pr-2 top-[0%] scale-[80%]"
+        onClick={() => {
+          setIsMuted(!isMuted);
+          isMuted ? restartMusic() : gameMusic.pause();
+        }}
+      >
+        <img src={isMuted ? muted : notMuted} />
       </button>
       {/* Constrains game contents maximum and minimum dimensions */}
       <div
