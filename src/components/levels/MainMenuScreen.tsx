@@ -65,13 +65,6 @@ export default function MainMenuScreen({
 
       <Button
         className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
-        onClick={(e) => handleScreenButtonClick(Screen.ReferenceBook, e)}
-        size={'sm'}
-      >
-        REFERENCE BOOK
-      </Button>
-      <Button
-        className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[100%]"
         onClick={(e) => handleScreenButtonClick(Screen.EchidnaMachine, e)}
         size={'sm'}
       >

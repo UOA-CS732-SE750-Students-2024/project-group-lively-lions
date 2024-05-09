@@ -22,7 +22,6 @@ import conspiracyBoard from '../../assets/room/main_menu/conspiracy_board/conspi
 import Cabinet from './Cabinet';
 import Phone from './Phone';
 import Computer from './Computer';
-import ReferenceBookEntryPoint from './ReferenceBookEntryPoint';
 import SpeechBubble from '../ui/SpeechBubble';
 import sepia from '../../assets/room/active_game/sepia.png';
 import vignettePixel from '../../assets/room/active_game/vignettePixelMainMenu.png';
@@ -33,6 +32,7 @@ import lampSound from '../../assets/sounds/lamp.mp4';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
 import fabricSound from '../../assets/sounds/fabric.mp4';
 import glassSound from '../../assets/sounds/glass_chink.mp4';
+import { ReferenceBook } from '../desk/ReferenceBook';
 
 interface MainGamePageProps {
   handleScreenButtonClick: (
@@ -236,10 +236,7 @@ export default function MainGamePage({
       />
       {/* Reference book entry point leads to reference book screen */}
       <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
-        <ReferenceBookEntryPoint
-          handleScreenButtonClick={handleScreenButtonClick}
-          isMuted={isMuted}
-        />
+        <ReferenceBook isMuted={isMuted} />
       </div>
       <img
         className="absolute top-[50%] left-[61%] scale-[160%] cursor-pointer"
@@ -335,6 +332,11 @@ export default function MainGamePage({
             imageRendering: 'pixelated'
           }}
         />
+
+        {/* Reference book */}
+        <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
+          <ReferenceBook isMuted={isMuted} />
+        </div>
 
         {/* Sepia Filter */}
         <div

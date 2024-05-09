@@ -18,6 +18,7 @@ import muted from './assets/common/muted.png';
 import notMuted from './assets/common/not_muted.png';
 import gameSound from './assets/sounds/gameMusic.mp4';
 import { delay } from './lib/utils';
+
 const gameMusic = new Audio(gameSound);
 
 function App() {
@@ -97,12 +98,6 @@ function App() {
       key="phone"
       story={currentStory}
       handleScreenButtonClick={handleScreenButtonClick}
-    />,
-    <ReferenceBook
-      key="referenceBook"
-      handleScreenButtonClick={handleScreenButtonClick}
-      returnToScreen={returnScreen}
-      isMuted={isMuted}
     />,
     <EchidnaMachine
       key="echidnaMachine"
