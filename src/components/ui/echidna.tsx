@@ -50,8 +50,8 @@ export function Echidna({
   handleSolvedPuzzle,
   availableCiphers,
   showAuxControls,
-  isMuted
-  active = true,
+  isMuted,
+  active = true
 }: EchidnaProps) {
   const [selectedCipher, setSelectedCipher] = useState<string>(
     availableCiphers[0].displayName
@@ -194,14 +194,14 @@ export function Echidna({
 
   // Anything that needs to happen on first load goes here
   useEffect(() => {
-    if(active){
+    if (active) {
       initialDisplayDelay();
     }
   });
 
   return (
     /* Centers component with some top padding */
-    <div className='absolute w-[100%] pt-[5%]'>
+    <div className="absolute w-[100%] pt-[5%]">
       {/* The wood, bakelite and aluminum base of the mighty "Echidna I" cipher machine */}
       {/* Cipher-select Section */}
       <img
@@ -214,25 +214,21 @@ export function Echidna({
       <div className="absolute top-[53.5%] left-[17.5%] h-[5.4%] w-[34.5%] px-[1.5%] py-[1%] overflow-hidden">
         {/* Cipher-select display, populated with available cipher options for current puzzle */}
         <AnimatePresence mode="wait">
-          { active ? 
+          {active ? (
             <motion.p
-            key={selectedCipher}
-            className={'font-[alagard] text-[1.2rem] leading-[1.2rem]'}
-            initial={{ y: cipherSelectUp ? 50 : -50 }}
-            animate={{
-              y: cipherAnimatingOut
-                ? cipherSelectUp
-                  ? 50
-                  : -50
-                : 0
-            }}
-            transition={{ type: 'spring', duration: 0.15 }}
+              key={selectedCipher}
+              className={'font-[alagard] text-[1.2rem] leading-[1.2rem]'}
+              initial={{ y: cipherSelectUp ? 50 : -50 }}
+              animate={{
+                y: cipherAnimatingOut ? (cipherSelectUp ? 50 : -50) : 0
+              }}
+              transition={{ type: 'spring', duration: 0.15 }}
             >
               {selectedCipher}
             </motion.p>
-            :
+          ) : (
             <></>
-          }
+          )}
         </AnimatePresence>
       </div>
       {/* Cipher-select buttons */}
@@ -260,36 +256,41 @@ export function Echidna({
       </div>
       {/* Solve lever */}
       <div className="absolute w-[24.4%] top-[51%] left-[69.52%]">
-        <EchidnaSolveLever delay={solve_delay_ms} onClick={() => { if (active) handleSolve()}} isMuted={isMuted}/>
+        <EchidnaSolveLever
+          delay={solve_delay_ms}
+          onClick={() => {
+            if (active) handleSolve();
+          }}
+          isMuted={isMuted}
+        />
       </div>
       {/* Paper feed */}
       <div className="absolute w-[50%] h-[28%] left-[15.5%] top-[0%] overflow-hidden">
         {/* Paper Motion */}
-        <AnimatePresence mode='wait'>
-          { active ? 
-          <motion.div
-          className="absolute w-[98%] h-[100%] left-[1%] top-[0%] overflow-scroll no-scrollbar"
-          key="paper_div"
-          initial={{ y: -500 }}
-          exit={{ y: -500, transition: { ease: 'easeIn', duration: 0.6 }}}
-          animate={{ y: isSolveLeverDown ? 120 : 0 }}
-          transition={{ type: 'spring', stiffness: 1000, damping: 80 }}>
+        <AnimatePresence mode="wait">
+          {active ? (
             <motion.div
-            className="absolute w-[100%] h-[100%]"
+              className="absolute w-[98%] h-[100%] left-[1%] top-[0%] overflow-scroll no-scrollbar"
+              key="paper_div"
+              initial={{ y: -500 }}
+              exit={{ y: -500, transition: { ease: 'easeIn', duration: 0.6 } }}
+              animate={{ y: isSolveLeverDown ? 120 : 0 }}
+              transition={{ type: 'spring', stiffness: 1000, damping: 80 }}
             >
-              <img 
-                className="absolute w-[100%] top-[25%]" 
-                src={echidnaPaper}
-                draggable={false}
-              />
-              <p className="absolute font-[alagard] text-[0.9rem] pt-[30%] px-[5%] left-[0%] [overflow-wrap:anywhere] leading-tight">
-                {phrase}
-              </p>
+              <motion.div className="absolute w-[100%] h-[100%]">
+                <img
+                  className="absolute w-[100%] top-[25%]"
+                  src={echidnaPaper}
+                  draggable={false}
+                />
+                <p className="absolute font-[alagard] text-[0.9rem] pt-[30%] px-[5%] left-[0%] [overflow-wrap:anywhere] leading-tight">
+                  {phrase}
+                </p>
+              </motion.div>
             </motion.div>
-          </motion.div>
-          :
-          <></>
-          }
+          ) : (
+            <></>
+          )}
         </AnimatePresence>
       </div>
       <img
@@ -305,7 +306,7 @@ export function Echidna({
       {/* Display */}
       <div className="absolute w-[69%] h-[12.2%] top-[34.4%] left-[15.5%] px-[1.5%] pl-[1.2%] pr-[3%] overflow-scroll no-scrollbar">
         <AnimatePresence>
-          {(active && displayOn) ? (
+          {active && displayOn ? (
             <motion.p
               key={workingPhrase}
               className="absolute text-[1.2rem] text-[#C1E7EB] font-[alagard] leading-tight [overflow-wrap:anywhere]"
@@ -351,7 +352,7 @@ export function Echidna({
           draggable={false}
         />
         <AnimatePresence mode="wait">
-          {(active && greenLampOn) ? (
+          {active && greenLampOn ? (
             <motion.img
               src={echidnaGreenLampOn}
               className="absolute w-[100%]"
@@ -373,7 +374,7 @@ export function Echidna({
           draggable={false}
         />
         <AnimatePresence mode="wait">
-          {(active && redLampOn) ? (
+          {active && redLampOn ? (
             <motion.img
               src={echidnaRedLampOn}
               className="absolute w-[100%]"
