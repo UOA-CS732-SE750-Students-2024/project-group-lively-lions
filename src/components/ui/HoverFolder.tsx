@@ -43,6 +43,10 @@ export function HoverFolder({
   const isAboveHovered = index <= isHoveredIndex;
   const isAboveClicked = index <= isClickedIndex;
   const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+  if (!userProfile) {
+    return <div>length is undefined</div>
+  }
+
   const countPuzzlesPerDifficulty = () => {
     const story = getStory(levelIndex);
     userProfile.profile.completed_puzzles;
@@ -73,6 +77,7 @@ export function HoverFolder({
 
   const solved =
     countPuzzlesPerDifficulty() === getStory(levelIndex).puzzles.length;
+
   return (
     <div className="w-[94%]">
       <motion.div
