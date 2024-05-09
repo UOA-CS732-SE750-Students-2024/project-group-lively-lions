@@ -47,11 +47,12 @@ export default function GameScreen({
   handleReturnScreen(Screen.GameScreen);
 
   // Replace cypher with actual cypher used by the task
-  const cipher = CipherType.Caesar;
+  const cipher = story.puzzles[puzzleIndex].cipher;
+  console.log(cipher);
 
   const exampleTranscript: Transcript = {
     messages: [
-      { sender: 'Purrlock', text: 'Hello, Director!' },
+      { sender: 'Purrlock', text: 'Hello, Director! ( ͠° ͟ʖ ͡°)' },
       { sender: 'Capo', text: 'Hi, Detective! What can I do for you?' },
       {
         sender: 'Purrlock',

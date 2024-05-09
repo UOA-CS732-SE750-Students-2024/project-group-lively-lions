@@ -11,8 +11,6 @@ import caperton from '../../assets/common/CapybaraFella.png';
 import { WoodenCard } from './WoodenCard';
 import Phone from '../mainpage/Phone';
 
-import phoneCallSound from '../../assets/sounds/phonecall.mp4';
-
 export interface Message {
   sender: string;
   text: string;
