@@ -27,8 +27,11 @@ function App() {
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+  const [showNote, setShowNote] = useState(false);
+  const [showBoard, setShowBoard] = useState(false);
+  const [puzzleSolved, setPuzzleSolved] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const SERVER_MONGODB_URI = "http://localhost:3000";
+  const SERVER_MONGODB_URI = 'http://localhost:3000';
 
   useEffect(() => {
     createGuestProfile();
@@ -83,7 +86,6 @@ function App() {
         )
       }
       handleLevel={handleLevel}
-      story={currentStory}
       isMuted={isMuted}
     />,
     <ComputerProfile
@@ -125,6 +127,12 @@ function App() {
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
       story={currentStory}
+      showNote={showNote}
+      setShowNote={setShowNote}
+      showBoard={showBoard}
+      setShowBoard={setShowBoard}
+      puzzleSolved={puzzleSolved}
+      setPuzzleSolved={setPuzzleSolved}
       isMuted={isMuted}
     />
   ];
@@ -135,7 +143,10 @@ function App() {
 
     switch (puzzleCipher[0]) {
       case 'caesar': {
-        const keyshift = Math.floor(Math.random() * 26);
+        let keyshift = Math.floor(Math.random() * 25);
+        if (keyshift === 0) {
+          keyshift = 1;
+        }
         return new ciphersExports.Caesar().encode({
           phrase: puzzleSolution,
           caesarkey: keyshift
@@ -180,13 +191,13 @@ function App() {
     setCurrentStory(story);
 
     // Check the completed puzzles in the profile
-    const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+    const userProfile = JSON.parse(localStorage.getItem('profile') ?? '');
     const completedPuzzles = userProfile.profile.completed_puzzles;
 
     let count = 0;
-    for (let i = 0; i < story.puzzles.length; i++) {
-      for (let j = 0; j < completedPuzzles.length; j++) {
-        if (story.puzzles[i].id === completedPuzzles[j]) {
+    for (const puzzle of story.puzzles) {
+      for (const completedPuzzle of completedPuzzles) {
+        if (puzzle.id === completedPuzzle) {
           count++;
         }
       }
@@ -215,7 +226,7 @@ function App() {
     //Check current level number of puzzles
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
-    const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+    const userProfile = JSON.parse(localStorage.getItem('profile') ?? '');
 
     const puzzleId = puzzles[currentPuzzleIndex].id;
     if (!userProfile.profile.completed_puzzles.includes(puzzleId)) {
@@ -229,25 +240,28 @@ function App() {
       setCurrentPuzzleIndex(index);
       setCurrentEncodedPhrase(encodePhrase(puzzles[index]));
       //Set current screen to new note with conspiracy board
+      setShowBoard(true);
     } else {
       // TODO: Handle 'congrats you've completed all of the puzzles'
       // setTimeout(() => {
       //   setCurrentScreen(Screen.MainGamePage);
       // }, 2500);
+      setPuzzleSolved(true);
+      setShowBoard(true);
     }
     const requestBody = {
       username: userProfile.profile.username,
       password: userProfile.profile.password,
       completed_puzzles: userProfile.profile.completed_puzzles
-    }
-    // Update database account info with puzzle completion 
+    };
+    // Update database account info with puzzle completion
     fetch(`${SERVER_MONGODB_URI}/player`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(requestBody), // Send the complete request body
-    })
+      body: JSON.stringify(requestBody) // Send the complete request body
+    });
   }
 
   function playMusic() {
