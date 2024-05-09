@@ -12,6 +12,7 @@ import ConspiracyNote from './ConspiracyNote';
 
 export interface ConspiracyNoteData {
   story: string;
+  description: string;
   image?: string;
 }
 
@@ -23,6 +24,8 @@ interface ConspiracyBoardProps {
   boardData: ConspiracyBoardData;
   maxNotes: 1 | 3 | 5 | 7;
   children: React.ReactNode;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // This component represents the conspiracy board, notes and strings on the board are rendered
@@ -30,7 +33,9 @@ interface ConspiracyBoardProps {
 const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
   boardData,
   maxNotes,
-  children
+  children,
+  open,
+  setOpen
 }) => {
   const progress = boardData.notes.length;
   const strings = [
@@ -130,7 +135,7 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="pt-[14rem] flex place-items-center justify-center min-w-[960px] min-h-[540px] w-[calc(60vw)] h-[calc(60vw*9/16)] bg-transparent border-none">
         <AnimatePresence>

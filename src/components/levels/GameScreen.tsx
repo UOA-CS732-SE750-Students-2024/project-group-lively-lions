@@ -35,6 +35,10 @@ interface GameScreenProps {
   story: Story;
   showNote: boolean;
   setShowNote: React.Dispatch<React.SetStateAction<boolean>>;
+  showBoard: boolean;
+  setShowBoard: React.Dispatch<React.SetStateAction<boolean>>;
+  puzzleSolved: boolean;
+  setPuzzleSolved: React.Dispatch<React.SetStateAction<boolean>>;
   isMuted: boolean;
 }
 
@@ -48,6 +52,10 @@ export default function GameScreen({
   story,
   showNote,
   setShowNote,
+  showBoard,
+  setShowBoard,
+  puzzleSolved,
+  setPuzzleSolved,
   isMuted
 }: GameScreenProps) {
   handleReturnScreen(Screen.GameScreen);
@@ -97,17 +105,28 @@ export default function GameScreen({
     notes: [
       {
         story: story.introduction,
+        description: story.introduction,
+        image: Caperton
+      },
+      ...story.puzzles.map((puzzle) => ({
+        story: puzzle.story,
+        description: puzzle.description
+      })),
+      {
+        story: story.conclusion,
+        description: story.conclusion,
         image: Caperton
       }
     ]
   };
-  story.puzzles.forEach((puzzle) => {
-    boardData.notes.push({ story: puzzle.story });
-  });
-  boardData.notes.push({
-    story: story.conclusion,
-    image: Caperton
-  });
+
+  const maxNotes = story.puzzles.length + 2;
+  const displayBoardData: ConspiracyBoardData = {
+    notes: []
+  };
+  displayBoardData.notes = puzzleSolved
+    ? boardData.notes.slice(0, puzzleIndex + 3)
+    : boardData.notes.slice(0, puzzleIndex + 2);
 
   function playWoodSound() {
     if (!isMuted) {
@@ -118,7 +137,7 @@ export default function GameScreen({
   // Show newest note on load
   useEffect(() => {
     setShowNote(true);
-  }, []);
+  }, [puzzleIndex]);
 
   return (
     <motion.div
@@ -142,8 +161,10 @@ export default function GameScreen({
         className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer"
       >
         <ConspiracyBoard
-          boardData={boardData}
-          maxNotes={boardData.notes.length as 1 | 3 | 5 | 7}
+          boardData={displayBoardData}
+          maxNotes={maxNotes as 1 | 3 | 5 | 7}
+          open={showBoard}
+          setOpen={setShowBoard}
         >
           <img
             className="hover:outline outline-white outline-7 cursor-pointer"
@@ -169,6 +190,7 @@ export default function GameScreen({
         onClick={(e) => {
           handleScreenButtonClick(Screen.MainGamePage, e);
           playWoodSound();
+          setPuzzleSolved(false);
         }}
       >
         <img src={exitSign} alt="Exit" />
@@ -241,8 +263,8 @@ export default function GameScreen({
       />
       {/* Invisible component for displaying new notes */}
       <NotePopup
-        index={boardData.notes.length}
-        noteData={boardData.notes[boardData.notes.length - 1]}
+        index={puzzleIndex}
+        noteData={boardData.notes[puzzleIndex + 1]}
         open={showNote}
         setOpen={setShowNote}
       />
