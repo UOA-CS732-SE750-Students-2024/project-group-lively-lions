@@ -22,6 +22,7 @@ function App() {
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     createGuestProfile();
@@ -51,7 +52,11 @@ function App() {
       handleLevel={handleLevel}
       level={currentLevel}
     />,
-    <LandingScreen key="landing" handleContinue={handleScreenButtonClick} />,
+    <LandingScreen
+      key="landing"
+      handleContinue={handleScreenButtonClick}
+      isMuted={isMuted}
+    />,
 
     <NewPlayer
       key="newPlayer"
@@ -72,6 +77,7 @@ function App() {
       }
       handleLevel={handleLevel}
       story={currentStory}
+      isMuted={isMuted}
     />,
     <ComputerProfile
       key="computerProfile"
@@ -86,6 +92,7 @@ function App() {
       key="referenceBook"
       handleScreenButtonClick={handleScreenButtonClick}
       returnToScreen={returnScreen}
+      isMuted={isMuted}
     />,
     <EchidnaMachine
       key="echidnaMachine"
@@ -94,11 +101,13 @@ function App() {
       handleScreenButtonClick={handleScreenButtonClick}
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
+      isMuted={isMuted}
     />,
     <MainGamePage
       key="mainGamePage"
       handleScreenButtonClick={handleScreenButtonClick}
       handleReturnScreen={handleReturnScreen}
+      isMuted={isMuted}
     />,
     <GameScreen
       key="gameScreen"
@@ -109,6 +118,7 @@ function App() {
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
       story={currentStory}
+      isMuted={isMuted}
     />
   ];
 
@@ -223,6 +233,12 @@ function App() {
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
+      <h1 className="text-[#d9b26f] font-[alagard] text-[3rem] leading-loose text-center text-pretty w-[100%]">
+        Purrlock Holmes' Crypawtography Agency
+      </h1>
+      <button onClick={() => setIsMuted(!isMuted)} className="text-[#FFFFFF]">
+        {isMuted ? 'click to unmute' : 'click to mute'}
+      </button>
       {/* Constrains game contents maximum and minimum dimensions */}
       <div
         className="

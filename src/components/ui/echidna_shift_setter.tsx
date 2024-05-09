@@ -7,15 +7,26 @@ import EchidnaButton from './echidna_button';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
+import clickSound from '../../assets/sounds/click.mp4';
+
 interface EchidnaShiftSetterProps {
-  shift: number;
+  shift: number
   handleShift: (shiftBy: number) => void;
+  isMuted: boolean;
 }
 
 export function EchidnaShiftSetter({
   shift,
-  handleShift
+  handleShift,
+  isMuted
 }: EchidnaShiftSetterProps) {
+
+  function playClickSound() {
+    if (!isMuted) {
+      new Audio(clickSound).play();
+    }
+  }
+
   return (
     <div className="absolute w-[100%] h-[100%]">
       {/* Shift setting block */}
@@ -27,18 +38,14 @@ export function EchidnaShiftSetter({
         <EchidnaButton
           capImage={echidnaAuxButtonCapUp}
           baseImage={echidnaAuxButtonBase}
-          onClick={() => {
-            handleShift(1);
-          }}
+          onClick={() => { handleShift(1); playClickSound() }}
         />
       </div>
       <div className="absolute w-[15%] left-[60%] top-[60%]">
         <EchidnaButton
           capImage={echidnaAuxButtonCapDown}
           baseImage={echidnaAuxButtonBase}
-          onClick={() => {
-            handleShift(-1);
-          }}
+          onClick={() => { handleShift(-1); playClickSound() }}
         />
       </div>
       {/* Shift setting display */}
@@ -61,6 +68,7 @@ export function EchidnaShiftSetter({
       </div>
     </div>
   );
+
 }
 
 export default EchidnaShiftSetter;

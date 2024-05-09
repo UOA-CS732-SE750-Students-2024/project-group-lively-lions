@@ -3,16 +3,15 @@ import { Screen } from '@/util';
 
 interface LandingScreenProps {
   handleContinue: (screen: Screen) => void;
+  isMuted: boolean;
 }
 
-export function LandingScreen({
-  handleContinue
-}: LandingScreenProps) {
+export function LandingScreen({ handleContinue, isMuted }: LandingScreenProps) {
   return (
     <div className="flex flex-col place-items-center">
-      <EchidnaIntro handleContinue={handleContinue}/>
+      <EchidnaIntro handleContinue={handleContinue} isMuted={isMuted} />
     </div>
   );
 }
 
-export default LandingScreen
+export default LandingScreen;
