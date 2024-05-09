@@ -111,7 +111,7 @@ export function Echidna({
           phrase: workingPhrase
         });
         setWorkingPhrase(decodedPhrase);
-        decodedPhrase === solution
+        decodedPhrase.toLowerCase() === solution.toLowerCase()
           ? handleSolutionFound()
           : handleSolutionNotFound();
         console.log(decodedPhrase);
@@ -121,7 +121,7 @@ export function Echidna({
           phrase: workingPhrase
         });
         setWorkingPhrase(decodedPhrase);
-        decodedPhrase === solution
+        decodedPhrase.toLowerCase() === solution.toLowerCase()
           ? handleSolutionFound()
           : handleSolutionNotFound();
         console.log(decodedPhrase);
