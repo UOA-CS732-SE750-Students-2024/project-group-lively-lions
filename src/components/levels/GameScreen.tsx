@@ -1,7 +1,6 @@
 import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
-import { CipherType } from '@/ciphers/Cipher';
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
 import paper from '../../assets/room/shared/crumpled_paper.png';
@@ -45,6 +44,9 @@ interface GameScreenProps {
   isMuted: boolean;
 }
 
+/*
+* This component holds the creation of the main game screen, and holds navigation to the interactive components.
+*/
 export default function GameScreen({
   handleScreenButtonClick,
   level,
@@ -63,9 +65,8 @@ export default function GameScreen({
 }: GameScreenProps) {
   handleReturnScreen(Screen.GameScreen);
 
-  // Replace cypher with actual cypher used by the task
+  //Set up hint system
   const hintText = story.puzzles[puzzleIndex].hint;
-  console.log(hintText);
 
   const hintTranscript: Transcript = {
     messages: [
@@ -102,6 +103,7 @@ export default function GameScreen({
     ]
   };
 
+  // Set up conspiracy board info
   const boardData: ConspiracyBoardData = {
     notes: [
       {
@@ -176,6 +178,7 @@ export default function GameScreen({
           />
         </ConspiracyBoard>
       </div>
+
       {/* Phone asset linked to hint system */}
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
@@ -235,7 +238,7 @@ export default function GameScreen({
         draggable={false}
       />
 
-      {/* ECHIDNA machine at the bottom so it is the highest element */}
+      {/* ECHIDNA machine at the bottom so it is the highest element and is infront of the filler items. */}
       <div className="absolute w-[40%] left-[30%]">
         <Echidna
           availableCiphers={Object.values(ciphersExports)}

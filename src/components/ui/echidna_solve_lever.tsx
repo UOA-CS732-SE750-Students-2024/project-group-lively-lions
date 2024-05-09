@@ -10,6 +10,7 @@ interface EchidnaSolveLeverProps {
   isMuted: boolean;
 }
 
+// This component controls the solver lever for the ECHIDNA machine
 const EchidnaSolveLever: React.FC<EchidnaSolveLeverProps> = ({
   delay,
   onClick,

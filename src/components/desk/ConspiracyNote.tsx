@@ -25,7 +25,8 @@ interface ConspiracyNoteProps {
   newLabel: boolean;
 }
 
-// This component represents a single interactive conspiracy note
+/* This component represents a single interactive conspiracy note
+*/
 const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
   index,
   type,

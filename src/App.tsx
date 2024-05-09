@@ -9,7 +9,6 @@ import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels, Puzzle, getStory } from './util';
 import GameScreen from './components/levels/GameScreen';
-import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
 import { set } from 'mongoose';
@@ -97,15 +96,6 @@ function App() {
     <ComputerProfile
       key="computerProfile"
       handleScreenButtonClick={handleScreenButtonClick}
-      isMuted={isMuted}
-    />,
-    <EchidnaMachine
-      key="echidnaMachine"
-      phrase={currentEncodedPhrase}
-      story={currentStory}
-      handleScreenButtonClick={handleScreenButtonClick}
-      puzzleIndex={currentPuzzleIndex}
-      handleSolvedPuzzle={handleSolvedPuzzle}
       isMuted={isMuted}
     />,
     <MainGamePage

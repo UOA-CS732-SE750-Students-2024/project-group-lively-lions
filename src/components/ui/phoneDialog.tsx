@@ -15,6 +15,7 @@ const DialogPortal = DialogPrimitive.Portal;
 
 const DialogClose = DialogPrimitive.Close;
 
+//This is a version of dialog used specifically for the hint overlay
 const DialogOverlay = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Overlay>,
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>

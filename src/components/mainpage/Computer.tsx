@@ -14,6 +14,9 @@ interface ComputerProps {
   isMuted: boolean;
 }
 
+/*
+* This component creates the computer asset and handles navigation to the computer profile pages.
+*/
 export default function ({
   handleScreenButtonClick, isMuted
 }: ComputerProps) {

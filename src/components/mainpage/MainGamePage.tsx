@@ -44,6 +44,9 @@ interface MainGamePageProps {
   isFirstJoin: boolean;
 }
 
+/*
+* This component handles the creation of the main page and handles the navigation to the various game components.
+*/
 export default function MainGamePage({
   handleScreenButtonClick,
   handleReturnScreen,

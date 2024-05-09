@@ -17,6 +17,9 @@ interface EchidnaIntroProps {
   playMusic: () => void;
 }
 
+/*
+* This handles the logic for creating the ECHIDNA in the intro locked state
+*/
 function EchidnaIntro({
   handleContinue,
   startDelay = 1000,

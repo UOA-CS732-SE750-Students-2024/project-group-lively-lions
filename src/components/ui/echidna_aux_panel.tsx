@@ -1,13 +1,7 @@
 import echidnaAuxPanel from '/echidna_aux_panel.png?url';
 import echidnaAuxEngraving from '/echidna_aux_engraving.png?url';
-import echidnaAuxDisplayInput from '/echidna_aux_display_input.png?url';
-import echidnaAuxDisplay from '/echidna_aux_display.png?url';
-
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import * as ciphersExports from '../../ciphers/ciphers';
-import { CipherType } from '../../ciphers/Cipher';
-import EchidnaButton from './echidna_button';
 import EchidnaKeyWordInput from './echidna_keyword_input';
 import EchidnaShiftSetter from './echidna_shift_setter';
 
@@ -20,6 +14,9 @@ interface EchidnaAuxPanelProps {
   isMuted: boolean;
 }
 
+/*
+* This component controls the creation and logic of the aux panel in the ECHIDNA machine
+*/
 export function EchidnaAuxPanel({
   showAuxControls,
   currentCipher,

@@ -25,7 +25,7 @@ interface HintDialogProps {
   isMuted: boolean;
 }
 
-// This component takes a transcript
+// This component takes a transcript and is used for the hint system
 const HintDialog: React.FC<HintDialogProps> = ({ transcript, isMuted }) => {
 
   return (

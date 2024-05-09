@@ -7,6 +7,9 @@ interface EchidnaCipherButtonProps {
   onClick: () => void;
 }
 
+/*
+* This styles the buttons for the echidna machine
+*/
 const EchidnaButton: React.FC<EchidnaCipherButtonProps> = ({
   capImage,
   baseImage,

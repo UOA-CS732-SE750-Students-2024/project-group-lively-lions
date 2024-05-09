@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
+//Creates wooden card used in hint dialgo
 const WoodenCard = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
