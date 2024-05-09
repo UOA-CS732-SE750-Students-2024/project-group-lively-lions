@@ -22,6 +22,7 @@ function App() {
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+  const [showNote, setShowNote] = useState(false);
 
   useEffect(() => {
     createGuestProfile();
@@ -33,14 +34,16 @@ function App() {
     console.log(existingProfile);
     if (!existingProfile) {
       // If 'profile' object doesn't exist, create a default guest profile and save it to local storage
-      const defaultProfile = { "profile": {
-        username: 'guest',
-        password: 'guest_password',
-        completed_puzzles: []
-      }};
+      const defaultProfile = {
+        profile: {
+          username: 'guest',
+          password: 'guest_password',
+          completed_puzzles: []
+        }
+      };
       localStorage.setItem('profile', JSON.stringify(defaultProfile));
-    };
-  };
+    }
+  }
 
   const screens = [
     <MainMenuScreen
@@ -110,6 +113,8 @@ function App() {
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
       story={currentStory}
+      showNote={showNote}
+      setShowNote={setShowNote}
     />
   ];
 

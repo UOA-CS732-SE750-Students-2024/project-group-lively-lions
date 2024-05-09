@@ -19,7 +19,7 @@ import Caperton from '../../assets/common/CapybaraFella.png';
 import * as ciphersExports from '@/ciphers/ciphers';
 import Echidna from '../ui/echidna';
 import NotePopup from '../desk/NotePopup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface GameScreenProps {
   handleScreenButtonClick: (
@@ -32,6 +32,8 @@ interface GameScreenProps {
   puzzleIndex: number;
   handleSolvedPuzzle: () => void;
   story: Story;
+  showNote: boolean;
+  setShowNote: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function GameScreen({
@@ -41,7 +43,9 @@ export default function GameScreen({
   phrase,
   puzzleIndex,
   handleSolvedPuzzle,
-  story
+  story,
+  showNote,
+  setShowNote
 }: GameScreenProps) {
   handleReturnScreen(Screen.GameScreen);
 
@@ -102,7 +106,10 @@ export default function GameScreen({
     image: Caperton
   });
 
-  const [showNote, setShowNote] = useState(false);
+  // Show newest note on load
+  useEffect(() => {
+    setShowNote(true);
+  }, []);
 
   return (
     <motion.div
