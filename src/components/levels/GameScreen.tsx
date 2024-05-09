@@ -1,7 +1,6 @@
 import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
-import { CipherType } from '@/ciphers/Cipher';
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
 import paper from '../../assets/room/shared/crumpled_paper.png';
@@ -20,7 +19,7 @@ import sepia from '../../assets/room/active_game/sepia.png';
 import vignettePixel from '../../assets/room/active_game/vignettePixel.png';
 import vignetteSmooth from '../../assets/room/active_game/vignetteSmooth.png';
 import NotePopup from '../desk/NotePopup';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
 import { ReferenceBook } from '../desk/ReferenceBook';
 
@@ -175,7 +174,7 @@ export default function GameScreen({
         </ConspiracyBoard>
       </div>
       {/* Phone asset linked to hint system */}
-      <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
+      <div className="absolute w-[20%] top-[32%] left-[10%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
 
@@ -193,22 +192,22 @@ export default function GameScreen({
 
       {/* Non-Interactive filler assets */}
       <img
-        className="absolute scale-[400%] top-[32%] left-[-1%]"
+        className="absolute min-h-[240px] h-[calc(27vw*9/16)] top-[10%] left-[-12%]"
         src={pencilHolder}
         draggable={false}
       />
       <img
-        className="absolute scale-[150%] top-[48%] left-[-2%]"
+        className="absolute min-h-[60px] h-[calc(7vw*9/16)] top-[45%] left-[-2%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute scale-[160%] top-[51%] left-[6%]"
+        className="absolute min-h-[60px] h-[calc(7vw*9/16)] top-[51%] left-[6%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute scale-[380%] top-[34%] left-[31%]"
+        className="absolute min-h-[228px] h-[calc(7vw*9/16)]  top-[34%] left-[31%]"
         src={milk}
         draggable={false}
       />

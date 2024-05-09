@@ -8,7 +8,6 @@ import paper from '../../assets/level-select/case_paper_sprite.png';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ConspiracyNoteData } from './ConspiracyBoard';
 import { WoodenCard } from '../ui/WoodenCard';
-import Caperton from '../../assets/common/CapybaraFella.png';
 
 interface NotePopupProps {
   index: number;
