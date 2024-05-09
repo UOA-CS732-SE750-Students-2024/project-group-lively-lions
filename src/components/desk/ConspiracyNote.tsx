@@ -123,7 +123,9 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
               ) : (
                 <></>
               )}
-              <p className="opacity-[70%] antialiased">{noteData.story}</p>
+              <p className="text-[1.2rem] opacity-[60%] antialiased">
+                {noteData.story}
+              </p>
             </div>
           </motion.div>
         </AnimatePresence>
