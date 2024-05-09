@@ -3,7 +3,7 @@
     {
       "name": "Caesar Ciphers",
       "encoding": "A Caesar cipher is a famous but simple encryption technique. To encode a phrase as a Caesar cipher, each character (letter) is \"shifted\" along in the alphabet.",
-      "diagram":  "/caesar_diagram.png?url)",
+      "diagram":  "/caesar_diagram.png?url",
       "decoding": "To decode a Caesar cipher the encryption is run in reverse. For example cipher with a shift of 1 can be decoded with a shift of -1."
     },
     {
