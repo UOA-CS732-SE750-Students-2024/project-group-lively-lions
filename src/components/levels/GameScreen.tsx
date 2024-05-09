@@ -174,7 +174,7 @@ export default function GameScreen({
         </ConspiracyBoard>
       </div>
       {/* Phone asset linked to hint system */}
-      <div className="absolute w-[20%] top-[32%] left-[8%]">
+      <div className="absolute w-[25%] top-[25%] left-[3%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
 
@@ -197,12 +197,12 @@ export default function GameScreen({
         draggable={false}
       />
       <img
-        className="absolute min-h-[60px] h-[calc(7vw*9/16)] top-[45%] left-[-2%]"
+        className="absolute min-h-[80px] h-[calc(8vw*9/16)] top-[45%] left-[-5%]"
         src={paper}
         draggable={false}
       />
       <img
-        className="absolute min-h-[60px] h-[calc(7vw*9/16)] top-[51%] left-[6%]"
+        className="absolute min-h-[80px] h-[calc(8vw*9/16)] top-[48%] left-[3%]"
         src={paper}
         draggable={false}
       />
@@ -212,7 +212,7 @@ export default function GameScreen({
         draggable={false}
       />
       <img
-        className="absolute min-h-[100px] h-[calc(11vw*9/16)] top-[36%] left-[64%]"
+        className="absolute min-h-[130px] h-[calc(14vw*9/16)] top-[36%] left-[61%]"
         src={blueYarn}
         draggable={false}
       />
@@ -257,7 +257,7 @@ export default function GameScreen({
       />
 
       {/* Reference book */}
-      <div className="absolute top-[65%] left-[7%] rotate-12">
+      <div className="absolute top-[60%] left-[2%] rotate-12">
         <ReferenceBook isMuted={isMuted} />
       </div>
 
