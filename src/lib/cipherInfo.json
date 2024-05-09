@@ -3,25 +3,25 @@
     {
       "name": "Caesar Ciphers",
       "encoding": "A Caesar cipher is a famous but simple encryption technique. To encode a phrase as a Caesar cipher, each character (letter) is \"shifted\" along in the alphabet.",
-      "diagram":  "/public/caesar_diagram.png?url')",
+      "diagram":  "/caesar_diagram.png?url')",
       "decoding": "To decode a Caesar cipher the encryption is run in reverse. For example cipher with a shift of 1 can be decoded with a shift of -1."
     },
     {
       "name": "Vigenere Ciphers",
       "encoding": "This cipher is encoded by shifting each character in a phrase along in the alphabet by a pre-determined sequence of shift values. The sequence of shift values is called the \"keyword\" and may be represented by letters to make it more memorable. Below is the phrase \"BAELDUNG\" encoded using the keyword \"HELLO\":",
-      "diagram": "/public/vigenere_diagram.png?url",
+      "diagram": "/vigenere_diagram.png?url",
       "decoding": "\"B\" is shifted by 8 characters, as the \"H\" in \"HELLO\" is the 8th letter of the alphabet. \"A\" is shifted by 5 characters as \"E\" determines the shift for the second character. Once the \"O\" is reached in \"HELLO\" but there is still more phrase to encode, the keyword simply repeats. \b To decode a Vigenere cipher is quite difficult without the keyword. The best keyword to try first is \"keyword\"... But you didn't hear that from me. I'm just a book."
     },
     {
       "name": "Polybius Ciphers",
       "encoding": "Invented by the ancient Greeks and first employed using fire signals, the Polybius cipher uses a grid to encode an alphabet into pairs of numbers based on their coordinates in the grid.",
-      "diagram": "/public/polybius_cipher.png?url",
+      "diagram": "/polybius_cipher.png?url",
       "decoding": "Decoding a Polybius cipher is easy if you have the grid used to encode it. The Echidna machine is programmed with the \"standard\" Polybius grid from the diagram already."
     },
     {
       "name": "Substitution Ciphers",
       "encoding": "The simplest of ciphers, substitution ciphers are constructed by replacing each letter in the alphabet with a set character or symbol. Encoding text into ones and zeros, beeps and boops, or even emojis are all examples of substitution ciphers.",
-      "diagram": "/public/emoji_cipher.png?url",
+      "diagram": "/emoji_cipher.png?url",
       "decoding": "Despite being easy to create, a substitution cipher can be tedious to decode... Unless you have some kind of machine which has a setting for the cipher's substituted alphabet."
     }
   ]
