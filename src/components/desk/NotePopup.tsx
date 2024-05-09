@@ -8,7 +8,6 @@ import paper from '../../assets/level-select/case_paper_sprite.png';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ConspiracyNoteData } from './ConspiracyBoard';
 import { WoodenCard } from '../ui/WoodenCard';
-import Caperton from '../../assets/common/CapybaraFella.png';
 
 interface NotePopupProps {
   index: number;
@@ -80,7 +79,9 @@ const NotePopup: React.FC<NotePopupProps> = ({
               ) : (
                 <></>
               )}
-              <p className="opacity-[70%] antialiased">{noteData.story}</p>
+              <p className="text-[1.2rem] opacity-[60%] antialiased">
+                {noteData.story}
+              </p>
             </div>
           </motion.div>
         </AnimatePresence>
