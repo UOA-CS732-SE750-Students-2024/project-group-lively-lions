@@ -236,10 +236,7 @@ export default function MainGamePage({
       />
       {/* Reference book entry point leads to reference book screen */}
       <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
-        <ReferenceBookEntryPoint
-          handleScreenButtonClick={handleScreenButtonClick}
-          isMuted={isMuted}
-        />
+        <ReferenceBook isMuted={isMuted} />
       </div>
       <img
         className="absolute top-[50%] left-[61%] scale-[160%] cursor-pointer"
