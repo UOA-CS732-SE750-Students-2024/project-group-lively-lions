@@ -22,7 +22,6 @@ import conspiracyBoard from '../../assets/room/main_menu/conspiracy_board/conspi
 import Cabinet from './Cabinet';
 import Phone from './Phone';
 import Computer from './Computer';
-import ReferenceBookEntryPoint from './ReferenceBookEntryPoint';
 import SpeechBubble from '../ui/SpeechBubble';
 import sepia from '../../assets/room/active_game/sepia.png';
 import vignettePixel from '../../assets/room/active_game/vignettePixelMainMenu.png';
@@ -33,6 +32,7 @@ import lampSound from '../../assets/sounds/lamp.mp4';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
 import fabricSound from '../../assets/sounds/fabric.mp4';
 import glassSound from '../../assets/sounds/glass_chink.mp4';
+import { ReferenceBook } from '../desk/ReferenceBook';
 
 interface MainGamePageProps {
   handleScreenButtonClick: (
@@ -296,57 +296,54 @@ export default function MainGamePage({
 
       {/* Cool Dark Overlay */}
       <motion.div
-      className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
-      initial={{ opacity: lightOn ? 0 : 1 }}
-      animate={{ opacity: lightOn ? 0 : 1 }}
-      transition={{ type: 'spring' }}
+        className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+        initial={{ opacity: lightOn ? 0 : 1 }}
+        animate={{ opacity: lightOn ? 0 : 1 }}
+        transition={{ type: 'spring' }}
       >
         <div
-        className="absolute opacity-[50%] w-[100%] h-[100%] top-0 pointer-events-none"
-        style={{
-          backgroundImage: `url(${coolDark})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          imageRendering: 'pixelated'
-        }}
+          className="absolute opacity-[50%] w-[100%] h-[100%] top-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${coolDark})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            imageRendering: 'pixelated'
+          }}
         />
       </motion.div>
 
       <motion.div
-      className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
-      initial={{ opacity: lightOn ? 1 : 0 }}
-      animate={{ opacity: lightOn ? 1 : 0 }}
-      transition={{ type: 'spring' }}
+        className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+        initial={{ opacity: lightOn ? 1 : 0 }}
+        animate={{ opacity: lightOn ? 1 : 0 }}
+        transition={{ type: 'spring' }}
       >
-      {/* Hard Pixel Vignette */}
-      <div
-        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
-        style={{
-          backgroundImage: `url(${vignettePixel})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          imageRendering: 'pixelated'
-        }}
-      />
-      
-      {/* Reference book entry point leads to reference book screen */}
-      <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
-        <ReferenceBookEntryPoint
-          handleScreenButtonClick={handleScreenButtonClick}
-          isMuted={isMuted}
+        {/* Hard Pixel Vignette */}
+        <div
+          className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${vignettePixel})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            imageRendering: 'pixelated'
+          }}
         />
-      </div>
 
-      {/* Sepia Filter */}
-      <div
-        className="absolute opacity-[8%] w-[100%] h-[100%] top-0 pointer-events-none"
-        style={{
-          backgroundImage: `url(${sepia})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          imageRendering: 'pixelated'
-        }}
-      />
+        {/* Reference book */}
+        <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
+          <ReferenceBook isMuted={isMuted} />
+        </div>
+
+        {/* Sepia Filter */}
+        <div
+          className="absolute opacity-[8%] w-[100%] h-[100%] top-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${sepia})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            imageRendering: 'pixelated'
+          }}
+        />
       </motion.div>
 
       {/* Soft Pixel Vignette */}

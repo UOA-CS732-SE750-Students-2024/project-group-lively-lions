@@ -97,12 +97,6 @@ function App() {
       story={currentStory}
       handleScreenButtonClick={handleScreenButtonClick}
     />,
-    <ReferenceBook
-      key="referenceBook"
-      handleScreenButtonClick={handleScreenButtonClick}
-      returnToScreen={returnScreen}
-      isMuted={isMuted}
-    />,
     <EchidnaMachine
       key="echidnaMachine"
       phrase={currentEncodedPhrase}
