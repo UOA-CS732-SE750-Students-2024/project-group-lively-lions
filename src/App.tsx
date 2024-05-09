@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import LandingScreen from './components/levels/LandingScreen';
 import { LevelSelect } from './components/desk/LevelSelect';
-import { Phone } from './components/desk/Phone';
 import { ReferenceBook } from './components/desk/ReferenceBook';
 import { ComputerProfile } from './components/desk/computer_profile/ComputerProfile';
 import { NewPlayer } from './components/desk/computer_profile/NewPlayer';
@@ -90,11 +89,6 @@ function App() {
     />,
     <ComputerProfile
       key="computerProfile"
-      handleScreenButtonClick={handleScreenButtonClick}
-    />,
-    <Phone
-      key="phone"
-      story={currentStory}
       handleScreenButtonClick={handleScreenButtonClick}
     />,
     <ReferenceBook
