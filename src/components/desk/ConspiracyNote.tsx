@@ -22,13 +22,15 @@ interface ConspiracyNoteProps {
   index: number;
   type: 'A' | 'B' | 'C' | 'D';
   noteData: ConspiracyNoteData;
+  newLabel: boolean;
 }
 
 // This component represents a single interactive conspiracy note
 const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
   index,
   type,
-  noteData
+  noteData,
+  newLabel
 }) => {
   const [src, setSrc] = useState(noteA);
   const noteImage =
@@ -82,10 +84,25 @@ const ConspiracyNote: React.FC<ConspiracyNoteProps> = ({
               src={paper}
               draggable={false}
             />
+            {/* 'New' label */}
+            {newLabel ? (
+              <p className="absolute text-[2.5rem] text-red-700 font-[alagard] rotate-30 right-[5%] top-[7%]">
+                NEW!
+              </p>
+            ) : (
+              <></>
+            )}
             {/* Note title */}
             <p className="absolute opacity-[70%] text-[2rem] font-[alagard] left-[42%] top-[5%]">
               {`Note ${index + 1}`}
             </p>
+            {noteData.puzzleName ? (
+              <p className="absolute opacity-[70%] text-[1.3rem] font-[alagard] left-[30%] top-[13%]">
+                {noteData.puzzleName}
+              </p>
+            ) : (
+              <></>
+            )}
             {/* Note content */}
             <div className="absolute h-[calc(45vw*9/16)] w-[80%] left-[10%] top-[20%] text-[1rem] font-[alagard] overflow-y-scroll max-h-full scrollbar">
               {noteData.image ? (

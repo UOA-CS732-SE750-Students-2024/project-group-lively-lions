@@ -39,8 +39,8 @@ interface GameScreenProps {
   setShowNote: React.Dispatch<React.SetStateAction<boolean>>;
   showBoard: boolean;
   setShowBoard: React.Dispatch<React.SetStateAction<boolean>>;
-  puzzleSolved: boolean;
-  setPuzzleSolved: React.Dispatch<React.SetStateAction<boolean>>;
+  allPuzzleSolved: boolean;
+  setAllPuzzleSolved: React.Dispatch<React.SetStateAction<boolean>>;
   isMuted: boolean;
 }
 
@@ -56,8 +56,8 @@ export default function GameScreen({
   setShowNote,
   showBoard,
   setShowBoard,
-  puzzleSolved,
-  setPuzzleSolved,
+  allPuzzleSolved,
+  setAllPuzzleSolved,
   isMuted
 }: GameScreenProps) {
   handleReturnScreen(Screen.GameScreen);
@@ -109,6 +109,7 @@ export default function GameScreen({
         image: Caperton
       },
       ...story.puzzles.map((puzzle) => ({
+        puzzleName: puzzle.name,
         story: puzzle.story,
         description: puzzle.description
       })),
@@ -124,7 +125,7 @@ export default function GameScreen({
   const displayBoardData: ConspiracyBoardData = {
     notes: []
   };
-  displayBoardData.notes = puzzleSolved
+  displayBoardData.notes = allPuzzleSolved
     ? boardData.notes.slice(0, puzzleIndex + 3)
     : boardData.notes.slice(0, puzzleIndex + 2);
 
@@ -184,7 +185,7 @@ export default function GameScreen({
         onClick={(e) => {
           handleScreenButtonClick(Screen.MainGamePage, e);
           playWoodSound();
-          setPuzzleSolved(false);
+          setAllPuzzleSolved(false);
         }}
       >
         <img src={exitSign} alt="Exit" />
@@ -307,8 +308,12 @@ export default function GameScreen({
 
       {/* Invisible component for displaying new notes */}
       <NotePopup
-        index={puzzleIndex}
-        noteData={boardData.notes[puzzleIndex + 1]}
+        index={allPuzzleSolved ? puzzleIndex + 1 : puzzleIndex}
+        noteData={
+          allPuzzleSolved
+            ? boardData.notes[puzzleIndex + 2]
+            : boardData.notes[puzzleIndex + 1]
+        }
         open={showNote}
         setOpen={setShowNote}
       />

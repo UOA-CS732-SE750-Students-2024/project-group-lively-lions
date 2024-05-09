@@ -53,26 +53,34 @@ const NotePopup: React.FC<NotePopupProps> = ({
             <p className="absolute opacity-[70%] text-[2rem] font-[alagard] left-[42%] top-[5%]">
               {`Note ${index + 1}`}
             </p>
+            {noteData.puzzleName ? (
+              <p className="absolute opacity-[70%] text-[1.3rem] font-[alagard] left-[30%] top-[13%]">
+                {noteData.puzzleName}
+              </p>
+            ) : (
+              <></>
+            )}
             {/* Note content */}
             <div className="absolute h-[calc(45vw*9/16)] w-[80%] left-[10%] top-[20%] text-[1rem] font-[alagard] overflow-y-scroll max-h-full scrollbar">
-              <WoodenCard className="min-h-[210px] h-[calc(12vw*9/16)] overflow-hidden float-left mr-4">
-                <motion.div
-                  className="items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ type: 'linear', duration: 1 }}
-                >
-                  <img
-                    src={Caperton}
-                    className="w-[10rem] pulse-slow mb-[-5%] pt-[5%]"
-                    draggable={false}
-                  />
-                </motion.div>
-              </WoodenCard>
+              {noteData.image ? (
+                <WoodenCard className="min-h-[210px] h-[calc(12vw*9/16)] overflow-hidden float-left mr-4">
+                  <motion.div
+                    className="items-center justify-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ type: 'linear', duration: 1 }}
+                  >
+                    <img
+                      src={noteData.image}
+                      className="w-[10rem] pulse-slow mb-[-5%] pt-[5%]"
+                      draggable={false}
+                    />
+                  </motion.div>
+                </WoodenCard>
+              ) : (
+                <></>
+              )}
               <p className="opacity-[70%] antialiased">{noteData.story}</p>
-              <p className="mt-3 text-[1.3rem] opacity-[80%] antialiased">
-                {noteData.description}
-              </p>
             </div>
           </motion.div>
         </AnimatePresence>
