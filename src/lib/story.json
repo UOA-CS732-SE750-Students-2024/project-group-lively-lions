@@ -142,7 +142,8 @@
           "image": "",
           "cipher": [
             "binary"
-          ]
+          ],
+          "hint": "The analysts believe this is a more modern cipher, their computer seemed to understand it."
         },
         {
           "name": "Hidden Patterns",
@@ -153,7 +154,8 @@
           "image": "",
           "cipher": [
             "caesar"
-          ]
+          ],
+          "hint": "The analysts believe a ceaser cipher has been used, they figured out the first letter should start with F!"
         },
         {
           "name": "Criminal Framework",
@@ -164,7 +166,8 @@
           "image": "Pawlice",
           "cipher": [
             "morse"
-          ]
+          ],
+          "hint": "The analysts believe the message is encoded in a similar way to the old war ciphers."
         },
         {
           "name": "The Mansion of Doom",
@@ -175,7 +178,8 @@
           "image": "",
           "cipher": [
             "polybius"
-          ]
+          ],
+          "hint": "The analysts think that coordinates may have used in the encoding process."
         },
         {
           "name": "There’s a Mouse in my House!",
@@ -186,7 +190,8 @@
           "image": "Keiththerat",
           "cipher": [
             "vigenere"
-          ]
+          ],
+          "hint": "The analysts that a keyword may have been used to encode this one, they suggest trying some common passwords to decode it."
         }
       ],
       "conclusion": "Keith shot puzzle after puzzle at Purrlock. As Purrlock solved each one, he noticed a pattern with the solutions!. A secret backstory, tragic beyond measure! A tragic childhood. Alone. Bored. Ignored. He read many books, learning about puzzles and becoming a master at them, being able to solve any that was sent his way. But young Keith never solved the puzzle of how to make a true friend. A puzzle it seemed that he felt all but him solved with ease. Everybody that he thought he made friends with abandoned him eventually, left him behind, leaving him alone. People used him. Hurt him. He vowed to find one as clever as him. He became the manipulator, creating the cult of alley cats to help him with his evil deeds, and to find the one clever enough to be a true archenemy. No one else could solve his puzzles. Until Purrlock. Purrlock is the chosen one!!! The one he can play with!!! Muahaha.\nWith this new knowledge, Purrlock chatted to Keith, who collapsed into tears. Of course, Purrlock had to take Keith in, as Keith was a criminal. But first, Purrlock brought Keith to couples therapy, and the two bonded. They become besties. Purrlock made sure that Keith went to a prison focused on rehabilitation, and often made visits to check up on him. Eventually Keith became Purrlock’s detective partner, and between the two of them, they became the best detectives in the entire world, able to solve any mystery, any puzzle. Partners in crime!"

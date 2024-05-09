@@ -47,12 +47,12 @@ export default function GameScreen({
   handleReturnScreen(Screen.GameScreen);
 
   // Replace cypher with actual cypher used by the task
-  const cipher = story.puzzles[puzzleIndex].cipher;
-  console.log(cipher);
+  const hintText = story.puzzles[puzzleIndex].hint;
+  console.log(hintText);
 
-  const exampleTranscript: Transcript = {
+  const hintTranscript: Transcript = {
     messages: [
-      { sender: 'Purrlock', text: 'Hello, Director! ( ͠° ͟ʖ ͡°)' },
+      { sender: 'Purrlock', text: 'Hello, Director!' },
       { sender: 'Capo', text: 'Hi, Detective! What can I do for you?' },
       {
         sender: 'Purrlock',
@@ -71,13 +71,11 @@ export default function GameScreen({
       {
         sender: 'Capo',
         text:
-          'Found it! It seems like the analysts believe that the clue may have something to do with something called a ' +
-          cipher +
-          ' cipher.'
+          'Found it!' + hintText
       },
       {
         sender: 'Capo',
-        text: 'Not quite sure what that means but I hope it helps!'
+        text: 'Im honestly not quite sure what that means but I hope it helps!'
       },
       {
         sender: 'Purrlock',
@@ -144,7 +142,7 @@ export default function GameScreen({
       </div>
       {/* Phone asset linked to hint system */}
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
-        <HintDialog transcript={exampleTranscript} isMuted={isMuted} />
+        <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
       {/* Reference book asset */}
       <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
