@@ -47,7 +47,15 @@ npm run dev
 - Alt + Shift + F should format the code in the current file according to Prettier + ESLint rules, otherwise you can also run `pnpm run format` to format all files.
 - Running `pnpm run build` produces an application bundle that is suitable to be served over a static hosting service in `./dist`. Subsequently, running `pnpm run preview` will boot up a local server with the application bundle in `./dist`.
 
-### Used packages
+## Backend in dev 
+This database is set to be automatically run upon apps startup, however if you need to run it for development reasons then: 
+
+1) navigate into the root directory using a terminal 
+2) run the [server.mjs](./src/backend/server.mjs) file using `node src/backend/server.mjs`
+
+This will start the server connection manually. This connection is hosted on `localhost:3000` and connects to the server using the general MongoDB URI stored in the .env. 
+
+## Used packages
 
 We used VS Code with a variety of packages to make the development process easier and faster. The main packages used by the team were:
 
