@@ -24,9 +24,7 @@ export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
   const [password, setPassword] = useState('');
 
   const handleConfirm = async () => {
-
     try {
-  
       // Send a POST request to create a new player profile
       const response = await fetch(SERVER_API_URL + '/player', {
         method: 'POST',
@@ -35,30 +33,45 @@ export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
         },
         body: JSON.stringify({ username, password })
       });
-  
+
       if (response.status === 500) {
         // Handle internal server error 500
-        alert("Username is already taken.")
+        alert('Username is already taken.');
         throw new Error('Username is already taken.');
       } else {
         // Handle success
-        console.log('Player profile created successfully');
+
         // Check if the current profile in local storage is 'guest'
         const currentProfile = localStorage.getItem('profile');
         if (currentProfile !== null) {
           const parsedProfile = JSON.parse(currentProfile);
-          if (parsedProfile && parsedProfile.profile && parsedProfile.profile.username === 'guest') {
+          if (
+            parsedProfile &&
+            parsedProfile.profile &&
+            parsedProfile.profile.username === 'guest'
+          ) {
             // Delete the current 'profile' object in local storage
-            localStorage.removeItem('profile');
+
             const newPlayer = await response.json();
+            if (newPlayer) {
+              localStorage.setItem(
+                'profile',
+                JSON.stringify({ profile: newPlayer })
+              );
+            } else {
+              alert('New profile created.');
+            }
             // Set the new player profile returned by the POST request to local storage
-            localStorage.setItem('profile', JSON.stringify({ profile: newPlayer }));
           } else {
-            alert("New profile created.");
-          };
-        };          
-      };
+            alert('New profile created.');
+          }
+        }
+        console.log('Player profile created successfully');
+      }
     } catch (error) {
+      alert(
+        'An error has occurred, we cannot make your profile at this time. Please continue playing with the guest profile'
+      );
       console.error('An error occurred:', error);
     }
   };

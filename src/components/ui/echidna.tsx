@@ -220,7 +220,7 @@ export function Echidna({
             <motion.p
               key={selectedCipher}
               className={'font-[alagard] text-[1.2rem] leading-[1.2rem]'}
-              initial={{ y: cipherSelectUp ? 50 : -50 }}
+              initial={{ y: cipherSelectUp ? -50 : 50 }}
               animate={{
                 y: cipherAnimatingOut ? (cipherSelectUp ? 50 : -50) : 0
               }}
