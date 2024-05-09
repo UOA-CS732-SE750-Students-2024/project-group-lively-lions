@@ -33,6 +33,7 @@ const EchidnaSolveLever: React.FC<EchidnaSolveLeverProps> = ({
   return (
     <div onClick={pushLever}>
       <motion.img
+        draggable={false}
         className="absolute w-[100%]"
         src={echidnaSolveLeverStem}
         animate={{ y: isPressed ? 35 : 0 }}
@@ -40,6 +41,7 @@ const EchidnaSolveLever: React.FC<EchidnaSolveLeverProps> = ({
         drag={false}
       />
       <motion.img
+        draggable={false}
         className="absolute w-[100%] cursor-pointer"
         src={echidnaSolveLeverHandle}
         animate={{ y: isPressed ? 60 : 0 }}

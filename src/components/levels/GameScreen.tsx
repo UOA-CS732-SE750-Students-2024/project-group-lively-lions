@@ -1,7 +1,6 @@
 import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
-import { CipherType } from '@/ciphers/Cipher';
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
 import paper from '../../assets/room/shared/crumpled_paper.png';
@@ -190,7 +189,7 @@ export default function GameScreen({
           setAllPuzzleSolved(false);
         }}
       >
-        <img src={exitSign} alt="Exit" />
+        <img src={exitSign} alt="Exit" draggable={false} />
       </div>
 
       {/* Non-Interactive filler assets */}
