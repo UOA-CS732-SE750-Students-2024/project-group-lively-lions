@@ -14,6 +14,7 @@ function EchidnaTestComponent() {
           solution="Hello world."
           solve_delay_ms={500}
           showAuxControls={true}
+          isMuted={false}
         />
       </div>
     </div>

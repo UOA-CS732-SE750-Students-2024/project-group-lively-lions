@@ -1,11 +1,9 @@
+import { useState } from 'react';
+import { Screen } from '@/util';
+import { motion } from 'framer-motion';
+//image asset imports
 import background from '../../assets/room/main_menu/background.png';
 import table from '../../assets/room/main_menu/table.png';
-import Cabinet from './Cabinet';
-import Phone from './Phone';
-import { Screen } from '@/util';
-import Computer from './Computer';
-import ReferenceBookEntryPoint from './ReferenceBookEntryPoint';
-import { useState } from 'react';
 import shadow from '../../assets/room/shared/pop_up_shadow.png';
 import lamp from '../../assets/room/main_menu/lamp.png';
 import lighting from '../../assets/room/main_menu/lighting.png';
@@ -19,32 +17,81 @@ import greenYarn from '../../assets/room/shared/green_yarn.png';
 import purpleYarn from '../../assets/room/shared/purple_yarn.png';
 import redYarn from '../../assets/room/shared/red_yarn.png';
 import pinkYarn from '../../assets/room/shared/pink_yarn.png';
-import { motion } from 'framer-motion';
 import conspiracyBoard from '../../assets/room/main_menu/conspiracy_board/conspiracy_board_notes_and_text.png';
+//UI component imports
+import Cabinet from './Cabinet';
+import Phone from './Phone';
+import Computer from './Computer';
+import ReferenceBookEntryPoint from './ReferenceBookEntryPoint';
 import SpeechBubble from '../ui/SpeechBubble';
+//sound imports
+import lampSound from '../../assets/sounds/lamp.mp4';
+import woodSound from '../../assets/sounds/wooden_tap.mp4';
+import fabricSound from '../../assets/sounds/fabric.mp4';
+import glassSound from '../../assets/sounds/glass_chink.mp4';
 
 interface MainGamePageProps {
   handleScreenButtonClick: (
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  handleReturnScreen: (screen: Screen) => void;
+  handleReturnScreen: (
+    screen: Screen
+  ) => void;
+  isMuted: boolean;
 }
 
 export default function MainGamePage({
-  handleScreenButtonClick,
-  handleReturnScreen
+  handleScreenButtonClick, handleReturnScreen, isMuted
 }: MainGamePageProps) {
+
+  //Set return screen value to this screen
+  handleReturnScreen(Screen.MainGamePage);
+
+  //Handle thought bubbles
   const [thoughtShowing, setThoughtShowing] = useState(false);
   const [thought, setThought] = useState<string>('');
-  const [lightOn, setLightOn] = useState(true);
-
-  handleReturnScreen(Screen.MainGamePage);
 
   function configureThought(text: string) {
     setThought(text);
     setThoughtShowing(true);
   }
+
+  //handle lighting
+  const [lightOn, setLightOn] = useState(true);
+
+  //delay lighting response slightly for realism and audio matching
+  function handleLight() {
+    setTimeout(function () {
+      setLightOn(!lightOn);
+    }, 100)
+  }
+
+  //Sound effects
+  function playLampSound() {
+    if (!isMuted) {
+      new Audio(lampSound).play();
+    }
+  }
+
+  function playWoodSound() {
+    if (!isMuted) {
+      new Audio(woodSound).play();
+    }
+  }
+
+  function playFabricSound() {
+    if (!isMuted) {
+      new Audio(fabricSound).play();
+    }
+  }
+
+  function playGlassSound() {
+    if (!isMuted) {
+      new Audio(glassSound).play();
+    }
+  }
+
 
   return (
     <motion.div
@@ -64,27 +111,28 @@ export default function MainGamePage({
       {/* visual items lower in scene order*/}
       <img
         className="absolute right-0 cursor-pointer"
-        onClick={() => setLightOn(!lightOn)}
+        onClick={() => { playLampSound(); handleLight() }}
         src={lamp}
         alt="lamp"
-        draggable={false}
-      />
+        draggable={false} />
       <img
         className="absolute bottom-0 w-screen"
+        onClick={() => playWoodSound()}
         src={table}
         alt="table"
-        draggable={false}
-      />
+        draggable={false} />
 
       {/* Main interactive elements */}
       {/* Conspiracy board shows thought about usage in game */}
       <div>
         <img
           className="absolute scale-[300%] top-[17%] left-[44%] transition ease-in-out hover:translate-y-1 cursor-pointer"
-          onClick={() =>
+          onClick={() => {
             configureThought(
               'This conspiracy board lets me keep track of information during cases!'
-            )
+            );
+            playWoodSound();
+          }
           }
           src={conspiracyBoard}
           alt="conspiracy board"
@@ -93,7 +141,7 @@ export default function MainGamePage({
       </div>
       {/* Cabinet leads to level select screen */}
       <div className="absolute top-[25%] left-[0.5%]">
-        <Cabinet handleScreenButtonClick={handleScreenButtonClick} />
+        <Cabinet handleScreenButtonClick={handleScreenButtonClick} isMuted={isMuted} />
       </div>
 
       {/* Phone shows thought about usage in game */}
@@ -105,18 +153,19 @@ export default function MainGamePage({
           )
         }
       >
-        <Phone />
+        <Phone isMuted={isMuted} />
       </div>
 
       {/* Computer leads to profile screen */}
       <div className="relative top-[25%] left-[82%]">
-        <Computer handleScreenButtonClick={handleScreenButtonClick} />
+        <Computer handleScreenButtonClick={handleScreenButtonClick} isMuted={isMuted} />
       </div>
 
       {/* Reference book entry point leads to reference book screen */}
       <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
         <ReferenceBookEntryPoint
           handleScreenButtonClick={handleScreenButtonClick}
+          isMuted={isMuted}
         />
       </div>
 
@@ -170,54 +219,44 @@ export default function MainGamePage({
       {/* Interactive visual filler items high in scene order*/}
       <img
         className="absolute top-[47%] left-[40%] scale-[250%] cursor-pointer"
-        onClick={() =>
-          configureThought('Mmmmmmmmmmmilkk, I simply must buy some more.')
-        }
+        onClick={() => { configureThought('Mmmmmmmmmmmilkk, I simply must buy some more.'); playGlassSound() }}
         src={milk}
         draggable={false}
       />
       <img
         className="absolute top-[50%] left-[61%] scale-[160%] cursor-pointer"
-        onClick={() =>
-          configureThought(
-            'Coffee has gotten me through many rough nights of casework.'
-          )
-        }
+        onClick={() => { configureThought('Coffee has gotten me through many rough nights of casework.'); playGlassSound() }}
         src={coffee}
         draggable={false}
       />
       {/* Cat Heaven */}
       <img
         className="absolute top-[65%] left-[90%] scale-[160%] cursor-pointer"
-        onClick={() => configureThought('Now wait just a meowment…')}
+        onClick={() => { configureThought('Now wait just a meowment…'); playFabricSound() }}
         src={greenYarn}
         draggable={false}
       />
       <img
         className="absolute top-[72%] left-[87%] scale-[160%] cursor-pointer"
-        onClick={() =>
-          configureThought('That case was a total cat-astrophe!!!')
-        }
+        onClick={() => { configureThought('That case was a total cat-astrophe!!!'); playFabricSound() }}
         src={redYarn}
         draggable={false}
       />
       <img
         className="absolute top-[51%] left-[47%] scale-[160%] cursor-pointer"
-        onClick={() => configureThought("Meow you're talking!")}
+        onClick={() => { configureThought("Meow you're talking!"); playFabricSound() }}
         src={blueYarn}
         draggable={false}
       />
       <img
         className="absolute top-[53%] left-[53%] scale-[160%] cursor-pointer"
-        onClick={() =>
-          configureThought('I need a meowtini. Shaken, not purred, of course.')
-        }
+        onClick={() => { configureThought('I need a meowtini. Shaken, not purred, of course.'); playFabricSound() }}
         src={purpleYarn}
         draggable={false}
       />
       <img
         className="absolute top-[78%] left-[9%] scale-[150%] cursor-pointer"
-        onClick={() => configureThought('This case will go down in hiss-tory!')}
+        onClick={() => { configureThought('This case will go down in hiss-tory!'); playFabricSound() }}
         src={pinkYarn}
         draggable={false}
       />

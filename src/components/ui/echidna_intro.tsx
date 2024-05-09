@@ -5,12 +5,13 @@ import { useState } from 'react';
 import echidnaLid from '/echidna_lid.png?url';
 import { Screen } from '@/util';
 
-interface EchidnaIntroProps{
+interface EchidnaIntroProps {
   handleContinue: (level: Screen) => void;
   startDelay?: number;
   liftDelay?: number;
   titleCardDelay?: number;
   startGameDelay?: number;
+  isMuted: boolean;
 }
 
 function EchidnaIntro({
@@ -19,6 +20,7 @@ function EchidnaIntro({
   liftDelay = 1500,
   titleCardDelay = 1000,
   startGameDelay = 4000,
+  isMuted
 }: EchidnaIntroProps) {
   const [liftLid, setLiftLid] = useState<boolean>(false);
   const [liftEchidna, setLiftEchidna] = useState<boolean>(false);
@@ -39,19 +41,26 @@ function EchidnaIntro({
     setTimeout(() => {
       setLiftEchidna(true);
     }, startDelay + liftDelay);
-    setTimeout(() => {
-      setShowTitleCard(true);
-    }, startDelay + liftDelay + titleCardDelay);
-    setTimeout(() => {
-      handleContinue(Screen.MainGamePage);
-    }, startDelay + liftDelay + titleCardDelay + startGameDelay);
+    setTimeout(
+      () => {
+        setShowTitleCard(true);
+      },
+      startDelay + liftDelay + titleCardDelay
+    );
+    setTimeout(
+      () => {
+        handleContinue(Screen.MainGamePage);
+      },
+      startDelay + liftDelay + titleCardDelay + startGameDelay
+    );
   };
 
   return (
-    <motion.div className="flex flex-col items-center"
-    initial={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ type: 'easeOut', duration: 2 }}
+    <motion.div
+      className="flex flex-col items-center"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ type: 'easeOut', duration: 2 }}
     >
       <AnimatePresence mode="wait">
         {!liftEchidna ? (
@@ -73,6 +82,7 @@ function EchidnaIntro({
               solve_delay_ms={1000}
               showAuxControls={false}
               active={startEchidna}
+              isMuted={isMuted}
             />
             <AnimatePresence mode="wait">
               {!liftLid ? (
@@ -86,36 +96,36 @@ function EchidnaIntro({
                   transition={{ duration: 1 }}
                   drag={false}
                 />
-              ) : 
-              <></>
-              }
+              ) : (
+                <></>
+              )}
             </AnimatePresence>
           </motion.div>
-        ) :
+        ) : (
           <></>
-        }
+        )}
       </AnimatePresence>
       <AnimatePresence>
-        { showTitleCard ? 
+        {showTitleCard ? (
           <motion.div
-          key='titleCard'
-          className='absolute w-[100%] h-[100%] bg-[black]'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ type: 'easeOut', duration: 2 }}
-          onClick={() => handleContinue(Screen.MainGamePage)}
+            key="titleCard"
+            className="absolute w-[100%] h-[100%] bg-[black]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ type: 'easeOut', duration: 2 }}
+            onClick={() => handleContinue(Screen.MainGamePage)}
           >
-            <p className='absolute font-[alagard] text-[3rem] text-[#f90d00] text-center text-pretty py-[20%] px-[20%] top-[0.5%]'>
+            <p className="absolute font-[alagard] text-[3rem] text-[#f90d00] text-center text-pretty py-[20%] px-[20%] top-[0.5%]">
               Purrlock Holmes' Crypawtography Agency
             </p>
-            <p className='absolute font-[alagard] text-[3rem] text-[#fc9605] text-center text-pretty py-[20%] px-[20%]'>
+            <p className="absolute font-[alagard] text-[3rem] text-[#fc9605] text-center text-pretty py-[20%] px-[20%]">
               Purrlock Holmes' Crypawtography Agency
             </p>
           </motion.div>
-          :
+        ) : (
           <></>
-        }
+        )}
       </AnimatePresence>
     </motion.div>
   );

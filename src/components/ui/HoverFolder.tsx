@@ -5,6 +5,8 @@ import solved_stamp_sprite from '../../assets/level-select/solved_stamp_sprite.p
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
 import { Screen, Levels, getStory } from '@/util';
+import pageSlideSound from '../../assets/sounds/paper_slide.mp4';
+import pageHoverSound from '../../assets/sounds/folder_hover.mp4';
 
 interface HoverFolderProps {
   marginTop: string;
@@ -22,6 +24,7 @@ interface HoverFolderProps {
     screen: Screen,
     event: React.MouseEvent<HTMLElement>
   ) => void;
+  isMuted: boolean;
 }
 
 export function HoverFolder({
@@ -33,8 +36,10 @@ export function HoverFolder({
   setClickedIndex,
   levelIndex,
   handleLevel,
-  handleScreenButtonClick
+  handleScreenButtonClick,
+  isMuted
 }: HoverFolderProps) {
+
   const isAboveHovered = index <= isHoveredIndex;
   const isAboveClicked = index <= isClickedIndex;
   const userProfile = JSON.parse(localStorage.getItem('profile') || '');
@@ -54,6 +59,18 @@ export function HoverFolder({
 
   const hoverOffset = -3; // Distance moved by folder when hovered over
   const clickedOffset = -40; // Distance moved by folder when clicked (selected)
+  function playPageSlideSound() {
+    if (!isMuted) {
+      new Audio(pageSlideSound).play();
+    }
+  }
+
+  function playPageHoverSound() {
+    if (!isMuted) {
+      new Audio(pageHoverSound).play();
+    }
+  }
+
   const solved =
     countPuzzlesPerDifficulty() === getStory(levelIndex).puzzles.length;
   return (
@@ -61,18 +78,19 @@ export function HoverFolder({
       <motion.div
         className="relative inline-block w-[100%]"
         style={{ marginTop: marginTop, imageRendering: 'pixelated' }} // marginTop controls the initial vertical overlap
-        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseEnter={() => { setHoveredIndex(index); playPageHoverSound() }}
         onMouseLeave={() => setHoveredIndex(-1)} // Clear hover status
-        onClick={() =>
+        onClick={() => {
           isClickedIndex === index
             ? setClickedIndex(-1)
-            : setClickedIndex(index)
+            : setClickedIndex(index);
+          playPageSlideSound()
+        }
         }
         animate={{
-          y: `${
-            (isAboveClicked ? clickedOffset : 0) +
+          y: `${(isAboveClicked ? clickedOffset : 0) +
             (isAboveHovered ? hoverOffset : 0)
-          }%`
+            }%`
         }}
         transition={{
           type: 'spring',
