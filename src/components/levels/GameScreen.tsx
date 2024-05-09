@@ -23,6 +23,7 @@ import NotePopup from '../desk/NotePopup';
 import { useEffect, useState } from 'react';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
 import { ReferenceBook } from '../desk/ReferenceBook';
+import { delay } from '../../lib/utils';
 
 interface GameScreenProps {
   handleScreenButtonClick: (
@@ -60,7 +61,10 @@ export default function GameScreen({
   isMuted
 }: GameScreenProps) {
 
-  //Set up hint system
+  const [echidnaOn, setEchidnaOn] = useState(true);
+  const [resetEchidnaDisplay, setResetEchidnaDisplay] = useState(false);
+
+  // Set up hint system
   const hintText = story.puzzles[puzzleIndex].hint;
 
   const hintTranscript: Transcript = {
@@ -132,6 +136,14 @@ export default function GameScreen({
     if (!isMuted) {
       new Audio(woodSound).play();
     }
+  }
+
+  async function solvedCurrentPuzzle() {
+    await delay(3000)
+    setEchidnaOn(false);
+    handleSolvedPuzzle();
+    await delay(2000);
+    setEchidnaOn(true);
   }
 
   // Show newest note on load
@@ -237,12 +249,14 @@ export default function GameScreen({
       <div className="absolute w-[40%] left-[30%]">
         <Echidna
           availableCiphers={Object.values(ciphersExports)}
-          handleSolvedPuzzle={handleSolvedPuzzle}
+          handleSolvedPuzzle={solvedCurrentPuzzle}
           phrase={phrase}
           solution={story.puzzles[puzzleIndex].solution}
           solve_delay_ms={500}
           showAuxControls={true}
           isMuted={isMuted}
+          active={echidnaOn}
+          resetDisplay={resetEchidnaDisplay}
         />
       </div>
 
