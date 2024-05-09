@@ -1,8 +1,16 @@
 import { Button } from '../../ui/button';
 import { useState } from 'react';
-import { TextField } from '../../ui/TextField';
+import { TextField, PassField } from '../../ui/TextField';
 import { Screen } from '@/util';
-import computer_screen_border from '../../../assets/room/main_menu/computer/computer_screen_border.png';
+import computer_screen from '../../../assets/room/main_menu/computer/computer_sign_in_new_profile.png';
+import confirm_cap from '../../../assets/room/main_menu/computer/confirm_cap.png';
+import confirm_base from '../../../assets/room/main_menu/computer/confirm_base.png';
+import back_cap from '../../../assets/room/main_menu/computer/back_arrow_cap.png';
+import back_base from '../../../assets/room/main_menu/computer/back_arrow_base.png';
+import EchidnaButton from '../../../components/ui/echidna_button';
+import signin_cap from '../../../assets/room/main_menu/computer/signin_cap.png';
+import signin_base from '../../../assets/room/main_menu/computer/new_account_signin_base.png';
+import click_sound from '../../../assets/sounds/click.mp4';
 
 /* 
 This is the component for the new player menu. It allows the creation of a new player profile.
@@ -13,13 +21,17 @@ It also has a confirm button, which does nothing yet, and a back button to the l
 interface NewPlayerProps {
   handleScreenButtonClick: (
     level: number,
-    event: React.MouseEvent<HTMLButtonElement>
+    event?: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  isMuted: boolean;
 }
 
 const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL;
 
-export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
+export function NewPlayer({
+  handleScreenButtonClick,
+  isMuted
+}: NewPlayerProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -76,55 +88,73 @@ export function NewPlayer({ handleScreenButtonClick }: NewPlayerProps) {
     }
   };
 
+  function playClickSound() {
+    if (!isMuted) {
+      new Audio(click_sound).play();
+    }
+  }
+
   return (
-    <div className="flex justify-center items-center">
-      <div className="absolute inset-0">
-        <img
-          className="w-[100%]"
-          src={computer_screen_border}
-          draggable={false}
-        />
+    <div>
+      <div className="absolute inset-0 flex justify-center items-center">
+        <img className="w-[100%]" src={computer_screen} draggable={false} />
       </div>
-      <div className="absolute inset-0 flex justify-center items-center flex-col">
-        <Button
-          className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[40%]"
-          onClick={(e) => handleScreenButtonClick(Screen.SignIn, e)}
-          size={'sm'}
-        >
-          SIGN IN TO EXISTING PROFILE
-        </Button>
-        <form>
-          <p className="font-[alagard] text-[1.5rem]">New Identity Name:</p>
-          <TextField
-            value={username}
-            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setUsername(e.target.value)
-            }
-            placeholder={'Username'}
+      <div className="absolute inset-0 flex justify-center flex-col items-center top-[26%]">
+        <div className="absolute top-[7%] right-[18%] w-[18%] cursor-pointer">
+          <EchidnaButton
+            baseImage={signin_base}
+            capImage={signin_cap}
+            onClick={() => {
+              handleScreenButtonClick(Screen.SignIn);
+              playClickSound();
+            }}
           />
-          <p className="font-[alagard] text-[1.5rem]">New Identity Password:</p>
-          <TextField
-            value={password}
-            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
-            placeholder={'Password'}
-          />
+        </div>
+        <p className="font-[alagard] text-[1.3rem]">Create New Account</p>
+        <form className="w-[30%]">
+          <div className="flex">
+            <div className="pr-1">
+              <p className="font-[alagard] text-[1.3rem] p-2">Identity:</p>
+              <p className="font-[alagard] text-[1.3rem]">Password:</p>
+            </div>
+            <div>
+              <TextField
+                value={username}
+                onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setUsername(e.target.value)
+                }
+                placeholder={'Username'}
+              />
+              <PassField
+                value={password}
+                onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
+                placeholder={'Password'}
+              />
+            </div>
+          </div>
         </form>
-        <Button
-          className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[50%]"
-          onClick={handleConfirm}
-          size={'sm'}
-        >
-          CONFIRM
-        </Button>
-        <Button
-          className="font-[alagard] text-[1.5rem] tracking-wide mt-2 w-[50%]"
-          onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
-          size={'sm'}
-        >
-          BACK
-        </Button>
+        <div className="absolute top-[68%] left-[43%] w-[12%] cursor-pointer">
+          <EchidnaButton
+            baseImage={confirm_base}
+            capImage={confirm_cap}
+            onClick={() => {
+              handleConfirm();
+              playClickSound();
+            }}
+          />
+        </div>
+        <div className="absolute top-[0%] left-[15%] w-[10%] cursor-pointer">
+          <EchidnaButton
+            baseImage={back_base}
+            capImage={back_cap}
+            onClick={() => {
+              handleScreenButtonClick(Screen.ComputerProfile);
+              playClickSound();
+            }}
+          />
+        </div>
       </div>
     </div>
   );
