@@ -22,6 +22,7 @@ function App() {
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(false);
   const SERVER_MONGODB_URI = "http://localhost:3000";
   const [isMuted, setIsMuted] = useState(false);
 
