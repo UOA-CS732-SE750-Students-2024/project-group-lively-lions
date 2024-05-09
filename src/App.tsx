@@ -136,7 +136,7 @@ function App() {
         });
       }
       case 'vigenere': {
-        const keyword = 'KEYWORD'; //tbd
+        const keyword = 'PASSWORD'; //tbd
         return new ciphersExports.Vigenere().encode({
           phrase: puzzleSolution,
           keyword: keyword
@@ -247,16 +247,13 @@ function App() {
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
-      <h1 className="text-[#d9b26f] font-[alagard] text-[3rem] leading-loose text-center text-pretty w-[100%]">
-        Purrlock Holmes' Crypawtography Agency
-      </h1>
       <button onClick={() => setIsMuted(!isMuted)} className="text-[#FFFFFF]">
         {isMuted ? 'click to unmute' : 'click to mute'}
       </button>
       {/* Constrains game contents maximum and minimum dimensions */}
       <div
         className="
-      relative bg-[#1e2d2f] rounded-md
+      relative bg-[#101819] rounded-md
       w-[calc(60vw)] h-[calc(60vw*9/16)]
       min-w-[960px] min-h-[540px]
       overflow-scroll no-scrollbar"
