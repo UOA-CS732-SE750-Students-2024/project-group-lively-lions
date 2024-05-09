@@ -52,7 +52,7 @@ export function NewPlayer({
         throw new Error('Username is already taken.');
       } else {
         // Handle success
-        console.log('Player profile created successfully');
+
         // Check if the current profile in local storage is 'guest'
         const currentProfile = localStorage.getItem('profile');
         if (currentProfile !== null) {
@@ -63,19 +63,27 @@ export function NewPlayer({
             parsedProfile.profile.username === 'guest'
           ) {
             // Delete the current 'profile' object in local storage
-            localStorage.removeItem('profile');
+
             const newPlayer = await response.json();
+            if (newPlayer) {
+              localStorage.setItem(
+                'profile',
+                JSON.stringify({ profile: newPlayer })
+              );
+            } else {
+              alert('New profile created.');
+            }
             // Set the new player profile returned by the POST request to local storage
-            localStorage.setItem(
-              'profile',
-              JSON.stringify({ profile: newPlayer })
-            );
           } else {
             alert('New profile created.');
           }
         }
+        console.log('Player profile created successfully');
       }
     } catch (error) {
+      alert(
+        'An error has occurred, we cannot make your profile at this time. Please continue playing with the guest profile'
+      );
       console.error('An error occurred:', error);
     }
   };

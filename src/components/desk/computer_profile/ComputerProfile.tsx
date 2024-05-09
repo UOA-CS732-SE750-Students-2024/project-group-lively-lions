@@ -41,7 +41,6 @@ export function ComputerProfile({
       if (parsedProfile.profile.username === 'guest') {
         alert('Cannot log out of guest account.');
       }
-      localStorage.removeItem('profile');
       const defaultProfile = {
         profile: {
           username: 'guest',

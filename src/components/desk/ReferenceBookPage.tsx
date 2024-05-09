@@ -7,12 +7,14 @@ interface ReferencePageProps {
   cipherName: string;
   encoding: string;
   decoding: string;
+  diagram: string;
 }
 
 export function ReferenceBookPage({
   cipherName,
   encoding,
-  decoding
+  decoding,
+  diagram
 }: ReferencePageProps) {
   return (
     <div className="flex justify-center relative min-w-[400px] w-[calc(24vw)]">
@@ -26,6 +28,11 @@ export function ReferenceBookPage({
           {cipherName}
         </p>
         <p className="opacity-[70%] text-[1rem] font-[alagard]">{encoding}</p>
+        { diagram != "" ?
+        <img className="inline-block mix-blend-multiply py-[1rem] px-[6%]" src={diagram} /> 
+        :
+        <></>
+        }
         <p className="opacity-[70%] text-[1rem] font-[alagard]">{decoding}</p>
       </div>
     </div>
