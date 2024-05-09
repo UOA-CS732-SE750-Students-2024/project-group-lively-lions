@@ -23,12 +23,12 @@ async function delete_player(client, databaseName, collectionName, player_id){
   );
 };
 
-async function update_player(player_id, puzzles_unlocked, puzzles_completed, notes_unlocked) {
+async function update_player(player_id, puzzles_unlocked, completed_puzzles, notes_unlocked) {
   try {
     const player = await Player.findByIdAndUpdate(
     { _id: player_id },
       {$addToSet: { puzzles_unlocked: { $each: puzzles_unlocked } },
-      $addToSet: { puzzles_completed: { $each: puzzles_completed } },
+      $addToSet: { completed_puzzles: { $each: completed_puzzles } },
       $addToSet: { notes_unlocked: { $each: notes_unlocked } }},
     { new: true });
   } catch (error) {
