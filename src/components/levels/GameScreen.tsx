@@ -258,6 +258,7 @@ export default function GameScreen({
       />
 
       {/* Reference book */}
+      {/* This asset just looks better when on top of the hard pixel vignette, sorry for throwing off the nice grouping. */}
       <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
         <ReferenceBook isMuted={isMuted} />
       </div>
