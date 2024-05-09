@@ -3,37 +3,50 @@ import computerScreen from '../../assets/room/main_menu/computer/computer_only_s
 import { Screen } from '@/util';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import computerBuzzSound from '../../assets/sounds/computer_buzz.mp4';
+import computerKeyboardSound from '../../assets/sounds/keyboard.mp4';
 
 interface ComputerProps {
   handleScreenButtonClick: (
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  isMuted: boolean;
 }
 
-export default function ({ handleScreenButtonClick }: ComputerProps) {
+export default function ({
+  handleScreenButtonClick, isMuted
+}: ComputerProps) {
+
   const [computerIsOn, setComputerIsOn] = useState(false);
 
+  function playComputerBuzzSound() {
+    if (!isMuted) {
+      new Audio(computerBuzzSound).play();
+    }
+  }
+
+  function playComputerKeyboardSound() {
+    if (!isMuted) {
+      new Audio(computerKeyboardSound).play();
+    }
+  }
+
   return (
-    <div style={{ imageRendering: 'pixelated' }}>
+    <div
+      style={{ imageRendering: 'pixelated' }}>
       <button
-        onClick={(e) => handleScreenButtonClick(Screen.ComputerProfile, e)}
-      >
+        onClick={(e) => { handleScreenButtonClick(Screen.ComputerProfile, e); playComputerKeyboardSound() }}>
         <motion.img
-          className="scale-[400%]"
-          onMouseEnter={() => setComputerIsOn(true)}
+          className='scale-[400%]'
+          onMouseEnter={() => { setComputerIsOn(true); playComputerBuzzSound() }}
           src={computerOff}
           alt="computer"
-          drag={false}
-        />
+          drag={false} />
         <AnimatePresence>
           {computerIsOn && (
             <motion.img
-              className={
-                computerIsOn
-                  ? 'absolute top-[0%] scale-[400%] visible'
-                  : 'invisible'
-              }
+              className={computerIsOn ? 'absolute top-[0%] scale-[400%] visible' : 'invisible'}
               onMouseLeave={() => setComputerIsOn(false)}
               initial={{ opacity: 0 }}
               animate={{
@@ -41,12 +54,12 @@ export default function ({ handleScreenButtonClick }: ComputerProps) {
               }}
               exit={{ opacity: 0 }}
               src={computerScreen}
-              alt="computer"
-              drag={false}
-            />
+              alt='computer'
+              drag={false} />
           )}
         </AnimatePresence>
       </button>
+
     </div>
-  );
+  )
 }
