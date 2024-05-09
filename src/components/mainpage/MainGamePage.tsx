@@ -39,7 +39,6 @@ interface MainGamePageProps {
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  handleReturnScreen: (screen: Screen) => void;
   isMuted: boolean;
   isFirstJoin: boolean;
 }
@@ -49,12 +48,9 @@ interface MainGamePageProps {
 */
 export default function MainGamePage({
   handleScreenButtonClick,
-  handleReturnScreen,
   isMuted,
   isFirstJoin
 }: MainGamePageProps) {
-  //Set return screen value to this screen
-  handleReturnScreen(Screen.MainGamePage);
 
   //Handle thought bubbles
   const [thoughtShowing, setThoughtShowing] = useState(false);

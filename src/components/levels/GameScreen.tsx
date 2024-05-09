@@ -30,7 +30,6 @@ interface GameScreenProps {
     event: React.MouseEvent<HTMLElement>
   ) => void;
   level: number;
-  handleReturnScreen: (screen: Screen) => void;
   phrase: string;
   puzzleIndex: number;
   handleSolvedPuzzle: () => void;
@@ -49,8 +48,6 @@ interface GameScreenProps {
 */
 export default function GameScreen({
   handleScreenButtonClick,
-  level,
-  handleReturnScreen,
   phrase,
   puzzleIndex,
   handleSolvedPuzzle,
@@ -63,7 +60,6 @@ export default function GameScreen({
   setAllPuzzleSolved,
   isMuted
 }: GameScreenProps) {
-  handleReturnScreen(Screen.GameScreen);
 
   //Set up hint system
   const hintText = story.puzzles[puzzleIndex].hint;

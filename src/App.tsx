@@ -21,7 +21,6 @@ const gameMusic = new Audio(gameSound);
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
-  const [returnScreen, setReturnScreen] = useState(Screen.MainGamePage);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
@@ -101,15 +100,12 @@ function App() {
     <MainGamePage
       key="mainGamePage"
       handleScreenButtonClick={handleScreenButtonClick}
-      handleReturnScreen={handleReturnScreen}
       isMuted={isMuted}
       isFirstJoin={isFirstJoin}
     />,
     <GameScreen
       key="gameScreen"
       handleScreenButtonClick={handleScreenButtonClick}
-      level={currentLevel}
-      handleReturnScreen={handleReturnScreen}
       phrase={currentEncodedPhrase}
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
@@ -194,10 +190,6 @@ function App() {
     setCurrentPuzzleIndex(index);
     setCurrentEncodedPhrase(encodePhrase(story.puzzles[index]));
     e.preventDefault();
-  }
-
-  function handleReturnScreen(screen: Screen) {
-    setReturnScreen(screen);
   }
 
   function handleScreenButtonClick(
