@@ -22,6 +22,8 @@ function App() {
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(false);
+  const SERVER_MONGODB_URI = "http://localhost:3000";
 
   useEffect(() => {
     createGuestProfile();
@@ -51,7 +53,11 @@ function App() {
       handleLevel={handleLevel}
       level={currentLevel}
     />,
-    <LandingScreen key="landing" handleContinue={handleScreenButtonClick} />,
+    <LandingScreen
+      key="landing"
+      handleContinue={handleScreenButtonClick}
+      isMuted={isMuted}
+    />,
 
     <NewPlayer
       key="newPlayer"
@@ -72,6 +78,7 @@ function App() {
       }
       handleLevel={handleLevel}
       story={currentStory}
+      isMuted={isMuted}
     />,
     <ComputerProfile
       key="computerProfile"
@@ -86,6 +93,7 @@ function App() {
       key="referenceBook"
       handleScreenButtonClick={handleScreenButtonClick}
       returnToScreen={returnScreen}
+      isMuted={isMuted}
     />,
     <EchidnaMachine
       key="echidnaMachine"
@@ -94,11 +102,13 @@ function App() {
       handleScreenButtonClick={handleScreenButtonClick}
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
+      isMuted={isMuted}
     />,
     <MainGamePage
       key="mainGamePage"
       handleScreenButtonClick={handleScreenButtonClick}
       handleReturnScreen={handleReturnScreen}
+      isMuted={isMuted}
     />,
     <GameScreen
       key="gameScreen"
@@ -109,6 +119,7 @@ function App() {
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
       story={currentStory}
+      isMuted={isMuted}
     />
   ];
 
@@ -125,7 +136,7 @@ function App() {
         });
       }
       case 'vigenere': {
-        const keyword = 'KEYWORD'; //tbd
+        const keyword = 'PASSWORD'; //tbd
         return new ciphersExports.Vigenere().encode({
           phrase: puzzleSolution,
           keyword: keyword
@@ -218,15 +229,31 @@ function App() {
       //   setCurrentScreen(Screen.MainGamePage);
       // }, 2500);
     }
+    const requestBody = {
+      username: userProfile.profile.username,
+      password: userProfile.profile.password,
+      completed_puzzles: userProfile.profile.completed_puzzles
+    }
+    // Update database account info with puzzle completion 
+    fetch(`${SERVER_MONGODB_URI}/player`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody), // Send the complete request body
+    })
   }
 
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
+      <button onClick={() => setIsMuted(!isMuted)} className="text-[#FFFFFF]">
+        {isMuted ? 'click to unmute' : 'click to mute'}
+      </button>
       {/* Constrains game contents maximum and minimum dimensions */}
       <div
         className="
-      relative bg-[#1e2d2f] rounded-md
+      relative bg-[#101819] rounded-md
       w-[calc(60vw)] h-[calc(60vw*9/16)]
       min-w-[960px] min-h-[540px]
       overflow-scroll no-scrollbar"

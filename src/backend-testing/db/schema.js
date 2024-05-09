@@ -4,9 +4,7 @@ const crypto = require("crypto");
 const playerSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
-  puzzles_completed: {},
-  puzzles_unlocked: {},
-  notes_unlocked: {}
+  completed_puzzles: {}
 });
 
 // Custom function to generate a 24-character hash of the username

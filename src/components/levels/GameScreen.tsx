@@ -2,6 +2,7 @@ import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
 import { CipherType } from '@/ciphers/Cipher';
+import lighting from '../../assets/room/active_game/lighting.png';
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
 import ReferenceBookEntryPoint from '../mainpage/ReferenceBookEntryPoint';
@@ -20,6 +21,7 @@ import Echidna from '../ui/echidna';
 import sepia from '../../assets/room/active_game/sepia.png';
 import vignettePixel from '../../assets/room/active_game/vignettePixel.png';
 import vignetteSmooth from '../../assets/room/active_game/vignetteSmooth.png';
+import woodSound from '../../assets/sounds/wooden_tap.mp4';
 
 interface GameScreenProps {
   handleScreenButtonClick: (
@@ -32,6 +34,7 @@ interface GameScreenProps {
   puzzleIndex: number;
   handleSolvedPuzzle: () => void;
   story: Story;
+  isMuted: boolean;
 }
 
 export default function GameScreen({
@@ -41,14 +44,16 @@ export default function GameScreen({
   phrase,
   puzzleIndex,
   handleSolvedPuzzle,
-  story
+  story,
+  isMuted
 }: GameScreenProps) {
   handleReturnScreen(Screen.GameScreen);
 
   // Replace cypher with actual cypher used by the task
-  const cipher = CipherType.Caesar;
+  const hintText = story.puzzles[puzzleIndex].hint;
+  console.log(hintText);
 
-  const exampleTranscript: Transcript = {
+  const hintTranscript: Transcript = {
     messages: [
       { sender: 'Purrlock', text: 'Hello, Director!' },
       { sender: 'Capo', text: 'Hi, Detective! What can I do for you?' },
@@ -69,13 +74,11 @@ export default function GameScreen({
       {
         sender: 'Capo',
         text:
-          'Found it! It seems like the analysts believe that the clue may have something to do with something called a ' +
-          cipher +
-          ' cipher.'
+          'Found it! ' + hintText
       },
       {
         sender: 'Capo',
-        text: 'Not quite sure what that means but I hope it helps!'
+        text: 'Im honestly not quite sure what that means but I hope it helps!'
       },
       {
         sender: 'Purrlock',
@@ -102,6 +105,12 @@ export default function GameScreen({
     image: Caperton
   });
 
+  function playWoodSound() {
+    if (!isMuted) {
+      new Audio(woodSound).play();
+    }
+  }
+
   return (
     <motion.div
       className="w-[100%] h-[100%]"
@@ -118,7 +127,11 @@ export default function GameScreen({
       exit={{ opacity: 0 }}
     >
       {/* Interactive Components */}
-      <div className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer">
+      {/* Conspiracy board asset linked to conspiracy board system */}
+      <div
+        onClick={() => playWoodSound()}
+        className="absolute left-[15%] scale-[120%] transition ease-in-out hover:translate-y-1 cursor-pointer"
+      >
         <ConspiracyBoard
           boardData={boardData}
           maxNotes={boardData.notes.length as 1 | 3 | 5 | 7}
@@ -132,19 +145,18 @@ export default function GameScreen({
       </div>
       {/* Phone asset linked to hint system */}
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
-        <HintDialog transcript={exampleTranscript} />
+        <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
+      
       {/* Exit sign to go back to main game page */}
       <div
         className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
-        onClick={(e) => handleScreenButtonClick(Screen.MainGamePage, e)}
+        onClick={(e) => {
+          handleScreenButtonClick(Screen.MainGamePage, e);
+          playWoodSound();
+        }}
       >
-        <img
-          className="hover:scale-105 active:scale-110 cursor-pointer "
-          src={exitSign}
-          alt="Exit"
-          draggable={false}
-        />
+        <img src={exitSign} alt="Exit" />
       </div>
 
       {/* Non-Interactive filler assets */}
@@ -198,6 +210,7 @@ export default function GameScreen({
           solution={story.puzzles[puzzleIndex].solution}
           solve_delay_ms={500}
           showAuxControls={true}
+          isMuted={isMuted}
         />
       </div>
 
@@ -240,7 +253,6 @@ export default function GameScreen({
           imageRendering: 'pixelated'
         }}
       />
-
 
     </motion.div>
   );
