@@ -264,7 +264,7 @@ export default function GameScreen({
       />
       {/* Invisible component for displaying new notes */}
       <NotePopup
-        index={allPuzzleSolved ? puzzleIndex + 2 : puzzleIndex + 1}
+        index={allPuzzleSolved ? puzzleIndex + 1 : puzzleIndex}
         noteData={
           allPuzzleSolved
             ? boardData.notes[puzzleIndex + 2]

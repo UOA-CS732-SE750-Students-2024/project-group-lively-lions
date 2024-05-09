@@ -158,9 +158,10 @@ const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
             {notes.slice(0, progress).map((note, i) => (
               <div key={i} className={note.css}>
                 <ConspiracyNote
-                  index={i}
+                  index={i - 1}
                   type={note.type as 'A' | 'B' | 'D' | 'C'}
                   noteData={boardData.notes[i]}
+                  newLabel={i === progress - 1}
                 />
               </div>
             ))}
