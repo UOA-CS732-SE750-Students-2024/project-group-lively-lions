@@ -122,7 +122,6 @@ export function ReferenceBook({ isMuted }: ReferenceBookProps) {
               encoding={handleGetEncoding(0)}
               diagram={handleGetDiagram(0)}
               decoding={handleGetDecoding(0)}
-              left={true}
             />
             {/* Right Page */}
             <ReferenceBookPage
@@ -130,7 +129,6 @@ export function ReferenceBook({ isMuted }: ReferenceBookProps) {
               encoding={handleGetEncoding(1)}
               diagram={handleGetDiagram(1)}
               decoding={handleGetDecoding(1)}
-              left={false}
             />
             {/* Right Arrow */}
             <img
@@ -144,7 +142,7 @@ export function ReferenceBook({ isMuted }: ReferenceBookProps) {
             />
             {/* Page Binder */}
             <img
-              className="absolute min-w-[49px] w-[5%] h-[80%] top-[10%] left-[47%] drop-shadow-2xl"
+              className="absolute w-[4%] h-[80%] top-[10%] left-[48%] drop-shadow-2xl"
               src={binders}
               draggable={false}
             />
