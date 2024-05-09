@@ -165,7 +165,7 @@ export default function MainGamePage({
 
       {/* Phone shows thought about usage in game */}
       <div
-        className="relative scale-[65%] top-[40%] left-[20%]"
+        className="relative scale-[65%] top-[45%] left-[20%]"
         style={{ maxWidth: '20vw' }}
         onClick={() =>
           configureThought(
@@ -233,7 +233,7 @@ export default function MainGamePage({
 
       {/* Interactive visual filler items high in scene order*/}
       <img
-        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[47%] left-[45%] scale-[250%] cursor-pointer"
+        className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[47%] left-[43%] scale-[250%] cursor-pointer"
         onClick={() => {
           configureThought('Mmmmmmmmmmmilkk, I simply must buy some more.');
           playGlassSound();
@@ -268,7 +268,7 @@ export default function MainGamePage({
         draggable={false}
       />
       <img
-        className="absolute min-h-[45px] h-[calc(5vw*9/16)] min-h-[45px] h-[calc(5vw*9/16)] top-[72%] left-[87%] scale-[160%] cursor-pointer"
+        className="absolute min-h-[66px] h-[calc(7vw*9/16)] top-[72%] left-[87%] scale-[160%] cursor-pointer"
         onClick={() => {
           configureThought('That case was a total cat-astrophe!!!');
           playFabricSound();
