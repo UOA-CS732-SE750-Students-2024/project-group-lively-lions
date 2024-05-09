@@ -2,7 +2,6 @@ import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
 import { CipherType } from '@/ciphers/Cipher';
-import lighting from '../../assets/room/active_game/lighting.png';
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
 import ReferenceBookEntryPoint from '../mainpage/ReferenceBookEntryPoint';
@@ -257,13 +256,36 @@ export default function GameScreen({
           imageRendering: 'pixelated'
         }}
       />
-
+            
       {/* Reference book asset */}
       <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
         <ReferenceBookEntryPoint
           handleScreenButtonClick={handleScreenButtonClick}
+          isMuted={isMuted}
         />
       </div>
+
+      {/* Sepia Filter */}
+      <div
+        className="absolute opacity-[9%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${sepia})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+      {/* Soft Pixel Vignette */}
+      <div
+        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${vignetteSmooth})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
 
       {/* Sepia Filter */}
       <div
