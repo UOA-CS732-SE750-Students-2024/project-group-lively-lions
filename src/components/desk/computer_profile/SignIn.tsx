@@ -18,7 +18,7 @@ So far it has input fields for a profile name and password. These are not yet co
 It also has a confirm button, which does nothing yet, and a back button to the landing page.
 */
 
-const SERVER_MONGODB_URI = 'http://localhost:3000';
+const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL
 
 interface SignInProps {
   handleScreenButtonClick: (
@@ -42,13 +42,10 @@ export function SignIn({ handleScreenButtonClick, isMuted }: SignInProps) {
 
       // Check if the existing account is a guest account
       if (existingPlayerData.profile.username === 'guest') {
-        fetch(
-          `${SERVER_MONGODB_URI}/player?username=${username}&password=${password}`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            }
+        fetch(`${SERVER_API_URL}/player?username=${username}&password=${password}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
           }
         )
           .then((response) => response.json())

@@ -26,7 +26,7 @@ interface NewPlayerProps {
   isMuted: boolean;
 }
 
-const SERVER_MONGODB_URI = 'http://localhost:3000';
+const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL;
 
 export function NewPlayer({
   handleScreenButtonClick,
@@ -37,22 +37,8 @@ export function NewPlayer({
 
   const handleConfirm = async () => {
     try {
-      // Check if the current profile in local storage is 'guest'
-      const currentProfile = localStorage.getItem('profile');
-      if (currentProfile !== null) {
-        const parsedProfile = JSON.parse(currentProfile);
-        if (
-          parsedProfile &&
-          parsedProfile.profile &&
-          parsedProfile.profile.username === 'guest'
-        ) {
-          // Delete the current 'profile' object in local storage
-          localStorage.removeItem('profile');
-        }
-      }
-
       // Send a POST request to create a new player profile
-      const response = await fetch(SERVER_MONGODB_URI + '/player', {
+      const response = await fetch(SERVER_API_URL + '/player', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -60,15 +46,34 @@ export function NewPlayer({
         body: JSON.stringify({ username, password })
       });
 
-      if (response.ok) {
+      if (response.status === 500) {
+        // Handle internal server error 500
+        alert('Username is already taken.');
+        throw new Error('Username is already taken.');
+      } else {
         // Handle success
         console.log('Player profile created successfully');
-        const newPlayer = await response.json();
-        // Set the new player profile returned by the POST request to local storage
-        localStorage.setItem('profile', JSON.stringify({ profile: newPlayer }));
-      } else {
-        // Handle error
-        console.error('Failed to create player profile');
+        // Check if the current profile in local storage is 'guest'
+        const currentProfile = localStorage.getItem('profile');
+        if (currentProfile !== null) {
+          const parsedProfile = JSON.parse(currentProfile);
+          if (
+            parsedProfile &&
+            parsedProfile.profile &&
+            parsedProfile.profile.username === 'guest'
+          ) {
+            // Delete the current 'profile' object in local storage
+            localStorage.removeItem('profile');
+            const newPlayer = await response.json();
+            // Set the new player profile returned by the POST request to local storage
+            localStorage.setItem(
+              'profile',
+              JSON.stringify({ profile: newPlayer })
+            );
+          } else {
+            alert('New profile created.');
+          }
+        }
       }
     } catch (error) {
       console.error('An error occurred:', error);

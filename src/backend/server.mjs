@@ -1,7 +1,6 @@
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 dotenv.config();
 
-import router from "./routes/routes.mjs"
 import express from "express"
 import mongoose from "mongoose"
 import bodyParser from "body-parser"
@@ -18,9 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-app.use("/", router)
-
-const SERVER_URI = 'mongodb+srv://game-user:general-access-password@purrlockholmes.jawkn3g.mongodb.net/'
+const SERVER_URI = process.env.VITE_SERVER_MONGODB_URI;
 
 // MongoDB connection
 mongoose.connect(SERVER_URI, {
@@ -58,7 +55,6 @@ app.post('/player', async (req, res) => {
     await newPlayer.save();
     res.status(201).json(newPlayer);
   } catch (error) {
-    console.error('Error creating player:', error);
     res.status(500).json({ error: 'An error occurred while creating the player' });
   }
 });
@@ -106,7 +102,6 @@ app.put('/player', async (req, res) => {
       { new: true }
     );
     // Return the updated player object
-    console.log(updatedPlayer);
   } catch (error) {
     console.error('Error updating player:', error);
     res.status(500).json({ error: 'An error occurred while updating the player' });
