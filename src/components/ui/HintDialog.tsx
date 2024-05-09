@@ -11,8 +11,6 @@ import caperton from '../../assets/common/CapybaraFella.png';
 import { WoodenCard } from './WoodenCard';
 import Phone from '../mainpage/Phone';
 
-import phoneCallSound from '../../assets/sounds/phonecall.mp4';
-
 export interface Message {
   sender: string;
   text: string;
@@ -28,19 +26,15 @@ interface HintDialogProps {
 }
 
 // This component takes a transcript
-const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
-  function playCallSound() {
-    //new Audio(phoneCallSound).play();
-  }
+const HintDialog: React.FC<HintDialogProps> = ({ transcript, isMuted }) => {
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div
-          onClick={() => playCallSound()}
           style={{ imageRendering: 'pixelated', cursor: 'pointer' }}
         >
-          <Phone isMuted={false} />
+          <Phone isMuted={isMuted} />
         </div>
       </DialogTrigger>
       <DialogContent className="flex flex-row place-items-center justify-between min-w-[960px] min-h-[540px] w-[calc(60vw)] h-[calc(60vw*9/16)] bg-slate-500 bg-opacity-10 border-none">

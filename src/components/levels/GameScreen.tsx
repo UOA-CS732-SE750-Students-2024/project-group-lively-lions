@@ -1,7 +1,6 @@
 import { Story, Screen } from '@/util';
 import { motion } from 'framer-motion';
 import background from '../../assets/room/active_game/background.png';
-import lighting from '../../assets/room/active_game/lighting.png';
 import { CipherType } from '@/ciphers/Cipher';
 import { Transcript } from '../ui/HintDialog';
 import HintDialog from '../ui/HintDialog';
@@ -18,6 +17,9 @@ import ConspiracyBoard, { ConspiracyBoardData } from '../desk/ConspiracyBoard';
 import Caperton from '../../assets/common/CapybaraFella.png';
 import * as ciphersExports from '@/ciphers/ciphers';
 import Echidna from '../ui/echidna';
+import sepia from '../../assets/room/active_game/sepia.png';
+import vignettePixel from '../../assets/room/active_game/vignettePixel.png';
+import vignetteSmooth from '../../assets/room/active_game/vignetteSmooth.png';
 import NotePopup from '../desk/NotePopup';
 import { useEffect, useState } from 'react';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
@@ -61,9 +63,10 @@ export default function GameScreen({
   handleReturnScreen(Screen.GameScreen);
 
   // Replace cypher with actual cypher used by the task
-  const cipher = CipherType.Caesar;
+  const hintText = story.puzzles[puzzleIndex].hint;
+  console.log(hintText);
 
-  const exampleTranscript: Transcript = {
+  const hintTranscript: Transcript = {
     messages: [
       { sender: 'Purrlock', text: 'Hello, Director!' },
       { sender: 'Capo', text: 'Hi, Detective! What can I do for you?' },
@@ -84,13 +87,11 @@ export default function GameScreen({
       {
         sender: 'Capo',
         text:
-          'Found it! It seems like the analysts believe that the clue may have something to do with something called a ' +
-          cipher +
-          ' cipher.'
+          'Found it! ' + hintText
       },
       {
         sender: 'Capo',
-        text: 'Not quite sure what that means but I hope it helps!'
+        text: 'Im honestly not quite sure what that means but I hope it helps!'
       },
       {
         sender: 'Purrlock',
@@ -176,15 +177,9 @@ export default function GameScreen({
       </div>
       {/* Phone asset linked to hint system */}
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
-        <HintDialog transcript={exampleTranscript} isMuted={isMuted} />
+        <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
-      {/* Reference book asset */}
-      <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
-        <ReferenceBookEntryPoint
-          handleScreenButtonClick={handleScreenButtonClick}
-          isMuted={isMuted}
-        />
-      </div>
+      
       {/* Exit sign to go back to main game page */}
       <div
         className="absolute left-[87%] scale-[200%] transition ease-in-out hover:translate-y-1 cursor-pointer"
@@ -252,16 +247,69 @@ export default function GameScreen({
         />
       </div>
 
-      {/* Lighting layer */}
+      {/* Hard Pixel Vignette */}
       <div
-        className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
         style={{
-          backgroundImage: `url(${lighting})`,
+          backgroundImage: `url(${vignettePixel})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          imageRendering: 'auto'
+          imageRendering: 'pixelated'
         }}
       />
+            
+      {/* Reference book asset */}
+      <div className="absolute scale-[250%] top-[71%] left-[7%] rotate-12">
+        <ReferenceBookEntryPoint
+          handleScreenButtonClick={handleScreenButtonClick}
+          isMuted={isMuted}
+        />
+      </div>
+
+      {/* Sepia Filter */}
+      <div
+        className="absolute opacity-[9%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${sepia})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+      {/* Soft Pixel Vignette */}
+      <div
+        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${vignetteSmooth})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+      {/* Sepia Filter */}
+      <div
+        className="absolute opacity-[9%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${sepia})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
+      {/* Soft Pixel Vignette */}
+      <div
+        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${vignetteSmooth})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          imageRendering: 'pixelated'
+        }}
+      />
+
       {/* Invisible component for displaying new notes */}
       <NotePopup
         index={allPuzzleSolved ? puzzleIndex + 1 : puzzleIndex}

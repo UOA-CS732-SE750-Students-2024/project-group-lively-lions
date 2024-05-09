@@ -14,7 +14,11 @@ import GameScreen from './components/levels/GameScreen';
 import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
+import muted from './assets/common/muted.png';
+import notMuted from './assets/common/not_muted.png';
+import gameSound from './assets/sounds/gameMusic.mp4';
 import { delay } from './lib/utils';
+const gameMusic = new Audio(gameSound);
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
@@ -61,6 +65,7 @@ function App() {
       key="landing"
       handleContinue={handleScreenButtonClick}
       isMuted={isMuted}
+      playMusic={playMusic}
     />,
 
     <NewPlayer
@@ -81,7 +86,6 @@ function App() {
         )
       }
       handleLevel={handleLevel}
-      story={currentStory}
       isMuted={isMuted}
     />,
     <ComputerProfile
@@ -139,14 +143,17 @@ function App() {
 
     switch (puzzleCipher[0]) {
       case 'caesar': {
-        const keyshift = Math.floor(Math.random() * 26);
+        let keyshift = Math.floor(Math.random() * 25);
+        if (keyshift === 0) {
+          keyshift = 1;
+        }
         return new ciphersExports.Caesar().encode({
           phrase: puzzleSolution,
           caesarkey: keyshift
         });
       }
       case 'vigenere': {
-        const keyword = 'KEYWORD'; //tbd
+        const keyword = 'PASSWORD'; //tbd
         return new ciphersExports.Vigenere().encode({
           phrase: puzzleSolution,
           keyword: keyword
@@ -184,13 +191,13 @@ function App() {
     setCurrentStory(story);
 
     // Check the completed puzzles in the profile
-    const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+    const userProfile = JSON.parse(localStorage.getItem('profile') ?? '');
     const completedPuzzles = userProfile.profile.completed_puzzles;
 
     let count = 0;
-    for (let i = 0; i < story.puzzles.length; i++) {
-      for (let j = 0; j < completedPuzzles.length; j++) {
-        if (story.puzzles[i].id === completedPuzzles[j]) {
+    for (const puzzle of story.puzzles) {
+      for (const completedPuzzle of completedPuzzles) {
+        if (puzzle.id === completedPuzzle) {
           count++;
         }
       }
@@ -220,7 +227,7 @@ function App() {
     //Check current level number of puzzles
     const puzzles = currentStory.puzzles;
     const index = currentPuzzleIndex + 1;
-    const userProfile = JSON.parse(localStorage.getItem('profile') || '');
+    const userProfile = JSON.parse(localStorage.getItem('profile') ?? '');
 
     const puzzleId = puzzles[currentPuzzleIndex].id;
     if (!userProfile.profile.completed_puzzles.includes(puzzleId)) {
@@ -257,19 +264,28 @@ function App() {
     });
   }
 
+  function playMusic() {
+    if (!isMuted) {
+      gameMusic.play();
+    }
+  }
+
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
-      <h1 className="text-[#d9b26f] font-[alagard] text-[3rem] leading-loose text-center text-pretty w-[100%]">
-        Purrlock Holmes' Crypawtography Agency
-      </h1>
-      <button onClick={() => setIsMuted(!isMuted)} className="text-[#FFFFFF]">
-        {isMuted ? 'click to unmute' : 'click to mute'}
+      <button
+        className="absolute self-end pr-2 top-[0%] scale-[80%]"
+        onClick={() => {
+          setIsMuted(!isMuted);
+          isMuted ? gameMusic.play() : gameMusic.pause();
+        }}
+      >
+        <img src={isMuted ? muted : notMuted} />
       </button>
       {/* Constrains game contents maximum and minimum dimensions */}
       <div
         className="
-      relative bg-[#1e2d2f] rounded-md
+      relative bg-[#101819] rounded-md
       w-[calc(60vw)] h-[calc(60vw*9/16)]
       min-w-[960px] min-h-[540px]
       overflow-scroll no-scrollbar"

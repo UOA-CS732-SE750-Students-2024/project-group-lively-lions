@@ -24,6 +24,10 @@ import Phone from './Phone';
 import Computer from './Computer';
 import ReferenceBookEntryPoint from './ReferenceBookEntryPoint';
 import SpeechBubble from '../ui/SpeechBubble';
+import sepia from '../../assets/room/active_game/sepia.png';
+import vignettePixel from '../../assets/room/active_game/vignettePixelMainMenu.png';
+import vignetteSmooth from '../../assets/room/active_game/vignetteSmoothMainMenu.png';
+import coolDark from '../../assets/room/active_game/coolDark.png';
 //sound imports
 import lampSound from '../../assets/sounds/lamp.mp4';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
@@ -35,16 +39,15 @@ interface MainGamePageProps {
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  handleReturnScreen: (
-    screen: Screen
-  ) => void;
+  handleReturnScreen: (screen: Screen) => void;
   isMuted: boolean;
 }
 
 export default function MainGamePage({
-  handleScreenButtonClick, handleReturnScreen, isMuted
+  handleScreenButtonClick,
+  handleReturnScreen,
+  isMuted
 }: MainGamePageProps) {
-
   //Set return screen value to this screen
   handleReturnScreen(Screen.MainGamePage);
 
@@ -64,7 +67,7 @@ export default function MainGamePage({
   function handleLight() {
     setTimeout(function () {
       setLightOn(!lightOn);
-    }, 100)
+    }, 100);
   }
 
   //Sound effects
@@ -92,7 +95,6 @@ export default function MainGamePage({
     }
   }
 
-
   return (
     <motion.div
       className="w-[100%] h-[100%]"
@@ -111,16 +113,21 @@ export default function MainGamePage({
       {/* visual items lower in scene order*/}
       <img
         className="absolute right-0 cursor-pointer"
-        onClick={() => { playLampSound(); handleLight() }}
+        onClick={() => {
+          playLampSound();
+          handleLight();
+        }}
         src={lamp}
         alt="lamp"
-        draggable={false} />
+        draggable={false}
+      />
       <img
         className="absolute bottom-0 w-screen"
         onClick={() => playWoodSound()}
         src={table}
         alt="table"
-        draggable={false} />
+        draggable={false}
+      />
 
       {/* Main interactive elements */}
       {/* Conspiracy board shows thought about usage in game */}
@@ -132,8 +139,7 @@ export default function MainGamePage({
               'This conspiracy board lets me keep track of information during cases!'
             );
             playWoodSound();
-          }
-          }
+          }}
           src={conspiracyBoard}
           alt="conspiracy board"
           draggable={false}
@@ -141,12 +147,16 @@ export default function MainGamePage({
       </div>
       {/* Cabinet leads to level select screen */}
       <div className="absolute top-[25%] left-[0.5%]">
-        <Cabinet handleScreenButtonClick={handleScreenButtonClick} isMuted={isMuted} />
+        <Cabinet
+          handleScreenButtonClick={handleScreenButtonClick}
+          isMuted={isMuted}
+        />
       </div>
 
       {/* Phone shows thought about usage in game */}
       <div
-        className="relative top-[45%] left-[20%]"
+        className="relative top-[45%] left-[23.5%]"
+        style={{ maxWidth: '20vw' }}
         onClick={() =>
           configureThought(
             'Im glad I can call the director incase I need some help.'
@@ -157,13 +167,11 @@ export default function MainGamePage({
       </div>
 
       {/* Computer leads to profile screen */}
-      <div className="relative top-[25%] left-[82%]">
-        <Computer handleScreenButtonClick={handleScreenButtonClick} isMuted={isMuted} />
-      </div>
-
-      {/* Reference book entry point leads to reference book screen */}
-      <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
-        <ReferenceBookEntryPoint
+      <div
+        className="relative top-[25%] left-[82%]"
+        style={{ maxWidth: 'fit-content' }}
+      >
+        <Computer
           handleScreenButtonClick={handleScreenButtonClick}
           isMuted={isMuted}
         />
@@ -219,56 +227,135 @@ export default function MainGamePage({
       {/* Interactive visual filler items high in scene order*/}
       <img
         className="absolute top-[47%] left-[40%] scale-[250%] cursor-pointer"
-        onClick={() => { configureThought('Mmmmmmmmmmmilkk, I simply must buy some more.'); playGlassSound() }}
+        onClick={() => {
+          configureThought('Mmmmmmmmmmmilkk, I simply must buy some more.');
+          playGlassSound();
+        }}
         src={milk}
         draggable={false}
       />
+      {/* Reference book entry point leads to reference book screen */}
+      <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
+        <ReferenceBookEntryPoint
+          handleScreenButtonClick={handleScreenButtonClick}
+          isMuted={isMuted}
+        />
+      </div>
       <img
         className="absolute top-[50%] left-[61%] scale-[160%] cursor-pointer"
-        onClick={() => { configureThought('Coffee has gotten me through many rough nights of casework.'); playGlassSound() }}
+        onClick={() => {
+          configureThought(
+            'Coffee has gotten me through many rough nights of casework.'
+          );
+          playGlassSound();
+        }}
         src={coffee}
         draggable={false}
       />
       {/* Cat Heaven */}
       <img
         className="absolute top-[65%] left-[90%] scale-[160%] cursor-pointer"
-        onClick={() => { configureThought('Now wait just a meowment…'); playFabricSound() }}
+        onClick={() => {
+          configureThought('Now wait just a meowment…');
+          playFabricSound();
+        }}
         src={greenYarn}
         draggable={false}
       />
       <img
         className="absolute top-[72%] left-[87%] scale-[160%] cursor-pointer"
-        onClick={() => { configureThought('That case was a total cat-astrophe!!!'); playFabricSound() }}
+        onClick={() => {
+          configureThought('That case was a total cat-astrophe!!!');
+          playFabricSound();
+        }}
         src={redYarn}
         draggable={false}
       />
       <img
         className="absolute top-[51%] left-[47%] scale-[160%] cursor-pointer"
-        onClick={() => { configureThought("Meow you're talking!"); playFabricSound() }}
+        onClick={() => {
+          configureThought("Meow you're talking!");
+          playFabricSound();
+        }}
         src={blueYarn}
         draggable={false}
       />
       <img
         className="absolute top-[53%] left-[53%] scale-[160%] cursor-pointer"
-        onClick={() => { configureThought('I need a meowtini. Shaken, not purred, of course.'); playFabricSound() }}
+        onClick={() => {
+          configureThought('I need a meowtini. Shaken, not purred, of course.');
+          playFabricSound();
+        }}
         src={purpleYarn}
         draggable={false}
       />
       <img
         className="absolute top-[78%] left-[9%] scale-[150%] cursor-pointer"
-        onClick={() => { configureThought('This case will go down in hiss-tory!'); playFabricSound() }}
+        onClick={() => {
+          configureThought('This case will go down in hiss-tory!');
+          playFabricSound();
+        }}
         src={pinkYarn}
         draggable={false}
       />
 
-      {/* Lighting layer */}
-      <div
+      {/* Lighting elements */}
+
+      {/* Cool Dark Overlay */}
+      <motion.div
         className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+        initial={{ opacity: lightOn ? 0 : 1 }}
+        animate={{ opacity: lightOn ? 0 : 1 }}
+        transition={{ type: 'spring' }}
+      >
+        <div
+          className="absolute opacity-[50%] w-[100%] h-[100%] top-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${coolDark})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            imageRendering: 'pixelated'
+          }}
+        />
+      </motion.div>
+
+      <motion.div
+        className="absolute w-[100%] h-[100%] top-0 pointer-events-none"
+        initial={{ opacity: lightOn ? 1 : 0 }}
+        animate={{ opacity: lightOn ? 1 : 0 }}
+        transition={{ type: 'spring' }}
+      >
+        {/* Hard Pixel Vignette */}
+        <div
+          className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${vignettePixel})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            imageRendering: 'pixelated'
+          }}
+        />
+
+        {/* Sepia Filter */}
+        <div
+          className="absolute opacity-[8%] w-[100%] h-[100%] top-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${sepia})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            imageRendering: 'pixelated'
+          }}
+        />
+      </motion.div>
+
+      {/* Soft Pixel Vignette */}
+      <div
+        className="absolute opacity-[30%] w-[100%] h-[100%] top-0 pointer-events-none"
         style={{
-          backgroundImage: `url(${lightOn ? lighting : lightingOff})`,
+          backgroundImage: `url(${vignetteSmooth})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          imageRendering: 'auto'
+          imageRendering: 'pixelated'
         }}
       />
 
