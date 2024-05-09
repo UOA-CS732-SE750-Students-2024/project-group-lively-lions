@@ -14,10 +14,10 @@ interface ComputerProps {
   isMuted: boolean;
 }
 
-export default function ({
-  handleScreenButtonClick, isMuted
+export default function Computer({
+  handleScreenButtonClick,
+  isMuted
 }: ComputerProps) {
-
   const [computerIsOn, setComputerIsOn] = useState(false);
 
   function playComputerBuzzSound() {
@@ -33,20 +33,31 @@ export default function ({
   }
 
   return (
-    <div
-      style={{ imageRendering: 'pixelated' }}>
+    <div style={{ imageRendering: 'pixelated' }}>
       <button
-        onClick={(e) => { handleScreenButtonClick(Screen.ComputerProfile, e); playComputerKeyboardSound() }}>
+        onClick={(e) => {
+          handleScreenButtonClick(Screen.ComputerProfile, e);
+          playComputerKeyboardSound();
+        }}
+      >
         <motion.img
-          className='scale-[400%]'
-          onMouseEnter={() => { setComputerIsOn(true); playComputerBuzzSound() }}
+          className="min-h-[230px] h-[calc(26vw*9/16)]"
+          onMouseEnter={() => {
+            setComputerIsOn(true);
+            playComputerBuzzSound();
+          }}
           src={computerOff}
           alt="computer"
-          drag={false} />
+          drag={false}
+        />
         <AnimatePresence>
           {computerIsOn && (
             <motion.img
-              className={computerIsOn ? 'absolute top-[0%] scale-[400%] visible' : 'invisible'}
+              className={
+                computerIsOn
+                  ? 'absolute top-[0%] min-h-[230px] h-[calc(26vw*9/16)] visible'
+                  : 'invisible'
+              }
               onMouseLeave={() => setComputerIsOn(false)}
               initial={{ opacity: 0 }}
               animate={{
@@ -54,12 +65,12 @@ export default function ({
               }}
               exit={{ opacity: 0 }}
               src={computerScreen}
-              alt='computer'
-              drag={false} />
+              alt="computer"
+              drag={false}
+            />
           )}
         </AnimatePresence>
       </button>
-
     </div>
-  )
+  );
 }

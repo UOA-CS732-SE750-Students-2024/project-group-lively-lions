@@ -9,10 +9,13 @@ interface CabinetProps {
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  isMuted: boolean
+  isMuted: boolean;
 }
 
-export default function Cabinet({ handleScreenButtonClick, isMuted }: CabinetProps) {
+export default function Cabinet({
+  handleScreenButtonClick,
+  isMuted
+}: CabinetProps) {
   function play_drawer_click_sound() {
     if (!isMuted) {
       new Audio(filing_cabinet_open).play();
@@ -29,7 +32,12 @@ export default function Cabinet({ handleScreenButtonClick, isMuted }: CabinetPro
 
   return (
     <div style={{ imageRendering: 'pixelated' }}>
-      <img src={cabinetFrame} alt="cabinet" draggable={false} />
+      <img
+        src={cabinetFrame}
+        className="min-h-[290px] h-[calc(32vw*9/16)]"
+        alt="cabinet"
+        draggable={false}
+      />
       {/* Cabinet Drawer */}
       <button
         onClick={(e) => {
@@ -38,11 +46,11 @@ export default function Cabinet({ handleScreenButtonClick, isMuted }: CabinetPro
         }}
       >
         <motion.img
-          className="absolute top-[26%] left-[10%]"
+          className="absolute min-h-[130px] h-[calc(14.5vw*9/16)] top-[26%] left-[10%]"
           style={{ imageRendering: 'pixelated' }}
           onMouseEnter={() => play_drawer_hover_sound()}
           whileHover={{
-            paddingTop: 20
+            translateY: 20
           }}
           transition={{
             type: 'spring',
