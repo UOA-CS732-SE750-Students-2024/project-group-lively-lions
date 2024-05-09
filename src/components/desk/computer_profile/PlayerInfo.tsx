@@ -8,6 +8,7 @@ import confirm_base from '../../../assets/room/main_menu/computer/confirm_base.p
 import back_cap from '../../../assets/room/main_menu/computer/back_arrow_cap.png';
 import back_base from '../../../assets/room/main_menu/computer/back_arrow_base.png';
 import EchidnaButton from '../../../components/ui/echidna_button';
+import click_sound from '../../../assets/sounds/click.mp4';
 
 /* 
 This is the component for the player info menu. It allows the user to view profile details.
@@ -24,9 +25,10 @@ interface ProfileProps {
     screen: Screen,
     event?: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  isMuted: boolean;
 }
 
-export function PlayerInfo({ handleScreenButtonClick }: ProfileProps) {
+export function PlayerInfo({ handleScreenButtonClick, isMuted }: ProfileProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -117,6 +119,12 @@ export function PlayerInfo({ handleScreenButtonClick }: ProfileProps) {
     }
   };
 
+  function playClickSound() {
+    if (!isMuted) {
+      new Audio(click_sound).play();
+    }
+  }
+
   return (
     <div className="flex justify-center items-center">
       <div className="absolute inset-0">
@@ -154,14 +162,20 @@ export function PlayerInfo({ handleScreenButtonClick }: ProfileProps) {
         <EchidnaButton
           baseImage={confirm_base}
           capImage={confirm_cap}
-          onClick={handleConfirm}
+          onClick={() => {
+            handleConfirm();
+            playClickSound();
+          }}
         />
       </div>
       <div className="absolute top-[18%] left-[12%] w-[10%] cursor-pointer">
         <EchidnaButton
           baseImage={back_base}
           capImage={back_cap}
-          onClick={() => handleScreenButtonClick(Screen.ComputerProfile)}
+          onClick={() => {
+            handleScreenButtonClick(Screen.ComputerProfile);
+            playClickSound();
+          }}
         />
       </div>
       <div className="absolute left-[10%] top-[55%] w-[40%]">

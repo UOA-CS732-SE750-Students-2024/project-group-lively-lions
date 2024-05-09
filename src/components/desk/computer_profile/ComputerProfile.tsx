@@ -8,6 +8,7 @@ import EchidnaButton from '../../../components/ui/echidna_button';
 import profile_base from '../../../assets/room/main_menu/computer/ProfileInfoIcon_base.png';
 import profile_cap from '../../../assets/room/main_menu/computer/ProfileInfoIcon_cap.png';
 import { motion } from 'framer-motion';
+import click_sound from '../../../assets/sounds/click.mp4';
 
 /* 
 This is the component for the computer visible on the desk on the main menu. The computer is where the user 
@@ -17,9 +18,13 @@ The user can also press the back button to go back to the main menu.
 
 interface ComputerProps {
   handleScreenButtonClick: (screen: Screen) => void;
+  isMuted: boolean;
 }
 
-export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
+export function ComputerProfile({
+  handleScreenButtonClick,
+  isMuted
+}: ComputerProps) {
   const currentProfile = localStorage.getItem('profile');
 
   const getUsername = (): string => {
@@ -48,6 +53,12 @@ export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
     }
   };
 
+  function playClickSound() {
+    if (!isMuted) {
+      new Audio(click_sound).play();
+    }
+  }
+
   return (
     <div className="flex justify-center items-center">
       <div className="absolute inset-0">
@@ -59,7 +70,10 @@ export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
       </div>
       <motion.img
         className="absolute w-[25%] top-[43%] left-[55%] cursor-pointer"
-        onClick={() => handleScreenButtonClick(Screen.SignIn)}
+        onClick={() => {
+          handleScreenButtonClick(Screen.SignIn);
+          playClickSound();
+        }}
         src={switch_account_icon}
         alt="switch_account_icon"
         draggable={false}
@@ -69,19 +83,28 @@ export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
         <EchidnaButton
           baseImage={profile_base}
           capImage={profile_cap}
-          onClick={() => handleScreenButtonClick(Screen.PlayerInfo)}
+          onClick={() => {
+            handleScreenButtonClick(Screen.PlayerInfo);
+            playClickSound();
+          }}
         />
       </div>
       <div className="absolute top-[60%] right-[26%] w-[12%] cursor-pointer">
         <EchidnaButton
           baseImage={log_out_base}
           capImage={log_out_cap}
-          onClick={logout}
+          onClick={() => {
+            logout;
+            playClickSound();
+          }}
         />
       </div>
       <motion.img
         className="absolute scale-[300%] top-[77%] left-[22%] cursor-pointer"
-        onClick={() => handleScreenButtonClick(Screen.MainGamePage)}
+        onClick={() => {
+          handleScreenButtonClick(Screen.MainGamePage);
+          playClickSound();
+        }}
         src={turn_off_icon}
         alt="turn_off_icon"
         draggable={false}

@@ -23,7 +23,7 @@ function App() {
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
-  const SERVER_MONGODB_URI = "http://localhost:3000";
+  const SERVER_MONGODB_URI = 'http://localhost:3000';
 
   useEffect(() => {
     createGuestProfile();
@@ -83,6 +83,7 @@ function App() {
     <ComputerProfile
       key="computerProfile"
       handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
     />,
     <Phone
       key="phone"
@@ -233,15 +234,15 @@ function App() {
       username: userProfile.profile.username,
       password: userProfile.profile.password,
       completed_puzzles: userProfile.profile.completed_puzzles
-    }
-    // Update database account info with puzzle completion 
+    };
+    // Update database account info with puzzle completion
     fetch(`${SERVER_MONGODB_URI}/player`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(requestBody), // Send the complete request body
-    })
+      body: JSON.stringify(requestBody) // Send the complete request body
+    });
   }
 
   return (

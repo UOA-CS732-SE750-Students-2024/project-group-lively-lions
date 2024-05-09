@@ -10,6 +10,7 @@ import confirm_base from '../../../assets/room/main_menu/computer/confirm_base.p
 import back_cap from '../../../assets/room/main_menu/computer/back_arrow_cap.png';
 import back_base from '../../../assets/room/main_menu/computer/back_arrow_base.png';
 import EchidnaButton from '../../../components/ui/echidna_button';
+import click_sound from '../../../assets/sounds/click.mp4';
 
 /* 
 This is the component for the sign in menu. It allows the user to sign into their profile.
@@ -24,9 +25,10 @@ interface SignInProps {
     level: number,
     event?: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  isMuted: boolean;
 }
 
-export function SignIn({ handleScreenButtonClick }: SignInProps) {
+export function SignIn({ handleScreenButtonClick, isMuted }: SignInProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [data, setData] = useState(null);
@@ -67,6 +69,12 @@ export function SignIn({ handleScreenButtonClick }: SignInProps) {
     }
   };
 
+  function playClickSound() {
+    if (!isMuted) {
+      new Audio(click_sound).play();
+    }
+  }
+
   return (
     <div>
       <div className="absolute inset-0 flex justify-center items-center ">
@@ -77,7 +85,10 @@ export function SignIn({ handleScreenButtonClick }: SignInProps) {
           <EchidnaButton
             baseImage={new_account_base}
             capImage={new_account_cap}
-            onClick={() => handleScreenButtonClick(Screen.NewPlayer)}
+            onClick={() => {
+              handleScreenButtonClick(Screen.NewPlayer);
+              playClickSound();
+            }}
           />
         </div>
         <p className="font-[alagard] text-[1.3rem]">Sign In</p>
@@ -109,14 +120,20 @@ export function SignIn({ handleScreenButtonClick }: SignInProps) {
           <EchidnaButton
             baseImage={confirm_base}
             capImage={confirm_cap}
-            onClick={handleConfirm}
+            onClick={() => {
+              handleConfirm();
+              playClickSound();
+            }}
           />
         </div>
         <div className="absolute top-[0%] left-[15%] w-[10%] cursor-pointer">
           <EchidnaButton
             baseImage={back_base}
             capImage={back_cap}
-            onClick={() => handleScreenButtonClick(Screen.ComputerProfile)}
+            onClick={() => {
+              handleScreenButtonClick(Screen.ComputerProfile);
+              playClickSound();
+            }}
           />
         </div>
       </div>
