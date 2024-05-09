@@ -31,7 +31,8 @@ function App() {
   const [showBoard, setShowBoard] = useState(false);
   const [puzzleSolved, setPuzzleSolved] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const SERVER_MONGODB_URI = 'http://localhost:3000';
+  const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL;
+
 
   useEffect(() => {
     createGuestProfile();
@@ -248,8 +249,8 @@ function App() {
       password: userProfile.profile.password,
       completed_puzzles: userProfile.profile.completed_puzzles
     };
-    // Update database account info with puzzle completion
-    fetch(`${SERVER_MONGODB_URI}/player`, {
+    // Update database account info with puzzle completion 
+    fetch(`${SERVER_API_URL}/player`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -260,20 +261,20 @@ function App() {
 
   function playMusic() {
     if (!isMuted) {
+      gameMusic.loop = true;
       gameMusic.play();
     }
+  }
+
+  function restartMusic() {
+    gameMusic.loop = true;
+    gameMusic.play();
   }
 
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
-      <button
-        className="absolute self-end pr-2 top-[0%] scale-[80%]"
-        onClick={() => {
-          setIsMuted(!isMuted);
-          isMuted ? gameMusic.play() : gameMusic.pause();
-        }}
-      >
+      <button className='absolute self-end pr-2 top-[0%] scale-[80%]' onClick={() => { setIsMuted(!isMuted); isMuted ? restartMusic() : gameMusic.pause() }}>
         <img src={isMuted ? muted : notMuted} />
       </button>
       {/* Constrains game contents maximum and minimum dimensions */}

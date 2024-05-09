@@ -14,7 +14,7 @@ So far it has input fields for changing profile name and password. These are not
 It also has a change info button, which does nothing yet, and a back button to the landing page.
 */
 
-const SERVER_MONGODB_URI = 'http://localhost:3000'
+const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL
 
 interface ProfileProps {
   handleScreenButtonClick: (
@@ -86,7 +86,7 @@ export function PlayerInfo({
   
     // Send a PUT request to update player's account if it's not a guest profile
     if (!isGuestProfile) {
-      fetch(`${SERVER_MONGODB_URI}/player`, {
+      fetch(`${SERVER_API_URL}/player`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
