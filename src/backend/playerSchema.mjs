@@ -1,6 +1,14 @@
 import mongoose from "mongoose";
 import crypto from "crypto";
 
+/* 
+This file defines the schema for the player profile. Only information
+that is stored for the player is their username, password, a list of 
+their completed puzzles, and an object _id make from a hashed, 
+hex-encoded form of the username. MongoDB always checks for duplicate
+_id instances, so this prevents duplicate usernames.
+*/
+
 const playerSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },

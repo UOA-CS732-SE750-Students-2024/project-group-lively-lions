@@ -6,6 +6,8 @@ const request = require("supertest");
 
 let mongod;
 
+// Testing file for the player schema
+
 // Create Express server. We don't need to start or stop it ourselves - we'll use the supertest package to manage this for us.
 const app = express();
 app.use("/", routes);

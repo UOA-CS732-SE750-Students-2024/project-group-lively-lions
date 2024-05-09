@@ -6,10 +6,18 @@ import mongoose from "mongoose"
 import bodyParser from "body-parser"
 import cors from "cors"
 
+/* 
+This file defines the express app & server connection that the app will
+use to connect to the MongoDB player database. Defined also are the CRUD
+endpoints the player can call to interact with the database. In 
+development it connects to http://localhost:3000. The server URI used
+to establish the mongoose connection, as well as the localhost port,
+is defined in .env in root.
+*/
+
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT ?? 3000;
-const BACKUP_PORT = 3000
 
 // Middleware
 app.use(bodyParser.json());
@@ -26,15 +34,8 @@ mongoose.connect(SERVER_URI, {
 }).then(() => {
   console.log("Connected to MongoDB");
   app.listen(PORT, () => {
-    console.log(`App server listening on port ${PORT}`);
-  }).on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-      console.log(`Port ${PORT} is already in use. Listening on ${BACKUP_PORT}`);;
-      app.listen(BACKUP_PORT);
-    } else {
-      console.error(err);
-    }
-  });
+    console.log(`App server listening on localhost:${PORT}`);
+  })
 }).catch(err => {
   console.error("MongoDB connection error:", err);
 });
@@ -79,6 +80,13 @@ app.get('/player', async (req, res) => {
 // This endpoint updates out database player info with our local info (our save function)
 app.put('/player', async (req, res) => {
   try {
+    /* 
+    There are two updates the game makes to the database:
+    1) When the player decides to update their username and password
+    2) When the player makes progress and their completed_puzzles get updated
+    Depending on which variables are supplied in the request body, one of
+    the updates will happen.
+    */
     const { old_username, old_password, username, password, completed_puzzles} = req.body;
 
     let filter, update;
@@ -105,18 +113,5 @@ app.put('/player', async (req, res) => {
   } catch (error) {
     console.error('Error updating player:', error);
     res.status(500).json({ error: 'An error occurred while updating the player' });
-  }
-});
-
-
-// This endpoint deletes our player from the database 
-app.delete('/player/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    await Player.findByIdAndDelete(id);
-    res.status(204).end();
-  } catch (error) {
-    console.error('Error deleting player:', error);
-    res.status(500).json({ error: 'An error occurred while deleting the player' });
   }
 });

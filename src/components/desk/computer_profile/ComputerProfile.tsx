@@ -21,6 +21,7 @@ interface ComputerProps {
   isMuted: boolean;
 }
 
+
 export function ComputerProfile({
   handleScreenButtonClick,
   isMuted
