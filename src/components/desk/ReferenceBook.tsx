@@ -1,4 +1,3 @@
-import { Screen } from '@/util';
 import { ReferenceBookPage } from './ReferenceBookPage';
 import cipherInfo from '../../lib/cipherInfo.json';
 import { useState } from 'react';
@@ -11,11 +10,11 @@ import bookHoverSound from '../../assets/sounds/book_slide.mp4';
 import bookOpenSound from '../../assets/sounds/book_open.mp4';
 import refBook from '../../assets/room/shared/reference_book.png';
 import { motion } from 'framer-motion';
+
 /* 
 This is the component for the reference book. It displays the information about two ciphers side by side It passes into these pages the needed information from cipherInfo.json.
 If there is an odd number of ciphers, the last page on the right is left blank at the end of the list.
 */
-
 interface ReferenceBookProps {
   isMuted: boolean;
 }
@@ -77,7 +76,6 @@ export function ReferenceBook({ isMuted }: ReferenceBookProps) {
   };
 
   // Sound Effect functions
-
   function playPageSound() {
     if (!isMuted) {
       new Audio(pageSound).play();

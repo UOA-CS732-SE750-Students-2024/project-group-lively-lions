@@ -7,6 +7,9 @@ interface PhoneProps {
   isMuted: boolean;
 }
 
+/*
+* This component creates the phone asset
+*/
 export default function Phone({ isMuted }: PhoneProps) {
 
   function playPhoneRing() {

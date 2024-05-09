@@ -8,6 +8,7 @@ import { Screen, Levels, getStory } from '@/util';
 import pageSlideSound from '../../assets/sounds/paper_slide.mp4';
 import pageHoverSound from '../../assets/sounds/folder_hover.mp4';
 
+// This component holds the display logic and level logic for the level select files
 interface HoverFolderProps {
   marginTop: string;
   index: number;

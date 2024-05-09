@@ -29,8 +29,10 @@ interface ConspiracyBoardProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// This component represents the conspiracy board, notes and strings on the board are rendered
-// based on the provided props
+/*
+* This component represents the conspiracy board, notes and strings on the board are rendered
+* based on the provided props
+*/
 const ConspiracyBoard: React.FC<ConspiracyBoardProps> = ({
   boardData,
   maxNotes,

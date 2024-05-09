@@ -16,7 +16,8 @@ interface NotePopupProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// This component represents a single interactive conspiracy note
+/* This component represents a single interactive conspiracy note
+*/
 const NotePopup: React.FC<NotePopupProps> = ({
   index,
   noteData,

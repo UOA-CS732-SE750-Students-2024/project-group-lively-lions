@@ -8,7 +8,6 @@ import { PlayerInfo } from './components/desk/computer_profile/PlayerInfo';
 import { AnimatePresence } from 'framer-motion';
 import { Screen, Levels, Puzzle, getStory } from './util';
 import GameScreen from './components/levels/GameScreen';
-import EchidnaMachine from './components/desk/EchidnaMachine';
 import MainGamePage from './components/mainpage/MainGamePage';
 import * as ciphersExports from './ciphers/ciphers';
 import muted from './assets/common/muted.png';
@@ -20,7 +19,6 @@ const gameMusic = new Audio(gameSound);
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(Screen.LandingScreen);
-  const [returnScreen, setReturnScreen] = useState(Screen.MainGamePage);
   const [currentLevel, setCurrentLevel] = useState(Levels.Tutorial);
   const [currentStory, setCurrentStory] = useState(getStory(Levels.Tutorial));
   const [currentEncodedPhrase, setCurrentEncodedPhrase] = useState('');
@@ -52,9 +50,6 @@ function App() {
       localStorage.setItem('profile', JSON.stringify(defaultProfile));
     } else {
       const profile = JSON.parse(existingProfile);
-      if (profile.profile.completed_puzzles.length > 0) {
-        setIsFirstJoin(false);
-      }
     }
   }
 
@@ -97,27 +92,16 @@ function App() {
       handleScreenButtonClick={handleScreenButtonClick}
       isMuted={isMuted}
     />,
-    <EchidnaMachine
-      key="echidnaMachine"
-      phrase={currentEncodedPhrase}
-      story={currentStory}
-      handleScreenButtonClick={handleScreenButtonClick}
-      puzzleIndex={currentPuzzleIndex}
-      handleSolvedPuzzle={handleSolvedPuzzle}
-      isMuted={isMuted}
-    />,
     <MainGamePage
       key="mainGamePage"
       handleScreenButtonClick={handleScreenButtonClick}
-      handleReturnScreen={handleReturnScreen}
       isMuted={isMuted}
       isFirstJoin={isFirstJoin}
+      handleFirstJoin={handleFirstJoin}
     />,
     <GameScreen
       key="gameScreen"
       handleScreenButtonClick={handleScreenButtonClick}
-      level={currentLevel}
-      handleReturnScreen={handleReturnScreen}
       phrase={currentEncodedPhrase}
       puzzleIndex={currentPuzzleIndex}
       handleSolvedPuzzle={handleSolvedPuzzle}
@@ -131,6 +115,10 @@ function App() {
       isMuted={isMuted}
     />
   ];
+
+  function handleFirstJoin() {
+    setIsFirstJoin(false);
+  }
 
   function encodePhrase(puzzle: Puzzle) {
     const puzzleCipher = puzzle.cipher;
@@ -202,10 +190,6 @@ function App() {
     setCurrentPuzzleIndex(index);
     setCurrentEncodedPhrase(encodePhrase(story.puzzles[index]));
     e.preventDefault();
-  }
-
-  function handleReturnScreen(screen: Screen) {
-    setReturnScreen(screen);
   }
 
   function handleScreenButtonClick(

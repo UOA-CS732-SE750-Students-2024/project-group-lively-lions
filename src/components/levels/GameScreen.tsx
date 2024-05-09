@@ -30,8 +30,6 @@ interface GameScreenProps {
     screen: Screen,
     event: React.MouseEvent<HTMLElement>
   ) => void;
-  level: number;
-  handleReturnScreen: (screen: Screen) => void;
   phrase: string;
   puzzleIndex: number;
   handleSolvedPuzzle: () => void;
@@ -45,10 +43,11 @@ interface GameScreenProps {
   isMuted: boolean;
 }
 
+/*
+* This component holds the creation of the main game screen, and holds navigation to the interactive components.
+*/
 export default function GameScreen({
   handleScreenButtonClick,
-  level,
-  handleReturnScreen,
   phrase,
   puzzleIndex,
   handleSolvedPuzzle,
@@ -61,14 +60,12 @@ export default function GameScreen({
   setAllPuzzleSolved,
   isMuted
 }: GameScreenProps) {
-  handleReturnScreen(Screen.GameScreen);
 
   const [echidnaOn, setEchidnaOn] = useState(true);
   const [resetEchidnaDisplay, setResetEchidnaDisplay] = useState(false);
 
-  // Replace cypher with actual cypher used by the task
+  // Set up hint system
   const hintText = story.puzzles[puzzleIndex].hint;
-  console.log(hintText);
 
   const hintTranscript: Transcript = {
     messages: [
@@ -105,6 +102,7 @@ export default function GameScreen({
     ]
   };
 
+  // Set up conspiracy board info
   const boardData: ConspiracyBoardData = {
     notes: [
       {
@@ -140,7 +138,7 @@ export default function GameScreen({
     }
   }
 
-  async function solvedCurrentPuzzle(){
+  async function solvedCurrentPuzzle() {
     await delay(3000)
     setEchidnaOn(false);
     handleSolvedPuzzle();
@@ -187,6 +185,7 @@ export default function GameScreen({
           />
         </ConspiracyBoard>
       </div>
+
       {/* Phone asset linked to hint system */}
       <div className="absolute w-[20%] scale-[150%] top-[32%] left-[10%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
@@ -246,7 +245,7 @@ export default function GameScreen({
         draggable={false}
       />
 
-      {/* ECHIDNA machine at the bottom so it is the highest element */}
+      {/* ECHIDNA machine at the bottom so it is the highest element and is infront of the filler items. */}
       <div className="absolute w-[40%] left-[30%]">
         <Echidna
           availableCiphers={Object.values(ciphersExports)}

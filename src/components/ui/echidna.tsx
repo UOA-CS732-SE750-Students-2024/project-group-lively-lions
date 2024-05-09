@@ -25,6 +25,7 @@ import resetButtonSound from '../../assets/sounds/echidna_reset.mp4';
 import successSound from '../../assets/sounds/echidna_success.mp4';
 import errorSound from '../../assets/sounds/echidna_error.mp4';
 
+// This component holds the creation and overall logic of the entire ECHIDNA machine
 interface EchidnaProps {
   solve_delay_ms: number;
   phrase: string;

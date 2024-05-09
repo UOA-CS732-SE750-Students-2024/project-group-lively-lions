@@ -7,6 +7,9 @@ interface LandingScreenProps {
   playMusic: () => void;
 }
 
+/*
+* This component builds the echinda in the landing page state.
+*/
 export function LandingScreen({ handleContinue, isMuted, playMusic }: LandingScreenProps) {
   return (
     <div className="flex flex-col place-items-center">
