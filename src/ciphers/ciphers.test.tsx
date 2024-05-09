@@ -1,4 +1,3 @@
-import { c } from 'vite/dist/node/types.d-aGj9QkWt';
 import { Caesar, Vigenere, Polybius, Morse, Binary, Emoji } from './ciphers';
 
 /*

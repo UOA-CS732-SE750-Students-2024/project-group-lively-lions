@@ -7,6 +7,9 @@ interface EchidnaCipherButtonProps {
   onClick: () => void;
 }
 
+/*
+* This styles the buttons for the echidna machine
+*/
 const EchidnaButton: React.FC<EchidnaCipherButtonProps> = ({
   capImage,
   baseImage,
@@ -35,6 +38,7 @@ const EchidnaButton: React.FC<EchidnaCipherButtonProps> = ({
         draggable={false}
       />
       <motion.img
+        draggable={false}
         src={capImage}
         alt="button cap"
         animate={isPressed ? 'pressed' : 'notPressed'}

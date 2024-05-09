@@ -21,6 +21,9 @@ interface LevelSelectProps {
   isMuted: boolean;
 }
 
+/*
+* This component controls the creation of the level select which is the inside of the cabinet holding the cases.
+*/
 export function LevelSelect({
   handleScreenButtonClick,
   handleLevel,

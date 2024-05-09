@@ -16,7 +16,8 @@ interface NotePopupProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// This component represents a single interactive conspiracy note
+/* This component represents a single interactive conspiracy note
+*/
 const NotePopup: React.FC<NotePopupProps> = ({
   index,
   noteData,
@@ -79,7 +80,9 @@ const NotePopup: React.FC<NotePopupProps> = ({
               ) : (
                 <></>
               )}
-              <p className="opacity-[70%] antialiased">{noteData.story}</p>
+              <p className="text-[1.2rem] opacity-[60%] antialiased">
+                {noteData.story}
+              </p>
             </div>
           </motion.div>
         </AnimatePresence>

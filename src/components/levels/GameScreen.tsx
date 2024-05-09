@@ -13,6 +13,7 @@ import conspiracyBoard from '../../assets/room/active_game/conspiracy_board.png'
 import exitSign from '../../assets/room/active_game/exit.png';
 import ConspiracyBoard, { ConspiracyBoardData } from '../desk/ConspiracyBoard';
 import Caperton from '../../assets/common/CapybaraFella.png';
+import Purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import * as ciphersExports from '@/ciphers/ciphers';
 import Echidna from '../ui/echidna';
 import sepia from '../../assets/room/active_game/sepia.png';
@@ -22,14 +23,13 @@ import NotePopup from '../desk/NotePopup';
 import { useEffect } from 'react';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
 import { ReferenceBook } from '../desk/ReferenceBook';
+import { delay } from '../../lib/utils';
 
 interface GameScreenProps {
   handleScreenButtonClick: (
     screen: Screen,
     event: React.MouseEvent<HTMLElement>
   ) => void;
-  level: number;
-  handleReturnScreen: (screen: Screen) => void;
   phrase: string;
   puzzleIndex: number;
   handleSolvedPuzzle: () => void;
@@ -43,10 +43,11 @@ interface GameScreenProps {
   isMuted: boolean;
 }
 
+/*
+* This component holds the creation of the main game screen, and holds navigation to the interactive components.
+*/
 export default function GameScreen({
   handleScreenButtonClick,
-  level,
-  handleReturnScreen,
   phrase,
   puzzleIndex,
   handleSolvedPuzzle,
@@ -59,11 +60,12 @@ export default function GameScreen({
   setAllPuzzleSolved,
   isMuted
 }: GameScreenProps) {
-  handleReturnScreen(Screen.GameScreen);
 
-  // Replace cypher with actual cypher used by the task
+  const [echidnaOn, setEchidnaOn] = useState(true);
+  const [resetEchidnaDisplay, setResetEchidnaDisplay] = useState(false);
+
+  // Set up hint system
   const hintText = story.puzzles[puzzleIndex].hint;
-  console.log(hintText);
 
   const hintTranscript: Transcript = {
     messages: [
@@ -100,17 +102,19 @@ export default function GameScreen({
     ]
   };
 
+  // Set up conspiracy board info
   const boardData: ConspiracyBoardData = {
     notes: [
       {
         story: story.introduction,
         description: story.introduction,
-        image: Caperton
+        image: Purrlock
       },
       ...story.puzzles.map((puzzle) => ({
         puzzleName: puzzle.name,
         story: puzzle.story,
-        description: puzzle.description
+        description: puzzle.description,
+        image: puzzle.image
       })),
       {
         story: story.conclusion,
@@ -132,6 +136,14 @@ export default function GameScreen({
     if (!isMuted) {
       new Audio(woodSound).play();
     }
+  }
+
+  async function solvedCurrentPuzzle() {
+    await delay(3000)
+    setEchidnaOn(false);
+    handleSolvedPuzzle();
+    await delay(2000);
+    setEchidnaOn(true);
   }
 
   // Show newest note on load
@@ -173,6 +185,7 @@ export default function GameScreen({
           />
         </ConspiracyBoard>
       </div>
+
       {/* Phone asset linked to hint system */}
       <div className="absolute w-[25%] top-[26%] left-[5%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
@@ -188,6 +201,7 @@ export default function GameScreen({
           playWoodSound();
           setAllPuzzleSolved(false);
         }}
+        draggable={false}
       />
 
       {/* Non-Interactive filler assets */}
@@ -232,16 +246,18 @@ export default function GameScreen({
         draggable={false}
       />
 
-      {/* ECHIDNA machine at the bottom so it is the highest element */}
+      {/* ECHIDNA machine at the bottom so it is the highest element and is infront of the filler items. */}
       <div className="absolute w-[40%] left-[30%]">
         <Echidna
           availableCiphers={Object.values(ciphersExports)}
-          handleSolvedPuzzle={handleSolvedPuzzle}
+          handleSolvedPuzzle={solvedCurrentPuzzle}
           phrase={phrase}
           solution={story.puzzles[puzzleIndex].solution}
           solve_delay_ms={500}
           showAuxControls={true}
           isMuted={isMuted}
+          active={echidnaOn}
+          resetDisplay={resetEchidnaDisplay}
         />
       </div>
 
@@ -260,28 +276,6 @@ export default function GameScreen({
       <div className="absolute top-[62%] left-[2%] rotate-12">
         <ReferenceBook isMuted={isMuted} />
       </div>
-
-      {/* Sepia Filter */}
-      <div
-        className="absolute opacity-[9%] w-[100%] h-[100%] top-0 pointer-events-none"
-        style={{
-          backgroundImage: `url(${sepia})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          imageRendering: 'pixelated'
-        }}
-      />
-
-      {/* Soft Pixel Vignette */}
-      <div
-        className="absolute opacity-[20%] w-[100%] h-[100%] top-0 pointer-events-none"
-        style={{
-          backgroundImage: `url(${vignetteSmooth})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          imageRendering: 'pixelated'
-        }}
-      />
 
       {/* Sepia Filter */}
       <div

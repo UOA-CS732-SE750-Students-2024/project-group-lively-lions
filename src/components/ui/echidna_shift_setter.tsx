@@ -2,11 +2,8 @@ import echidnaAuxButtonBase from '/echidna_aux_button_base.png?url';
 import echidnaAuxButtonCapDown from '/echidna_aux_button_cap_down.png?url';
 import echidnaAuxButtonCapUp from '/echidna_aux_button_cap_up.png?url';
 import echidnaAuxDisplay from '/echidna_aux_display.png?url';
-
 import EchidnaButton from './echidna_button';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-
 import clickSound from '../../assets/sounds/click.mp4';
 
 interface EchidnaShiftSetterProps {
@@ -14,6 +11,10 @@ interface EchidnaShiftSetterProps {
   handleShift: (shiftBy: number) => void;
   isMuted: boolean;
 }
+
+/*
+* This component controls the logic and creation of the ECHIDNA machine shift setter
+*/
 
 export function EchidnaShiftSetter({
   shift,

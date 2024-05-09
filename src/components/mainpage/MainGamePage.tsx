@@ -39,27 +39,25 @@ interface MainGamePageProps {
     screen: Screen,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  handleReturnScreen: (screen: Screen) => void;
   isMuted: boolean;
   isFirstJoin: boolean;
+  handleFirstJoin: () => void
 }
 
+/*
+* This component handles the creation of the main page and handles the navigation to the various game components.
+*/
 export default function MainGamePage({
   handleScreenButtonClick,
-  handleReturnScreen,
   isMuted,
-  isFirstJoin
+  isFirstJoin,
+  handleFirstJoin
 }: MainGamePageProps) {
-  //Set return screen value to this screen
-  handleReturnScreen(Screen.MainGamePage);
 
   //Handle thought bubbles
   const [thoughtShowing, setThoughtShowing] = useState(false);
   const [thought, setThought] = useState<string>('');
-  console.log(isFirstJoin);
-  // if (isFirstJoin) {
-  //   configureThought('Welcome to the game!');
-  // }
+
   function configureThought(text: string) {
     setThought(text);
     setThoughtShowing(true);
@@ -184,6 +182,11 @@ export default function MainGamePage({
         />
       </div>
 
+      {/* Reference book entry point leads to reference book screen */}
+      <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
+        <ReferenceBook isMuted={isMuted} />
+      </div>
+
       {/* Non interactive visual items higher in scene order*/}
       <img
         className="absolute min-h-[45px] h-[calc(5vw*9/16)] top-[74%] left-[3%]"
@@ -241,6 +244,7 @@ export default function MainGamePage({
         src={milk}
         draggable={false}
       />
+
       {/* Reference book entry point leads to reference book screen */}
       <div className="absolute scale-[60%] top-[62%] left-[15%] rotate-12">
         <ReferenceBook isMuted={isMuted} />
@@ -384,6 +388,27 @@ export default function MainGamePage({
           onClick={() => setThoughtShowing(false)}
         >
           <SpeechBubble text={thought} arrow="none" />
+        </div>
+      </div>
+
+      <div
+        className={
+          isFirstJoin
+            ? 'absolute top-0 w-[100%] h-[100%] cursor-pointer'
+            : 'invisible'
+        }
+        style={{ backgroundImage: `url(${shadow})` }}
+        onClick={() => handleFirstJoin()}
+      >
+        <div
+          className={
+            isFirstJoin
+              ? 'fixed visible top-[40%] left-[35.5%] cursor-pointer'
+              : 'invisible'
+          }
+          onClick={() => handleFirstJoin()}
+        >
+          <SpeechBubble text="Welcome to the office! Have a look around to see what you can do with each of the items in the room. Head over to the computer to log in, and when you are ready to play go over to the cases cabinet. Happy decoding!" arrow="none" />
         </div>
       </div>
     </motion.div>
