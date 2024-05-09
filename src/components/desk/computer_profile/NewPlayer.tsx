@@ -37,7 +37,7 @@ export function NewPlayer({
 
   const handleConfirm = async () => {
     try {
-      // Send a POST request to create a new player profile
+      // Send a POST request to create a new player profile in the MongoDB server
       const response = await fetch(SERVER_API_URL + '/player', {
         method: 'POST',
         headers: {
@@ -81,6 +81,7 @@ export function NewPlayer({
         console.log('Player profile created successfully');
       }
     } catch (error) {
+      // In case the server can't be connected to, the guest profile remains active
       alert(
         'An error has occurred, we cannot make your profile at this time. Please continue playing with the guest profile'
       );
