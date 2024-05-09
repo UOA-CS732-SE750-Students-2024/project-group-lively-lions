@@ -1,15 +1,12 @@
 import * as story from '../src/lib/story.json';
 
 export enum Screen {
-  MainMenuScreen,
   LandingScreen,
   NewPlayer,
   SignIn,
   PlayerInfo,
   LevelSelect,
   ComputerProfile,
-  Phone,
-  ReferenceBook,
   EchidnaMachine,
   MainGamePage,
   GameScreen

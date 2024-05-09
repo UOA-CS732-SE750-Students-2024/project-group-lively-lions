@@ -10,7 +10,7 @@ So far it has input fields for a profile name and password. These are not yet co
 It also has a confirm button, which does nothing yet, and a back button to the landing page.
 */
 
-const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL
+const SERVER_API_URL = import.meta.env.VITE_BASE_API_URL;
 
 interface SignInProps {
   handleScreenButtonClick: (
@@ -19,7 +19,7 @@ interface SignInProps {
   ) => void;
 }
 
-export function SignIn({ handleScreenButtonClick}: SignInProps) {
+export function SignIn({ handleScreenButtonClick }: SignInProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [data, setData] = useState(null);
@@ -33,29 +33,30 @@ export function SignIn({ handleScreenButtonClick}: SignInProps) {
 
       // Check if the existing account is a guest account
       if (existingPlayerData.profile.username === 'guest') {
-        fetch(`${SERVER_API_URL}/player?username=${username}&password=${password}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
+        fetch(
+          `${SERVER_API_URL}/player?username=${username}&password=${password}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }
-        })
-          .then(response => response.json())
-          .then(data => {
+        )
+          .then((response) => response.json())
+          .then((data) => {
             setData(data);
             console.log(data); // Moved console.log inside the .then() block
             // If it's a guest account, remove it from local storage
-            localStorage.removeItem('profile');
             localStorage.setItem('profile', JSON.stringify({ profile: data }));
           })
-          .catch(error => {
-            alert("Username or password is incorrect.")
-
+          .catch((error) => {
+            alert('Username or password is incorrect.');
           });
       } else {
         // If it's not a guest account, prompt the user to log out first
         alert('Please log out before logging in with a new account.');
-      };
-    };
+      }
+    }
   };
 
   return (
