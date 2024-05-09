@@ -16,8 +16,8 @@ interface ComputerProps {
 }
 
 export function ComputerProfile({ handleScreenButtonClick }: ComputerProps) {
-  // TODO: change to check if user is signed in
-  // If player is not signed in
+
+  // Logout function for the player
   const logout = async () => {
     const currentProfile = localStorage.getItem('profile');
     if (currentProfile) {

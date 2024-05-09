@@ -71,8 +71,6 @@ export function PlayerInfo({
     currentProfile.profile.username = username;
     currentProfile.profile.password = password;
 
-    
-  
     // Store the updated profile back into local storage
     localStorage.setItem('profile', JSON.stringify(currentProfile));
   
