@@ -1,5 +1,10 @@
 import SpeechBubble from './SpeechBubble';
-import { Dialog, DialogContent, DialogFooter, DialogTrigger } from './dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger
+} from './phoneDialog';
 import { AnimatePresence, motion } from 'framer-motion';
 import purrlock from '../../assets/common/PurrlockHolmesNobkgd.png';
 import caperton from '../../assets/common/CapybaraFella.png';
@@ -17,15 +22,19 @@ export interface Transcript {
 
 interface HintDialogProps {
   transcript: Transcript;
+  isMuted: boolean;
 }
 
 // This component takes a transcript
 const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div style={{ imageRendering: 'pixelated', cursor: 'pointer' }}>
-          <Phone />
+        <div
+          style={{ imageRendering: 'pixelated', cursor: 'pointer' }}
+        >
+          <Phone isMuted={false} />
         </div>
       </DialogTrigger>
       <DialogContent className="flex flex-row place-items-center justify-between min-w-[960px] min-h-[540px] w-[calc(60vw)] h-[calc(60vw*9/16)] bg-slate-500 bg-opacity-10 border-none">
@@ -53,7 +62,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ transcript }) => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  delay: index * 2,
+                  delay: index * 2 + 3,
                   type: 'spring',
                   stiffness: 120
                 }}

@@ -13,13 +13,15 @@ interface EchidnaMachineProps {
   puzzleIndex: number;
   handleSolvedPuzzle: () => void;
   story: Story;
+  isMuted: boolean;
 }
 
 const EchidnaMachine = ({
   phrase,
   puzzleIndex,
   story,
-  handleSolvedPuzzle
+  handleSolvedPuzzle,
+  isMuted
 }: EchidnaMachineProps) => {
   return (
     <>
@@ -32,6 +34,7 @@ const EchidnaMachine = ({
             solution={story.puzzles[puzzleIndex].solution}
             solve_delay_ms={500}
             showAuxControls={true}
+            isMuted={isMuted}
           />
         </div>
       </div>
