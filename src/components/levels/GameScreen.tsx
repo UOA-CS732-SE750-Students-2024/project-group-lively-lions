@@ -20,7 +20,7 @@ import sepia from '../../assets/room/active_game/sepia.png';
 import vignettePixel from '../../assets/room/active_game/vignettePixel.png';
 import vignetteSmooth from '../../assets/room/active_game/vignetteSmooth.png';
 import NotePopup from '../desk/NotePopup';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import woodSound from '../../assets/sounds/wooden_tap.mp4';
 import { ReferenceBook } from '../desk/ReferenceBook';
 import { delay } from '../../lib/utils';
@@ -44,8 +44,8 @@ interface GameScreenProps {
 }
 
 /*
-* This component holds the creation of the main game screen, and holds navigation to the interactive components.
-*/
+ * This component holds the creation of the main game screen, and holds navigation to the interactive components.
+ */
 export default function GameScreen({
   handleScreenButtonClick,
   phrase,
@@ -60,7 +60,6 @@ export default function GameScreen({
   setAllPuzzleSolved,
   isMuted
 }: GameScreenProps) {
-
   const [echidnaOn, setEchidnaOn] = useState(true);
   const [resetEchidnaDisplay, setResetEchidnaDisplay] = useState(false);
 
@@ -139,7 +138,7 @@ export default function GameScreen({
   }
 
   async function solvedCurrentPuzzle() {
-    await delay(3000)
+    await delay(3000);
     setEchidnaOn(false);
     handleSolvedPuzzle();
     await delay(2000);
