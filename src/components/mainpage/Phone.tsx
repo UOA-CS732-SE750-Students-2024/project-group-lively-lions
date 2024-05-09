@@ -17,14 +17,14 @@ export default function Phone({ isMuted }: PhoneProps) {
   return (
     <div className="h-[400px]" style={{ imageRendering: 'pixelated' }}>
       <img
-        className="absolute min-h-[220px] h-[calc(25vw*9/16)] top-[4%] left-[3%]"
+        className="absolute min-h-[200px] h-[calc(24vw*9/16)] top-[3%] left-[3%]"
         style={{ imageRendering: 'pixelated' }}
         src={phoneBase}
         alt="phone base"
         draggable={false}
       />
       <motion.img
-        className="absolute min-h-[150px] h-[calc(16vw*9/16)] left-[5%] hover:animate-phone-ring"
+        className="absolute min-h-[130px] h-[calc(15vw*9/16)] left-[5%] hover:animate-phone-ring"
         style={{ imageRendering: 'pixelated' }}
         onMouseEnter={() => playPhoneRing()}
         src={phoneHandset}

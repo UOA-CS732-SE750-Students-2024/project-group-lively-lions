@@ -174,7 +174,7 @@ export default function GameScreen({
         </ConspiracyBoard>
       </div>
       {/* Phone asset linked to hint system */}
-      <div className="absolute w-[25%] top-[25%] left-[3%]">
+      <div className="absolute w-[25%] top-[26%] left-[5%]">
         <HintDialog transcript={hintTranscript} isMuted={isMuted} />
       </div>
 
@@ -192,7 +192,7 @@ export default function GameScreen({
 
       {/* Non-Interactive filler assets */}
       <img
-        className="absolute min-h-[240px] h-[calc(27vw*9/16)] top-[10%] left-[-12%]"
+        className="absolute min-h-[240px] h-[calc(27vw*9/16)] top-[13%] left-[-9%]"
         src={pencilHolder}
         draggable={false}
       />
@@ -207,7 +207,7 @@ export default function GameScreen({
         draggable={false}
       />
       <img
-        className="absolute min-h-[200px] h-[calc(7vw*9/16)]  top-[34%] left-[31%]"
+        className="absolute min-h-[200px] h-[calc(23vw*9/16)] top-[22%] left-[27%]"
         src={milk}
         draggable={false}
       />
@@ -257,7 +257,7 @@ export default function GameScreen({
       />
 
       {/* Reference book */}
-      <div className="absolute top-[60%] left-[2%] rotate-12">
+      <div className="absolute top-[62%] left-[2%] rotate-12">
         <ReferenceBook isMuted={isMuted} />
       </div>
 
