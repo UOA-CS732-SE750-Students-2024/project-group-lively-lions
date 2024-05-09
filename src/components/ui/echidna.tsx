@@ -148,6 +148,9 @@ export function Echidna({
     setGreenLampOn(true);
     console.log('Solution found.');
     handleSolvedPuzzle();
+    setTimeout(() => {
+      setGreenLampOn(false);
+    }, 3000);
   }
 
   function handleSolutionNotFound() {
