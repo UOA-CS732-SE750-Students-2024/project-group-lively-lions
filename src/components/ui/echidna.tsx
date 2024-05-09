@@ -101,7 +101,7 @@ export function Echidna({
       if (newCipher.type === CipherType.Caesar) {
         const decodedPhrase = newCipher.decode({
           caesarkey: shift,
-          phrase: workingPhrase
+          phrase: phrase
         });
         setWorkingPhrase(decodedPhrase);
         decodedPhrase === solution
@@ -111,7 +111,7 @@ export function Echidna({
       } else if (newCipher.type === CipherType.Keyword) {
         const decodedPhrase = newCipher.decode({
           keyword: keyword,
-          phrase: workingPhrase
+          phrase: phrase
         });
         setWorkingPhrase(decodedPhrase);
         decodedPhrase === solution
@@ -119,7 +119,7 @@ export function Echidna({
           : handleSolutionNotFound();
         console.log(decodedPhrase);
       } else if (newCipher.type === CipherType.Substitution) {
-        const decodedPhrase = newCipher.decode({ phrase: workingPhrase });
+        const decodedPhrase = newCipher.decode({ phrase: phrase });
         setWorkingPhrase(decodedPhrase);
         decodedPhrase.toLowerCase() === solution.toLowerCase()
           ? handleSolutionFound()
