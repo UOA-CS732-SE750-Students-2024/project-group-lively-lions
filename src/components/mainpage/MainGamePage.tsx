@@ -244,10 +244,6 @@ export default function MainGamePage({
         src={milk}
         draggable={false}
       />
-      {/* Reference book entry point leads to reference book screen */}
-      <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
-        <ReferenceBook isMuted={isMuted} />
-      </div>
 
       <img
         className="absolute top-[50%] left-[61%] scale-[160%] cursor-pointer"
@@ -343,6 +339,11 @@ export default function MainGamePage({
             imageRendering: 'pixelated'
           }}
         />
+
+        {/* Reference book entry point leads to reference book screen */}
+        <div className="absolute scale-[150%] top-[71%] left-[20%] rotate-12">
+          <ReferenceBook isMuted={isMuted} />
+        </div>
 
         {/* Sepia Filter */}
         <div

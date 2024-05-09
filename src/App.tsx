@@ -71,11 +71,17 @@ function App() {
     <NewPlayer
       key="newPlayer"
       handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
     />,
-    <SignIn key="signIn" handleScreenButtonClick={handleScreenButtonClick} />,
+    <SignIn
+      key="signIn"
+      handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
+    />,
     <PlayerInfo
       key="playerInfo"
       handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
     />,
     <LevelSelect
       key="levelSelect"
@@ -91,6 +97,7 @@ function App() {
     <ComputerProfile
       key="computerProfile"
       handleScreenButtonClick={handleScreenButtonClick}
+      isMuted={isMuted}
     />,
     <EchidnaMachine
       key="echidnaMachine"
@@ -266,6 +273,11 @@ function App() {
     gameMusic.play();
   }
 
+  function pauseMusic() {
+    gameMusic.loop = false;
+    gameMusic.pause();
+  }
+
   return (
     /* Fills viewport and centers game bounds */
     <div className="bg-[#101819] flex flex-col items-center justify-center h-screen w-screen">
@@ -273,7 +285,7 @@ function App() {
         className="absolute self-end pr-2 top-[0%] scale-[80%]"
         onClick={() => {
           setIsMuted(!isMuted);
-          isMuted ? restartMusic() : gameMusic.pause();
+          isMuted ? restartMusic() : pauseMusic();
         }}
       >
         <img src={isMuted ? muted : notMuted} />

@@ -3,7 +3,7 @@ import { ReferenceBookPage } from './ReferenceBookPage';
 import cipherInfo from '../../lib/cipherInfo.json';
 import { useState } from 'react';
 import arrow from '../../assets/room/main_menu/reference_book/arrow.png';
-import binders from '../../assets/room/main_menu/reference_book/note-binders.png';
+import binders from '../../assets/room/main_menu/reference_book/binder.png';
 import pageSound from '../../assets/sounds/page_turn.mp4';
 import clickSound from '../../assets/sounds/click.mp4';
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
@@ -68,6 +68,14 @@ export function ReferenceBook({ isMuted }: ReferenceBookProps) {
     }
   };
 
+  const handleGetDiagram = (increment: number): string => {
+    if (currentPage + increment < cipherInfo.cipherList.length) {
+      return cipherInfo.cipherList[currentPage + increment].diagram;
+    } else {
+      return '';
+    }
+  };
+
   // Sound Effect functions
 
   function playPageSound() {
@@ -95,9 +103,9 @@ export function ReferenceBook({ isMuted }: ReferenceBookProps) {
           draggable={false}
         />
       </DialogTrigger>
-      <DialogContent className="flex flex-col min-h-[400px] h-[calc(40vw*9/16)] min-w-[780px] w-[calc(45vw)] justify-center items-center space-between p-5 bg-transparent border-none">
+      <DialogContent className="flex flex-col min-h-[400px] h-[calc(55vw*9/16)] min-w-[780px] w-[calc(55vh*16/9)] justify-center items-center space-between p-5 bg-transparent border-none">
         <div>
-          <div className="flex flex-ro justify-center items-center mb-4">
+          <div className="flex flex-row justify-center items-center">
             {/* Left Arrow */}
             <img
               className="min-w-[48px] w-[calc(3vw)] min-h-[80px] h-[calc(5vw)] rotate-180 hover:scale-105 active:scale-110 cursor-pointer m-x-10"
@@ -112,12 +120,14 @@ export function ReferenceBook({ isMuted }: ReferenceBookProps) {
             <ReferenceBookPage
               cipherName={handleGetName(0)}
               encoding={handleGetEncoding(0)}
+              diagram={handleGetDiagram(0)}
               decoding={handleGetDecoding(0)}
             />
             {/* Right Page */}
             <ReferenceBookPage
               cipherName={handleGetName(1)}
               encoding={handleGetEncoding(1)}
+              diagram={handleGetDiagram(1)}
               decoding={handleGetDecoding(1)}
             />
             {/* Right Arrow */}
@@ -132,7 +142,7 @@ export function ReferenceBook({ isMuted }: ReferenceBookProps) {
             />
             {/* Page Binder */}
             <img
-              className="absolute min-w-[49px] w-[calc(3vw)] min-h-[267px] h-[calc(16vw)] top-[20%] left-[47%] drop-shadow-2xl"
+              className="absolute w-[4%] h-[80%] top-[10%] left-[48%] drop-shadow-2xl"
               src={binders}
               draggable={false}
             />
