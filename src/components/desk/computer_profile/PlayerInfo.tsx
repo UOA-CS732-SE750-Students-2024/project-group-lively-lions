@@ -77,6 +77,11 @@ export function PlayerInfo({ handleScreenButtonClick, isMuted }: ProfileProps) {
     const isGuestProfile =
       currentProfile.profile.username === 'guest' || username === 'guest';
 
+    if (isGuestProfile) {
+      alert('Cannot update a guest profile or name a profile guest, please make your own first.')
+      throw Error('Cannot update a guest profile or name a profile guest, please make your own first.')
+    }
+
     // Update the username and password fields inside the profile object
     const old_username = currentProfile.profile.username;
     const old_password = currentProfile.profile.password;
@@ -96,27 +101,20 @@ export function PlayerInfo({ handleScreenButtonClick, isMuted }: ProfileProps) {
     };
 
     // Send a PUT request to update player's account if it's not a guest profile
-    if (!isGuestProfile) {
-      fetch(`${SERVER_API_URL}/player`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestBody) // Send the complete request body
+    fetch(`${SERVER_API_URL}/player`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody) // Send the complete request body
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Player account updated:', data);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Player account updated:', data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      alert(
-        'Cannot update a guest profile or name a profile guest, please make your own first.'
-      );
-      localStorage.setItem('profile', currentProfileString);
-    }
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   function playClickSound() {
